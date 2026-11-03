@@ -1,0 +1,124 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "description": "Logotipo, logomarca e símbolo em SVG de uma cor, em preto e em branco.",
+      "tile": "md",
+      "order": [
+        "logotipo.svg",
+        "logomarca.svg",
+        "simbolo.svg",
+        "logotipo-branco.svg",
+        "logomarca-branca.svg",
+        "simbolo-branco.svg"
+      ],
+      "files": {
+        "logotipo.svg": {
+          "name": "hattie-logotipo.svg",
+          "blob": "ddd7177cd13a66740c611d02352f847a",
+          "size": 4385,
+          "type": "image/svg+xml"
+        },
+        "logomarca.svg": {
+          "name": "hattie-logomarca.svg",
+          "blob": "2b6bac41bcb8cf7ac1a9800dfdd6649c",
+          "size": 9180,
+          "type": "image/svg+xml"
+        },
+        "simbolo.svg": {
+          "name": "hattie-simbolo.svg",
+          "blob": "cc4606c6da014906b17c9a89179abe1a",
+          "size": 4950,
+          "type": "image/svg+xml"
+        },
+        "logotipo-branco.svg": {
+          "name": "hattie-logotipo-branco.svg",
+          "blob": "43d797654db658f42f3220802a231d24",
+          "size": 4385,
+          "type": "image/svg+xml"
+        },
+        "logomarca-branca.svg": {
+          "name": "hattie-logomarca-branca.svg",
+          "blob": "34b6c03ea279dc60f3f170af5f03e0d1",
+          "size": 11352,
+          "type": "image/svg+xml"
+        },
+        "simbolo-branco.svg": {
+          "name": "hattie-simbolo-branco.svg",
+          "blob": "34039a11a9325d24ffe12a301f763edd",
+          "size": 7104,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Personagem": {
+      "name": "Personagem",
+      "description": "O Hattie, mago de marca: avatar e expressões (feliz, bravo, entediado).",
+      "tile": "md",
+      "order": [
+        "avatar.svg",
+        "feliz.svg",
+        "bravo.svg",
+        "entediado.svg"
+      ],
+      "files": {
+        "avatar.svg": {
+          "name": "hattie-avatar.svg",
+          "blob": "11815ce1bec827e93bde06ba312d316b",
+          "size": 4959,
+          "type": "image/svg+xml"
+        },
+        "feliz.svg": {
+          "name": "hattie-feliz.svg",
+          "blob": "ef3b951e280ae4417072485b73df8c4d",
+          "size": 5400,
+          "type": "image/svg+xml"
+        },
+        "bravo.svg": {
+          "name": "hattie-bravo.svg",
+          "blob": "e91e2076a8a871c1ec858abaf2dfae12",
+          "size": 5261,
+          "type": "image/svg+xml"
+        },
+        "entediado.svg": {
+          "name": "hattie-entediado.svg",
+          "blob": "0500152d767d27284d36bda98880e974",
+          "size": 4997,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {
+    "fonts/DMSans-VariableFont_opsz~2cwght.ttf": {
+      "blob": "31076ab270ec6e8de0735449603ff4fd",
+      "name": "fonts/DMSans-VariableFont_opsz,wght.ttf",
+      "sha256": "dd1563c3bb43e0a5163db0d0dfe3ef4b9cd698ed4166d23ba3031e6eff00e9f5",
+      "size": 238984,
+      "type": "font/ttf"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-25T16:37:20.241Z",
+    "v": 1
+  },
+  "docs": {
+    "sections": []
+  },
+  "groups": [
+    "Logos",
+    "Personagem"
+  ],
+  "lastChange": {
+    "by": "Claude",
+    "via": "visual-system-build",
+    "at": "2026-11-03T13:55:00Z",
+    "note": "Logos em branco, expressões do Hattie e revisão geral das pendências"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "HattieDS",
+  "sections": {},
+  "title": "Hattie Design System"
+}

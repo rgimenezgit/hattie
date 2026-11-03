@@ -1,0 +1,156 @@
+/* Cópia dos tokens de marca/04-visual/design-system/tokens.css — fonte da verdade.
+   Atualize lá e copie para cá (e para plataforma/design/tokens.css).
+   As famílias de fonte (--font-display, --font-text) são resolvidas pelas variáveis
+   do next/font em layout.tsx, não por @font-face aqui. */
+
+:root, [data-theme="gabinete"] {
+  --branco: #f5f5f5;
+  --cinza: #d3d3d3;
+  --cinza-medio: #6b6b6b;
+  --grafite: #333333;
+  --preto: #101010;
+  --lima: #e6f344;
+  --lima-forte: #77a00f;
+  --lilas: #b19dfc;
+  --violeta: #7f3aef;
+  --rosa: #ff8ae5;
+  --rosa-forte: #f53890;
+  --azul: #8ad3fa;
+  --azul-forte: #1764d6;
+  --lilas-suave: #e4dff7;
+  --lima-suave: #f1f4c9;
+  --rosa-suave: #f8daf1;
+  --azul-suave: #daecf6;
+  --lima-tinta: #59780b;
+  --rosa-tinta: #b5296b;
+
+  --bg: var(--branco);
+  --surface: var(--lilas-suave);
+  --ink: var(--preto);
+  --ink-soft: var(--grafite);
+  --line: var(--cinza);
+  --control-border: var(--grafite);
+  --link: var(--violeta);
+  --focus: var(--preto);
+  --action: var(--preto);
+  --on-action: var(--lima);
+  --action-pressed: var(--grafite);
+  --accent: var(--lilas);
+  --on-accent: var(--preto);
+  --highlight: var(--lima);
+  --on-highlight: var(--preto);
+  --think: var(--azul);
+  --on-think: var(--preto);
+  --think-ink: var(--azul-forte);
+  --human: var(--rosa);
+  --on-human: var(--preto);
+  --human-ink: var(--rosa-tinta);
+}
+
+[data-theme="noturno"] {
+  --bg: var(--preto);
+  --surface: var(--grafite);
+  --ink: var(--branco);
+  --ink-soft: var(--cinza);
+  --line: var(--grafite);
+  --control-border: var(--cinza);
+  --link: var(--lilas);
+  --focus: var(--lima);
+  --action: var(--lima);
+  --on-action: var(--preto);
+  --action-pressed: var(--lima-forte);
+  --accent: var(--lilas);
+  --on-accent: var(--preto);
+  --highlight: var(--lima);
+  --on-highlight: var(--preto);
+  --think: var(--azul);
+  --on-think: var(--preto);
+  --think-ink: var(--azul);
+  --human: var(--rosa);
+  --on-human: var(--preto);
+  --human-ink: var(--rosa);
+}
+
+[data-theme="palco"] {
+  --bg: var(--lilas);
+  --surface: var(--lima);
+  --ink: var(--preto);
+  --ink-soft: var(--grafite);
+  --line: var(--preto);
+  --control-border: var(--preto);
+  --link: var(--preto);
+  --focus: var(--preto);
+  --action: var(--preto);
+  --on-action: var(--lima);
+  --action-pressed: var(--grafite);
+  --accent: var(--violeta);
+  --on-accent: var(--branco);
+  --highlight: var(--lima);
+  --on-highlight: var(--preto);
+  --think: var(--azul);
+  --on-think: var(--preto);
+  --think-ink: var(--preto);
+  --human: var(--rosa);
+  --on-human: var(--preto);
+  --human-ink: var(--preto);
+}
+
+[data-theme="intenso"] {
+  --bg: var(--violeta);
+  --surface: var(--preto);
+  --ink: var(--branco);
+  --ink-soft: var(--branco);
+  --line: var(--lilas);
+  --control-border: var(--branco);
+  --link: var(--lima);
+  --focus: var(--lima);
+  --action: var(--lima);
+  --on-action: var(--preto);
+  --action-pressed: var(--lima-forte);
+  --accent: var(--lima);
+  --on-accent: var(--preto);
+  --highlight: var(--lima);
+  --on-highlight: var(--preto);
+  --think: var(--azul);
+  --on-think: var(--preto);
+  --think-ink: var(--branco);
+  --human: var(--rosa);
+  --on-human: var(--preto);
+  --human-ink: var(--branco);
+}
+
+:root {
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+  --radius-pill: 9999px;
+}
+
+.headline-xl { font-family: var(--font-display); font-size: 120px; line-height: 0.95; font-weight: 500; letter-spacing: -0.02em; }
+.headline-l { font-family: var(--font-display); font-size: 90px; line-height: 1; font-weight: 500; letter-spacing: -0.02em; }
+.headline-m { font-family: var(--font-display); font-size: 67px; line-height: 1.02; font-weight: 500; letter-spacing: -0.02em; }
+.headline-s { font-family: var(--font-display); font-size: 50px; line-height: 1.05; font-weight: 500; letter-spacing: -0.015em; }
+.headline-xs { font-family: var(--font-display); font-size: 38px; line-height: 1.1; font-weight: 500; letter-spacing: -0.015em; }
+.subhead-l { font-family: var(--font-text); font-size: 38px; line-height: 1.2; font-weight: 500; letter-spacing: -0.005em; }
+.subhead-m { font-family: var(--font-text); font-size: 28px; line-height: 1.3; font-weight: 500; letter-spacing: 0; }
+.subhead-s { font-family: var(--font-text); font-size: 21px; line-height: 1.35; font-weight: 500; letter-spacing: 0; }
+.body-l { font-family: var(--font-text); font-size: 28px; line-height: 1.4; font-weight: 400; letter-spacing: 0; }
+.body-lead { font-family: var(--font-text); font-size: 21px; line-height: 1.5; font-weight: 400; letter-spacing: 0; }
+.body { font-family: var(--font-text); font-size: 16px; line-height: 1.55; font-weight: 400; letter-spacing: 0; }
+.cta-l { font-family: var(--font-text); font-size: 28px; line-height: 1; font-weight: 600; letter-spacing: 0; }
+.cta { font-family: var(--font-text); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 0; }
+.label-l { font-family: var(--font-text); font-size: 21px; line-height: 1.3; font-weight: 500; letter-spacing: 0.01em; }
+.label { font-family: var(--font-text); font-size: 12px; line-height: 1.4; font-weight: 500; letter-spacing: 0.02em; }
+.som-l { font-family: var(--font-display); font-size: 38px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; }
+.som-m { font-family: var(--font-display); font-size: 28px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; }
+.som-s { font-family: var(--font-display); font-size: 21px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; }

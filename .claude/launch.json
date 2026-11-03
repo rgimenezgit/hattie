@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hattie-app",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd plataforma/app && npm run dev"],
+      "port": 3000
+    }
+  ]
+}

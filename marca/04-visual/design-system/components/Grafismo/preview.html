@@ -1,0 +1,168 @@
+<title>Grafismo Hattie</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@font-face{font-family:Clash;src:url(../../../../../assets/fontes/ClashDisplay-Variable.ttf);font-weight:200 700}
+@font-face{font-family:Poppins;src:url(../../../../../assets/fontes/Poppins-Regular.ttf);font-weight:400}
+@font-face{font-family:Poppins;src:url(../../../../../assets/fontes/Poppins-Medium.ttf);font-weight:500}
+:root{--branco:#F5F5F5;--preto:#101010;--cinza:#6B6B6B;--borda:#D3D3D3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--branco);color:var(--preto);font-family:Poppins,system-ui,sans-serif;padding-block:24px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:1120px;margin:0 auto}
+h1{font:500 44px/1.05 Clash,sans-serif;margin:0 0 6px;letter-spacing:-.01em}
+.lead{color:var(--cinza);margin:0 0 8px;max-width:64ch}
+h2{font:500 26px Clash,sans-serif;margin:44px 0 4px}
+h3{font:500 13px Poppins,sans-serif;margin:22px 0 10px;letter-spacing:.06em;text-transform:uppercase;color:var(--cinza)}
+.sub{font-size:14px;color:var(--cinza);margin:0 0 6px;max-width:72ch}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.grid,.grid.g3{grid-template-columns:minmax(0,1fr)}}
+.tile{border:1px solid var(--borda);border-radius:16px;overflow:hidden;position:relative;aspect-ratio:4/3;min-width:0;touch-action:pan-y}
+.tile.live{cursor:crosshair}
+.tile canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+.tile.smooth canvas{image-rendering:auto}
+.cap{position:absolute;left:10px;bottom:8px;max-width:calc(100% - 20px);font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--preto);color:var(--branco);pointer-events:none}
+</style>
+<main>
+<h1>grafismo hattie</h1>
+<p class="lead">Etapa 3: o ✱ oficial combinado com os outros glifos, e novas composições de cor, em pontos e em faíscas. Os quadros com mira reagem ao mouse e, sem mouse, se movem sozinhos.</p>
+
+<h2>Gradiente em pontos</h2>
+<p class="sub">Duas cores vizinhas se alternam em pontos ordenados. Cada ponto tem a cor pura da marca.</p>
+<h3>lima · lilás · violeta</h3><div class="grid g3" id="s1"></div>
+<h3>invertido e lilás dominante</h3><div class="grid" id="s2"></div>
+
+<h2>Composições com as proporções da marca</h2>
+<p class="sub">A área de cada cor segue a proporção do contexto (<span>1-cor.md</span>): neutros como base, lima como acento, lilás e violeta como apoio, rosa e azul em pitadas. A transição entre as cores é contínua. Em cada par, o quadro de pontos fica ao lado do quadro de faíscas, em que o fundo mantém a cor dominante e os glifos crescem e mudam de cor.</p>
+<h3>plataforma · neutros 90 · lima 8 · violeta e lilás 2</h3><div class="grid" id="c1"></div>
+<h3>apresentações · neutros 45 · lima 30 · violeta e lilás 20 · rosa e azul 5</h3><div class="grid" id="c2"></div>
+<h3>landing · neutros 50 · lima 25 · lilás e violeta 15 · rosa e azul 10</h3><div class="grid" id="c3"></div>
+<h3>posts · uma cor dominante</h3><div class="grid g3" id="c4"></div>
+
+<h2>Composições com as cores dos gradientes</h2>
+<p class="sub">As combinações de lima, lilás e violeta do gradiente em pontos viram composições, cada uma em pontos e em faíscas.</p>
+<div class="grid" id="c5"></div>
+
+<h2>Pontos interativos</h2>
+<p class="sub">Lanterna acende uma mancha, rastro deixa um caminho que se apaga, ondas pulsam a partir do cursor e olho faz os pontos crescerem e se afastarem.</p>
+<div class="grid" id="i1"></div>
+
+<h2>Faíscas</h2>
+<p class="sub">Ponto, mais, brilho e o ✱ oficial no topo da escala: a luz forte acende o asterisco do logo. Lupa cresce os glifos perto do cursor, luz deixa um rastro de brilho e onda abre anéis a partir do cursor. Clique para soltar uma onda.</p>
+<h3>lupa</h3><div class="grid" id="f1"></div>
+<h3>luz</h3><div class="grid" id="f2"></div>
+<h3>onda</h3><div class="grid" id="f3"></div>
+<h3>lilás e violeta sobre lima, e outras duas tintas</h3><div class="grid" id="f6"></div>
+<h3>lima, lilás e violeta com rosa e azul de apoio</h3><div class="grid" id="f4"></div>
+
+<h2>✱ oficial como glifo único</h2>
+<p class="sub">O asterisco do logo sozinho. Pequeno, lê como ponto; cresce e gira conforme a luz.</p>
+<div class="grid g3" id="f5"></div>
+</main>
+<script>
+const C={lima:'#E6F344',limaf:'#77A00F',lilas:'#B19DFC',violeta:'#7F3AEF',rosa:'#FF8AE5',rosaf:'#F53890',azul:'#8AD3FA',azulf:'#1764D6',branco:'#F5F5F5',cinza:'#D3D3D3',grafite:'#333333',preto:'#101010'};
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ease=t=>t*t*(3-2*t);
+const AST=new Path2D("M293.649 426.264L251.957 642.616C250.22 651.633 257.129 660 266.311 660H441.28C450.447 660 457.352 651.66 455.641 642.654L414.527 426.261L595.096 575.441C601.941 581.095 612.204 579.393 616.857 571.832L706.825 425.628C711.719 417.674 708.003 407.234 699.184 404.162L486.261 330L699.184 255.838C708.003 252.766 711.719 242.326 706.825 234.372L616.857 88.1678C612.204 80.6068 601.941 78.9048 595.096 84.5593L414.527 233.739L455.641 17.3465C457.352 8.3404 450.447 0 441.28 0H266.311C257.129 0 250.22 8.3671 251.957 17.3839L293.649 233.736L112.529 84.5913C105.654 78.9296 95.3559 80.6801 90.7374 88.2957L2.12524 234.414C-2.69706 242.365 1.03391 252.739 9.81623 255.798L222.853 330L9.81621 404.202C1.03389 407.261 -2.69705 417.635 2.12525 425.587L90.7374 571.704C95.3559 579.32 105.653 581.07 112.529 575.409L293.649 426.264Z");
+function bayer(n){if(n===1)return[[0]];const p=bayer(n/2),s=n/2,m=[];for(let y=0;y<n;y++){m[y]=[];for(let x=0;x<n;x++){m[y][x]=4*p[y%s][x%s]+[[0,2],[3,1]][Math.floor(y/s)][Math.floor(x/s)]}}return m}
+const B=bayer(8);
+const tiles=[];
+function mk(parent,label,live){const el=document.createElement('div');el.className='tile '+(live?'live smooth':'');const c=document.createElement('canvas');el.appendChild(c);const s=document.createElement('span');s.className='cap';s.textContent=label;el.appendChild(s);parent.appendChild(el);const t={el,c,live,fx:.5,fy:.5,tx:.5,ty:.5,hover:false,vis:false,ph:Math.random()*6,rings:[],trail:null,dirty:true};
+ if(live){el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();t.tx=(e.clientX-r.left)/r.width;t.ty=(e.clientY-r.top)/r.height;t.hover=true});el.addEventListener('pointerleave',()=>t.hover=false);el.addEventListener('pointerdown',e=>{const r=el.getBoundingClientRect();t.rings.push({x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height,t0:t.now||0})})}
+ tiles.push(t);return t}
+// paleta com pesos: cada cor ocupa sua fatia de t; entre vizinhas, pontos se alternam
+function wpal(items,tw=.12){const tot=items.reduce((a,b)=>a+b[1],0);let acc=0;const b=[],cols=items.map(i=>i[0]),w=items.map(i=>i[1]/tot);w.forEach((x,i)=>{acc+=x;b.push(acc)});const twj=b.slice(0,-1).map((_,j)=>Math.min(tw,.8*Math.min(w[j],w[j+1])));
+ return{cols,at(t){for(let j=0;j<b.length-1;j++){const d=t-b[j],h=twj[j]/2;if(Math.abs(d)<h)return[j,d/twj[j]+.5]}for(let k=0;k<b.length;k++)if(t<=b[k])return[k,0];return[cols.length-1,0]}}}
+// paleta contínua: cada cor tem um centro proporcional ao peso; entre centros a transição é suave
+function spal(items){const tot=items.reduce((a,b)=>a+b[1],0);let acc=0;const cols=items.map(i=>i[0]),c=items.map(i=>{const w=i[1]/tot,m=acc+w/2;acc+=w;return m});
+ return{cols,at(t){if(t<=c[0])return[0,0];if(t>=c[c.length-1])return[cols.length-1,0];let i=0;while(c[i+1]<t)i++;return[i,ease((t-c[i])/(c[i+1]-c[i]))]}}}
+function ditherPal(t,pal,field,px=4){const W=t.el.clientWidth,H=t.el.clientHeight,w=Math.max(8,Math.round(W/px)),h=Math.max(8,Math.round(H/px));if(t.c.width!==w||t.c.height!==h){t.c.width=w;t.c.height=h;t.im=t.c.getContext('2d').createImageData(w,h);t.trail=new Float32Array(w*h)}const im=t.im,rg=pal.cols.map(rgb);for(let y=0;y<h;y++)for(let x=0;x<w;x++){const v=clamp(field(x/w,y/h,x,y,w,h,W,H));const [i,f]=pal.at(v);const th=(B[y%8][x%8]+.5)/64;const col=rg[f>th?i+1:i],o=(y*w+x)*4;im.data[o]=col[0];im.data[o+1]=col[1];im.data[o+2]=col[2];im.data[o+3]=255}t.c.getContext('2d').putImageData(im,0,0)}
+// faíscas como pixel: o ✱ oficial cresce da cor vizinha
+function glyphPal(t,pal,field,cell=14){const W=t.el.clientWidth,H=t.el.clientHeight,dpr=Math.min(2,devicePixelRatio||1);if(t.c.width!==Math.round(W*dpr)){t.c.width=Math.round(W*dpr);t.c.height=Math.round(H*dpr)}const g=t.c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=pal.cols[0];g.fillRect(0,0,W,H);const cc=Math.round(W/cell),rr=Math.round(H/cell),pw=W/cc,ph=H/rr;
+ for(let j=0;j<rr;j++)for(let i=0;i<cc;i++){const u=clamp(field((i+.5)/cc,(j+.5)/rr)),[a,f]=pal.at(u),th=(B[j%8][i%8]+.5)/64,ci=f>th?a+1:a;if(ci===0)continue;const size=ease(clamp((u-.04)/.8));if(size<.05)continue;const k=size<.3?0:size<.5?1:size<.75?2:3;g.fillStyle=pal.cols[ci];glyph(g,k,(i+.5)*pw,(j+.5)*ph,pw*(.28+.62*size),size*Math.PI/4,true)}}
+// campos
+const tri=u=>Math.abs((((u%1)+1)%1)*2-1);
+const FD={
+ linear:(t)=>(x,y)=>clamp(.5+((x-.5)*.6+(y-.5)*.8)-((t.fx-.5)*.5+(t.fy-.5)*.5)),
+ radial:(t)=>(x,y)=>clamp((Math.hypot((x-t.fx)*1.25,y-t.fy)/.8)**2),
+ faixas:(t)=>(x,y)=>tri((x*.6+y*.8)*1.5+t.fx*.8)
+};
+function stat(parent,label,items,shape,tw){const t=mk(parent,label,false);const pal=wpal(items,tw);t.draw=()=>ditherPal(t,pal,FD[shape]({fx:.5,fy:.5}))}
+const EQ=(a,b,c)=>[[a,1],[b,1],[c,1]];
+stat(s1,'linear',EQ(C.lima,C.lilas,C.violeta),'linear',.3);stat(s1,'radial',EQ(C.lima,C.lilas,C.violeta),'radial',.3);stat(s1,'faixas',EQ(C.lima,C.lilas,C.violeta),'faixas',.3);
+stat(s2,'invertido · violeta → lilás → lima',EQ(C.violeta,C.lilas,C.lima),'linear',.3);
+stat(s2,'lilás dominante · gradiente lima',[[C.lilas,60],[C.lima,40]],'radial',.35);
+stat(s2,'lilás dominante · lima e violeta nas pontas',[[C.lima,25],[C.lilas,50],[C.violeta,25]],'linear',.25);
+stat(s2,'lima dominante · lilás e violeta',[[C.lima,55],[C.lilas,28],[C.violeta,17]],'radial',.25);
+// composições (pontos + faíscas), todas vivas
+function comp(parent,label,items,shape,kind){const t=mk(parent,label,true);const pal=spal(items);const fld=FD[shape](t);t.draw=()=>kind==='p'?ditherPal(t,pal,fld):glyphPal(t,pal,fld)}
+function pair(parent,nome,items,shape){comp(parent,'pontos · '+nome,items,shape,'p');comp(parent,'faíscas · '+nome,items,shape,'g')}
+const K={b:C.branco,c:C.cinza,g:C.grafite,p:C.preto,l:C.lima,a:C.lilas,v:C.violeta,r:C.rosa,z:C.azul};
+pair(c1,'claro',[[K.b,70],[K.c,20],[K.l,8],[K.a,1.5],[K.v,.5]],'linear');
+pair(c1,'escuro',[[K.p,70],[K.g,20],[K.l,8],[K.a,1.5],[K.v,.5]],'linear');
+pair(c2,'claro',[[K.b,45],[K.l,30],[K.a,12],[K.v,8],[K.z,2],[K.r,3]],'radial');
+pair(c2,'escuro',[[K.p,45],[K.v,8],[K.a,12],[K.l,30],[K.r,3],[K.z,2]],'linear');
+pair(c3,'claro',[[K.c,10],[K.b,40],[K.l,25],[K.a,8],[K.v,7],[K.z,5],[K.r,5]],'faixas');
+pair(c3,'escuro',[[K.p,40],[K.g,10],[K.v,7],[K.a,8],[K.l,25],[K.r,5],[K.z,5]],'faixas');
+comp(c4,'pontos · lilás dominante',[[K.a,55],[K.l,20],[K.v,12],[K.r,7],[K.z,6]],'radial','p');
+comp(c4,'pontos · lima dominante',[[K.l,55],[K.a,20],[K.v,12],[K.r,7],[K.z,6]],'linear','p');
+comp(c4,'pontos · violeta dominante',[[K.v,55],[K.a,20],[K.l,15],[K.r,5],[K.z,5]],'radial','p');
+comp(c4,'faíscas · lilás dominante',[[K.a,55],[K.l,20],[K.v,12],[K.r,7],[K.z,6]],'radial','g');
+comp(c4,'faíscas · lima dominante',[[K.l,55],[K.a,20],[K.v,12],[K.r,7],[K.z,6]],'linear','g');
+comp(c4,'faíscas · violeta dominante',[[K.v,55],[K.a,20],[K.l,15],[K.r,5],[K.z,5]],'radial','g');
+pair(c5,'trio · lima, lilás, violeta',[[K.l,1],[K.a,1],[K.v,1]],'linear');
+pair(c5,'invertido · violeta, lilás, lima',[[K.v,1],[K.a,1],[K.l,1]],'faixas');
+pair(c5,'lilás dominante · gradiente lima',[[K.a,60],[K.l,40]],'radial');
+pair(c5,'lilás dominante · lima e violeta nas pontas',[[K.l,25],[K.a,50],[K.v,25]],'linear');
+pair(c5,'lima dominante · lilás e violeta',[[K.l,55],[K.a,28],[K.v,17]],'radial');
+pair(c5,'lima e violeta com rosa e azul de apoio',[[K.l,45],[K.v,30],[K.a,13],[K.r,6],[K.z,6]],'faixas');
+// pontos interativos
+function dlive(parent,label,cols,mode){const t=mk(parent,label+' · '+mode,true);const pal=wpal(cols.map(c=>[c,1]),.3);t.draw=(now,dt)=>{
+ const d2=(x,y,W,H)=>Math.hypot((x-t.fx)*W,(y-t.fy)*H)/Math.max(W,H);
+ if(mode==='lanterna')return ditherPal(t,pal,(x,y,a,b,w,h,W,H)=>1-ease(1-clamp(d2(x,y,W,H)/.7)));
+ if(mode==='ondas')return ditherPal(t,pal,(x,y,a,b,w,h,W,H)=>{const d=d2(x,y,W,H);return 1-(.5+.5*Math.sin(d*26-now*3))*clamp(1.1-d*1.2)});
+ if(mode==='rastro')return ditherPal(t,pal,(x,y,xi,yi,w,h,W,H)=>{const tr=t.trail,k=yi*w+xi,d=d2(x,y,W,H);tr[k]=Math.max(tr[k]*Math.exp(-dt*1.3),ease(1-clamp(d/.2)));return 1-tr[k]})}}
+function olho(parent,label,cols,field){const t=mk(parent,label,true);t.draw=()=>{const W=t.el.clientWidth,H=t.el.clientHeight,dpr=Math.min(2,devicePixelRatio||1);if(t.c.width!==Math.round(W*dpr)){t.c.width=Math.round(W*dpr);t.c.height=Math.round(H*dpr)}const g=t.c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=field;g.fillRect(0,0,W,H);const cell=18,cc=Math.round(W/cell),rr=Math.round(H/cell),pw=W/cc,ph=H/rr,fx=t.fx*W,fy=t.fy*H,R=Math.max(W,H)*.42;for(let j=0;j<rr;j++)for(let i=0;i<cc;i++){let x=(i+.5)*pw,y=(j+.5)*ph,dx=x-fx,dy=y-fy,d=Math.hypot(dx,dy),f=ease(clamp(1-d/R));const r=pw*(.09+.38*f),push=f*pw*.28/(d||1);x+=dx*push;y+=dy*push;g.fillStyle=cols[Math.min(cols.length-1,Math.floor(f*cols.length*.999))];g.beginPath();g.arc(x,y,r,0,7);g.fill()}}}
+const TR=[C.lima,C.lilas,C.violeta];
+dlive(i1,'lima → lilás → violeta',TR,'lanterna');dlive(i1,'lima → lilás → violeta',TR,'rastro');dlive(i1,'lima → lilás → violeta',TR,'ondas');olho(i1,'olho · lima sobre preto',[C.lima],C.preto);
+// faíscas
+function glyph(g,k,x,y,s,a,mix){g.save();g.translate(x,y);if(k>=2)g.rotate(a);g.beginPath();if(k===0){g.arc(0,0,s*.16,0,7);g.fill()}else if(k===1){g.fillRect(-s*.4,-s*.06,s*.8,s*.12);g.fillRect(-s*.06,-s*.4,s*.12,s*.8)}else if(k===2){g.moveTo(0,-s*.5);g.quadraticCurveTo(0,0,s*.5,0);g.quadraticCurveTo(0,0,0,s*.5);g.quadraticCurveTo(0,0,-s*.5,0);g.quadraticCurveTo(0,0,0,-s*.5);g.fill()}else if(mix){const q=s*1.1/700;g.scale(q,q);g.translate(-354.5,-330);g.fill(AST)}else{for(let q=0;q<3;q++){g.rotate(Math.PI/3);g.fillRect(-s*.07,-s*.5,s*.14,s)}}g.restore()}
+function spark(parent,label,tiers,field,mode,oficial){const t=mk(parent,label+' · '+mode,true);t.draw=(now,dt)=>{const W=t.el.clientWidth,H=t.el.clientHeight,dpr=Math.min(2,devicePixelRatio||1);if(t.c.width!==Math.round(W*dpr)){t.c.width=Math.round(W*dpr);t.c.height=Math.round(H*dpr);t.tr=null}const g=t.c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=field;g.fillRect(0,0,W,H);const cell=oficial===1?19:17,cc=Math.round(W/cell),rr=Math.round(H/cell),pw=W/cc,M=Math.max(W,H);
+ if(mode==='luz'&&(!t.tr||t.tr.length!==cc*rr))t.tr=new Float32Array(cc*rr);
+ t.rings=t.rings.filter(r=>now-r.t0<1.8);
+ if(!reduced&&!t.hover&&(!t.lastAmb||now-t.lastAmb>1.9)&&mode==='onda'){t.lastAmb=now;t.rings.push({x:t.fx,y:t.fy,t0:now})}
+ const ph=H/rr;
+ for(let j=0;j<rr;j++)for(let i=0;i<cc;i++){const x=(i+.5)*pw,y=(j+.5)*ph,d=Math.hypot(x-t.fx*W,y-t.fy*H)/M;let v;
+  if(mode==='lupa')v=.08+.92*ease(clamp(1-d/.4));
+  else if(mode==='luz'){const k=j*cc+i;t.tr[k]=Math.max(t.tr[k]*Math.exp(-dt*1.1),ease(clamp(1-d/.25)));v=.08+.92*t.tr[k]}
+  else v=.08;
+  for(const r of t.rings){const age=(now-r.t0)/1.8,rad=age*.95,dd=Math.hypot(x-r.x*W,y-r.y*H)/M;v=Math.max(v,(1-age)*Math.exp(-((dd-rad)**2)/(2*.05*.05)))}
+  const k=v<.22?0:v<.45?1:v<.7?2:3;g.fillStyle=tiers[k];
+  if(oficial===1){const sz=pw*(.22+.78*v);g.save();g.translate(x,y);g.rotate(v*Math.PI/4);g.scale(sz/700,sz/700);g.translate(-354.5,-330);g.fill(AST);g.restore()}
+  else glyph(g,k,x,y,pw*(.62+.5*v),v*Math.PI/2,oficial===2)}}}
+const one=c=>[c,c,c,c];
+const sp=(p,l,tiers,field,m,o)=>spark(p,l,tiers,field,m,o);
+sp(f1,'lima sobre preto',one(C.lima),C.preto,'lupa',2);sp(f1,'violeta sobre lilás',one(C.violeta),C.lilas,'lupa',2);sp(f1,'rosa-forte sobre lima',one(C.rosaf),C.lima,'lupa',2);sp(f1,'azul-forte sobre azul',one(C.azulf),C.azul,'lupa',2);
+sp(f2,'lilás sobre violeta',one(C.lilas),C.violeta,'luz',2);sp(f2,'preto sobre rosa',one(C.preto),C.rosa,'luz',2);sp(f2,'lima sobre azul-forte',one(C.lima),C.azulf,'luz',2);sp(f2,'rosa sobre preto',one(C.rosa),C.preto,'luz',2);
+sp(f3,'preto sobre lima',one(C.preto),C.lima,'onda',2);sp(f3,'violeta sobre rosa',one(C.violeta),C.rosa,'onda',2);sp(f3,'azul sobre preto',one(C.azul),C.preto,'onda',2);sp(f3,'lima sobre violeta',one(C.lima),C.violeta,'onda',2);
+const two=(a,b)=>[a,a,b,b];
+sp(f6,'lilás e violeta sobre lima',two(C.lilas,C.violeta),C.lima,'lupa',2);sp(f6,'lilás e violeta sobre lima',two(C.lilas,C.violeta),C.lima,'luz',2);sp(f6,'lilás e violeta sobre lima',two(C.lilas,C.violeta),C.lima,'onda',2);sp(f6,'lima e lilás sobre violeta',two(C.lima,C.lilas),C.violeta,'lupa',2);
+sp(f6,'violeta e lima sobre lilás',two(C.violeta,C.lima),C.lilas,'luz',2);sp(f6,'lima e violeta sobre preto',two(C.lima,C.violeta),C.preto,'onda',2);sp(f6,'lilás e violeta sobre branco',two(C.lilas,C.violeta),C.branco,'lupa',2);sp(f6,'lima e lilás sobre preto',two(C.lima,C.lilas),C.preto,'luz',2);
+sp(f4,'sobre preto',[C.violeta,C.lilas,C.lima,C.rosa],C.preto,'lupa',2);sp(f4,'sobre lilás',[C.violeta,C.violeta,C.lima,C.rosaf],C.lilas,'luz',2);sp(f4,'sobre violeta',[C.lilas,C.lilas,C.lima,C.azul],C.violeta,'onda',2);sp(f4,'sobre lima',[C.violeta,C.violeta,C.preto,C.rosaf],C.lima,'lupa',2);
+sp(f5,'lima sobre preto',one(C.lima),C.preto,'lupa',1);sp(f5,'violeta sobre lilás',one(C.violeta),C.lilas,'luz',1);sp(f5,'preto sobre lima',one(C.preto),C.lima,'onda',1);
+sp(f5,'lilás sobre violeta',one(C.lilas),C.violeta,'lupa',1);sp(f5,'lima sobre violeta',one(C.lima),C.violeta,'luz',1);sp(f5,'violeta sobre lima',one(C.violeta),C.lima,'onda',1);
+// loop
+const io=new IntersectionObserver(es=>es.forEach(e=>{tiles.find(t=>t.el===e.target).vis=e.isIntersecting}),{threshold:0});
+tiles.forEach(t=>io.observe(t.el));
+let last=0;
+function frame(ms){const now=ms/1000,dt=Math.min(.05,last?now-last:.016);last=now;
+ tiles.forEach(t=>{if(!t.vis)return;t.now=now;
+  if(t.live){if(!t.hover){if(!reduced){t.tx=.5+.3*Math.sin(now*.7+t.ph);t.ty=.5+.28*Math.sin(now*1.1+t.ph*2)}else{t.tx=.5;t.ty=.5}}
+   const k=1-Math.exp(-dt*9);t.fx+=(t.tx-t.fx)*k;t.fy+=(t.ty-t.fy)*k;t.draw(now,dt)}
+  else if(t.dirty){t.draw(now,dt);t.dirty=false}});
+ requestAnimationFrame(frame)}
+addEventListener('resize',()=>tiles.forEach(t=>{t.dirty=true;t.trail=null}));
+requestAnimationFrame(frame);
+</script>

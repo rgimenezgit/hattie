@@ -1,0 +1,8 @@
+# Decisões técnicas
+
+Mais recente primeiro. Formato: data, decisão, motivo.
+
+- 2026-11-03: Stack escolhida — Next.js (App Router) + TypeScript + Tailwind CSS + shadcn/ui, em `plataforma/app/`. Motivo: a maioria das bibliotecas e registries que vamos usar para construir os componentes e grafismos da plataforma (react-bits, dithercn, 21st.dev, Astryx Design + StyleX) são feitos para projetos React/shadcn; Tailwind facilita mapear os tokens de `marca/04-visual/design-system/tokens.css` direto para classes utilitárias e temas (`gabinete`, `noturno`, `palco`, `intenso`).
+- 2026-11-03: shadcn/ui inicializado com base Radix (`-b radix`) e preset Nova. Tokens do Hattie plugados em `src/app/hattie-tokens.css` + mapeamento em `globals.css` (`--color-primary` = `--action` etc.), em vez da paleta cinza padrão do shadcn. Tema por `data-theme` no `<html>` (`gabinete`/`noturno`/`palco`/`intenso`), não pela classe `.dark` do Tailwind — cada peça que usa `dark:` (ex.: dithercn) ainda assume `.dark`; ajustar quando formos usar essas peças de verdade.
+- 2026-11-03: Instalado `react-bits` (componente `SplitText` via registry shadcn) e `dithercn` (engine de dither via registry shadcn) para os grafismos/efeitos visuais da plataforma. `p5`, `ogl` e `calligraph` instalados como dependências para prototipar grafismos, shaders e o zuum — ainda não usados em nenhuma tela.
+- 2026-11-03: Avaliado e NÃO instalado o Astryx Design System (`@astryxdesign/*` + StyleX) — StyleX é um motor de estilos (CSS-in-JS atômico) concorrente do Tailwind, e misturar os dois no mesmo app criaria duas formas de estilizar a mesma coisa. Fica como referência de padrões, não como dependência.

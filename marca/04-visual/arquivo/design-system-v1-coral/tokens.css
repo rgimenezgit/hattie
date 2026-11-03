@@ -1,0 +1,20 @@
+/* Design System — generated from tokens.json */
+:root, [data-theme="light"] {
+  --white: #f9f9f9; /* primary, use for backgrounds and  text containers */
+  --black: #000000; /* Typography and text */
+  --Orange: #ff6237; /* Visual elements and layout */
+  --yellow: #ffb530; /* Visual elements and layout */
+  --blue: #7ec4ff; /* visual elements and layout */
+  --blueish: #4164fe; /* visual elements, layout and back grounds */
+}
+:root {
+  --default: 6px; /* containers */
+  --buttons-and-cta: 20px; /* buttons and cta */
+}
+@font-face {
+  font-family: "DMSans Variable Font opsz,wght";
+  src: url("../_blob/31076ab270ec6e8de0735449603ff4fd") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

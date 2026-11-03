@@ -1,0 +1,31 @@
+<!-- @dsCard group="Ações" height=330 subtitle="O botão de criar do Hattie" -->
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@font-face{font-family:"Clash Display";src:url("../../../../../assets/fontes/ClashDisplay-Variable.ttf");font-weight:200 700}
+@font-face{font-family:"Poppins";src:url("../../../../../assets/fontes/Poppins-Regular.ttf");font-weight:400}
+@font-face{font-family:"Poppins";src:url("../../../../../assets/fontes/Poppins-Medium.ttf");font-weight:500}
+@font-face{font-family:"Poppins";src:url("../../../../../assets/fontes/Poppins-SemiBold.ttf");font-weight:600}
+@font-face{font-family:"Poppins";src:url("../../../../../assets/fontes/Poppins-Italic.ttf");font-weight:400;font-style:italic}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font-text);color:var(--ink);background:var(--bg)}
+.star{display:inline-block;width:1em;height:1em;vertical-align:-0.12em}
+
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.cell{padding:28px;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.lab{font-size:12px;font-weight:500;letter-spacing:.02em;opacity:.8}
+.pl{white-space:nowrap;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 32px;border-radius:9999px;border:0;font-family:var(--font-display);font-weight:600;font-size:21px;letter-spacing:-.01em;background:var(--action);color:var(--on-action);cursor:pointer;transition:transform .12s, box-shadow .12s}
+.pl.sm{height:44px;padding:0 24px}
+.pl:hover{transform:translateY(-2px);box-shadow:0 4px 0 var(--ink)}
+.pl:active,.pl.pr{background:var(--action-pressed);transform:translateY(2px);box-shadow:none}
+.pl:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.pl.dis{background:var(--cinza);color:var(--grafite);cursor:not-allowed}
+.pl.ld .star{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.c4{background:var(--violeta);color:var(--branco)}.c4 .pl{background:var(--lima);color:var(--preto)}.c1{background:var(--bg)}.c2{background:var(--preto);color:var(--branco)}.c3{background:var(--lilas);color:var(--preto)}
+.c2 .pl{background:var(--lima);color:var(--preto)}
+.c2 .pl:hover{box-shadow:0 4px 0 var(--lima-forte)}
+.c2 .pl.dis{background:var(--grafite);color:var(--cinza)}
+</style></head><body><div class="g">
+<div class="cell c1" data-theme="gabinete"><span class="lab">Gabinete · padrão, hover e pressionado</span>
+<button class="pl"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm</button><button class="pl sm"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm · criar logotipo</button><button class="pl sm pr"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm</button></div>
+<div class="cell c2" data-theme="noturno"><span class="lab">Noturno · carregando e desabilitado</span>
+<button class="pl ld"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm…</button><button class="pl sm dis"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm</button></div>
+<div class="cell c3" data-theme="palco"><span class="lab">Palco · peça social</span>
+<button class="pl"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm</button></div><div class="cell c4" data-theme="intenso"><span class="lab">Palco intenso · capa</span><button class="pl"><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>plimm</button></div></div></body></html>
