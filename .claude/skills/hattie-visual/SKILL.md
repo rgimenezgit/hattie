@@ -27,7 +27,7 @@ Arquivos finais em `assets/`.
 - ✱ é grafismo da marca, fora do logo.
 - Fundo de foto e de ilustração: uma cor com hex citado. Uma única direção fotográfica (studio infinito).
 - Sem laranja na marca. Sem áudio por enquanto.
-- Logo em branco sobre fundos escuros, em preto sobre claros.
+- Logo: sete cores e catorze combinações de fundo aprovadas em `marca/04-visual/design-system/10-logo.md`. Fora da tabela, preto sobre fundos claros e branco sobre escuros.
 - Contraste mínimo 4,5:1 em ícones de função e texto.
 
 ## Antes de entregar

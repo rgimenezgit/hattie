@@ -12,7 +12,8 @@ Sistema visual do Hattie, o mago de marca. Leia este arquivo primeiro; os demais
 7. Ilustração, formas chapadas com sombras recortadas: `7-ilustracao.md`.
 8. Grafismo e gradiente: `8-grafismo-e-gradiente.md`.
 9. Grafismos e ícones: `9-grafismos-e-icones.md`.
-10. `tokens.css` é compilado de `tokens.json`; use as variáveis `--bg`, `--ink`, `--action` e as classes de tipografia.
+10. Logo, cores e combinações: `10-logo.md`.
+11. `tokens.css` é compilado de `tokens.json`; use as variáveis `--bg`, `--ink`, `--action` e as classes de tipografia.
 
 ## Princípios
 - Dois registros: Palco (alto, lilás, violeta e lima) e Gabinete (calmo, branco e preto).

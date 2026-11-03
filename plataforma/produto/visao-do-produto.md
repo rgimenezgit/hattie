@@ -124,15 +124,26 @@ O designer percorre as etapas 3 a 9 com os próprios clientes e gerencia várias
 - **Character sheet completo** do Hattie: será trabalhado depois.
 - **Plataforma corporativa** para médias e grandes empresas: o público é o pequeno e micro empreendedor e o designer.
 - **Entrega única de pacote de arquivos:** a plataforma existe para a relação contínua.
+- **Landing pages, vídeo, avatares de IA e pesquisa com personas sintéticas:** fase 2 (decisão de 03/11/2026, ver seção 8).
 
 ### Em aberto
-- Escopo do MVP (`mvp.md`).
 - Planos, limites de geração e preços validados.
 - Titularidade e registro dos ativos gerados.
 - Registro do nome e conflito com "Hattie's Design Co." (`marca/05-decisoes/alinhamentos.md`).
 - Stack e arquitetura (`../docs/arquitetura.md`).
+- Perguntas 2 a 5 do escopo do MVP (`mvp.md`).
 
-## 8. Onde continuar
+## 8. Estrutura da plataforma
+
+Decisão de 03/11/2026. Três zonas:
+
+1. **Conta** — login, lista de marcas (criar nova ou adicionar existente), plano e perfil. Fora de qualquer marca específica.
+2. **Criação da marca** — fluxo de onboarding conversacional: briefing com qualquer material (texto, links, docs, PDFs, imagens, vídeo), perguntas de validação, pesquisa de mercado e concorrentes, propostas por seção (estratégia, personalidade, verbal, visual completo) e aprovação iterativa seção por seção. Termina com a marca salva como cérebro de marca.
+3. **Ambiente da marca** — gestão contínua, uma marca por ambiente (quantas o plano permitir). Agrupa em: **Marca** (Estratégia só com os porquês, e uma página de brandbook completo ainda sem ícone definido), **Produção** (Criar, Marketing, Projetos/campanhas) e **Suporte** (Designer parceiro, Dicas).
+
+A área de Enviar (vassoura) deixou de ser independente: publicar e exportar viram ações dentro de Marketing, da Biblioteca e de cada criação. Detalhe completo, por página, em `fluxos.md`.
+
+## 9. Onde continuar
 - Fluxos de tela e navegação: `fluxos.md`.
 - Escopo do MVP: `mvp.md`.
 - Tarefas: `backlog.md`.

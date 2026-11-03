@@ -2,7 +2,7 @@
 
 Versão consolidada do que está decidido. Cada item aponta para o documento com o detalhe. O que continua em aberto está em `05-decisoes/alinhamentos.md`.
 
-**Última atualização:** 03/11/2026.
+**Última atualização:** 03/11/2026 (logo em todas as cores e combinações).
 
 ---
 
@@ -47,7 +47,7 @@ Detalhes: `03-verbal/`.
 ## 4. Visual
 
 ### Logo
-Logotipo, logomarca e símbolo, cada um em preto e em branco (seis arquivos). O pingo do "i" é a ponta do chapéu. Clash Display 700 pertence ao logotipo. O ✱ é grafismo da marca, fora do logo. Arquivos em `assets/logos/`.
+Logotipo, logomarca e símbolo em preto, branco, lima, azul claro, lilás, rosa forte e violeta (lilás, rosa e violeta incluem avatar, feliz, bravo e entediado). O pingo do "i" é a ponta do chapéu. Clash Display 700 pertence ao logotipo. O ✱ é grafismo da marca, fora do logo. Catorze combinações de fundo e logo aprovadas. Detalhes: `10-logo.md`. Arquivos em `assets/logos/`.
 
 ### Cor
 | Família | Clara | Forte |

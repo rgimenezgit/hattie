@@ -3,7 +3,7 @@
   "assetGroups": {
     "Logos": {
       "name": "Logos",
-      "description": "Logotipo, logomarca e símbolo em SVG de uma cor, em preto e em branco.",
+      "description": "Logotipo, logomarca e símbolo em SVG de uma cor, em preto e em branco. Cores e combinações em 10-logo.md.",
       "tile": "md",
       "order": [
         "logotipo.svg",

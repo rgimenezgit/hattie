@@ -30,3 +30,4 @@ O que ainda precisa de decisão ou de checagem. Resolvido: registre em `decisoes
 | 15 | Cinza-médio, suaves, tintas, espaçamento, raios, status, violeta-noite `#2B1160` | Aprovar |
 | 16 | Palco intenso validado em peças reais; regra do violeta na plataforma e cores dos selos de som | Validar |
 | 17 | Aura (luz difusa) no grafismo; movimento e ritmo das animações | Próxima etapa |
+| 18 | Preto e branco dos arquivos de logo e das composições são `#000000` e `#FFFFFF`; os neutros da marca são `#101010` e `#F5F5F5`. Manter ou recolorir os logos | Decidir |

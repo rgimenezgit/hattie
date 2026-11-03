@@ -4,7 +4,7 @@ Arquivos finais da marca, prontos para uso.
 
 | Pasta | Conteúdo |
 |---|---|
-| `logos/` | Logotipo, logomarca e símbolo em preto e em branco |
+| `logos/` | Logotipo, logomarca e símbolo em preto, branco e nas cores da marca, mais as combinações de cor |
 | `personagem/` | Avatar e expressões do Hattie |
 | `icones/` | Ícones e grafismos desenhados (base, propostos e puff) |
 | `grafismos/` | ✱ oficial |

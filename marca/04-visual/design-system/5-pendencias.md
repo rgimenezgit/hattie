@@ -11,6 +11,7 @@
 ## Em aberto
 - Slogan da marca.
 - Ícones: função de limpar e refinar (a vassoura virou enviar); forma de zuum; versões quadradas do chapéu e do castelo; ícones de interface restantes.
+- Ícone novo para a página de "marca / brandbook completo" no ambiente da marca (decisão de produto de 03/11/2026, ver `plataforma/produto/fluxos.md`) — a bola de cristal (Estratégia) ficou só com os porquês, essa página reúne todas as seções aprovadas da marca.
 - Character sheet completo, a trabalhar depois.
 - Ilustração: aprovar o violeta-noite `#2B1160` (proposta).
 - Cores: aprovar cinza-médio, suaves, tintas, espaçamento, raios e status.

@@ -3,7 +3,8 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 03/11/2026
-- Aplicações do logo com cor: preto sobre lima, violeta `#7F3AEF` sobre lima `#E6F344` e lima sobre violeta, em símbolo, logotipo e logomarca (`assets/logos/aplicacoes/`).
+- Logo em sete cores: preto, branco, lima `#E6F344`, azul claro `#8AD3FA`, lilás `#B19DFC`, rosa forte `#F53890` e violeta `#7F3AEF`. Lilás, rosa e violeta incluem avatar, feliz, bravo e entediado (`assets/logos/cores/`).
+- Catorze combinações de fundo e logo aprovadas, em composição completa (símbolo, avatar, expressões, logomarca e logotipo) ou básica (logotipo, logomarca e símbolo), documentadas em `04-visual/design-system/10-logo.md` e em `assets/logos/composicoes/`.
 - Cinco exemplos de ilustração e oito de fotografia entram no Design System como referência de estilo (`assets/ilustracao/exemplos/`, `assets/fotografia/exemplos/`).
 - Design System em PDF com logo, gradientes em pontos, faíscas, exemplos de ilustração e fotografia e peças de aplicação (`assets/pecas/aplicacoes/`).
 - Teoria da marca (estratégia, personalidade e identidade verbal) em PDF próprio: `marca/hattie-teoria-da-marca.pdf`.
