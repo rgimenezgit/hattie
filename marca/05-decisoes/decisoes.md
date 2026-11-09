@@ -2,6 +2,13 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 09/11/2026
+- A plataforma segue a estrutura desenhada pelo Raphael no Figma: entrada em duas colunas, primeiro acesso com "criar marca" ou "importar marca", conversa de criação com plano lateral, cérebro da marca com sumário e cards, Home com rail lateral que expande no hover. Detalhes em `plataforma/produto/fluxos.md` e `plataforma/design/diretrizes-ui.md`.
+- Na plataforma, o botão plimm é pílula lima `#E6F344` com ✱ e texto preto `#101010`. Ele envia pedidos ao Hattie e cria.
+- Ícones de interface vêm do Lucide. Os desenhos da marca ficam para o Hattie (personagem de chapéu), o ✱, os selos de som e os momentos de marca.
+- Superfícies da plataforma: fundo branco `#F5F5F5`, canvas cinza (`#D3D3D3` a 62%) com cards brancos.
+- Interface mais compacta, com mais respiro: margem de 8 px em volta da página, topo de 56 px, rail de 48 px (208 px aberto) rente à borda, colunas de 256 px, plimm de 36 px e texto de controles em 14 px. Medidas em `plataforma/design/diretrizes-ui.md`.
+
 ## 03/11/2026
 - Logo em sete cores: preto, branco, lima `#E6F344`, azul claro `#8AD3FA`, lilás `#B19DFC`, rosa forte `#F53890` e violeta `#7F3AEF`. Lilás, rosa e violeta incluem avatar, feliz, bravo e entediado (`assets/logos/cores/`).
 - Catorze combinações de fundo e logo aprovadas, em composição completa (símbolo, avatar, expressões, logomarca e logotipo) ou básica (logotipo, logomarca e símbolo), documentadas em `04-visual/design-system/10-logo.md` e em `assets/logos/composicoes/`.

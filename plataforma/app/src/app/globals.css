@@ -3,22 +3,42 @@
 @import "shadcn/tailwind.css";
 @import "./hattie-tokens.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is([data-theme="noturno"] *));
 
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--ink);
   --font-sans: var(--font-text);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-heading: var(--font-display);
   --color-sidebar-ring: var(--focus);
   --color-sidebar-border: var(--line);
-  --color-sidebar-accent-foreground: var(--on-accent);
-  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--ink);
+  --color-sidebar-accent: var(--neutro-hover);
   --color-sidebar-primary-foreground: var(--on-action);
   --color-sidebar-primary: var(--action);
   --color-sidebar-foreground: var(--ink);
-  --color-sidebar: var(--surface);
+  --color-sidebar: var(--bg);
+  --color-hattie: var(--surface);
+  --color-ink: var(--ink);
+  --color-preto: var(--preto);
+  --color-branco: var(--branco);
+  --color-neutro-hover: var(--neutro-hover);
+  --color-canvas: var(--canvas);
+  --color-lima-suave: var(--lima-suave);
+  --color-lilas-suave: var(--lilas-suave);
+  --color-violeta: var(--violeta);
+  --color-violeta: var(--violeta);
+  --color-lilas: var(--lilas);
+  --color-lima: var(--lima);
+  --color-lima-forte: var(--lima-forte);
+  --color-grafite: var(--grafite);
+  --color-cinza: var(--cinza);
+  --color-cinza-medio: var(--cinza-medio);
+  --color-ink-soft: var(--ink-soft);
+  --color-action: var(--action);
+  --color-on-action: var(--on-action);
+  --color-action-pressed: var(--action-pressed);
   --color-chart-5: var(--azul-forte);
   --color-chart-4: var(--rosa-forte);
   --color-chart-3: var(--violeta);
@@ -27,26 +47,26 @@
   --color-ring: var(--focus);
   --color-input: var(--control-border);
   --color-border: var(--line);
-  --color-destructive: var(--rosa-forte);
-  --color-accent-foreground: var(--on-accent);
-  --color-accent: var(--accent);
+  --color-destructive: var(--ink);
+  --color-accent-foreground: var(--ink);
+  --color-accent: var(--neutro-hover);
   --color-muted-foreground: var(--ink-soft);
-  --color-muted: var(--surface);
+  --color-muted: var(--neutro-hover);
   --color-secondary-foreground: var(--ink);
-  --color-secondary: var(--surface);
+  --color-secondary: var(--neutro-hover);
   --color-primary-foreground: var(--on-action);
   --color-primary: var(--action);
   --color-popover-foreground: var(--ink);
-  --color-popover: var(--surface);
+  --color-popover: var(--bg);
   --color-card-foreground: var(--ink);
-  --color-card: var(--surface);
+  --color-card: var(--bg);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-xl);
-  --radius-3xl: var(--radius-pill);
-  --radius-4xl: var(--radius-pill);
+  --radius-2xl: var(--radius-md);
+  --radius-3xl: var(--radius-lg);
+  --radius-4xl: 32px;
   --color-dither-ink: var(--dither-ink);
   --color-dither-paper: var(--dither-paper);
   --color-dither-blue: var(--dither-color-blue);
@@ -60,7 +80,11 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
   }
   body {
     @apply bg-background text-foreground;
@@ -69,29 +93,100 @@
     @apply font-sans;
   }
   :root {
-    --dither-ink: var(--primary);
-    --dither-paper: var(--background);
-    --dither-cell: 3px;
-    --dither-color-blue: oklch(0.56 0.18 248);
-    --dither-color-purple: oklch(0.53 0.22 302);
-    --dither-color-green: oklch(0.58 0.15 152);
-    --dither-color-pink: oklch(0.58 0.21 355);
-    --dither-color-orange: oklch(0.64 0.17 52);
-    --dither-color-red: oklch(0.55 0.21 27);
-    --dither-color-grey: oklch(0.55 0 0);
-    --dither-bloom: 0.6;
+    --neutro-hover: color-mix(in oklch, var(--ink) 6%, var(--bg));
+    --canvas: color-mix(in oklch, var(--cinza) 62%, var(--branco));
+    --plimm-sombra: var(--preto);
   }
-  .dark {
-    --dither-ink: var(--primary);
-    --dither-paper: var(--background);
+  [data-theme="noturno"] {
+    --plimm-sombra: var(--lima-forte);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@keyframes selo-som {
+  0% {
+    opacity: 0;
+    scale: 0.8;
+  }
+  25%,
+  80% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}
+
+@keyframes selo-som-reduzido {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  25%,
+  80% {
+    opacity: 1;
+  }
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+    filter: blur(4px);
+  }
+}
+
+@utility animate-selo {
+  animation: selo-som 600ms ease-out both;
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: selo-som-reduzido;
+  }
+}
+
+@keyframes flutuar {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+@utility animate-entrada {
+  animation: entrada 300ms ease-out both;
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: aparecer;
+  }
+}
+
+@layer base {
+  :root {
+    --dither-ink: var(--ink);
+    --dither-paper: var(--bg);
     --dither-cell: 3px;
-    --dither-color-blue: oklch(0.72 0.14 240);
-    --dither-color-purple: oklch(0.7 0.18 304);
-    --dither-color-green: oklch(0.78 0.17 152);
-    --dither-color-pink: oklch(0.74 0.17 354);
-    --dither-color-orange: oklch(0.79 0.15 62);
-    --dither-color-red: oklch(0.68 0.2 25);
-    --dither-color-grey: oklch(0.66 0 0);
-    --dither-bloom: 1;
+    --dither-color-blue: var(--azul-forte);
+    --dither-color-purple: var(--violeta);
+    --dither-color-green: var(--lima-forte);
+    --dither-color-pink: var(--rosa-forte);
+    --dither-color-orange: var(--lima);
+    --dither-color-red: var(--rosa-forte);
+    --dither-color-grey: var(--cinza-medio);
+    --dither-bloom: 0.6;
   }
 }

@@ -1,10 +1,24 @@
 # Backlog
 
-- [ ] Responder as perguntas 2 a 5 do escopo do MVP (`mvp.md`).
-- [ ] Detalhar os fluxos principais listados em `fluxos.md` (onboarding, criação, revisão de peça, chamar designer, criar e publicar post).
-- [ ] Definir os ícones de interface restantes (editar, apagar, compartilhar, baixar, configurações, ajuda) e o ícone novo da página de marca/brandbook.
-- [ ] Escolher a stack e registrar em `../docs/decisoes-tecnicas.md`.
+## Produto
+- [ ] Responder as perguntas 2 a 4 do escopo do MVP (`mvp.md`).
+- [ ] Desenhar o cérebro de marca (o que guarda, versões, como o Hattie consulta).
 - [ ] Validar preços das assinaturas contra o custo real.
-- [ ] Desenhar o cérebro de marca (o que guarda, como evolui).
-- [ ] Desenhar o fluxo de "adicionar marca existente" (upload de materiais/links e pedido de revisão).
-- [ ] Especificar o Marketing básico do MVP (criação de posts e calendário, sem contas conectadas).
+- [ ] Testar os wireframes com 3 a 5 empreendedoras e 2 designers.
+
+## Telas da próxima rodada
+- [ ] Login e escolha de perfil (`/entrar`).
+- [ ] Plano e créditos (`/plano`).
+- [ ] Importar marca existente (`/nova-marca/importar`).
+- [ ] Brandbook público sem login (`/b/[marca]`).
+- [ ] Designer parceiro: pedido, valor, prazo e entrega.
+- [ ] Projetos: criar e acompanhar uma campanha.
+- [ ] Visão do designer com várias marcas de clientes.
+
+## Visual
+- [ ] Ícones de interface faltando e ícones definitivos de Livro da marca e Projetos (`marca/04-visual/design-system/5-pendencias.md`).
+- [ ] Decidir a superfície dos cards: branco com borda ou lilás-suave (`marca/05-decisoes/alinhamentos.md`).
+
+## Técnico
+- [ ] Definir dados, IA, autenticação e hospedagem (`../docs/arquitetura.md`).
+- [ ] Trocar os mocks de `app/src/lib/mock/` por dados reais.

@@ -11,7 +11,8 @@
 ## Em aberto
 - Slogan da marca.
 - Ícones: função de limpar e refinar (a vassoura virou enviar); forma de zuum; versões quadradas do chapéu e do castelo; ícones de interface restantes.
-- Ícone novo para a página de "marca / brandbook completo" no ambiente da marca (decisão de produto de 03/11/2026, ver `plataforma/produto/fluxos.md`) — a bola de cristal (Estratégia) ficou só com os porquês, essa página reúne todas as seções aprovadas da marca.
+- Ícone novo para a página de "marca / brandbook completo" no ambiente da marca (decisão de produto de 03/11/2026, ver `plataforma/produto/fluxos.md`) — a bola de cristal (Estratégia) ficou só com os porquês, essa página reúne todas as seções aprovadas da marca. Com a estrutura do Figma (09/11/2026), a página virou o "cérebro da marca" e o ícone é o selo com A, no rail.
+- Ícones de interface: decidido em 09/11/2026 usar o Lucide. Os desenhos da marca ficam para o Hattie, o ✱, os selos de som e momentos de marca. O ícone "Marca" do rail (selo com A) segue o desenho do Figma.
 - Character sheet completo, a trabalhar depois.
 - Ilustração: aprovar o violeta-noite `#2B1160` (proposta).
 - Cores: aprovar cinza-médio, suaves, tintas, espaçamento, raios e status.

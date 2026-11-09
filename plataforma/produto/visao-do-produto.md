@@ -94,21 +94,23 @@ IA e humano dividem o mesmo espaço de trabalho o tempo todo, e não em etapas s
 
 ## 6. Jornada (proposta)
 
-Esboço do caminho de uso a partir dos objetivos. Cada etapa precisa de validação com usuários.
+Caminho de uso alinhado às três zonas da seção 8 e aos wireframes de 03/11/2026. Cada etapa precisa de validação com usuários.
 
-| # | Etapa | O que acontece | Quem conduz |
-|---|---|---|---|
-| 1 | Descoberta | A pessoa vê uma marca criada na plataforma em Instagram, TikTok ou YouTube e entra na landing | Marca |
-| 2 | Entrada | Cria a conta, escolhe o perfil (empreendedor ou designer) e ganha créditos de teste | Hattie |
-| 3 | Conversa de ideia | Responde perguntas simples sobre o negócio, o público e a visão. O Hattie transforma as respostas em estratégia | Hattie e pessoa |
-| 4 | Estratégia | Recebe propósito, posicionamento, personalidade e tom de voz, cada um com o porquê | Hattie |
-| 5 | Identidade | Nome, logo e sistema visual gerados e ajustados com a pessoa | Hattie, com designer se chamado |
-| 6 | Marca pronta | O cérebro de marca guarda tudo; a pessoa vê a marca completa no castelo (home) | Hattie |
-| 7 | Materiais | Cria posts, cards e peças sempre consistentes com a marca (botão plimm) | Hattie |
-| 8 | Ajuda humana | Chama um designer parceiro (toc toc) para um ajuste pontual | Designer |
-| 9 | Gestão contínua | Volta para evoluir a marca, planejar o marketing e criar novos assets | Hattie e pessoa |
+| # | Etapa | Zona | O que acontece | Quem conduz |
+|---|---|---|---|---|
+| 1 | Descoberta | — | A pessoa vê uma marca criada com o Hattie em Instagram, TikTok ou YouTube e entra na landing | Marca |
+| 2 | Entrada | Conta | Cria a conta, escolhe o perfil (empreendedor ou designer) e ganha créditos de teste | Hattie |
+| 3 | Minhas marcas | Conta | Cria uma marca nova ou traz uma existente com materiais e links | Pessoa |
+| 4 | Briefing | Criação | Conta a ideia do seu jeito e anexa o que tem: catálogo, fotos, vídeos, links | Pessoa |
+| 5 | Perguntas | Criação | Responde perguntas curtas sobre negócio, público, mercado, localização e produto | Hattie e pessoa |
+| 6 | Pesquisa | Criação | O Hattie estuda mercado e concorrentes (tela hmm…) | Hattie |
+| 7 | Propostas | Criação | Recebe uma proposta por seção, de estratégia ao visual, cada uma com o porquê; aprova, pede ajuste ou outra versão | Hattie, com designer se chamado |
+| 8 | Marca pronta | Criação | Tcharam: o cérebro de marca guarda tudo e o livro da marca fica pronto para compartilhar | Hattie |
+| 9 | Produção | Ambiente | Cria peças e posts com a cara da marca (plimm) e organiza o calendário | Hattie e pessoa |
+| 10 | Ajuda humana | Ambiente | Chama um designer parceiro (toc toc) para um ajuste pontual | Designer |
+| 11 | Gestão contínua | Ambiente | Volta para evoluir a marca, conversar com o Hattie e planejar o marketing | Hattie e pessoa |
 
-O designer percorre as etapas 3 a 9 com os próprios clientes e gerencia várias marcas num só lugar.
+O designer percorre as etapas 3 a 11 com os próprios clientes e gerencia várias marcas num só lugar.
 
 ## 7. Escopo
 
@@ -130,18 +132,19 @@ O designer percorre as etapas 3 a 9 com os próprios clientes e gerencia várias
 - Planos, limites de geração e preços validados.
 - Titularidade e registro dos ativos gerados.
 - Registro do nome e conflito com "Hattie's Design Co." (`marca/05-decisoes/alinhamentos.md`).
-- Stack e arquitetura (`../docs/arquitetura.md`).
-- Perguntas 2 a 5 do escopo do MVP (`mvp.md`).
+- Dados, IA e hospedagem da arquitetura (`../docs/arquitetura.md`). A stack do app já está escolhida (`../docs/decisoes-tecnicas.md`).
+- Perguntas 2 a 4 do escopo do MVP (`mvp.md`).
 
 ## 8. Estrutura da plataforma
 
-Decisão de 03/11/2026. Três zonas:
+Estrutura desenhada pelo Raphael no Figma em 09/11/2026 (registrada em `marca/05-decisoes/decisoes.md`):
 
-1. **Conta** — login, lista de marcas (criar nova ou adicionar existente), plano e perfil. Fora de qualquer marca específica.
-2. **Criação da marca** — fluxo de onboarding conversacional: briefing com qualquer material (texto, links, docs, PDFs, imagens, vídeo), perguntas de validação, pesquisa de mercado e concorrentes, propostas por seção (estratégia, personalidade, verbal, visual completo) e aprovação iterativa seção por seção. Termina com a marca salva como cérebro de marca.
-3. **Ambiente da marca** — gestão contínua, uma marca por ambiente (quantas o plano permitir). Agrupa em: **Marca** (Estratégia só com os porquês, e uma página de brandbook completo ainda sem ícone definido), **Produção** (Criar, Marketing, Projetos/campanhas) e **Suporte** (Designer parceiro, Dicas).
+1. **Entrada** — criar conta ou entrar, e o primeiro acesso, onde a pessoa escolhe criar uma marca do zero ou importar uma existente e conta a ideia com todos os materiais que tiver.
+2. **Criação da marca** — conversa com o Hattie guiada por um plano: pontos que toda marca precisa, mais pontos específicos do segmento. Dá para pular qualquer ponto e deixar o Hattie decidir. Depois vem a tela "estou criando a sua marca".
+3. **Cérebro da marca** — sumário com as seções em quatro grupos (Estratégia, Verbal, Personalidade, Visual), visão geral em cards e uma página por seção. Cada proposta espera o ok da pessoa, que aprova, edita com o Hattie ou contrata um parceiro. O resto do Hattie já fica liberado enquanto isso.
+4. **Dia a dia** — Início ("o que vamos criar hoje?", projetos e modelos por tipo de peça), Hattie (conversas), Projetos, Biblioteca, Marketing, Parceiros, Automações e Conectores, num rail lateral que expande no hover.
 
-A área de Enviar (vassoura) deixou de ser independente: publicar e exportar viram ações dentro de Marketing, da Biblioteca e de cada criação. Detalhe completo, por página, em `fluxos.md`.
+Detalhe por tela em `fluxos.md`. Telas navegáveis em `plataforma/app` (mapa na rota `/`).
 
 ## 9. Onde continuar
 - Fluxos de tela e navegação: `fluxos.md`.

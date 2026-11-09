@@ -1,19 +1,73 @@
-import { Button } from "@/components/ui/button";
+import Image from "next/image"
+import Link from "next/link"
+import type { Route } from "next"
 
-export default function Home() {
+const FLUXOS: { titulo: string; descricao: string; telas: { rotulo: string; href: string }[] }[] = [
+  {
+    titulo: "1 · entrada",
+    descricao: "Conta nova e primeiro acesso.",
+    telas: [
+      { rotulo: "Criar conta", href: "/criar-conta" },
+      { rotulo: "Entrar", href: "/entrar" },
+      { rotulo: "Primeiro acesso: criar ou importar", href: "/comecar" },
+    ],
+  },
+  {
+    titulo: "2 · criação da marca",
+    descricao: "Comece pelo primeiro acesso para ver o fluxo do zero.",
+    telas: [
+      { rotulo: "Conversa de criação com o plano", href: "/marca/raiz-natural/hattie/criacao" },
+      { rotulo: "O Hattie criando a marca", href: "/marca/raiz-natural/criando" },
+      { rotulo: "Cérebro da marca: visão geral", href: "/marca/raiz-natural/cerebro" },
+      { rotulo: "Cérebro da marca: uma seção", href: "/marca/raiz-natural/cerebro/proposito" },
+    ],
+  },
+  {
+    titulo: "3 · dia a dia",
+    descricao: "Navegação geral com a marca pronta.",
+    telas: [
+      { rotulo: "Início", href: "/marca/raiz-natural" },
+      { rotulo: "Conversa nova com o Hattie", href: "/marca/raiz-natural/hattie/nova" },
+      { rotulo: "Minhas marcas", href: "/marcas" },
+      { rotulo: "Áreas da próxima etapa", href: "/marca/raiz-natural/projetos" },
+    ],
+  },
+]
+
+export default function MapaDasTelas() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-8 bg-background px-6 py-24 text-foreground">
-      <p className="label text-muted-foreground">plataforma hattie · design system</p>
-      <h1 className="headline-xs text-center text-foreground sm:headline-m">
-        gabinete, lima e o plimm funcionando
-      </h1>
-      <p className="body max-w-md text-center text-muted-foreground">
-        Tokens de <code>marca/04-visual/design-system</code> conectados ao Tailwind e ao shadcn/ui. Troque{" "}
-        <code>data-theme</code> em <code>layout.tsx</code> para ver palco, intenso e noturno.
-      </p>
-      <Button size="lg" className="rounded-full">
-        criar
-      </Button>
-    </div>
-  );
+    <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-4 py-10 md:px-8">
+      <header className="flex flex-col gap-4">
+        <Image src="/logos/hattie-logomarca.svg" alt="Hattie" width={168} height={36} priority className="h-9 w-auto self-start" />
+        <h1 className="font-heading text-[32px] leading-[1.05] font-medium tracking-[-0.02em] lowercase md:text-[38px]">mapa das telas</h1>
+        <p className="text-ink-soft">
+          Telas navegáveis com dados fictícios da Bia e da Raiz Natural. Para o fluxo completo, comece em Criar conta.
+        </p>
+      </header>
+      {FLUXOS.map((fluxo) => (
+        <section key={fluxo.titulo} className="flex flex-col gap-3">
+          <div>
+            <h2 className="font-heading text-[21px] leading-tight font-medium lowercase">{fluxo.titulo}</h2>
+            <p className="text-sm text-ink-soft">{fluxo.descricao}</p>
+          </div>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {fluxo.telas.map((tela) => (
+              <li key={tela.href}>
+                <Link
+                  href={tela.href as Route}
+                  className="flex min-h-10 items-center justify-between gap-3 rounded-xl bg-branco px-3.5 py-2 text-sm transition-[box-shadow] duration-150 hover:shadow-[0_0_0_2px_var(--ink)]"
+                >
+                  <span className="font-medium">{tela.rotulo}</span>
+                  <span className="truncate text-xs text-ink-soft">{tela.href}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+      <Link href="/dev/tokens" className="self-start text-sm font-semibold underline underline-offset-4">
+        Vitrine dos componentes
+      </Link>
+    </main>
+  )
 }

@@ -1,47 +1,61 @@
 # Fluxos e navegação
 
-Estrutura decidida em 03/11/2026, a partir da discussão registrada em `visao-do-produto.md` (seção 8).
+Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refinada nos wireframes navegáveis de `plataforma/app` (mapa na rota `/`). Regras de interface em `plataforma/design/diretrizes-ui.md`; rotas e camadas em `plataforma/docs/arquitetura.md`.
 
-## As três zonas
+## 1. Entrada
 
-1. **Conta** — fora de qualquer marca específica.
-2. **Criação da marca** — fluxo de onboarding conversacional, não é uma tela fixa.
-3. **Ambiente da marca** — gestão contínua, uma vez que a marca existe.
-
-## Zona 1 · Conta
-
-| Página | Função |
-|---|---|
-| Login / cadastro | Entrada, escolha de perfil (empreendedor ou designer) |
-| Minhas marcas | Lista de ambientes; criar marca nova ou adicionar uma existente (materiais + links, com pedido de revisão) |
-| Plano e assinatura | Créditos, nível do plano, limites |
-| Perfil (chapéu) | Conta e preferências da pessoa — não muda por marca |
-
-## Zona 2 · Criação da marca (onboarding)
-
-Fluxo de estados, não navegação por ícones:
-
-1. Briefing inicial (texto, links, docs, PDFs, imagens, vídeo)
-2. Perguntas de validação (negócio, público, mercado, localização, produto)
-3. Pesquisa (concorrentes, cenário) — trabalho do Hattie, não aparece como etapa pro usuário
-4. Propostas por seção (estratégia, personalidade, identidade verbal; visual: fontes, paleta, direção de logo, grafismos, gradiente, ícones, fotografia, ilustração), cada seção pendente de aprovação
-5. Aprovação iterativa, seção por seção
-6. Marca salva → cérebro de marca → Zona 3
-
-## Zona 3 · Ambiente da marca
-
-| Área | Ícone | Função |
+| Tela | Rota | O que acontece |
 |---|---|---|
-| Home | castelo | Visão geral da marca pronta e próximos passos |
-| Estratégia | bola de cristal (hmm…) | Só os porquês e o raciocínio por trás das decisões — **não** é o brandbook completo (decisão de 03/11/2026) |
-| Marca / brandbook | *(em aberto)* | Todas as seções aprovadas da marca num só lugar: link público pra stakeholder, PDF, download de arquivos. Precisa de ícone novo — ver `marca/04-visual/design-system/5-pendencias.md` |
-| Biblioteca | caderno | Materiais e peças geradas, com status aprovado/rascunho; publicar e baixar arquivos acontece aqui, não em uma área separada |
-| Criar | botão plimm | Gerar marca, variação, peça, imagem de produto, vídeo, avatar |
-| Marketing | *(em aberto)* | Posts e calendário de conteúdo no MVP; conectar contas, métricas, campanhas e personas sintéticas em fase 2 |
-| Projetos / campanhas | *(em aberto)* | Organiza o trabalho em projetos dentro do ambiente |
-| Designer | porta (toc toc) | Chamar um designer parceiro |
-| Dicas | vela | Sugestões do Hattie |
+| Criar conta | `/criar-conta` | Nome, e-mail e senha (ou Google). Erros aparecem no próprio campo e o foco vai para o primeiro. Leva ao primeiro acesso |
+| Entrar | `/entrar` | E-mail e senha, "esqueci minha senha". Leva à Home da marca |
+| Primeiro acesso | `/comecar` | Chapéu do Hattie, "vamos tirar sua marca do chapéu" e a escolha **Criar marca** ou **Importar marca**. A pessoa conta a ideia e anexa o que tiver: PDF, imagens, vídeos, links. Ideias de exemplo preenchem o campo. Enter ou plimm envia |
 
-**Enviar (vassoura) deixou de ser área própria** (decisão de 03/11/2026): publicar e exportar viram ações dentro de Marketing e de cada criação/Biblioteca, em vez de um hub central.
+## 2. Criar uma marca do zero
 
-Fluxos principais a detalhar: onboarding da ideia, criação da marca, revisão de uma peça, chamar o designer, criar e publicar um post, publicar.
+1. **Briefing** no primeiro acesso.
+2. **Conversa de criação** (`/marca/[marca]/hattie/criacao`). O Hattie abre uma conversa com o nome da pessoa ("Marca da Bia"), lê o briefing e os materiais e pergunta, um ponto por vez. Cada pergunta traz respostas rápidas e a opção "Pular, você decide".
+3. **Plano** à direita, com os pontos que vão formar a base da marca:
+   - **Base de toda marca:** o negócio, objetivos, público, mercado e concorrentes, localização e canais, produto e diferencial, personalidade, referências.
+   - **Para a sua marca:** pontos que o Hattie acrescenta pelo segmento. Para cosméticos naturais: ingredientes e origem, embalagem e rótulo.
+   - Cada ponto mostra o status: respondido, conversando agora, falta conversar ou o Hattie decide. Pelo menu do ponto dá para voltar a ele ou pular.
+   - **Criar minha marca** fica disponível o tempo todo. Os pontos que faltam o Hattie decide com o que já sabe.
+4. **Criando a marca** (`/marca/[marca]/criando`): tela própria com as etapas (ler o que a pessoa contou, pesquisar o mercado, estudar concorrentes, montar a estratégia, propor nome, voz e visual). Texto final ainda em aberto.
+5. **Cérebro da marca** (`/marca/[marca]/cerebro`) com a notificação "tcharam". Todas as propostas chegam esperando o ok da pessoa, e o resto do Hattie já fica liberado.
+
+**Importar marca:** o mesmo campo do primeiro acesso recebe links e arquivos. Nos wireframes vai direto para "criando a marca" e para o cérebro; a conversa de revisão da marca importada fica para a próxima rodada.
+
+## 3. Cérebro da marca
+
+**Sumário** à esquerda: busca, Visão geral (com o total esperando ok) e os quatro grupos com contador de aprovadas:
+
+| Grupo | Seções |
+|---|---|
+| Estratégia (7) | briefing de marca, propósito, posicionamento, público e personas, mercado e concorrentes, diferencial, objetivos |
+| Verbal (6) | nome, tagline, tom de voz, mensagens-chave, palavras-chave, vocabulário |
+| Personalidade (3) | arquétipo, atributos, como a marca age |
+| Visual (10) | logo, cores, tipografia, grafismos, gradiente, ícones, estilo fotográfico, ilustração, aplicações, movimento |
+
+**Visão geral** no canvas: nome da marca grande, aviso com quantas propostas esperam ok e o botão "Revisar uma por uma", e cards das seções-chave (briefing em destaque, propósito, logo, tipografia, cores, palavras-chave, público, fotografia, ilustração).
+
+- **Clicar no card** abre a seção: proposta completa, "por que eu propus isso", Aprovar, Editar com o Hattie, Contratar um parceiro e navegação para a seção anterior e a próxima.
+- **⋮ do card**: Aprovar (ou Reabrir para ajustes), Editar com o Hattie, Contratar um parceiro e a ação do tipo (baixar logos, copiar cores, baixar fontes).
+- **Editar com o Hattie** abre a coluna direita: o Hattie pergunta se a proposta resume bem a marca, mostra o texto e oferece "Perfeito, pode aprovar", "Deixa mais curto" e "Quero outra opção", além do campo livre.
+- **⋮ da marca**: compartilhar link, baixar o livro da marca em PDF, convidar pessoa.
+
+## 4. Dia a dia
+
+| Área | Rota | Estado |
+|---|---|---|
+| Início | `/marca/[marca]` | Saudação pelo horário, aviso de propostas pendentes, "o que vamos criar hoje?", projetos recentes, abas Imagem, Vídeo, Posts, Apresentação, Pesquisa, Personas, Atalhos e Site com modelos que preenchem o pedido. Vídeo e Site marcados "em breve" |
+| Hattie | `/marca/[marca]/hattie`, `/hattie/[conversa]`, `/hattie/nova` | Conversas à esquerda, conversa no centro |
+| Marca | `/marca/[marca]/cerebro` | Seção 3 |
+| Projetos, Biblioteca, Marketing, Parceiros, Automações, Conectores | `/marca/[marca]/…` | Estado vazio, próxima rodada |
+| Minhas marcas | `/marcas` | Cards das marcas e "Nova marca" |
+
+**Seletor de marca** (pílula lima no topo): as marcas da pessoa, Nova marca, Minhas marcas, Convidar pessoa, Compartilhar link da marca.
+
+**Conta** (avatar no fim do rail): Configurações da conta, Ajuda, Convidar pessoa, Sair.
+
+## 5. Próximas rodadas
+
+Revisão da marca importada, área de parceiros e contratação, projetos, biblioteca, marketing com calendário e conectores, automações, brandbook público por link, plano e créditos, texto final da tela de criação.

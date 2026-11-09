@@ -7,14 +7,14 @@ O produto Hattie: criação e gestão de marca com IA conduzindo o processo e de
 - **Modelo híbrido:** IA e humano dividem o mesmo espaço de trabalho o tempo todo.
 - **Cérebro de marca:** a plataforma guarda as decisões da marca e evolui com o negócio.
 - **Receita:** assinatura em níveis, créditos extras e comissão sobre serviços de designers parceiros. Valores ainda não validados.
-- **Estágio:** pré-MVP; escopo do MVP em definição.
+- **Estágio:** pré-MVP, com wireframes navegáveis do núcleo do MVP no app.
 
 ## Pastas
 | Pasta | Conteúdo |
 |---|---|
 | `produto/` | Visão, MVP, fluxos e backlog |
-| `design/` | Tokens e ponte com o Design System |
+| `design/` | Tokens, ponte com o Design System e diretrizes de interface |
 | `docs/` | Arquitetura e decisões técnicas |
-| `app/` | Código da aplicação (a criar) |
+| `app/` | Código da aplicação (Next.js). `npm run dev` e abra a rota `/` para o mapa das telas |
 
 Antes de construir qualquer tela, leia `CLAUDE.md` desta pasta.
