@@ -13,8 +13,8 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo({ rotulo
   const descricao = [erro ? `${id}-erro` : null, dica ? `${id}-dica` : null].filter(Boolean).join(" ") || undefined
 
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
-      <label htmlFor={id} className="text-sm font-medium">
+    <div className={cn("flex flex-col gap-1.5", className)}>
+      <label htmlFor={id} className="text-detalhe font-medium text-texto-2">
         {rotulo}
       </label>
       <div className="relative">
@@ -25,7 +25,9 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo({ rotulo
           aria-invalid={erro ? true : undefined}
           aria-describedby={descricao}
           className={cn(
-            "h-11 w-full rounded-xl border border-cinza-medio bg-transparent px-4 text-base outline-none transition-[border-color] duration-150 placeholder:text-cinza-medio hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink aria-invalid:border-2 aria-invalid:border-ink",
+            "h-11 w-full rounded-xl border border-transparent bg-preenchimento px-3.5 text-sm outline-none transition-[background-color,border-color,box-shadow] duration-150 placeholder:text-texto-3",
+            "hover:bg-preenchimento-hover focus-visible:border-borda-tag focus-visible:bg-superficie focus-visible:shadow-[0_0_0_4px_var(--preenchimento)]",
+            "aria-invalid:border-erro aria-invalid:bg-erro-suave aria-invalid:focus-visible:shadow-[0_0_0_4px_var(--erro-suave)]",
             ehSenha && "pe-12",
           )}
           {...props}
@@ -36,20 +38,20 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo({ rotulo
             onClick={() => setVisivel((atual) => !atual)}
             aria-label="Mostrar senha"
             aria-pressed={visivel}
-            className="absolute inset-y-0 end-1 my-auto grid size-9 place-items-center rounded-full text-ink-soft hover:bg-ink/6 hover:text-ink"
+            className="clique absolute inset-y-0 end-1.5 my-auto grid size-8 place-items-center rounded-lg text-texto-2 hover:bg-preenchimento-hover hover:text-texto"
           >
-            {visivel ? <EyeOff className="size-4.5" strokeWidth={2} /> : <Eye className="size-4.5" strokeWidth={2} />}
+            {visivel ? <EyeOff className="size-4" strokeWidth={2} /> : <Eye className="size-4" strokeWidth={2} />}
           </button>
         )}
       </div>
       {erro ? (
-        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-sm font-medium">
-          <CircleAlert className="size-4 shrink-0" strokeWidth={2} aria-hidden />
+        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-detalhe">
+          <CircleAlert className="size-3.5 shrink-0 text-erro" strokeWidth={2.25} aria-hidden />
           {erro}
         </p>
       ) : (
         dica && (
-          <p id={`${id}-dica`} className="text-sm text-ink-soft">
+          <p id={`${id}-dica`} className="text-detalhe text-texto-3">
             {dica}
           </p>
         )

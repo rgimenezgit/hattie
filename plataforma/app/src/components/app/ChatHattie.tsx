@@ -63,7 +63,7 @@ function MensagemHattie({ mensagem }: { mensagem: Mensagem }) {
           ]}
         />
       </div>
-      <p className="max-w-[68ch] text-[15px] leading-relaxed">{mensagem.texto}</p>
+      <p className="max-w-[68ch] text-corpo leading-relaxed">{mensagem.texto}</p>
     </article>
   )
 }
@@ -71,7 +71,7 @@ function MensagemHattie({ mensagem }: { mensagem: Mensagem }) {
 function MensagemPessoa({ mensagem }: { mensagem: Mensagem }) {
   return (
     <div className="flex flex-col items-end gap-2">
-      <p className="max-w-[85%] rounded-[20px] rounded-br-md bg-preto px-4 py-2.5 text-[15px] leading-relaxed text-lima md:max-w-[70%]">
+      <p className="max-w-[85%] rounded-[20px] rounded-br-md bg-preto px-4 py-2.5 text-corpo leading-relaxed text-lima md:max-w-[70%]">
         <span className="sr-only">Você: </span>
         {mensagem.texto}
       </p>
@@ -108,17 +108,17 @@ function IconeStatus({ status }: { status: StatusPasso }) {
     )
   if (status === "atual")
     return (
-      <span className="grid size-5 shrink-0 place-items-center rounded-full border-2 border-ink">
-        <span className="size-1.5 rounded-full bg-ink" />
+      <span className="grid size-5 shrink-0 place-items-center rounded-full bg-preenchimento-ativo">
+        <span className="size-1.5 rounded-full bg-texto motion-safe:animate-pulse" />
       </span>
     )
   if (status === "pulado")
     return (
-      <span className="grid size-5 shrink-0 place-items-center rounded-full border-2 border-dashed border-cinza-medio">
-        <IconeHattie nome="hattie" tamanho={10} className="text-ink-soft" />
+      <span className="grid size-5 shrink-0 place-items-center rounded-full border border-dashed border-borda-tag">
+        <IconeHattie nome="hattie" tamanho={10} className="text-texto-2" />
       </span>
     )
-  return <span className="size-5 shrink-0 rounded-full border-2 border-cinza" />
+  return <span className="size-5 shrink-0 rounded-full border border-borda-tag" />
 }
 
 const ROTULO_STATUS: Record<StatusPasso, string> = {
@@ -144,7 +144,7 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-5">
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-ink-soft">Os pontos que toda marca precisa, mais os que fazem sentido para a sua.</p>
+        <p className="text-sm text-texto-2">Os pontos que toda marca precisa, mais os que fazem sentido para a sua.</p>
         <div className="flex items-center justify-between text-sm">
           <span className="font-medium tabular-nums">
             {resolvidos} de {PASSOS_PLANO.length} pontos
@@ -156,7 +156,7 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
       <div className="relative -mx-2 flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-2">
         {grupos.map((grupo) => (
           <section key={grupo.titulo} className="flex flex-col gap-1">
-            <h3 className="flex items-center gap-2 px-3 pb-1 text-sm font-medium text-ink-soft">
+            <h3 className="flex items-center gap-2 px-3 pb-1 text-sm font-medium text-texto-2">
               {grupo.titulo === "Para a sua marca" && <Sparkle className="size-3.5" strokeWidth={2} aria-hidden />}
               {grupo.titulo}
             </h3>
@@ -166,14 +166,14 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
                 return (
                   <li
                     key={passo.id}
-                    className={cn("group/passo flex min-h-10 items-center gap-2.5 rounded-xl ps-2.5 pe-1 text-sm", status === "atual" && "bg-ink/6")}
+                    className={cn("group/passo flex min-h-10 items-center gap-2.5 rounded-xl ps-2.5 pe-1 text-sm", status === "atual" && "bg-preenchimento")}
                   >
                     <IconeStatus status={status} />
                     <span className="flex min-w-0 flex-1 flex-col">
-                      <span className={cn("truncate", status === "atual" ? "font-semibold" : status === "pendente" ? "text-ink-soft" : "")}>
+                      <span className={cn("truncate", status === "atual" ? "font-semibold" : status === "pendente" ? "text-texto-2" : "")}>
                         {passo.titulo}
                       </span>
-                      <span className={cn("text-xs text-ink-soft", status === "respondido" && "sr-only")}>{ROTULO_STATUS[status]}</span>
+                      <span className={cn("text-xs text-texto-2", status === "respondido" && "sr-only")}>{ROTULO_STATUS[status]}</span>
                     </span>
                     {rascunho && !digitando && status !== "atual" && (
                       <MenuAcoes
@@ -188,7 +188,7 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
                       />
                     )}
                     {rascunho && status === "atual" && (
-                      <Botao variante="fantasma" tamanho="sm" className="px-3 text-sm" disabled={digitando} onClick={() => pularPasso(passo.id)}>
+                      <Botao variante="fantasma" tamanho="sm" disabled={digitando} onClick={() => pularPasso(passo.id)}>
                         Pular
                       </Botao>
                     )}
@@ -200,11 +200,11 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
         ))}
       </div>
 
-      <div className="flex flex-col gap-3 border-t border-cinza pt-4">
+      <div className="flex flex-col gap-3 border-t border-borda-sutil pt-4">
         {rascunho ? (
           <>
             {faltam > 0 && (
-              <p className="text-sm text-ink-soft">
+              <p className="text-sm text-texto-2">
                 {faltam === 1 ? "O ponto que falta" : `Os ${faltam} pontos que faltam`} eu decido com base no que você já me contou. Você revisa tudo depois.
               </p>
             )}
@@ -239,7 +239,7 @@ function ListaConversas({ atual, aoNavegar }: { atual: string; aoNavegar?: () =>
         const titulo = conversa.id === "criacao" && etapa === "rascunho" ? nomeMarca : conversa.titulo
         const ativa = conversa.id === atual
         return (
-          <li key={conversa.id} className={cn("group/conversa flex items-center rounded-full pe-1", ativa ? "bg-lima-suave" : "hover:bg-ink/6")}>
+          <li key={conversa.id} className={cn("group/conversa flex items-center rounded-full pe-1", ativa ? "bg-lima-suave" : "hover:bg-preenchimento")}>
             <Link
               href={`/marca/${marca.slug}/hattie/${conversa.id}` as Route}
               onClick={aoNavegar}
@@ -305,7 +305,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
           </Botao>
         </SheetTrigger>
         <SheetContent side="right" className="w-full gap-0 bg-background p-6 data-[side=right]:sm:max-w-sm">
-          <SheetTitle className="font-heading text-[21px] font-medium lowercase">plano</SheetTitle>
+          <SheetTitle className="font-heading text-titulo-3 font-medium lowercase">plano</SheetTitle>
           <SheetDescription className="sr-only">Pontos da criação da marca</SheetDescription>
           <div className="mt-4 flex min-h-0 flex-1 flex-col">
             <Plano aoFechar={() => setPlanoCelular(false)} />
@@ -349,7 +349,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
                     </Botao>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-full gap-0 bg-background p-6 data-[side=left]:sm:max-w-sm">
-                    <SheetTitle className="font-heading text-[21px] font-medium lowercase">conversas</SheetTitle>
+                    <SheetTitle className="font-heading text-titulo-3 font-medium lowercase">conversas</SheetTitle>
                     <SheetDescription className="sr-only">Suas conversas com o Hattie</SheetDescription>
                     <div className="mt-4">
                       <ListaConversas atual={conversaId} aoNavegar={() => setConversasCelular(false)} />
@@ -373,8 +373,8 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
               {nova && mensagens.length === 0 && (
                 <div className="flex flex-col items-center gap-3 py-12 text-center">
                   <IconeHattie nome="hattie" tamanho={64} className="text-preto" />
-                  <p className="font-heading text-[21px] leading-tight font-medium lowercase">sobre o que vamos conversar?</p>
-                  <p className="max-w-sm text-sm text-ink-soft">Eu já conheço a {estado.nomeMarca}. Pode pedir uma legenda, uma ideia de post ou uma opinião sincera.</p>
+                  <p className="font-heading text-titulo-3 font-medium lowercase">sobre o que vamos conversar?</p>
+                  <p className="max-w-sm text-sm text-texto-2">Eu já conheço a {estado.nomeMarca}. Pode pedir uma legenda, uma ideia de post ou uma opinião sincera.</p>
                 </div>
               )}
               {mensagens.map((mensagem) =>
@@ -392,7 +392,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
                       key={sugestao}
                       type="button"
                       onClick={() => estado.responder(sugestao)}
-                      className="h-8 rounded-full bg-branco px-3 text-[13px] transition-[background-color,scale] duration-150 hover:bg-lima-suave active:scale-[.96] motion-reduce:active:scale-100"
+                      className="clique h-8 rounded-full bg-superficie px-3 text-detalhe font-medium hover:bg-acao-suave"
                     >
                       {sugestao}
                     </button>
@@ -400,9 +400,9 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
                   <button
                     type="button"
                     onClick={() => estado.pularPasso(passoAtual.id)}
-                    className="flex h-8 items-center gap-1.5 rounded-full border border-dashed border-ink/40 px-3 text-[13px] text-ink-soft transition-[background-color,color] duration-150 hover:bg-ink/6 hover:text-ink"
+                    className="clique flex h-8 items-center gap-1.5 rounded-full px-3 text-detalhe font-medium text-texto-2 hover:bg-preenchimento hover:text-texto"
                   >
-                    <SkipForward className="size-4" strokeWidth={2} aria-hidden />
+                    <SkipForward className="size-3.5" strokeWidth={2} aria-hidden />
                     Pular, você decide
                   </button>
                 </div>

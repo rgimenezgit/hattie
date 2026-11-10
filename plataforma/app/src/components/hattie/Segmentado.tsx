@@ -21,13 +21,13 @@ export function Segmentado({ rotulo, opcoes, valor, onChange, className }: Props
       value={valor}
       onValueChange={(novo) => novo && onChange(novo)}
       aria-label={rotulo}
-      className={cn("grid w-full grid-cols-2 gap-1 rounded-full bg-ink/6 p-1", className)}
+      className={cn("grid w-full grid-cols-2 gap-1 rounded-full bg-preenchimento p-1", className)}
     >
       {opcoes.map((opcao) => (
         <ToggleGroupItem
           key={opcao.valor}
           value={opcao.valor}
-          className="h-9 w-full gap-2 rounded-full text-sm font-medium text-ink-soft transition-[background-color,color] duration-150 hover:bg-transparent hover:text-ink data-[state=on]:bg-lima data-[state=on]:text-preto"
+          className="h-9 w-full gap-2 rounded-full text-sm font-medium text-texto-2 transition-[background-color,color] duration-150 hover:bg-transparent hover:text-ink data-[state=on]:bg-lima data-[state=on]:text-preto"
         >
           <opcao.icone className="size-4" strokeWidth={2} aria-hidden />
           {opcao.rotulo}

@@ -2,6 +2,15 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 10/11/2026
+- Poppins entra com a família completa (100 a 900, com itálico) em `assets/fontes/poppins/` e no app.
+- Sistema tipográfico da plataforma com escala nomeada (display 48, título 32/24/20, destaque 18, corpo 15, 14, detalhe 13, 12 e micro 11) e pesos por função: 300 destaque, 400 corpo e tags, 500 botões e controles, 600 títulos de card, alerta e nota.
+- Cores da plataforma organizadas por papel (fundo, canvas, superfície, preenchimento, bordas, texto em três níveis, ação, erro, informação), todas a partir dos hex do Design System.
+- Botão e tag se separam: botão é pílula cheia em Poppins 500, sem contorno; tag tem canto de 6 px, Poppins 400 em 12 px e contorno de 1 px em preto `#101010` a 16%. Campos, botões e cards ficam sem contorno preto.
+- Clique: todo botão afunda para 0,97 e volta com mola; o primário solta uma onda; o ✱ do plimm dá meia-volta e solta faíscas da marca para fora do botão (brilho, mais e ponto em lima-forte `#77A00F`, em degraus de pixel).
+- Alerta da plataforma vira cartão preto `#101010` com círculo lima `#E6F344` à esquerda, sem lilás e sem contorno. A nota "por que eu propus isso" vira card branco com a assinatura do Hattie em lima, sem lilás.
+- Detalhes em `plataforma/design/diretrizes-ui.md` e na vitrine `/dev/tokens`.
+
 ## 09/11/2026
 - A plataforma segue a estrutura desenhada pelo Raphael no Figma: entrada em duas colunas, primeiro acesso com "criar marca" ou "importar marca", conversa de criação com plano lateral, cérebro da marca com sumário e cards, Home com rail lateral que expande no hover. Detalhes em `plataforma/produto/fluxos.md` e `plataforma/design/diretrizes-ui.md`.
 - Na plataforma, o botão plimm é pílula lima `#E6F344` com ✱ e texto preto `#101010`. Ele envia pedidos ao Hattie e cria.

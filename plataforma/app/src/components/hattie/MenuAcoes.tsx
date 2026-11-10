@@ -32,7 +32,7 @@ export function MenuAcoes({ rotulo, itens, className }: Props) {
         aria-label={rotulo}
         onClick={(evento) => evento.stopPropagation()}
         className={cn(
-          "relative z-10 grid size-8 shrink-0 place-items-center rounded-full text-ink-soft transition-[background-color,color] duration-150 hover:bg-ink/6 hover:text-ink data-[state=open]:bg-ink/6",
+          "relative z-10 grid size-8 shrink-0 place-items-center rounded-full text-texto-2 transition-[background-color,color] duration-150 hover:bg-preenchimento hover:text-ink data-[state=open]:bg-preenchimento",
           className,
         )}
       >
@@ -62,7 +62,7 @@ export function MenuAcoes({ rotulo, itens, className }: Props) {
             >
               <item.icone className="size-4" strokeWidth={2} aria-hidden />
               {item.rotulo}
-              {item.emBreve && <span className="ms-auto ps-4 text-xs text-ink-soft">em breve</span>}
+              {item.emBreve && <span className="ms-auto ps-4 text-xs text-texto-2">em breve</span>}
             </DropdownMenuItem>
           </div>
         ))}

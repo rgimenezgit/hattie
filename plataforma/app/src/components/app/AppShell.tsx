@@ -42,7 +42,7 @@ function TrocaMarca() {
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-64 rounded-2xl p-1">
-        <DropdownMenuLabel className="text-xs font-medium text-ink-soft">Suas marcas</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-xs font-medium text-texto-2">Suas marcas</DropdownMenuLabel>
         {MARCAS.map((item) => (
           <DropdownMenuItem key={item.slug} asChild className={ITEM_MENU}>
             <Link href={`/marca/${item.slug}` as Route}>
@@ -68,7 +68,7 @@ function TrocaMarca() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className={ITEM_MENU} disabled>
-          <UserPlus aria-hidden /> Convidar pessoa <span className="ms-auto text-xs text-ink-soft">em breve</span>
+          <UserPlus aria-hidden /> Convidar pessoa <span className="ms-auto text-xs text-texto-2">em breve</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           className={ITEM_MENU}
@@ -90,7 +90,7 @@ function MenuConta({ lado = "right" }: { lado?: "right" | "top" }) {
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="Sua conta"
-        className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-cinza bg-background p-0.5 transition-[border-color] duration-150 hover:border-ink focus-visible:outline-offset-[-3px] data-[state=open]:border-ink"
+        className="grid size-10 shrink-0 place-items-center rounded-full bg-preenchimento p-0.5 transition-[background-color] duration-150 hover:bg-preenchimento-ativo focus-visible:outline-offset-[-3px] data-[state=open]:bg-preenchimento-ativo"
       >
         <span className="grid size-full place-items-center rounded-full bg-lilas text-xs font-semibold text-preto">{PESSOA.nome[0]}</span>
       </DropdownMenuTrigger>
@@ -103,18 +103,18 @@ function MenuConta({ lado = "right" }: { lado?: "right" | "top" }) {
             <p className="truncate font-medium">
               {PESSOA.nome} {PESSOA.sobrenome}
             </p>
-            <p className="truncate text-sm text-ink-soft">{PESSOA.email}</p>
+            <p className="truncate text-sm text-texto-2">{PESSOA.email}</p>
           </div>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem className={ITEM_MENU} disabled>
-          <Settings aria-hidden /> Configurações da conta <span className="ms-auto text-xs text-ink-soft">em breve</span>
+          <Settings aria-hidden /> Configurações da conta <span className="ms-auto text-xs text-texto-2">em breve</span>
         </DropdownMenuItem>
         <DropdownMenuItem className={ITEM_MENU} disabled>
-          <CircleHelp aria-hidden /> Ajuda <span className="ms-auto text-xs text-ink-soft">em breve</span>
+          <CircleHelp aria-hidden /> Ajuda <span className="ms-auto text-xs text-texto-2">em breve</span>
         </DropdownMenuItem>
         <DropdownMenuItem className={ITEM_MENU} disabled>
-          <UserPlus aria-hidden /> Convidar pessoa <span className="ms-auto text-xs text-ink-soft">em breve</span>
+          <UserPlus aria-hidden /> Convidar pessoa <span className="ms-auto text-xs text-texto-2">em breve</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className={ITEM_MENU} onSelect={() => router.push("/entrar")}>
@@ -134,7 +134,7 @@ function ItemRail({ item, ativo, slug, aoNavegar }: { item: ItemNavegacao; ativo
         aria-current={ativo ? "page" : undefined}
         className={cn(
           "flex h-10 items-center gap-3 rounded-full px-2.5 text-sm whitespace-nowrap transition-[background-color,color] duration-150 focus-visible:outline-offset-[-3px]",
-          ativo ? "bg-lima font-medium text-preto" : "text-ink-soft hover:bg-ink/6 hover:text-ink",
+          ativo ? "bg-lima font-medium text-preto" : "text-texto-2 hover:bg-preenchimento hover:text-ink",
         )}
       >
         <item.icone className="shrink-0" />
@@ -173,7 +173,7 @@ function NavegacaoCelular() {
 
   return (
     <Sheet open={aberto} onOpenChange={setAberto}>
-      <SheetTrigger aria-label="Abrir navegação" className="-ms-1 grid size-10 place-items-center rounded-full hover:bg-ink/6 md:hidden">
+      <SheetTrigger aria-label="Abrir navegação" className="-ms-1 grid size-10 place-items-center rounded-full hover:bg-preenchimento md:hidden">
         <Menu className="size-5" strokeWidth={2} />
       </SheetTrigger>
       <SheetContent side="left" className="w-64 gap-0 bg-background p-3">

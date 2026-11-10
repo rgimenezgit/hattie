@@ -10,14 +10,13 @@ import {
   Check,
   ChevronDown,
   CircleCheck,
-  CircleX,
   Copy,
   Download,
   FileText,
   Link2,
   ListTree,
+  MessageCircle,
   RotateCcw,
-  Search,
   SquarePen,
   UserPlus,
   UsersRound,
@@ -25,9 +24,11 @@ import {
 } from "lucide-react"
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Botao } from "@/components/hattie/Botao"
+import { Busca } from "@/components/hattie/Busca"
 import { Composer, type ComposerHandle } from "@/components/hattie/Composer"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { MenuAcoes, type ItemMenu } from "@/components/hattie/MenuAcoes"
+import { NotaHattie } from "@/components/hattie/NotaHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { StatusBadge } from "@/components/hattie/StatusBadge"
 import { cn } from "@/lib/utils"
@@ -57,8 +58,8 @@ function useAcoesSecao(secao: Secao, aoEditar: (id: string) => void) {
           onSelect: () => {
             aprovar(secao.id)
             notificar({
-              titulo: "guardado no cérebro",
-              texto: `${secao.titulo} aprovado. Tudo que você criar já usa essa decisão.`,
+              titulo: "guardei no cérebro",
+              texto: `A seção ${secao.titulo} está aprovada. Tudo que você criar já usa essa decisão.`,
               som: "cling",
             })
           },
@@ -103,27 +104,7 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-4">
-      <label className="flex h-10 items-center gap-2 rounded-full border-[1.5px] border-ink px-3.5 text-sm focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink">
-        <Search className="size-4.5 shrink-0 text-ink-soft" strokeWidth={2} aria-hidden />
-        <span className="sr-only">Buscar no cérebro da marca</span>
-        <input
-          type="search"
-          value={busca}
-          onChange={(evento) => setBusca(evento.target.value)}
-          placeholder="Buscar"
-          className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-cinza-medio [&::-webkit-search-cancel-button]:hidden"
-        />
-        {busca && (
-          <button
-            type="button"
-            aria-label="Limpar busca"
-            onClick={() => setBusca("")}
-            className="-me-2 grid size-8 place-items-center rounded-full hover:bg-ink/6"
-          >
-            <CircleX className="size-4.5" strokeWidth={2} />
-          </button>
-        )}
-      </label>
+      <Busca valor={busca} aoMudar={setBusca} rotulo="Buscar no cérebro da marca" />
 
       <nav ref={lista} aria-label="Seções da marca" className="relative -mx-2 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-2 pb-4">
         <Link
@@ -132,12 +113,12 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
           aria-current={!secaoAtual ? "page" : undefined}
           className={cn(
             "flex h-9 items-center justify-between rounded-full px-3 text-sm",
-            !secaoAtual ? "bg-lima-suave font-medium" : "hover:bg-ink/6",
+            !secaoAtual ? "bg-lima-suave font-medium" : "hover:bg-preenchimento",
           )}
         >
           Visão geral
           {pendentesTotal > 0 && (
-            <span className="text-sm text-ink-soft tabular-nums">
+            <span className="text-sm text-texto-2 tabular-nums">
               {pendentesTotal}
               <span className="sr-only"> esperando seu ok</span>
             </span>
@@ -160,10 +141,10 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
                 aria-controls={idLista}
                 disabled={Boolean(termo)}
                 onClick={() => setFechados((atual) => ({ ...atual, [grupo.id]: aberto }))}
-                className="flex h-9 items-center gap-2 rounded-full px-3 text-left text-sm hover:bg-ink/6 disabled:hover:bg-transparent"
+                className="flex h-9 items-center gap-2 rounded-full px-3 text-left text-sm hover:bg-preenchimento disabled:hover:bg-transparent"
               >
                 <ChevronDown
-                  className={cn("size-4 shrink-0 text-ink-soft transition-transform duration-150", !aberto && "-rotate-90")}
+                  className={cn("size-4 shrink-0 text-texto-2 transition-transform duration-150", !aberto && "-rotate-90")}
                   strokeWidth={2}
                   aria-hidden
                 />
@@ -171,7 +152,7 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
                 <span
                   className={cn(
                     "flex h-7 items-center gap-1 rounded-full px-2.5 text-sm tabular-nums",
-                    completo ? "bg-ink/6 text-ink-soft" : "bg-lima-suave text-preto",
+                    completo ? "bg-preenchimento text-texto-2" : "bg-lima-suave text-preto",
                   )}
                 >
                   {completo ? (
@@ -184,7 +165,7 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
                 </span>
               </button>
               {aberto && (
-                <ul id={idLista} className="ms-5 flex flex-col border-s border-cinza ps-2">
+                <ul id={idLista} className="ms-5 flex flex-col border-s border-borda-sutil ps-2">
                   {itens.map((secao) => {
                     const ativa = secao.id === secaoAtual
                     const pendente = secoes[secao.id] === "pendente"
@@ -196,7 +177,7 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
                           aria-current={ativa ? "page" : undefined}
                           className={cn(
                             "flex h-8 items-center justify-between gap-2 rounded-full px-3 text-sm",
-                            ativa ? "bg-lima-suave font-medium" : "text-ink-soft hover:bg-ink/6 hover:text-ink",
+                            ativa ? "bg-lima-suave font-medium" : "text-texto-2 hover:bg-preenchimento hover:text-ink",
                           )}
                         >
                           <span className="truncate">{secao.titulo}</span>
@@ -216,7 +197,7 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
           )
         })}
         {termo && resultados === 0 && (
-          <p role="status" className="px-4 py-3 text-sm text-ink-soft">
+          <p role="status" className="px-4 py-3 text-sm text-texto-2">
             Nada encontrado para “{busca.trim()}”.
           </p>
         )}
@@ -232,7 +213,7 @@ function CardSecao({ secao, destaque = false, aoEditar }: { secao: Secao; destaq
     <article
       className={cn(
         "group/card relative flex min-h-40 flex-col gap-3 rounded-3xl border-2 bg-branco p-5 transition-[border-color] duration-150",
-        destaque && !aprovada ? "border-lima" : "border-transparent hover:border-ink/15",
+        destaque && !aprovada ? "border-lima" : "border-transparent hover:border-borda-sutil",
         destaque && "@2xl:col-span-2",
       )}
     >
@@ -240,7 +221,7 @@ function CardSecao({ secao, destaque = false, aoEditar }: { secao: Secao; destaq
         <h3 className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-2">
           <Link
             href={`/marca/${marca.slug}/cerebro/${secao.id}` as Route}
-            className="text-lg leading-tight font-medium after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-ink"
+            className="text-destaque leading-tight font-medium after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-ink"
           >
             {secao.titulo}
           </Link>
@@ -281,7 +262,7 @@ function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => 
     setMensagens((atual) => [...atual, { id: atual.length, autor: "pessoa", texto: limpo }])
     if (aprovar_) {
       aprovar(secao.id)
-      notificar({ titulo: "guardado no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
+      notificar({ titulo: "guardei no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
     }
     timer.current = setTimeout(() => {
       setMensagens((atual) => [
@@ -312,12 +293,12 @@ function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => 
       >
         <div className="mt-auto flex items-start gap-3">
           <IconeHattie nome="hattie" tamanho={32} label="Hattie" className="shrink-0 text-preto" />
-          <p className="font-heading text-lg leading-tight font-medium lowercase">
+          <p className="font-heading text-destaque leading-tight font-medium lowercase">
             {aprovada ? "quer ajustar alguma coisa aqui?" : "isso resume bem a sua marca?"}
           </p>
         </div>
-        <div className="rounded-2xl bg-ink/6 p-4 text-sm">
-          <p className="mb-2 text-sm font-medium text-ink-soft">{secao.titulo}</p>
+        <div className="rounded-2xl bg-preenchimento p-4 text-sm">
+          <p className="mb-2 text-sm font-medium text-texto-2">{secao.titulo}</p>
           <p className="leading-relaxed">{secao.resumo}</p>
         </div>
         {mensagens.map((mensagem) =>
@@ -343,7 +324,7 @@ function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => 
                 key={sugestao as string}
                 type="button"
                 onClick={() => enviar(sugestao as string)}
-                className="h-8 rounded-full bg-ink/6 px-3 text-[13px] transition-[background-color] duration-150 hover:bg-lima-suave"
+                className="h-8 rounded-full bg-preenchimento px-3 text-detalhe transition-[background-color] duration-150 hover:bg-lima-suave"
               >
                 {sugestao}
               </button>
@@ -395,17 +376,20 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
   return (
     <div className="flex flex-col gap-6">
       {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
-        <p className="max-w-[60ch] text-lg leading-snug">{secao.resumo}</p>
+        <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
       )}
       <PreviaSecao secao={secao} modo="completo" marca={marca} />
 
-      <section aria-label="Por que eu propus isso" className="flex gap-3 rounded-3xl bg-lilas-suave p-5">
-        <IconeHattie nome="hattie" tamanho={32} className="shrink-0 text-preto" />
-        <div className="flex flex-col gap-1">
-          <h2 className="font-heading text-[21px] leading-tight font-medium lowercase">por que eu propus isso</h2>
-          <p className="max-w-[65ch] text-[15px] leading-relaxed">{secao.porque}</p>
-        </div>
-      </section>
+      <NotaHattie
+        titulo="Por que eu propus isso"
+        acao={
+          <Botao variante="secundario" tamanho="sm" onClick={() => aoEditar(secao.id)}>
+            <MessageCircle /> Perguntar mais
+          </Botao>
+        }
+      >
+        <p>{secao.porque}</p>
+      </NotaHattie>
 
       <div className="flex flex-wrap items-center gap-2">
         {aprovada ? (
@@ -417,7 +401,7 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
             variante="primario"
             onClick={() => {
               aprovar(secao.id)
-              notificar({ titulo: "guardado no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
+              notificar({ titulo: "guardei no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
             }}
           >
             <Check /> Aprovar
@@ -426,16 +410,16 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <Botao variante="secundario" data-editar onClick={() => aoEditar(secao.id)}>
           <SquarePen /> Editar com o Hattie
         </Botao>
-        <Botao variante="terciario" asChild>
+        <Botao variante="link" asChild>
           <Link href={`/marca/${marca.slug}/parceiros` as Route}>Contratar um parceiro</Link>
         </Botao>
       </div>
 
-      <nav aria-label="Outras seções" className="flex justify-between gap-4 border-t border-ink/10 pt-5">
+      <nav aria-label="Outras seções" className="flex justify-between gap-4 border-t border-borda-sutil pt-5 text-sm">
         {anterior ? (
           <Link
             href={`/marca/${marca.slug}/cerebro/${anterior.id}` as Route}
-            className="flex items-center gap-2 text-ink-soft hover:text-ink"
+            className="flex items-center gap-2 text-texto-2 hover:text-texto"
           >
             <ArrowLeft className="size-4" strokeWidth={2} aria-hidden />
             {anterior.titulo}
@@ -507,7 +491,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
             {secao && (
               <Link
                 href={`/marca/${marca.slug}/cerebro` as Route}
-                className="flex items-center gap-2 self-start text-sm font-medium text-ink-soft hover:text-ink"
+                className="flex items-center gap-2 self-start text-sm font-medium text-texto-2 hover:text-ink"
               >
                 <ArrowLeft className="size-4" strokeWidth={2} aria-hidden />
                 Visão geral
@@ -526,7 +510,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
                       </Botao>
                     </SheetTrigger>
                     <SheetContent side="left" className="w-full gap-0 bg-background p-4 data-[side=left]:sm:max-w-xs">
-                      <SheetTitle className="mb-3 font-heading text-[21px] font-medium lowercase">{nome}</SheetTitle>
+                      <SheetTitle className="mb-3 font-heading text-titulo-3 font-medium lowercase">{nome}</SheetTitle>
                       <SheetDescription className="sr-only">Seções da marca</SheetDescription>
                       <Sumario secaoAtual={secaoId} aoNavegar={() => setSumarioCelular(false)} />
                     </SheetContent>
@@ -557,7 +541,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
       {secaoEditada && !telaLarga && (
         <Sheet open onOpenChange={(aberto) => !aberto && fecharEdicao()}>
           <SheetContent side="right" className="w-full gap-0 bg-background p-4 data-[side=right]:sm:max-w-sm">
-            <SheetTitle className="mb-3 font-heading text-[21px] font-medium lowercase">editar com o hattie</SheetTitle>
+            <SheetTitle className="mb-3 font-heading text-titulo-3 font-medium lowercase">editar com o hattie</SheetTitle>
             <SheetDescription className="sr-only">Ajuste de {secaoEditada.titulo}</SheetDescription>
             <PainelEdicao key={`m-${secaoEditada.id}`} secaoId={secaoEditada.id} aoFechar={fecharEdicao} />
           </SheetContent>

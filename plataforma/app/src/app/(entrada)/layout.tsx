@@ -22,7 +22,7 @@ export default function LayoutDeEntrada({ children }: LayoutProps<"/">) {
       >
         <div className="relative z-10 flex max-w-md flex-col gap-6">
           <SeloSom som="plimm" fixo className="self-start" />
-          <p className="font-heading text-[38px] leading-[1.02] xl:text-[50px] font-medium tracking-[-0.02em] text-preto lowercase">
+          <p className="font-heading text-titulo-1 xl:text-display font-medium text-preto lowercase">
             já tirei muitas marcas do chapéu. bora tirar a sua?
           </p>
         </div>

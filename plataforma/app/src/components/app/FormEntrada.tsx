@@ -13,7 +13,7 @@ type Erros = Partial<Record<"nome" | "email" | "senha", string>>
 
 function Divisor() {
   return (
-    <div className="flex items-center gap-3 text-sm text-ink-soft" aria-hidden>
+    <div className="flex items-center gap-3 text-sm text-texto-2" aria-hidden>
       <span className="h-px flex-1 bg-cinza" />
       ou com e-mail
       <span className="h-px flex-1 bg-cinza" />
@@ -54,10 +54,10 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2 text-center">
-        <h1 className="font-heading text-[32px] leading-[1.05] font-medium tracking-[-0.015em] lowercase">
+        <h1 className="font-heading text-titulo-1 font-medium lowercase">
           {criar ? "criar conta" : "que bom te ver"}
         </h1>
-        <p className="text-ink-soft">
+        <p className="text-texto-2">
           {criar ? "Em poucos minutos a sua marca sai do chapéu." : "Entra para continuar de onde parou."}
         </p>
       </div>
@@ -101,7 +101,7 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
       </form>
 
       {criar && (
-        <p className="text-sm text-ink-soft">
+        <p className="text-sm text-texto-2">
           Ao criar a conta, você concorda com os Termos de uso e a Política de privacidade do Hattie.
         </p>
       )}

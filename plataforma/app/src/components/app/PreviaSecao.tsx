@@ -1,4 +1,5 @@
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
+import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Marca, Secao } from "@/lib/mock"
 
@@ -10,17 +11,17 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
 
   switch (conteudo.tipo) {
     case "texto":
-      return <p className={cn("leading-relaxed text-ink-soft", card ? "line-clamp-3 text-sm" : "max-w-[65ch] text-lg leading-snug text-ink")}>{conteudo.texto}</p>
+      return <p className={cn("leading-relaxed text-texto-2", card ? "line-clamp-3 text-sm" : "max-w-[65ch] text-destaque leading-snug text-ink")}>{conteudo.texto}</p>
 
     case "blocos":
       return card ? (
-        <p className="line-clamp-3 text-sm leading-relaxed text-ink-soft">{secao.resumo}</p>
+        <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{secao.resumo}</p>
       ) : (
         <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {conteudo.blocos.map((bloco) => (
             <div key={bloco.titulo} className="flex flex-col gap-1 rounded-2xl bg-branco p-4">
-              <dt className="text-sm font-medium text-ink-soft">{bloco.titulo}</dt>
-              <dd className="text-[15px] leading-relaxed">{bloco.texto}</dd>
+              <dt className="text-sm font-medium text-texto-2">{bloco.titulo}</dt>
+              <dd className="text-corpo leading-relaxed">{bloco.texto}</dd>
             </div>
           ))}
         </dl>
@@ -30,8 +31,8 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       return (
         <ul className="flex flex-wrap gap-2">
           {conteudo.palavras.map((palavra) => (
-            <li key={palavra} className={cn("flex items-center rounded-full border-[1.5px] border-ink px-3.5", card ? "h-8 text-sm" : "h-10 text-lg")}>
-              {palavra}
+            <li key={palavra}>
+              <Tag tamanho={card ? "md" : "lg"}>{palavra}</Tag>
             </li>
           ))}
         </ul>
@@ -53,7 +54,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
               ) : (
                 <span className="flex flex-col">
                   <span className="font-medium">{cor.nome}</span>
-                  <span className="text-sm text-ink-soft tabular-nums">
+                  <span className="text-sm text-texto-2 tabular-nums">
                     {cor.hex} · {cor.papel}
                   </span>
                 </span>
@@ -71,8 +72,8 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       ) : (
         <div className="flex flex-col gap-3 rounded-2xl bg-branco p-5">
           <p className="font-serif text-[38px] leading-tight">{conteudo.amostra}</p>
-          <p className="font-sans text-[21px]">Todo frasco diz de qual lote e de qual cooperativa veio.</p>
-          <p className="text-sm text-ink-soft">
+          <p className="font-sans text-titulo-3">Todo frasco diz de qual lote e de qual cooperativa veio.</p>
+          <p className="text-sm text-texto-2">
             Títulos em <span className="font-medium text-ink">{conteudo.display}</span> · texto em{" "}
             <span className="font-medium text-ink">{conteudo.texto}</span>
           </p>
@@ -90,14 +91,14 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         <ul className="grid gap-3 sm:grid-cols-3">
           {conteudo.opcoes.map((opcao, indice) => (
             <li key={opcao} className="flex flex-col gap-2">
-              <div className={cn("grid aspect-[4/3] place-items-center rounded-3xl", indice === 0 && "outline-2 outline-ink")} style={{ backgroundColor: CREME }}>
+              <div className={cn("grid aspect-[4/3] place-items-center rounded-3xl", indice === 0 && "outline-2 outline-offset-2 outline-acao-forte")} style={{ backgroundColor: CREME }}>
                 <span className="font-serif text-[28px]" style={{ color: VERDE }}>
                   {indice === 1 ? marca.nome.split(" ").map((parte) => parte[0]).join("") : marca.nome}
                 </span>
               </div>
               <span className="text-sm">
                 {opcao}
-                {indice === 0 && <span className="text-ink-soft"> · proposta principal</span>}
+                {indice === 0 && <span className="text-texto-2"> · proposta principal</span>}
               </span>
             </li>
           ))}
@@ -106,7 +107,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
 
     case "imagens":
       return card ? (
-        <p className="line-clamp-3 leading-relaxed text-ink-soft">{conteudo.descricao}</p>
+        <p className="line-clamp-3 leading-relaxed text-texto-2">{conteudo.descricao}</p>
       ) : (
         <ul className="grid gap-3 sm:grid-cols-3">
           {conteudo.legendas.map((legenda) => (
@@ -119,7 +120,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
 
     case "persona":
       return card ? (
-        <p className="line-clamp-3 leading-relaxed text-ink-soft">
+        <p className="line-clamp-3 leading-relaxed text-texto-2">
           <span className="font-medium text-ink">
             {conteudo.nome}, {conteudo.idade}.
           </span>{" "}
@@ -127,13 +128,13 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </p>
       ) : (
         <div className="flex flex-col gap-3 rounded-2xl bg-branco p-5">
-          <p className="font-heading text-[21px] font-medium">
+          <p className="font-heading text-titulo-3 font-medium">
             {conteudo.nome}, {conteudo.idade}
           </p>
           <p className="max-w-[60ch] leading-relaxed">{conteudo.descricao}</p>
           <ul className="flex flex-wrap gap-2">
             {conteudo.habitos.map((habito) => (
-              <li key={habito} className="flex h-9 items-center rounded-full bg-ink/6 px-3.5 text-sm">
+              <li key={habito} className="flex h-9 items-center rounded-full bg-preenchimento px-3.5 text-sm">
                 {habito}
               </li>
             ))}

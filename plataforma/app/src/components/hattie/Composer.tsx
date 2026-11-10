@@ -46,7 +46,7 @@ function BotaoFerramenta({
           aria-label={rotulo}
           aria-disabled={disabled || undefined}
           onClick={disabled ? undefined : onClick}
-          className="grid size-8 place-items-center rounded-full text-ink-soft transition-[background-color,color] duration-150 hover:bg-ink/6 hover:text-ink aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
+          className="clique grid size-8 place-items-center rounded-full text-texto-2 hover:bg-preenchimento hover:text-texto aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-disabled:active:scale-100"
         >
           {children}
         </button>
@@ -129,8 +129,9 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
         adicionar(evento.dataTransfer.files)
       }}
       className={cn(
-        "flex w-full flex-col gap-2 rounded-3xl bg-branco p-3 shadow-[0_1px_2px_oklch(0_0_0/0.04),0_6px_24px_oklch(0_0_0/0.06)] outline-offset-2 transition-[outline-color] focus-within:outline-2 focus-within:outline-ink/70",
-        arrastando && "outline-2 outline-dashed outline-ink",
+        "flex w-full flex-col gap-2 rounded-3xl bg-superficie p-3 shadow-(--sombra-campo) transition-[box-shadow] duration-200",
+        "focus-within:shadow-[0_0_0_1px_var(--borda-tag),var(--sombra-flutuante)]",
+        arrastando && "shadow-[0_0_0_2px_var(--lima-forte),var(--sombra-flutuante)]",
         className,
       )}
     >
@@ -157,14 +158,14 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
         aria-describedby={erro ? `${id}-erro` : undefined}
         rows={tamanho === "grande" ? 2 : 1}
         className={cn(
-          "field-sizing-content w-full resize-none bg-transparent px-1 text-base leading-relaxed outline-none placeholder:text-cinza-medio",
+          "field-sizing-content w-full resize-none bg-transparent px-1 text-corpo outline-none placeholder:text-texto-3",
           tamanho === "grande" ? "min-h-16 max-h-56" : "min-h-10 max-h-40",
         )}
       />
 
       {erro && (
-        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 px-1 text-sm font-medium">
-          <CircleAlert className="size-4 shrink-0" strokeWidth={2} aria-hidden />
+        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 px-1 text-detalhe font-medium">
+          <CircleAlert className="size-4 shrink-0 text-erro" strokeWidth={2} aria-hidden />
           {erro}
         </p>
       )}
@@ -172,16 +173,16 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
       {anexos.length > 0 && (
         <ul className="flex flex-wrap gap-2" aria-label="Materiais anexados">
           {anexos.map((nome, indice) => (
-            <li key={`${nome}-${indice}`} className="flex h-8 items-center gap-2 rounded-full bg-ink/6 ps-3 pe-0.5 text-sm">
-              <FileText className="size-4" strokeWidth={2} aria-hidden />
+            <li key={`${nome}-${indice}`} className="flex h-7 items-center gap-1.5 rounded-md border border-borda-tag ps-2 pe-0.5 text-xs">
+              <FileText className="size-3.5 text-texto-2" strokeWidth={2} aria-hidden />
               <span className="max-w-48 truncate">{nome}</span>
               <button
                 type="button"
                 aria-label={`Remover ${nome}`}
                 onClick={() => setAnexos((atual) => atual.filter((_, i) => i !== indice))}
-                className="grid size-8 place-items-center rounded-full hover:bg-ink/10"
+                className="grid size-6 place-items-center rounded-sm text-texto-2 hover:bg-preenchimento-hover hover:text-texto"
               >
-                <X className="size-3.5" strokeWidth={2} />
+                <X className="size-3" strokeWidth={2} />
               </button>
             </li>
           ))}
@@ -202,7 +203,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
             <TooltipTrigger asChild>
               <DropdownMenuTrigger
                 aria-label="Opções"
-                className="grid size-8 place-items-center rounded-full text-ink-soft transition-[background-color,color] duration-150 hover:bg-ink/6 hover:text-ink data-[state=open]:bg-ink/6"
+                className="clique grid size-8 place-items-center rounded-full text-texto-2 hover:bg-preenchimento hover:text-texto data-[state=open]:bg-preenchimento-hover"
               >
                 <SlidersHorizontal className="size-[18px]" strokeWidth={1.75} />
               </DropdownMenuTrigger>
@@ -210,7 +211,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
             <TooltipContent>Opções</TooltipContent>
           </Tooltip>
           <DropdownMenuContent align="start" className="w-60 rounded-2xl p-1">
-            <DropdownMenuLabel className="text-xs text-ink-soft">O Hattie vai</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-xs text-texto-2">O Hattie vai</DropdownMenuLabel>
             <DropdownMenuCheckboxItem checked={usarCerebro} onCheckedChange={(valor) => setUsarCerebro(Boolean(valor))} className="h-9 rounded-xl text-sm">
               Usar o cérebro da marca
             </DropdownMenuCheckboxItem>

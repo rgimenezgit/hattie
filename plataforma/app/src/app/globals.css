@@ -28,7 +28,10 @@
   --color-lima-suave: var(--lima-suave);
   --color-lilas-suave: var(--lilas-suave);
   --color-violeta: var(--violeta);
-  --color-violeta: var(--violeta);
+  --color-rosa: var(--rosa);
+  --color-rosa-forte: var(--rosa-forte);
+  --color-azul: var(--azul);
+  --color-azul-forte: var(--azul-forte);
   --color-lilas: var(--lilas);
   --color-lima: var(--lima);
   --color-lima-forte: var(--lima-forte);
@@ -60,13 +63,63 @@
   --color-popover: var(--bg);
   --color-card-foreground: var(--ink);
   --color-card: var(--bg);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-md);
-  --radius-3xl: var(--radius-lg);
+  /* Raios da plataforma. Os do Design System (8, 16, 24, 40) seguem nas variáveis --radius-* das peças de marca. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
   --radius-4xl: 32px;
+  /* Cores da plataforma (papéis). Valores em :root, abaixo. */
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-preenchimento: var(--preenchimento);
+  --color-preenchimento-hover: var(--preenchimento-hover);
+  --color-preenchimento-ativo: var(--preenchimento-ativo);
+  --color-borda-sutil: var(--borda-sutil);
+  --color-borda-tag: var(--borda-tag);
+  --color-texto: var(--texto);
+  --color-texto-2: var(--texto-2);
+  --color-texto-3: var(--texto-3);
+  --color-acao: var(--lima);
+  --color-acao-suave: var(--lima-suave);
+  --color-acao-forte: var(--lima-forte);
+  --color-erro: var(--erro);
+  --color-erro-suave: var(--erro-suave);
+  --color-info-suave: var(--info-suave);
+
+  /* Escala tipográfica. Clash Display em minúsculas nos títulos; Poppins no resto. */
+  --text-display: 48px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.025em;
+  --text-titulo-1: 32px;
+  --text-titulo-1--line-height: 1.05;
+  --text-titulo-1--letter-spacing: -0.02em;
+  --text-titulo-2: 24px;
+  --text-titulo-2--line-height: 1.15;
+  --text-titulo-2--letter-spacing: -0.015em;
+  --text-titulo-3: 20px;
+  --text-titulo-3--line-height: 1.2;
+  --text-titulo-3--letter-spacing: -0.01em;
+  --text-destaque: 18px;
+  --text-destaque--line-height: 1.5;
+  --text-corpo: 15px;
+  --text-corpo--line-height: 1.6;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.45;
+  --text-detalhe: 13px;
+  --text-detalhe--line-height: 1.4;
+  --text-xs: 12px;
+  --text-xs--line-height: 1.35;
+  --text-micro: 11px;
+  --text-micro--line-height: 1.3;
+  --text-micro--letter-spacing: 0.02em;
+  --text-micro--font-weight: 500;
+
+  --ease-mola: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-saida: cubic-bezier(0.23, 1, 0.32, 1);
+
   --color-dither-ink: var(--dither-ink);
   --color-dither-paper: var(--dither-paper);
   --color-dither-blue: var(--dither-color-blue);
@@ -96,6 +149,28 @@
     --neutro-hover: color-mix(in oklch, var(--ink) 6%, var(--bg));
     --canvas: color-mix(in oklch, var(--cinza) 62%, var(--branco));
     --plimm-sombra: var(--preto);
+
+    /* Superfícies: branco #F5F5F5 na página e nos cards, canvas cinza por baixo. */
+    --fundo: var(--branco);
+    --superficie: var(--branco);
+    /* Preenchimento de botão secundário, campo e busca: preto #101010 em 5, 9 e 13%. */
+    --preenchimento: color-mix(in oklch, var(--preto) 5%, transparent);
+    --preenchimento-hover: color-mix(in oklch, var(--preto) 9%, transparent);
+    --preenchimento-ativo: color-mix(in oklch, var(--preto) 13%, transparent);
+    /* Bordas: só divisórias e tags. Nada de contorno preto em campo ou botão. */
+    --borda-sutil: color-mix(in oklch, var(--preto) 8%, transparent);
+    --borda-tag: color-mix(in oklch, var(--preto) 16%, transparent);
+    /* Texto: preto #101010, grafite #333333 e cinza-médio #6B6B6B. */
+    --texto: var(--preto);
+    --texto-2: var(--grafite);
+    --texto-3: var(--cinza-medio);
+    /* Erro em rosa-forte #F53890 só na borda e no ícone; a mensagem fica em preto. */
+    --erro: var(--rosa-forte);
+    --erro-suave: color-mix(in oklch, var(--rosa-forte) 10%, var(--branco));
+    /* Dica e informação: azul #8AD3FA bem diluído. */
+    --info-suave: color-mix(in oklch, var(--azul) 22%, var(--branco));
+    --sombra-flutuante: 0 1px 2px oklch(0 0 0 / 0.05), 0 12px 32px -8px oklch(0 0 0 / 0.16);
+    --sombra-campo: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px -12px oklch(0 0 0 / 0.14);
   }
   [data-theme="noturno"] {
     --plimm-sombra: var(--lima-forte);
@@ -188,5 +263,146 @@
     --dither-color-red: var(--rosa-forte);
     --dither-color-grey: var(--cinza-medio);
     --dither-bloom: 0.6;
+  }
+}
+/* Clique. Todo botão afunda (escala 0,97) e volta com mola.
+   Botões de ação (primário e plimm) soltam uma onda curta em volta. */
+@keyframes onda-clique {
+  from {
+    box-shadow: 0 0 0 0 var(--onda-cor, oklch(0 0 0 / 0.22));
+  }
+  to {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+@keyframes giro-plimm {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 180deg;
+  }
+}
+
+@utility clique {
+  transition-property: scale, background-color, color, box-shadow, translate;
+  transition-duration: 160ms;
+  transition-timing-function: var(--ease-mola);
+  &:active {
+    scale: 0.97;
+    transition-duration: 80ms;
+    transition-timing-function: ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition-property: background-color, color;
+    &:active {
+      scale: 1;
+    }
+  }
+}
+
+@utility onda {
+  &[data-onda] {
+    animation: onda-clique 420ms var(--ease-saida);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &[data-onda] {
+      animation: none;
+    }
+  }
+}
+
+@utility animate-giro-plimm {
+  animation: giro-plimm 480ms var(--ease-mola);
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Faíscas do plimm: voo em degraus de pixel e troca de glifo (brilho → mais → ponto). */
+@keyframes faisca-voo {
+  from {
+    translate: -50% -50%;
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  to {
+    translate: calc(-50% + var(--dx)) calc(-50% + var(--dy));
+    opacity: 0;
+  }
+}
+
+@keyframes faisca-brilho {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  41%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes faisca-mais {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  41%,
+  72% {
+    opacity: 1;
+  }
+  73%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes faisca-ponto {
+  0%,
+  72% {
+    opacity: 0;
+  }
+  73%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .faisca {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 9px;
+    height: 9px;
+    color: var(--lima-forte);
+    opacity: 0;
+    animation: faisca-voo 460ms steps(5, end) both;
+  }
+  .faisca > * {
+    grid-area: 1 / 1;
+    animation: inherit;
+    animation-timing-function: linear;
+  }
+  .faisca-brilho {
+    animation-name: faisca-brilho;
+  }
+  .faisca-mais {
+    width: 7px;
+    height: 7px;
+    background:
+      linear-gradient(currentColor, currentColor) center / 7px 2px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 2px 7px no-repeat;
+    animation-name: faisca-mais;
+  }
+  .faisca-ponto {
+    width: 3px;
+    height: 3px;
+    background: currentColor;
+    animation-name: faisca-ponto;
   }
 }

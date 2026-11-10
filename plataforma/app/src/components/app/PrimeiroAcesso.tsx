@@ -46,10 +46,10 @@ export function PrimeiroAcesso() {
         <div className="flex flex-col items-center gap-4 text-center animate-entrada">
           <IconeHattie nome="hattie" tamanho={96} className="text-preto" />
           <div className="flex flex-col gap-2">
-            <h1 className="font-heading text-[32px] leading-[1.02] font-medium tracking-[-0.02em] lowercase md:text-[50px]">
+            <h1 className="font-heading text-titulo-1 font-medium lowercase md:text-display">
               vamos tirar sua marca do chapéu
             </h1>
-            <p className="text-lg leading-snug text-ink-soft">
+            <p className="text-destaque leading-snug text-texto-2">
               Oi, {PESSOA.nome}! {criar ? "Me conta a sua ideia do seu jeito." : "Me mostra a marca que você já tem."}
             </p>
           </div>
@@ -78,20 +78,20 @@ export function PrimeiroAcesso() {
             sugestoes={criar ? IDEIAS : undefined}
             onEnviar={enviar}
           />
-          <p className="px-2 text-xs text-ink-soft">
+          <p className="px-2 text-xs text-texto-2">
             Pode mandar PDF, imagens, vídeos e links. Quanto mais ingredientes, melhor a marca.
           </p>
         </div>
 
         {criar && (
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-sm text-ink-soft">Experimente:</span>
+            <span className="text-sm text-texto-2">Experimente:</span>
             {EXEMPLOS.map((exemplo, indice) => (
               <button
                 key={exemplo}
                 type="button"
                 onClick={() => composer.current?.preencher(IDEIAS[indice])}
-                className="h-8 rounded-full border border-cinza px-3 text-[13px] transition-[background-color,border-color] duration-150 hover:border-ink hover:bg-ink/6"
+                className="clique h-8 rounded-full bg-preenchimento px-3 text-detalhe font-medium hover:bg-preenchimento-hover"
               >
                 {exemplo}
               </button>

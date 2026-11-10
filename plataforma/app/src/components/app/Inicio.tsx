@@ -52,14 +52,14 @@ export function Inicio() {
           <section className="flex flex-col items-center gap-5">
             <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4 sm:text-left">
               <IconeHattie nome="hattie" tamanho={64} className="text-preto" />
-              <h1 className="font-heading text-[32px] leading-none font-medium tracking-[-0.02em] lowercase md:text-[48px]">
+              <h1 className="font-heading text-titulo-1 font-medium lowercase md:text-display">
                 oi, {PESSOA.nome.toLowerCase()}!{periodo && ` ${periodo} :)`}
               </h1>
             </div>
             {pendentes > 0 && (
               <Link
                 href={`/marca/${marca.slug}/cerebro` as Route}
-                className="flex h-8 items-center gap-2 rounded-full bg-lima-suave px-3 text-[13px] font-medium transition-[background-color] duration-150 hover:bg-lima"
+                className="flex h-8 items-center gap-2 rounded-full bg-lima-suave px-3 text-detalhe font-medium transition-[background-color] duration-150 hover:bg-lima"
               >
                 <span aria-hidden className="size-2 rounded-full bg-lima-forte" />
                 {pendentes === 1 ? "1 proposta espera" : `${pendentes} propostas esperam`} o seu ok
@@ -84,7 +84,7 @@ export function Inicio() {
 
           <section aria-labelledby="titulo-projetos" className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <h2 id="titulo-projetos" className="font-heading text-[21px] leading-tight font-medium lowercase">
+              <h2 id="titulo-projetos" className="font-heading text-titulo-3 font-medium lowercase">
                 projetos
               </h2>
               <Botao variante="fantasma" tamanho="icone-sm" aria-label="Novo projeto" asChild>
@@ -104,7 +104,7 @@ export function Inicio() {
               {PROJETOS.map((projeto) => (
                 <li key={projeto.id}>
                   <Link href={`/marca/${marca.slug}/projetos` as Route} className="group flex flex-col gap-2 rounded-2xl">
-                    <span className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink/15 transition-[background-color] duration-150 group-hover:bg-ink/25">
+                    <span className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-preenchimento-ativo transition-[background-color] duration-150 group-hover:bg-[color-mix(in_oklch,var(--preto)_20%,transparent)]">
                       <span
                         aria-hidden
                         className="absolute inset-0 bg-[radial-gradient(var(--branco)_2px,transparent_2.5px)] bg-size-[20px_20px] bg-position-[10px_10px]"
@@ -112,7 +112,7 @@ export function Inicio() {
                     </span>
                     <span className="flex flex-col px-1">
                       <span className="truncate text-sm font-medium">{projeto.nome}</span>
-                      <span className="text-xs text-ink-soft">{projeto.editado}</span>
+                      <span className="text-xs text-texto-2">{projeto.editado}</span>
                     </span>
                   </Link>
                 </li>
@@ -133,7 +133,7 @@ export function Inicio() {
                       <TabsTrigger
                         key={categoria.id}
                         value={categoria.id}
-                        className="h-9 flex-none gap-1.5 rounded-full border-0 px-3 text-sm font-medium text-ink-soft data-active:bg-lima-suave data-active:text-preto data-active:shadow-none"
+                        className="h-9 flex-none gap-1.5 rounded-full border-0 px-3 text-sm font-medium text-texto-2 data-active:bg-lima-suave data-active:text-preto data-active:shadow-none"
                       >
                         <Icone className="size-4" strokeWidth={1.75} aria-hidden />
                         {categoria.rotulo}
@@ -159,8 +159,8 @@ export function Inicio() {
                             <span className="flex items-center gap-2">
                               <span className="line-clamp-2 text-sm font-medium">{modelo.titulo}</span>
                             </span>
-                            <span className="text-xs leading-snug text-ink-soft">{modelo.descricao}</span>
-                            {categoria.emBreve && <span className="mt-auto text-xs font-medium text-ink-soft">em breve</span>}
+                            <span className="text-xs leading-snug text-texto-2">{modelo.descricao}</span>
+                            {categoria.emBreve && <span className="mt-auto text-xs font-medium text-texto-2">em breve</span>}
                           </span>
                         </button>
                       </li>

@@ -12,10 +12,10 @@ export default function MinhasMarcas() {
       </Link>
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-6 py-8">
         <div className="flex flex-col gap-2">
-          <h1 className="font-heading text-[32px] leading-[1.05] font-medium tracking-[-0.02em] lowercase md:text-[38px]">
+          <h1 className="font-heading text-titulo-1 font-medium lowercase">
             suas marcas
           </h1>
-          <p className="text-ink-soft">
+          <p className="text-texto-2">
             {PESSOA.nome}, o seu plano comporta 3 marcas. Você usa {MARCAS.length}.
           </p>
         </div>
@@ -32,8 +32,8 @@ export default function MinhasMarcas() {
                   ))}
                 </span>
                 <span className="flex flex-col gap-1 p-5">
-                  <span className="font-heading text-[21px] leading-tight font-medium">{marca.nome}</span>
-                  <span className="text-ink-soft">
+                  <span className="font-heading text-titulo-3 font-medium">{marca.nome}</span>
+                  <span className="text-texto-2">
                     {marca.segmento} · {marca.cidade}
                   </span>
                 </span>
@@ -43,7 +43,7 @@ export default function MinhasMarcas() {
           <li>
             <Link
               href="/comecar"
-              className="flex h-full min-h-40 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-cinza p-5 text-sm text-center transition-[background-color,border-color] duration-150 hover:border-ink hover:bg-ink/6"
+              className="flex h-full min-h-40 flex-col items-center justify-center gap-2 rounded-3xl border border-dashed border-borda-tag p-5 text-sm text-center transition-[background-color] duration-150 hover:bg-preenchimento"
             >
               <span className="grid size-12 place-items-center rounded-full bg-lima">
                 <Plus className="size-5" strokeWidth={2} aria-hidden />

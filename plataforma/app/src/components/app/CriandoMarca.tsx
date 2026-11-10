@@ -42,10 +42,10 @@ export function CriandoMarca() {
         <IconeHattie nome="hattie" tamanho={104} className="text-preto motion-safe:animate-[flutuar_3s_ease-in-out_infinite]" />
         <div className="flex flex-col items-center gap-4">
           <SeloSom som="zuum" fixo />
-          <h1 className="font-heading text-[32px] leading-[1.02] font-medium tracking-[-0.02em] lowercase md:text-[38px]">
+          <h1 className="font-heading text-titulo-1 font-medium lowercase">
             estou criando a sua marca
           </h1>
-          <p className="text-ink-soft">Esse feitiço leva alguns segundos. Pode deixar a tela aberta.</p>
+          <p className="text-texto-2">Esse feitiço leva alguns segundos. Pode deixar a tela aberta.</p>
         </div>
 
         <p role="status" className="sr-only">
@@ -59,18 +59,18 @@ export function CriandoMarca() {
               <li
                 key={texto}
                 aria-current={agora ? "step" : undefined}
-                className={cn("flex h-10 items-center gap-3 rounded-xl px-3 text-sm", agora && "bg-ink/6")}
+                className={cn("flex h-10 items-center gap-3 rounded-xl px-3 text-sm", agora && "bg-preenchimento")}
               >
                 <span
                   className={cn(
                     "grid size-6 shrink-0 place-items-center rounded-full",
-                    feito ? "bg-lima text-preto" : agora ? "border-2 border-ink" : "border-2 border-cinza",
+                    feito ? "bg-lima text-preto" : agora ? "bg-preenchimento-ativo" : "border border-borda-tag",
                   )}
                 >
                   {feito && <Check className="size-3.5" strokeWidth={3} aria-hidden />}
-                  {agora && <span className="size-2 rounded-full bg-ink motion-safe:animate-pulse" />}
+                  {agora && <span className="size-2 rounded-full bg-texto motion-safe:animate-pulse" />}
                 </span>
-                <span className={cn(feito ? "text-ink" : agora ? "font-medium" : "text-ink-soft")}>{texto}</span>
+                <span className={cn(feito ? "text-ink" : agora ? "font-medium" : "text-texto-2")}>{texto}</span>
                 <span className="sr-only">{feito ? ", concluída" : agora ? ", em andamento" : ""}</span>
               </li>
             )

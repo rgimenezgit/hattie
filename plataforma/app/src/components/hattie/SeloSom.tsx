@@ -6,7 +6,7 @@ import { IconeHattie, type NomeIcone } from "./IconeHattie"
 
 export type Som = "plimm" | "hmm…" | "tcharam" | "cling" | "zuum" | "puff" | "toc toc" | "psiu"
 
-const FORMA: Record<Som, NomeIcone> = {
+export const FORMA_DO_SOM: Record<Som, NomeIcone> = {
   plimm: "asterisco",
   "hmm…": "bola-de-cristal",
   tcharam: "estrela",
@@ -40,8 +40,8 @@ export function SeloSom({ som, fixo = false, className }: SeloProps) {
         className,
       )}
     >
-      <IconeHattie nome={FORMA[som]} tamanho={20} />
-      <span className="font-heading text-[21px] leading-none font-semibold">{som}</span>
+      <IconeHattie nome={FORMA_DO_SOM[som]} tamanho={20} />
+      <span className="font-heading text-titulo-3 font-semibold">{som}</span>
     </span>
   )
 }
