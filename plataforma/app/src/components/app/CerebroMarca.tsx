@@ -38,6 +38,7 @@ import { useMarca } from "./MarcaContexto"
 import { PreviaSecao } from "./PreviaSecao"
 import { SecaoDiferenciais } from "./SecaoDiferenciais"
 import { SecaoMercado } from "./SecaoMercado"
+import { SecaoNome } from "./SecaoNome"
 import { SecaoPublico } from "./SecaoPublico"
 import { useMidia } from "./useMidia"
 
@@ -383,6 +384,8 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoMercado secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "diferenciais" ? (
         <SecaoDiferenciais secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "nome" ? (
+        <SecaoNome secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
@@ -399,7 +402,7 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        {aprovada ? (
+        {secao.conteudo.tipo === "nome" ? null : aprovada ? (
           <Botao variante="secundario" onClick={() => reabrir(secao.id)}>
             <RotateCcw /> Reabrir para ajustes
           </Botao>

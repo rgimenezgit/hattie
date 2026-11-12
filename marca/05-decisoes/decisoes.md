@@ -3,6 +3,7 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Nome: na primeira visita, a pessoa escolhe entre opções, cada uma com significado, por que funciona, como soa, ponto de atenção e disponibilidade. Escolhido, o nome aparece com o porquê organizado e as outras opções. O processo (funil, o que o Hattie ouviu, territórios e critérios) aparece nos dois momentos. Escolher um nome troca o nome da marca no app.
 - Mercado e concorrentes: referências de marca (citadas no briefing ou sugeridas pelo Hattie), concorrentes diretos e indiretos com a leitura do Hattie por grupo, e um painel de mercado atualizado toda segunda com indicadores e insights.
 - Diferenciais separados em cinco frentes (funcionais, emocionais, sociais, ambientais e econômicos). Só entram as frentes que fazem sentido para a marca; as outras aparecem com o motivo. A seção passa a se chamar Diferenciais.
 - Regras de hierarquia da plataforma: uma camada de caixa (card branco sobre o palco, sem caixa cinza dentro), títulos de bloco fora do card, três níveis de texto, listas de atributos em texto, títulos em Clash sempre em minúsculas (menos nome de marca e de conversa). Toda mudança de UI passa por revisão de hierarquia antes de ser entregue.

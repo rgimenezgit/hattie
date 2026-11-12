@@ -142,6 +142,20 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       )
     }
 
+    case "nome":
+      return (
+        <div className="flex flex-col gap-2">
+          <ul className="flex flex-wrap gap-1.5">
+            {conteudo.opcoes.map((opcao) => (
+              <li key={opcao.id}>
+                <Tag tamanho="md">{opcao.nome}</Tag>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs text-texto-3">{conteudo.opcoes.length} opções para escolher</p>
+        </div>
+      )
+
     case "publico":
       return (
         <div className="flex flex-col gap-3">

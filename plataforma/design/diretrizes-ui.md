@@ -172,6 +172,22 @@ Diálogos da plataforma usam `Janela` (branco, raio 24, sem contorno, rodapé co
 
 Botões de adicionar no cabeçalho de bloco encurtam para "Adicionar" no celular (o resto do rótulo continua para leitores de tela). Cabeçalhos de bloco e de tela quebram de linha quando falta espaço.
 
+### Nome
+
+A página tem dois momentos.
+
+**Escolher (primeira visita, nome pendente).** O bloco "escolha um nome" vem primeiro, com o ícone do porquê e "Sugerir um nome". Cada opção é um card com:
+- território (tag) e "minha aposta" na opção que o Hattie recomenda;
+- o nome em Clash 32 com a grafia original e o que ele quer dizer;
+- "Por que funciona" em lista com check lima-forte, "Como soa" e, quando houver, um ponto de atenção;
+- disponibilidade de domínio, Instagram e INPI (livre, a confirmar, em uso) e o botão "Escolher". A aposta leva o botão primário; as outras, o secundário.
+
+Escolher abre a confirmação em três camadas: a prévia "Como vai aparecer" com o nome na fonte e na cor da marca da cliente e o significado; o aviso "Antes de registrar" em azul de informação (`info-suave`), só quando algum canal falta confirmar ou está em uso, com o canal em peso 500 e o que falta; e a consequência numa linha discreta no fim. Ao confirmar, o nome passa a valer no app inteiro e a seção fica aprovada, com o selo cling. "Pedir outras opções" abre a conversa com o Hattie; "Sugerir um nome" adiciona uma opção da pessoa para o Hattie checar.
+
+**Escolhido.** "nome da marca" com o nome grande na fonte e na cor da marca, o significado e quatro fatos (território, como soa, domínio, Instagram); "por que esse nome" com os motivos numerados e a disponibilidade; "outras opções" em lista com "Trocar por esta"; e "Ver as opções de novo".
+
+Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes gerados, os que passaram nos critérios, os finalistas) e três colunas com o que o Hattie ouviu, os territórios e os critérios. Na página do nome, a aprovação acontece pela escolha, então o botão "Aprovar" genérico não aparece.
+
 ### Demais peças
 
 | Componente | Uso | Forma |

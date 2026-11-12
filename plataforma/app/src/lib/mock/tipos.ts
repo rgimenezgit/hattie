@@ -29,6 +29,7 @@ export type ConteudoSecao =
   | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
   | { tipo: "mercado"; referencias: Referencia[]; concorrentes: Concorrente[]; leituras: Record<TipoConcorrente, string>; painel: PainelMercado }
   | { tipo: "diferenciais"; principal: string; clusters: ClusterDiferencial[] }
+  | { tipo: "nome"; processo: ProcessoNome; opcoes: OpcaoNome[] }
 
 export type Dado = { rotulo: string; valor: string }
 
@@ -99,6 +100,33 @@ export type Diferencial = { titulo: string; descricao: string; prova: string; fo
 
 /** Cluster de diferenciais. Sem diferenciais, explica por que ficou de fora para esta marca. */
 export type ClusterDiferencial = { id: TipoCluster; diferenciais: Diferencial[]; foraPorque?: string }
+
+export type StatusChecagem = "livre" | "verificar" | "em uso"
+
+/** Checagem de disponibilidade de um nome num canal (domínio, Instagram, INPI). */
+export type Checagem = { canal: string; valor: string; status: StatusChecagem }
+
+/** Uma opção de nome com o raciocínio por trás. */
+export type OpcaoNome = {
+  id: string
+  nome: string
+  territorio: string
+  significado: string
+  porque: string[]
+  soa: string
+  atencao?: string
+  checagens: Checagem[]
+  aposta?: boolean
+  sugerida?: boolean
+}
+
+/** Como o Hattie chegou às opções: o que ouviu, os territórios, os critérios e o funil. */
+export type ProcessoNome = {
+  ouvi: string[]
+  territorios: { nome: string; ideia: string }[]
+  criterios: string[]
+  funil: { gerados: number; passaram: number; finalistas: number }
+}
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }
 

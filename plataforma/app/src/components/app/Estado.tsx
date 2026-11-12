@@ -41,6 +41,8 @@ type EstadoApp = {
   concorrentesNovos: Concorrente[]
   adicionarReferencia: (referencia: Referencia) => void
   adicionarConcorrente: (concorrente: Concorrente) => void
+  nomeEscolhido: string | null
+  escolherNome: (id: string, nome: string) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -87,6 +89,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [personasNovas, setPersonasNovas] = useState<Persona[]>([])
   const [referenciasNovas, setReferenciasNovas] = useState<Referencia[]>([])
   const [concorrentesNovos, setConcorrentesNovos] = useState<Concorrente[]>([])
+  const [nomeEscolhido, setNomeEscolhido] = useState<string | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -203,6 +206,10 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const adicionarPublico = useCallback((publico: Publico) => setPublicosNovos((atual) => [...atual, publico]), [])
   const adicionarPersona = useCallback((persona: Persona) => setPersonasNovas((atual) => [...atual, persona]), [])
   const adicionarReferencia = useCallback((referencia: Referencia) => setReferenciasNovas((atual) => [...atual, referencia]), [])
+  const escolherNome = useCallback((id: string, nome: string) => {
+    setNomeEscolhido(id)
+    setNomeMarca(nome)
+  }, [])
   const adicionarConcorrente = useCallback((concorrente: Concorrente) => setConcorrentesNovos((atual) => [...atual, concorrente]), [])
 
   const valor = useMemo<EstadoApp>(
@@ -228,6 +235,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       concorrentesNovos,
       adicionarReferencia,
       adicionarConcorrente,
+      nomeEscolhido,
+      escolherNome,
     }),
     [
       nomeMarca,
@@ -251,6 +260,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       concorrentesNovos,
       adicionarReferencia,
       adicionarConcorrente,
+      nomeEscolhido,
+      escolherNome,
     ],
   )
 
