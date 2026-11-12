@@ -43,6 +43,8 @@ type EstadoApp = {
   adicionarConcorrente: (concorrente: Concorrente) => void
   nomeEscolhido: string | null
   escolherNome: (id: string, nome: string) => void
+  logoEscolhido: string | null
+  escolherLogo: (id: string | null) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -90,6 +92,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [referenciasNovas, setReferenciasNovas] = useState<Referencia[]>([])
   const [concorrentesNovos, setConcorrentesNovos] = useState<Concorrente[]>([])
   const [nomeEscolhido, setNomeEscolhido] = useState<string | null>(null)
+  const [logoEscolhido, escolherLogo] = useState<string | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -237,6 +240,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      logoEscolhido,
+      escolherLogo,
     }),
     [
       nomeMarca,
@@ -262,6 +267,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      logoEscolhido,
     ],
   )
 

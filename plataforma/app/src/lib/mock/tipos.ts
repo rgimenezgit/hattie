@@ -24,7 +24,7 @@ export type ConteudoSecao =
   | { tipo: "palavras"; palavras: string[] }
   | { tipo: "cores"; cores: Cor[] }
   | { tipo: "tipografia"; display: string; texto: string; amostra: string }
-  | { tipo: "logo"; descricao: string; opcoes: string[] }
+  | ({ tipo: "logo" } & SistemaLogo)
   | { tipo: "imagens"; descricao: string; legendas: string[] }
   | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
   | { tipo: "mercado"; referencias: Referencia[]; concorrentes: Concorrente[]; leituras: Record<TipoConcorrente, string>; painel: PainelMercado }
@@ -172,6 +172,21 @@ export type Atributo = {
   naMarca: string
   ondeSeVe: { onde: string; como: string }[]
   arquetipo?: string
+}
+
+export type SimboloLogo = "gota" | "selo" | "monograma"
+
+/** Ideia de logo apresentada antes da geração. */
+export type IdeiaLogo = { id: string; nome: string; simbolo: SimboloLogo; conceito: string; porque: string[]; aposta?: boolean }
+
+export type ErroLogo = "esticar" | "girar" | "cor" | "sombra" | "contraste" | "separar"
+
+/** Briefing, ideias, regras de uso e espaçamento do logo. As versões de cor saem da paleta da marca. */
+export type SistemaLogo = {
+  briefing: { conceito: string; palavras: string[]; referencias: string[]; evitar: string[]; usos: string[] }
+  ideias: IdeiaLogo[]
+  regras: { faca: string[]; evite: { tipo: ErroLogo; texto: string }[] }
+  espacamento: { protecao: string; minimos: { versao: string; digital: string; impresso: string }[] }
 }
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }

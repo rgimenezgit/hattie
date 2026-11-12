@@ -1,5 +1,6 @@
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Tag } from "@/components/hattie/Tag"
+import { Logo } from "./Logo"
 import { cn } from "@/lib/utils"
 import type { Marca, Secao } from "@/lib/mock"
 
@@ -80,30 +81,14 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </div>
       )
 
-    case "logo":
-      return card ? (
+    case "logo": {
+      const ideia = conteudo.ideias.find((item) => item.aposta) ?? conteudo.ideias[0]
+      return (
         <div className="grid h-24 place-items-center rounded-2xl" style={{ backgroundColor: CREME }}>
-          <span className="font-serif text-[28px]" style={{ color: VERDE }}>
-            {marca.nome}
-          </span>
+          <Logo tipo="composta" simbolo={ideia.simbolo} nome={marca.nome} tinta={VERDE} altura={card ? 30 : 48} />
         </div>
-      ) : (
-        <ul className="grid gap-3 sm:grid-cols-3">
-          {conteudo.opcoes.map((opcao, indice) => (
-            <li key={opcao} className="flex flex-col gap-2">
-              <div className={cn("grid aspect-[4/3] place-items-center rounded-3xl", indice === 0 && "outline-2 outline-offset-2 outline-acao-forte")} style={{ backgroundColor: CREME }}>
-                <span className="font-serif text-[28px]" style={{ color: VERDE }}>
-                  {indice === 1 ? marca.nome.split(" ").map((parte) => parte[0]).join("") : marca.nome}
-                </span>
-              </div>
-              <span className="text-sm">
-                {opcao}
-                {indice === 0 && <span className="text-texto-2"> · proposta principal</span>}
-              </span>
-            </li>
-          ))}
-        </ul>
       )
+    }
 
     case "imagens":
       return card ? (

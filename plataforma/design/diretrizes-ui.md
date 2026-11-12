@@ -219,6 +219,18 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 
 Bloco "como a marca é" com um card por atributo, numerado. À esquerda: número, de qual arquétipo vem (tag), o nome em Clash e a frase-título em `destaque`. À direita, separados por linha vertical: "O que significa", "Como aparece na marca" e "Onde se vê" (pontos de contato como rótulo, atendimento e posts, cada um com o como).
 
+### Logo
+
+**Primeira visita (logo pendente).** "briefing do logo": o conceito em `destaque` e quatro colunas (palavras, referências, evitar, onde vai aparecer). Depois, "escolha uma ideia": três cards com a prévia (composta positiva), nome, "minha aposta" quando for o caso, conceito, por que funciona e "Gerar com esta ideia". Gerar mostra a tela "gerando o logo" com o ✱ girando e, ao terminar, o selo tcharam. O botão "Aprovar" genérico só aparece depois que o logo existe.
+
+**Logo gerado.**
+1. **O logo**: a composta grande sobre o fundo claro da marca, com a ideia e o conceito; "Ver as ideias de novo" no cabeçalho.
+2. **Versões**: abas Composta, Símbolo e Tipográfica. Em cada uma, um card por variação de cor tirada da paleta da cliente: positiva, negativa, uma sobre cada cor de apoio (com a cor de maior contraste) e as monocromáticas preta e branca. Cada card mostra a prévia, o nome, as cores com hex e três ações: **Baixar** (SVG ou PNG transparente, gerados de verdade), **Ajustar com o Hattie** e **Pedir a um parceiro**.
+3. **Regras de uso**: "Faça" em lista com check verde; "Evite" em miniaturas que mostram o erro (esticar, girar, cor fora da paleta, sombra, fundo sem contraste, símbolo fora do lugar), cada uma com um X vermelho.
+4. **Área de proteção e tamanho mínimo**: diagrama com a área de proteção (x = metade da altura do símbolo) e tabela de tamanhos mínimos na tela e impresso, com a prévia no tamanho mínimo.
+
+As prévias de marca da cliente usam a fonte dela (`font-serif`, Fraunces na Raiz Natural) e nunca as fontes do Hattie.
+
 ### Demais peças
 
 | Componente | Uso | Forma |

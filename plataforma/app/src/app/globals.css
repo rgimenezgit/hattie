@@ -13,6 +13,7 @@
   --font-sans: var(--font-text);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-heading: var(--font-display);
+  --font-serif: var(--font-marca), Georgia, serif;
   --color-sidebar-ring: var(--focus);
   --color-sidebar-border: var(--line);
   --color-sidebar-accent-foreground: var(--ink);

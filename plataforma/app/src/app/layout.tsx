@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fraunces } from "next/font/google";
 import localFont from "next/font/local";
 import { EstadoProvider } from "@/components/app/Estado";
 import { Toaster } from "@/components/ui/sonner";
@@ -34,6 +35,14 @@ const poppins = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
+// Fonte de exemplo da marca da cliente (Raiz Natural), só para prévias de logo e de peças.
+const fraunces = Fraunces({
+  variable: "--font-marca",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+
 const clashDisplay = localFont({
   variable: "--font-display",
   src: "../fonts/ClashDisplay-Variable.ttf",
@@ -50,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt-BR"
       data-theme="gabinete"
-      className={`${poppins.variable} ${clashDisplay.variable} h-full antialiased`}
+      className={`${poppins.variable} ${clashDisplay.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <TooltipProvider>
