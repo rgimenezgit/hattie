@@ -15,7 +15,6 @@ import {
   FileText,
   Link2,
   ListTree,
-  MessageCircle,
   RotateCcw,
   SquarePen,
   UserPlus,
@@ -28,7 +27,7 @@ import { Busca } from "@/components/hattie/Busca"
 import { Composer, type ComposerHandle } from "@/components/hattie/Composer"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { MenuAcoes, type ItemMenu } from "@/components/hattie/MenuAcoes"
-import { NotaHattie } from "@/components/hattie/NotaHattie"
+import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { StatusBadge } from "@/components/hattie/StatusBadge"
 import { cn } from "@/lib/utils"
@@ -262,7 +261,7 @@ function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => 
     setMensagens((atual) => [...atual, { id: atual.length, autor: "pessoa", texto: limpo }])
     if (aprovar_) {
       aprovar(secao.id)
-      notificar({ titulo: "guardei no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
+      notificar({ titulo: "guardei no cérebro", texto: `A seção ${secao.titulo} está aprovada.`, som: "cling" })
     }
     timer.current = setTimeout(() => {
       setMensagens((atual) => [
@@ -374,22 +373,19 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
   const anterior = SECOES[indice - 1]
 
   return (
-    <div className="flex flex-col gap-6">
-      {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
-        <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
-      )}
-      <PreviaSecao secao={secao} modo="completo" marca={marca} />
-
-      <NotaHattie
-        titulo="Por que eu propus isso"
-        acao={
-          <Botao variante="secundario" tamanho="sm" onClick={() => aoEditar(secao.id)}>
-            <MessageCircle /> Perguntar mais
-          </Botao>
-        }
-      >
-        <p>{secao.porque}</p>
-      </NotaHattie>
+    <div className="flex flex-col gap-5">
+      <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
+        <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
+          <p className="text-xs font-medium text-texto-3">{secao.titulo}</p>
+          <PorqueHattie assunto={secao.titulo} aoPerguntar={() => aoEditar(secao.id)}>
+            <p>{secao.porque}</p>
+          </PorqueHattie>
+        </div>
+        {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
+          <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
+        )}
+        <PreviaSecao secao={secao} modo="completo" marca={marca} />
+      </section>
 
       <div className="flex flex-wrap items-center gap-2">
         {aprovada ? (
@@ -401,7 +397,7 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
             variante="primario"
             onClick={() => {
               aprovar(secao.id)
-              notificar({ titulo: "guardei no cérebro", texto: `${secao.titulo} aprovado.`, som: "cling" })
+              notificar({ titulo: "guardei no cérebro", texto: `A seção ${secao.titulo} está aprovada.`, som: "cling" })
             }}
           >
             <Check /> Aprovar
@@ -481,7 +477,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
 
   return (
     <>
-      <ColunaLateral rotulo="Sumário da marca" className="hidden pt-1 lg:flex">
+      <ColunaLateral rotulo="Sumário da marca" className="hidden lg:flex">
         <Sumario secaoAtual={secaoId} />
       </ColunaLateral>
 

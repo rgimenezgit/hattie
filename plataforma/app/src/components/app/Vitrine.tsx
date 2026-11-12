@@ -7,7 +7,6 @@ import {
   CircleCheck,
   Download,
   FolderOpen,
-  MessageCircle,
   Plus,
   RotateCcw,
   Share2,
@@ -23,7 +22,7 @@ import { Composer } from "@/components/hattie/Composer"
 import { EmptyState } from "@/components/hattie/EmptyState"
 import { ICONES_HATTIE, IconeHattie } from "@/components/hattie/IconeHattie"
 import { MenuAcoes } from "@/components/hattie/MenuAcoes"
-import { NotaHattie } from "@/components/hattie/NotaHattie"
+import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { CartaoAlerta, notificar } from "@/components/hattie/Notificacao"
 import { Plimm } from "@/components/hattie/Plimm"
 import { Segmentado } from "@/components/hattie/Segmentado"
@@ -40,7 +39,7 @@ const SECOES = [
   { id: "tags", titulo: "tags e status" },
   { id: "campos", titulo: "campos" },
   { id: "alertas", titulo: "alertas" },
-  { id: "nota", titulo: "nota do hattie" },
+  { id: "nota", titulo: "porquê do hattie" },
   { id: "menus", titulo: "menus e vazio" },
   { id: "selos", titulo: "selos de som" },
   { id: "icones", titulo: "ícones" },
@@ -415,18 +414,21 @@ export function Vitrine() {
           </Linha>
         </Secao>
 
-        <Secao id="nota" titulo="nota do hattie" descricao="O raciocínio por trás de uma proposta. Card branco sobre o canvas, assinatura do Hattie num círculo lima e uma ação para continuar a conversa.">
+        <Secao
+          id="nota"
+          titulo="porquê do hattie"
+          descricao="O conteúdo da proposta fica em destaque num container branco sobre o canvas. O raciocínio do Hattie mora num ícone de informação de 32 px no canto do container e abre num diálogo, com a ação Perguntar mais."
+        >
           <div className="rounded-2xl bg-canvas p-4">
-            <NotaHattie
-              titulo="Por que eu propus isso"
-              acao={
-                <Botao variante="secundario" tamanho="sm">
-                  <MessageCircle /> Perguntar mais
-                </Botao>
-              }
-            >
-              <p>Suas clientes compram pela origem. O propósito coloca essa origem no centro de tudo que a marca fala.</p>
-            </NotaHattie>
+            <section className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
+              <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
+                <p className="text-xs font-medium text-texto-3">Propósito</p>
+                <PorqueHattie assunto="Propósito" aoPerguntar={() => notificar({ titulo: "abri a conversa", tipo: "sucesso" })}>
+                  <p>Suas clientes compram pela origem. O propósito coloca essa origem no centro de tudo que a marca fala.</p>
+                </PorqueHattie>
+              </div>
+              <p className="max-w-[60ch] text-destaque font-light">Levar o cuidado do cerrado para a rotina de quem lê o rótulo.</p>
+            </section>
           </div>
         </Secao>
 

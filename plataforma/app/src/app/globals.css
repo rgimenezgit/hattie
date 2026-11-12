@@ -4,6 +4,8 @@
 @import "./hattie-tokens.css";
 
 @custom-variant dark (&:is([data-theme="noturno"] *));
+/* Espinha aberta: hover, foco pelo teclado ou menu de marcas aberto. */
+@custom-variant aberta (&:where(.espinha:is(:hover, :has(:focus-visible), [data-fixo]) *));
 
 @theme inline {
   --color-background: var(--bg);
@@ -171,6 +173,8 @@
     --info-suave: color-mix(in oklch, var(--azul) 22%, var(--branco));
     --sombra-flutuante: 0 1px 2px oklch(0 0 0 / 0.05), 0 12px 32px -8px oklch(0 0 0 / 0.16);
     --sombra-campo: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px -12px oklch(0 0 0 / 0.14);
+    /* Sombra fina do branco sobre o canvas: o cinza fica um degrau abaixo. */
+    --sombra-canvas: inset 0 1px 2px oklch(0 0 0 / 0.06), inset 0 0 0 1px oklch(0 0 0 / 0.025);
   }
   [data-theme="noturno"] {
     --plimm-sombra: var(--lima-forte);
@@ -404,5 +408,69 @@
     height: 3px;
     background: currentColor;
     animation-name: faisca-ponto;
+  }
+}
+
+/* Abas brancas da espinha. Saem da margem (20 px) para dentro do palco cinza.
+   As orelhas (::before e ::after) desenham os cantos côncavos do cinza; raio de 24 px.
+   A sombra levíssima cai só sobre o cinza: o clip corta a parte que cairia na margem branca. */
+@layer components {
+  .aba {
+    --r: 24px;
+    --margem: 20px;
+    position: absolute;
+    inset: 0;
+    background: var(--fundo);
+    filter: drop-shadow(0 0 1px oklch(0 0 0 / 0.07)) drop-shadow(0 3px 8px oklch(0 0 0 / 0.05));
+    pointer-events: none;
+  }
+  .aba::before,
+  .aba::after {
+    content: "";
+    position: absolute;
+    width: var(--r);
+    height: var(--r);
+  }
+  .aba-topo {
+    border-bottom-right-radius: var(--r);
+    clip-path: polygon(0 0, 100% 0, 100% 8px, calc(100% + 80px) 8px, calc(100% + 80px) calc(100% + 80px), var(--margem) calc(100% + 80px), var(--margem) 100%, 0 100%);
+  }
+  .aba-topo::before {
+    left: var(--margem);
+    top: 100%;
+    background: radial-gradient(circle at 100% 100%, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
+  }
+  .aba-topo::after {
+    left: 100%;
+    top: 8px;
+    background: radial-gradient(circle at 100% 100%, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
+  }
+  .aba-meio {
+    border-radius: 0 var(--r) var(--r) 0;
+    clip-path: inset(-80px -80px -80px var(--margem));
+  }
+  .aba-meio::before {
+    left: var(--margem);
+    top: calc(var(--r) * -1);
+    background: radial-gradient(circle at 100% 0, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
+  }
+  .aba-meio::after {
+    left: var(--margem);
+    top: 100%;
+    background: radial-gradient(circle at 100% 100%, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
+  }
+  .aba-base {
+    border-top-right-radius: var(--r);
+    clip-path: polygon(var(--margem) -80px, calc(100% + 80px) -80px, calc(100% + 80px) calc(100% - 8px), 100% calc(100% - 8px), 100% 100%, 0 100%, 0 0, var(--margem) 0);
+  }
+  .aba-base::before {
+    left: var(--margem);
+    top: calc(var(--r) * -1);
+    background: radial-gradient(circle at 100% 0, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
+  }
+  .aba-base::after {
+    left: 100%;
+    bottom: 8px;
+    background: radial-gradient(circle at 100% 0, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
   }
 }

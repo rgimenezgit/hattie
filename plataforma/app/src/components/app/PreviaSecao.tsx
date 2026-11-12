@@ -19,7 +19,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       ) : (
         <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {conteudo.blocos.map((bloco) => (
-            <div key={bloco.titulo} className="flex flex-col gap-1 rounded-2xl bg-branco p-4">
+            <div key={bloco.titulo} className="flex flex-col gap-1 rounded-2xl bg-preenchimento p-4">
               <dt className="text-sm font-medium text-texto-2">{bloco.titulo}</dt>
               <dd className="text-corpo leading-relaxed">{bloco.texto}</dd>
             </div>
@@ -70,7 +70,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
           Aa <span className="font-sans font-medium">Aa</span>
         </p>
       ) : (
-        <div className="flex flex-col gap-3 rounded-2xl bg-branco p-5">
+        <div className="flex flex-col gap-3 rounded-2xl bg-preenchimento p-5">
           <p className="font-serif text-[38px] leading-tight">{conteudo.amostra}</p>
           <p className="font-sans text-titulo-3">Todo frasco diz de qual lote e de qual cooperativa veio.</p>
           <p className="text-sm text-texto-2">
@@ -127,7 +127,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
           {conteudo.descricao}
         </p>
       ) : (
-        <div className="flex flex-col gap-3 rounded-2xl bg-branco p-5">
+        <div className="flex flex-col gap-3 rounded-2xl bg-preenchimento p-5">
           <p className="font-heading text-titulo-3 font-medium">
             {conteudo.nome}, {conteudo.idade}
           </p>

@@ -2,6 +2,12 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 11/11/2026
+- Casca do app em palco cinza com três abas brancas que saem da margem (topo, navegação e conta), com cantos côncavos. Fechada, a aba do topo mostra só o símbolo do Hattie; aberta, mostra a logomarca e o seletor de marca. Colunas laterais viram painéis brancos sobre o palco.
+- O rail fica colado na margem da página: aberto, a margem branca estica por cima do canvas com cantos côncavos e sombra levíssima. Itens em repouso em cinza-médio `#6B6B6B`, ativo em pílula lima com ícone cheio. O Hattie passa a ser o segundo item, logo abaixo do Início.
+- O canvas ganha uma sombra interna muito fina, como se o branco estivesse um degrau acima do cinza.
+- Na página de uma proposta, o conteúdo fica em destaque num container branco e o porquê do Hattie fica discreto: ícone de informação no canto do container, que abre um diálogo com a explicação e a opção "Perguntar mais".
+
 ## 10/11/2026
 - Poppins entra com a família completa (100 a 900, com itálico) em `assets/fontes/poppins/` e no app.
 - Sistema tipográfico da plataforma com escala nomeada (display 48, título 32/24/20, destaque 18, corpo 15, 14, detalhe 13, 12 e micro 11) e pesos por função: 300 destaque, 400 corpo e tags, 500 botões e controles, 600 títulos de card, alerta e nota.

@@ -28,13 +28,13 @@ function hrefDe(slug: string, item: ItemNavegacao) {
   return (item.segmento ? `/marca/${slug}/${item.segmento}` : `/marca/${slug}`) as Route
 }
 
-function TrocaMarca() {
+function TrocaMarca({ aoAbrir }: { aoAbrir?: (aberto: boolean) => void }) {
   const marca = useMarca()
   const { nomeMarca } = useEstado()
   const nomeDe = (slug: string, nome: string) => (slug === "raiz-natural" ? nomeMarca : nome)
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={aoAbrir}>
       <DropdownMenuTrigger className="flex h-9 min-w-0 items-center gap-2 rounded-full bg-lima ps-3.5 pe-1.5 text-sm font-medium text-preto transition-[background-color] duration-150 hover:bg-lima/80 data-[state=open]:bg-lima/80">
         <span className="truncate">{nomeDe(marca.slug, marca.nome)}</span>
         <span className="grid size-5 shrink-0 place-items-center rounded-md bg-preto text-lima">
@@ -125,7 +125,22 @@ function MenuConta({ lado = "right" }: { lado?: "right" | "top" }) {
   )
 }
 
-function ItemRail({ item, ativo, slug, aoNavegar }: { item: ItemNavegacao; ativo: boolean; slug: string; aoNavegar?: () => void }) {
+const LARGURA_ITEM =
+  "[transition:width_260ms_var(--ease-saida),background-color_150ms,color_150ms] aberta:[transition:width_260ms_var(--ease-saida)_120ms,background-color_150ms,color_150ms] motion-reduce:transition-none"
+
+function ItemRail({
+  item,
+  ativo,
+  slug,
+  aoNavegar,
+  gaveta = false,
+}: {
+  item: ItemNavegacao
+  ativo: boolean
+  slug: string
+  aoNavegar?: () => void
+  gaveta?: boolean
+}) {
   return (
     <li>
       <Link
@@ -133,12 +148,18 @@ function ItemRail({ item, ativo, slug, aoNavegar }: { item: ItemNavegacao; ativo
         onClick={aoNavegar}
         aria-current={ativo ? "page" : undefined}
         className={cn(
-          "flex h-10 items-center gap-3 rounded-full px-2.5 text-sm whitespace-nowrap transition-[background-color,color] duration-150 focus-visible:outline-offset-[-3px]",
-          ativo ? "bg-lima font-medium text-preto" : "text-texto-2 hover:bg-preenchimento hover:text-ink",
+          "flex h-10 items-center gap-3 overflow-hidden rounded-full ps-2.5 text-sm whitespace-nowrap focus-visible:outline-offset-[-3px]",
+          gaveta ? "w-full transition-[background-color,color] duration-150" : cn("w-10 aberta:w-46", LARGURA_ITEM),
+          ativo ? "bg-lima font-semibold text-preto" : "text-texto-3 hover:bg-preenchimento hover:text-texto",
         )}
       >
-        <item.icone className="shrink-0" />
-        <span className="opacity-0 transition-opacity duration-150 group-hover/rail:opacity-100 group-focus-within/rail:opacity-100 group-data-[aberto=true]/rail:opacity-100">
+        <item.icone className="shrink-0" ativo={ativo} />
+        <span
+          className={cn(
+            !gaveta &&
+              "opacity-0 [transition:opacity_90ms_ease-in] aberta:opacity-100 aberta:[transition:opacity_200ms_ease-out_230ms] motion-reduce:transition-none",
+          )}
+        >
           {item.rotulo}
         </span>
       </Link>
@@ -146,23 +167,55 @@ function ItemRail({ item, ativo, slug, aoNavegar }: { item: ItemNavegacao; ativo
   )
 }
 
-function Rail() {
+/**
+ * Espinha da casca no desktop: três abas brancas que saem da margem para dentro do palco cinza,
+ * com cantos côncavos onde encontram o cinza (desenhos em .aba, globals.css).
+ * Topo: símbolo do Hattie; aberta, estica e mostra a logomarca e a troca de marca.
+ * Meio: navegação; fechada acompanha a coluna de ícones, aberta estica e mostra os rótulos.
+ * Base: conta.
+ * Abre no hover (120 ms de espera), no foco pelo teclado e enquanto o menu de marcas está aberto.
+ */
+function Espinha() {
   const marca = useMarca()
   const segmento = useSelectedLayoutSegment()
+  const [fixo, setFixo] = useState(false)
+  const largura =
+    "[transition:width_260ms_var(--ease-saida)] aberta:[transition:width_260ms_var(--ease-saida)_120ms] motion-reduce:transition-none"
 
   return (
-    <nav aria-label="Navegação principal" className="group/rail relative hidden w-12 shrink-0 md:block">
-      <div className="absolute inset-y-0 left-0 z-30 flex w-12 flex-col justify-between overflow-hidden rounded-3xl py-1 transition-[width,background-color,box-shadow] delay-0 duration-200 ease-out group-hover/rail:w-52 group-hover/rail:bg-branco group-hover/rail:shadow-[0_8px_32px_oklch(0_0_0/0.12)] group-hover/rail:delay-150 group-focus-within/rail:w-52 group-focus-within/rail:bg-branco group-focus-within/rail:shadow-[0_8px_32px_oklch(0_0_0/0.12)] motion-reduce:transition-none">
-        <ul className="my-auto flex flex-col gap-0.5 px-1">
+    <div data-fixo={fixo || undefined} className="espinha pointer-events-none absolute inset-y-0 left-0 z-30 hidden md:block">
+      <div className={cn("pointer-events-auto absolute top-0 left-0 h-15 w-19 aberta:w-84", largura)}>
+        <span aria-hidden className="aba aba-topo" />
+        <div className="relative flex h-full items-center gap-3 ps-4.5">
+          <Link
+            href={`/marca/${marca.slug}` as Route}
+            aria-label="Hattie, início"
+            className={cn("block w-10.5 shrink-0 overflow-hidden rounded-md aberta:w-33.5", largura)}
+          >
+            <Image src="/logos/hattie-logomarca.svg" alt="" width={168} height={36} priority className="h-7 w-auto max-w-none" />
+          </Link>
+          <div className="invisible min-w-0 opacity-0 [transition:opacity_90ms,visibility_0s_90ms] aberta:visible aberta:opacity-100 aberta:[transition:opacity_200ms_ease-out_230ms,visibility_0s] [&_button]:max-w-40">
+            <TrocaMarca aoAbrir={setFixo} />
+          </div>
+        </div>
+      </div>
+
+      <nav aria-label="Navegação principal" className={cn("pointer-events-auto absolute top-1/2 left-0 w-19 -translate-y-1/2 aberta:w-54", largura)}>
+        <span aria-hidden className="aba aba-meio" />
+        <ul className="relative flex flex-col gap-1 py-3 ps-4.5 [@media(min-height:760px)]:gap-2 [@media(min-height:760px)]:py-4">
           {NAVEGACAO.map((item) => (
             <ItemRail key={item.rotulo} item={item} slug={marca.slug} ativo={segmento === item.segmento} />
           ))}
         </ul>
-        <div className="px-1">
+      </nav>
+
+      <div className="pointer-events-auto absolute bottom-0 left-0 h-16 w-19">
+        <span aria-hidden className="aba aba-base" />
+        <div className="relative flex h-full items-center ps-4">
           <MenuConta />
         </div>
       </div>
-    </nav>
+    </div>
   )
 }
 
@@ -179,9 +232,16 @@ function NavegacaoCelular() {
       <SheetContent side="left" className="w-64 gap-0 bg-background p-3">
         <SheetTitle className="sr-only">Navegação</SheetTitle>
         <SheetDescription className="sr-only">Áreas da sua marca</SheetDescription>
-        <ul data-aberto="true" className="group/rail mt-10 flex flex-col gap-1">
+        <ul className="mt-10 flex flex-col gap-1">
           {NAVEGACAO.map((item) => (
-            <ItemRail key={item.rotulo} item={item} slug={marca.slug} ativo={segmento === item.segmento} aoNavegar={() => setAberto(false)} />
+            <ItemRail
+              key={item.rotulo}
+              item={item}
+              slug={marca.slug}
+              ativo={segmento === item.segmento}
+              aoNavegar={() => setAberto(false)}
+              gaveta
+            />
           ))}
         </ul>
         <div className="mt-auto">
@@ -195,27 +255,28 @@ function NavegacaoCelular() {
 export function AppShell({ children }: { children: ReactNode }) {
   const marca = useMarca()
   return (
-    <div className="flex h-svh flex-col overflow-hidden bg-background">
+    <div className="relative flex h-svh flex-col overflow-hidden bg-fundo">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-preto focus:px-4 focus:py-2 focus:text-branco"
       >
         Pular para o conteúdo
       </a>
-      <header className="flex h-14 shrink-0 items-center gap-3 px-3 md:gap-4">
+      <header className="flex h-14 shrink-0 items-center gap-3 px-3 md:hidden">
         <NavegacaoCelular />
         <Link href={`/marca/${marca.slug}` as Route} aria-label="Hattie, início" className="shrink-0">
-          <Image src="/logos/hattie-logomarca.svg" alt="" width={168} height={36} priority className="hidden h-7 w-auto sm:block" />
-          <Image src="/logos/hattie-simbolo.svg" alt="" width={40} height={28} priority className="h-6 w-auto sm:hidden" />
+          <Image src="/logos/hattie-simbolo.svg" alt="" width={40} height={28} priority className="h-6 w-auto" />
         </Link>
         <TrocaMarca />
       </header>
-      <div className="flex min-h-0 flex-1 gap-2 px-2 pb-2 md:gap-3">
-        <Rail />
-        <main id="conteudo" tabIndex={-1} className="flex min-h-0 min-w-0 flex-1 gap-3 outline-none">
-          {children}
-        </main>
+      <div className="flex min-h-0 flex-1 px-2 pb-2 md:p-2 md:ps-5">
+        <div className="palco flex min-h-0 min-w-0 flex-1 rounded-3xl bg-canvas shadow-(--sombra-canvas) md:rounded-[28px]">
+          <main id="conteudo" tabIndex={-1} className="flex min-h-0 min-w-0 flex-1 gap-2 outline-none md:p-2 md:ps-16">
+            {children}
+          </main>
+        </div>
       </div>
+      <Espinha />
     </div>
   )
 }
