@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Botões da plataforma: pílula cheia, Poppins 500, sem contorno.
- * primario: confirmar e seguir (preto #101010). Solta a onda no clique.
+ * primario: confirmar e seguir (preto #101010 com texto lima #E6F344). Solta a onda no clique.
  * secundario: ação de apoio (preto #101010 a 5%).
  * fantasma: ícones e ações discretas, fundo só no hover.
  * link: ação em texto, sublinha no hover.
@@ -23,7 +23,7 @@ export const botaoVariants = cva(
   {
     variants: {
       variante: {
-        primario: "onda bg-preto text-branco hover:bg-grafite",
+        primario: "onda bg-preto text-lima hover:bg-grafite",
         secundario: "bg-preenchimento text-texto hover:bg-preenchimento-hover active:bg-preenchimento-ativo",
         fantasma: "text-texto-2 hover:bg-preenchimento hover:text-texto active:bg-preenchimento-hover",
         link: "text-texto underline-offset-4 hover:underline",

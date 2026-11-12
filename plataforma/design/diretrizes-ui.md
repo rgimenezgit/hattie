@@ -16,8 +16,8 @@ Regras de UI da plataforma Hattie, a partir das telas que o Raphael desenhou no 
 | Aba do topo | Fechada (76 × 60 px): só o símbolo do Hattie. Aberta (336 px): a logomarca se revela e aparece o seletor de marca (pílula lima de 36 px) |
 | Aba do meio | Navegação. Fechada (76 px), acompanha a coluna de ícones em itens de 40 px; aberta (216 px), os itens viram pílulas de 184 px com rótulo |
 | Aba da base | Avatar da conta (76 × 64 px) |
-| Palco | Cinza `#D3D3D3` a 62% com raio 28 e sombra interna fina (`--sombra-canvas`). O conteúdo começa a 64 px da borda do palco, livre das abas |
-| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco: conversas (no Hattie) ou sumário (na Marca) |
+| Palco | Cinza `#D3D3D3` a 62% com raio 28. O conteúdo vai até a borda do palco e rola por baixo da margem branca; a sombra da margem (`--sombra-canvas`) é desenhada por cima do conteúdo, em `.palco::after`. À esquerda, o conteúdo começa a 64 px, livre das abas |
+| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco, a 8 px do topo e da base: conversas (no Hattie), sumário (na Marca) ou áreas (em Parceiros). O conteúdo que rola de lado passa por baixo dela, com sombra leve (`--sombra-coluna`) |
 | Canvas | Área transparente sobre o palco, onde o conteúdo vive e rola; respiro interno de 24 × 20 px (16 px no celular) |
 | Coluna direita (256–320 px, opcional) | Painel branco: plano da criação ou "editar com o hattie" |
 
@@ -61,10 +61,10 @@ Contorno preto fica fora de campos, botões e cards. O único contorno de 1 px q
 
 | Papel | Valor | Onde |
 |---|---|---|
-| Ação | lima `#E6F344` | Plimm, item ativo do rail, seletor de marca, opção ativa, passo concluído, círculo do alerta e do porquê do Hattie |
-| `acao-suave` | lima-suave `#F1F4C9` | Tag "esperando seu ok", banner de pendências, hover de resposta rápida |
+| Ação | lima `#E6F344` | Plimm, item ativo do rail, seletor de marca, opção ativa, filtro aplicado, pílula escolhida, passo concluído, círculo do alerta e do porquê do Hattie. Fora de avatares e de selos decorativos |
+| `acao-suave` | lima-suave `#F1F4C9` | Tag "esperando seu ok", banner de pendências, item ativo da coluna lateral |
 | `acao-forte` | lima-forte `#77A00F` | Ponto de status, onda do plimm, opção escolhida |
-| Confirmar | preto `#101010` com texto branco `#F5F5F5` | Botão primário, alerta, mensagem da pessoa no chat (texto lima) |
+| Confirmar | preto `#101010` com texto lima `#E6F344` | Botão primário, alerta, mensagem da pessoa no chat, contagem de não lidas |
 | `info-suave` (já existia) | azul `#8AD3FA` a 22% | Aviso informativo |
 | `info-suave` | azul `#8AD3FA` a 22% sobre o branco | Dica e informação |
 | Parceiro | rosa `#FF8AE5` | Designer parceiro |
@@ -147,7 +147,8 @@ Botão age, tag descreve. As duas formas nunca se confundem:
 
 | `Botao` | Uso | Forma |
 |---|---|---|
-| `primario` | Confirmar e seguir: Entrar, Criar conta, Aprovar | Preto `#101010`, texto branco, hover grafite `#333333`, onda no clique |
+| `primario` | Confirmar e seguir: Entrar, Criar conta, Aprovar, Ver proposta | Preto `#101010`, texto lima `#E6F344`, hover grafite `#333333`, onda no clique |
+| Plimm com ícone | Mandar algo: enviar mensagem, pedido ou prompt ("encontrar parceiros", "enviar pedido", enviar na conversa) | Lima `#E6F344`, texto preto `#101010` em Clash Display minúsculo, ícone da ação no lugar do ✱ e faíscas no clique. Sem ícone, segue como o botão de criar |
 | `secundario` | Ação de apoio: Editar com o Hattie, Reabrir, Baixar | `preenchimento`, hover `preenchimento-hover` |
 | `fantasma` | Ícones e ações discretas | Sem fundo; `preenchimento` no hover |
 | `link` | Ação em texto: Contratar um parceiro | Sublinha no hover |
@@ -284,6 +285,23 @@ Tudo é montado com `useSistemaMarca`, que junta logo, paleta, combinação tipo
 5. **Explorações gráficas**: peças quadradas com a ideia e os recursos usados em tags.
 
 As peças (`Peca`) usam medidas em `cqmin`, então o mesmo layout vale do story ao banner. Em formatos com zona segura, o conteúdo desce e sobe para ficar fora dela.
+
+### Parceiros
+
+Área com coluna lateral própria (`ShellParceiros`), no padrão do cérebro: Contratar, Mensagens (contagem de não lidas em pílula preta com número lima) e Quadro (trabalhos em curso), mais "Trabalhando com você" e o convite para ser parceiro. No celular, a coluna vira uma trilha de pílulas no topo de cada página. Um estado compartilhado liga as três áreas: o pedido vira conversa e card no quadro.
+
+- **Contratar**: card do Hattie com o chapéu, a pergunta em Clash, uma frase curta e um campo de pedido com atalhos; "Encontrar parceiros" (primário) mostra três indicados com o motivo de cada um. Abaixo, busca, filtros em pílulas (aplicado em lima `#E6F344` com texto preto) e quatro listas em carrossel: em destaque, o que falta na marca, perto de você e cabem no orçamento. Outros países ficam no filtro "Onde". Com busca ou filtro, vira grade de resultados.
+- **Card do parceiro**: três trabalhos no topo, avatar com iniciais sobre lilás, azul, rosa ou cinza, nome (o card inteiro leva ao perfil), título, nota, local, duas especialidades, preço e "Contratar" (secundário, porque a lista repete o botão). A única tag de estado no card é "agenda cheia", em atenção.
+- **Janela de contratar**, em quatro blocos:
+  1. **Onde entra este trabalho**: projeto da marca (ou "Sem projeto", ou "Criar projeto novo" com nome) e a tarefa do projeto que o parceiro assume (ou "Outra tarefa", escrita à mão).
+  2. **Com o que o parceiro pode ajudar**: serviços do parceiro em pílulas; escolhidos em lima.
+  3. **Sua mensagem**, com a lista do que o parceiro vai ver da marca: partes do cérebro em pílulas, já marcadas pela especialidade do parceiro (fotógrafo vê estilo fotográfico, cores e logo; estrategista vê briefing, posicionamento, público e mercado). Cada pílula sai com um ×, e "Mencionar da marca" abre o cérebro por grupo para citar outras partes.
+  4. **Orçamento e prazo**, opcionais. No rodapé, como funciona o pagamento.
+- **Perfil**: capa, avatar grande, selos neutros, nome, local e título; card de contratar com preço em destaque, nota e o primário; sobre (projetos, anos, quem costuma atender), trabalhos, serviços e preços, experiência em linha do tempo e avaliações.
+- **Mensagens**: lista e conversa lado a lado; no celular, uma de cada vez. O cabeçalho mostra a tarefa e o projeto. A pessoa fala em balão preto com texto lima, o parceiro em balão cinza, o Hattie em nota azul diluído (`info-suave`) centralizada, com as partes da marca compartilhadas como links para o cérebro. Propostas aparecem como card com valor, prazo, o que inclui e "Aprovar proposta".
+- **Quadro**: resumo (em curso, esperando seu ok, investido) e cinco etapas só com nome e quantidade. O card mostra projeto, título, parceiro, valor e prazo, e o card inteiro abre a conversa. Cards que esperam a pessoa ganham um primário de largura cheia ("Ver proposta" ou "Aprovar entrega"), sem borda. No celular, as etapas empilham.
+
+**Cores de estado em Parceiros:** verde de sucesso só para "aceitando projetos" e proposta aprovada; amarelo de atenção para agenda cheia; vermelho fica de fora, porque nenhuma ação da área apaga algo de vez. Azul diluído marca a fala do Hattie. Destaque e verificado são selos neutros.
 
 ### Envio de imagens
 

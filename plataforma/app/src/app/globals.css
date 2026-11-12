@@ -191,8 +191,11 @@
     --info-suave: color-mix(in oklch, var(--azul) 22%, var(--branco));
     --sombra-flutuante: 0 1px 2px oklch(0 0 0 / 0.05), 0 12px 32px -8px oklch(0 0 0 / 0.16);
     --sombra-campo: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px -12px oklch(0 0 0 / 0.14);
-    /* Sombra fina do branco sobre o canvas: o cinza fica um degrau abaixo. */
-    --sombra-canvas: inset 0 1px 2px oklch(0 0 0 / 0.06), inset 0 0 0 1px oklch(0 0 0 / 0.025);
+    /* Sombra da margem branca sobre o palco cinza. Fica por cima do conteúdo (.palco::after):
+       o que rola passa por baixo da margem e some na sombra. */
+    --sombra-canvas: inset 0 2px 6px -1px oklch(0 0 0 / 0.08), inset 0 0 10px oklch(0 0 0 / 0.035), inset 0 0 0 1px oklch(0 0 0 / 0.03);
+    /* Coluna lateral sobre o palco: o conteúdo que rola de lado passa por baixo dela. */
+    --sombra-coluna: 0 0 0 1px oklch(0 0 0 / 0.02), 6px 0 14px -8px oklch(0 0 0 / 0.14);
   }
   [data-theme="noturno"] {
     --plimm-sombra: var(--lima-forte);
@@ -426,6 +429,20 @@
     height: 3px;
     background: currentColor;
     animation-name: faisca-ponto;
+  }
+}
+
+/* Palco: o cinza onde o conteúdo rola. O conteúdo vai até a borda e passa por baixo da margem branca;
+   a sombra da margem é desenhada por cima, num pseudo-elemento que não recebe clique. */
+@layer components {
+  .palco::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    border-radius: inherit;
+    box-shadow: var(--sombra-canvas);
+    pointer-events: none;
   }
 }
 

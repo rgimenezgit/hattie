@@ -130,8 +130,8 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
       }}
       className={cn(
         "flex w-full flex-col gap-2 rounded-3xl bg-superficie p-3 shadow-(--sombra-campo) transition-[box-shadow] duration-200",
-        "focus-within:shadow-[0_0_0_1px_var(--borda-tag),var(--sombra-flutuante)]",
-        arrastando && "shadow-[0_0_0_2px_var(--lima-forte),var(--sombra-flutuante)]",
+        "focus-within:shadow-(--sombra-flutuante)",
+        arrastando && "bg-acao-suave shadow-(--sombra-flutuante)",
         className,
       )}
     >

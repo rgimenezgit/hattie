@@ -3,12 +3,22 @@
 import Link from "next/link"
 import type { Route } from "next"
 import { useState } from "react"
+import type { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Faiscas } from "./Faiscas"
 import { IconeHattie } from "./IconeHattie"
 
+/**
+ * Plimm: botão lima #E6F344 com texto preto #101010 em Clash Display, ícone e faíscas no clique.
+ * Sem ícone, é o botão de criar (✱ que dá meia-volta). Com ícone, é o botão de mandar algo:
+ * enviar mensagem, pedido ou prompt.
+ */
 type Props = {
   rotulo?: string
+  /** Ícone no lugar do ✱, para enviar mensagem, pedido ou prompt. */
+  icone?: LucideIcon
+  /** Id do formulário, quando o botão fica fora dele (rodapé de janela). */
+  form?: string
   tamanho?: "md" | "lg"
   somenteIcone?: boolean
   href?: Route
@@ -21,6 +31,8 @@ type Props = {
 
 export function Plimm({
   rotulo = "plimm",
+  icone: Icone,
+  form,
   tamanho = "md",
   somenteIcone = false,
   href,
@@ -46,16 +58,20 @@ export function Plimm({
 
   const conteudo = (
     <>
-      <IconeHattie
-        key={`icone-${giro}`}
-        nome="asterisco"
-        tamanho={tamanho === "lg" ? 20 : 16}
-        className={cn(carregando ? "animate-spin [animation-duration:1s] motion-reduce:animate-none" : giro > 0 && "animate-giro-plimm")}
-      />
+      {Icone && !carregando ? (
+        <Icone aria-hidden className={tamanho === "lg" ? "size-5" : "size-4"} strokeWidth={2.25} />
+      ) : (
+        <IconeHattie
+          key={`icone-${giro}`}
+          nome="asterisco"
+          tamanho={tamanho === "lg" ? 20 : 16}
+          className={cn(carregando ? "animate-spin [animation-duration:1s] motion-reduce:animate-none" : giro > 0 && "animate-giro-plimm")}
+        />
+      )}
       {somenteIcone ? (
         <span className="sr-only">{carregando ? "Criando" : rotulo}</span>
       ) : (
-        <span className={cn("font-heading leading-none font-semibold lowercase", tamanho === "lg" ? "text-titulo-3" : "text-base")}>{carregando ? "plimm…" : rotulo}</span>
+        <span className={cn("font-heading leading-none font-semibold lowercase", tamanho === "lg" ? "text-titulo-3" : "text-base")}>{carregando && !Icone ? "plimm…" : rotulo}</span>
       )}
       {giro > 0 && !carregando && <Faiscas key={`faiscas-${giro}`} />}
     </>
@@ -72,6 +88,7 @@ export function Plimm({
   return (
     <button
       type={type}
+      form={form}
       onClick={(evento) => {
         if (disabled || carregando) {
           evento.preventDefault()

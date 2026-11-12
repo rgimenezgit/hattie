@@ -303,7 +303,8 @@ export type Mensagem = { id: string; autor: "hattie" | "pessoa"; texto: string; 
 
 export type Conversa = { id: string; titulo: string; quando: string }
 
-export type Projeto = { id: string; nome: string; editado: string }
+/** Projeto da marca. As tarefas abertas podem ser atribuídas a um parceiro na janela de contratar. */
+export type Projeto = { id: string; nome: string; editado: string; tarefas?: string[] }
 
 export type Categoria = { id: string; rotulo: string; icone: string; emBreve?: boolean }
 

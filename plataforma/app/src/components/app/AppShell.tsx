@@ -270,8 +270,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         <TrocaMarca />
       </header>
       <div className="flex min-h-0 flex-1 px-2 pb-2 md:p-2 md:ps-5">
-        <div className="palco flex min-h-0 min-w-0 flex-1 rounded-3xl bg-canvas shadow-(--sombra-canvas) md:rounded-[28px]">
-          <main id="conteudo" tabIndex={-1} className="flex min-h-0 min-w-0 flex-1 gap-2 outline-none md:p-2 md:ps-16">
+        <div className="palco relative isolate flex min-h-0 min-w-0 flex-1 overflow-hidden rounded-3xl bg-canvas md:rounded-[28px]">
+          <main id="conteudo" tabIndex={-1} className="flex min-h-0 min-w-0 flex-1 outline-none md:ps-16">
             {children}
           </main>
         </div>

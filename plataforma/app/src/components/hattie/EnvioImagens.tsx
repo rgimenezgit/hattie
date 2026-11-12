@@ -108,8 +108,8 @@ export function EnvioImagens({ imagens, aoMudar, rotulo, dica, limite = 30, comp
             adicionar(evento.dataTransfer.files)
           }}
           className={cn(
-            "flex flex-col items-center gap-2 rounded-2xl border border-dashed px-4 py-6 text-center transition-[background-color,border-color] duration-150",
-            arrastando ? "border-acao-forte bg-acao-suave" : "border-borda-tag bg-preenchimento",
+            "flex flex-col items-center gap-2 rounded-2xl px-4 py-6 text-center transition-[background-color] duration-150",
+            arrastando ? "bg-acao-suave" : "bg-preenchimento hover:bg-preenchimento-hover",
           )}
         >
           <span aria-hidden className="grid size-9 place-items-center rounded-full bg-superficie">

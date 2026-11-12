@@ -1,10 +1,10 @@
 import type { Categoria, Modelo, Projeto } from "./tipos"
 
 export const PROJETOS: Projeto[] = [
-  { id: "pequi", nome: "Lançamento do óleo de pequi", editado: "editado há 2 minutos" },
-  { id: "black-friday", nome: "Black Friday consciente", editado: "editado há 1 hora" },
-  { id: "catalogo", nome: "Catálogo para lojistas", editado: "editado ontem" },
-  { id: "novembro", nome: "Posts de novembro", editado: "editado há 3 dias" },
+  { id: "pequi", nome: "Lançamento do óleo de pequi", editado: "editado há 2 minutos", tarefas: ["Fotos do frasco para a loja", "Rótulo do óleo", "Vídeo de lançamento", "Posts da semana de lançamento"] },
+  { id: "black-friday", nome: "Black Friday consciente", editado: "editado há 1 hora", tarefas: ["Arte da campanha", "Posts e stories", "E-mail para clientes"] },
+  { id: "catalogo", nome: "Catálogo para lojistas", editado: "editado ontem", tarefas: ["Fotos dos produtos", "Diagramação do catálogo", "Texto das fichas"] },
+  { id: "novembro", nome: "Posts de novembro", editado: "editado há 3 dias", tarefas: ["Calendário de posts", "Carrossel educativo", "Stories de bastidores"] },
 ]
 
 export const CATEGORIAS: Categoria[] = [

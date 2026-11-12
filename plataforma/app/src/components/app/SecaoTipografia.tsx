@@ -552,7 +552,7 @@ function EspacoDeTeste({ guia, combinacoes }: { guia: GuiaTipografia; combinacoe
                   escolherFonte(evento.target.value)
                 }}
                 placeholder={`Buscar entre ${catalogo.length} fontes`}
-                className="h-9 rounded-xl bg-preenchimento px-3 text-sm outline-none placeholder:text-texto-3 hover:bg-preenchimento-hover focus-visible:bg-superficie focus-visible:shadow-[0_0_0_1px_var(--borda-tag),0_0_0_4px_var(--preenchimento)]"
+                className="h-9 rounded-xl bg-preenchimento px-3 text-sm outline-none placeholder:text-texto-3 hover:bg-preenchimento-hover focus-visible:bg-superficie focus-visible:shadow-(--sombra-campo)"
               />
               <datalist id={idLista}>
                 {catalogo.map((fonte) => (

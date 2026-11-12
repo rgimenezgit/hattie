@@ -222,8 +222,7 @@ function CardSecao({ secao, destaque = false, aoEditar }: { secao: Secao; destaq
   return (
     <article
       className={cn(
-        "group/card relative flex min-h-40 flex-col gap-3 rounded-3xl border-2 bg-branco p-5 transition-[border-color] duration-150",
-        destaque && !aprovada ? "border-lima" : "border-transparent hover:border-borda-sutil",
+        "group/card relative flex min-h-40 flex-col gap-3 rounded-3xl bg-branco p-5 transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)",
         destaque && "@2xl:col-span-2",
       )}
     >

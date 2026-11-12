@@ -24,7 +24,7 @@ export default function MinhasMarcas() {
             <li key={marca.slug}>
               <Link
                 href={`/marca/${marca.slug}` as Route}
-                className="flex h-full flex-col overflow-hidden rounded-[28px] bg-branco outline-offset-2 transition-[box-shadow] duration-150 hover:shadow-[0_0_0_2px_var(--ink)]"
+                className="flex h-full flex-col overflow-hidden rounded-[28px] bg-branco outline-offset-2 transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)"
               >
                 <span className="flex h-24" aria-hidden>
                   {marca.paleta.map((cor) => (

@@ -55,7 +55,7 @@ export default function MapaDasTelas() {
               <li key={tela.href}>
                 <Link
                   href={tela.href as Route}
-                  className="flex min-h-10 items-center justify-between gap-3 rounded-xl bg-branco px-3.5 py-2 text-sm transition-[box-shadow] duration-150 hover:shadow-[0_0_0_2px_var(--ink)]"
+                  className="flex min-h-10 items-center justify-between gap-3 rounded-xl bg-branco px-3.5 py-2 text-sm transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)"
                 >
                   <span className="font-medium">{tela.rotulo}</span>
                   <span className="truncate text-xs text-texto-2">{tela.href}</span>

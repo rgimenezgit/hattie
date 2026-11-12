@@ -26,7 +26,7 @@ export function ColunaLateral({
   rotulo?: string
 }) {
   return (
-    <aside aria-label={rotulo ?? titulo} className={cn("flex min-h-0 w-64 shrink-0 flex-col gap-3 rounded-3xl bg-superficie p-3", className)}>
+    <aside aria-label={rotulo ?? titulo} className={cn("relative z-10 flex min-h-0 w-64 shrink-0 flex-col gap-3 rounded-3xl bg-superficie p-3 shadow-(--sombra-coluna) md:my-2", className)}>
       {titulo && (
         <div className="flex min-h-9 items-center justify-between gap-2 border-b border-borda-sutil pb-2">
           <h2 className="ps-1 font-heading text-titulo-3 font-medium lowercase">{titulo}</h2>

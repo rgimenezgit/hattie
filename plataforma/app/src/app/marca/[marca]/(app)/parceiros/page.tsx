@@ -1,5 +1,5 @@
-import { AreaEmBreve } from "@/components/app/AreaEmBreve"
+import { ContratarParceiros } from "@/components/app/parceiros/Contratar"
 
 export default function Pagina() {
-  return <AreaEmBreve area="parceiros" />
+  return <ContratarParceiros />
 }
