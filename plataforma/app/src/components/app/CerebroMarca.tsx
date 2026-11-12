@@ -38,6 +38,9 @@ import { useMarca } from "./MarcaContexto"
 import { PreviaSecao } from "./PreviaSecao"
 import { SecaoDiferenciais } from "./SecaoDiferenciais"
 import { SecaoMercado } from "./SecaoMercado"
+import { SecaoAplicacoes } from "./SecaoAplicacoes"
+import { SecaoFotografia, SecaoIlustracao } from "./SecaoEstiloImagem"
+import { SecaoMotion } from "./SecaoMotion"
 import { SecaoLogo } from "./SecaoLogo"
 import { SecaoNome } from "./SecaoNome"
 import { SecaoArquetipos, SecaoAtributos } from "./SecaoPersonalidade"
@@ -400,6 +403,14 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoLogo secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "tipografia" ? (
         <SecaoTipografia secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "fotografia" ? (
+        <SecaoFotografia secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "ilustracao" ? (
+        <SecaoIlustracao secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "motion" ? (
+        <SecaoMotion secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "aplicacoes" ? (
+        <SecaoAplicacoes secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">

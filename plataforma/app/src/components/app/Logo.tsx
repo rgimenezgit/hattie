@@ -50,10 +50,10 @@ const RAIZES = "M24 18v22M24 28l-6 5.5M24 32l6 5M24 23l-4.5 3.5"
 const FOLHA = "M24 13.5c-6.5 5-7.5 12.5 0 21 7.5-8.5 6.5-16 0-21Z"
 
 /** Símbolo em SVG, de uma cor só (tinta). Os vazados usam máscara, então funcionam sobre qualquer fundo. */
-export function Simbolo({ simbolo, tinta, tamanho, className }: { simbolo: SimboloLogo; tinta: string; tamanho: number; className?: string }) {
+export function Simbolo({ simbolo, tinta, tamanho, className, style }: { simbolo: SimboloLogo; tinta: string; tamanho: number; className?: string; style?: CSSProperties }) {
   const id = useId().replace(/:/g, "")
   return (
-    <svg viewBox="0 0 48 48" width={tamanho} height={tamanho} className={cn("shrink-0", className)} aria-hidden>
+    <svg viewBox="0 0 48 48" width={tamanho} height={tamanho} className={cn("shrink-0", className)} style={style} aria-hidden>
       {simbolo === "gota" && (
         <>
           <mask id={`m${id}`}>

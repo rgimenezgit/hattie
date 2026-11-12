@@ -39,7 +39,14 @@ const descreve = (id: string, erro?: string, dica?: string) =>
   [erro ? `${id}-erro` : null, dica ? `${id}-dica` : null].filter(Boolean).join(" ") || undefined
 
 /** Texto longo, mesmo visual do Campo, cresce com o conteúdo. */
-export function CampoArea({ rotulo, erro, dica, className, ...props }: ComponentProps<"textarea"> & { rotulo: string; erro?: string; dica?: string }) {
+export function CampoArea({
+  rotulo,
+  erro,
+  dica,
+  compacto = false,
+  className,
+  ...props
+}: ComponentProps<"textarea"> & { rotulo: string; erro?: string; dica?: string; compacto?: boolean }) {
   const id = useId()
   return (
     <Moldura id={id} rotulo={rotulo} erro={erro} dica={dica} className={className}>
@@ -48,7 +55,7 @@ export function CampoArea({ rotulo, erro, dica, className, ...props }: Component
         aria-invalid={erro ? true : undefined}
         aria-describedby={descreve(id, erro, dica)}
         rows={3}
-        className={cn(CAMPO, "field-sizing-content min-h-22 max-h-48 resize-none py-2.5 leading-relaxed")}
+        className={cn(CAMPO, "field-sizing-content max-h-48 resize-none py-2.5 leading-relaxed", compacto ? "min-h-11" : "min-h-22")}
         {...props}
       />
     </Moldura>

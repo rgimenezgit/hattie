@@ -9,6 +9,7 @@ import {
   STATUS_INICIAL,
   getSecao,
   type Concorrente,
+  type EstiloFoto,
   type Mensagem,
   type Persona,
   type Publico,
@@ -47,6 +48,10 @@ type EstadoApp = {
   escolherLogo: (id: string | null) => void
   tipografiaEscolhida: string | null
   escolherTipografia: (id: string | null) => void
+  estilosFoto: EstiloFoto[] | null
+  salvarEstilosFoto: (estilos: EstiloFoto[]) => void
+  estilosIlustracao: EstiloFoto[] | null
+  salvarEstilosIlustracao: (estilos: EstiloFoto[]) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -96,6 +101,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [nomeEscolhido, setNomeEscolhido] = useState<string | null>(null)
   const [logoEscolhido, escolherLogo] = useState<string | null>(null)
   const [tipografiaEscolhida, escolherTipografia] = useState<string | null>(null)
+  const [estilosFoto, salvarEstilosFoto] = useState<EstiloFoto[] | null>(null)
+  const [estilosIlustracao, salvarEstilosIlustracao] = useState<EstiloFoto[] | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -247,6 +254,10 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       escolherLogo,
       tipografiaEscolhida,
       escolherTipografia,
+      estilosFoto,
+      salvarEstilosFoto,
+      estilosIlustracao,
+      salvarEstilosIlustracao,
     }),
     [
       nomeMarca,
@@ -274,6 +285,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       escolherNome,
       logoEscolhido,
       tipografiaEscolhida,
+      estilosFoto,
+      estilosIlustracao,
     ],
   )
 

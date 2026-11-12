@@ -1,5 +1,6 @@
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Tag } from "@/components/hattie/Tag"
+import { Ilustracao } from "./Ilustracao"
 import { Logo } from "./Logo"
 import { cn } from "@/lib/utils"
 import type { Marca, Secao } from "@/lib/mock"
@@ -99,6 +100,55 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
             </li>
           ))}
         </ul>
+      )
+
+    case "fotografia": {
+      const estilo = conteudo.estilos[0]
+      const paleta = estilo.camadas.find((camada) => camada.paleta)?.paleta ?? []
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="line-clamp-2 text-sm leading-relaxed text-texto-2">{estilo.registro}</p>
+          <div className="flex h-3 overflow-hidden rounded-full" aria-hidden>
+            {paleta.map((cor) => (
+              <span key={cor.hex} className="flex-1" style={{ backgroundColor: cor.hex }} />
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    case "ilustracao": {
+      const estilo = conteudo.estilos[0]
+      const paleta = estilo.camadas.find((camada) => camada.paleta)?.paleta ?? []
+      const cores = { principal: paleta[0]?.hex ?? VERDE, apoio: paleta[1]?.hex ?? VERDE, fundo: paleta[2]?.hex ?? CREME, escuro: paleta[3]?.hex ?? VERDE, destaque: paleta[4]?.hex ?? VERDE }
+      return (
+        <div className="grid grid-cols-3 gap-1.5" aria-hidden>
+          {(["pequi", "buriti", "paisagem"] as const).map((desenho) => (
+            <div key={desenho} className="aspect-square overflow-hidden rounded-xl">
+              <Ilustracao desenho={desenho} cores={cores} grao={0} />
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    case "motion": {
+      const [x1, y1, x2, y2] = conteudo.curvas[0].valores
+      return (
+        <div className="flex items-center gap-3">
+          <svg viewBox="-4 -4 108 108" className="size-14 shrink-0 rounded-xl bg-preenchimento p-1.5" aria-hidden>
+            <path d={`M0 100 C${x1 * 100} ${100 - y1 * 100} ${x2 * 100} ${100 - y2 * 100} 100 0`} fill="none" stroke={VERDE} strokeWidth="6" strokeLinecap="round" />
+          </svg>
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.conceito}</p>
+        </div>
+      )
+    }
+
+    case "aplicacoes":
+      return (
+        <p className="text-sm leading-relaxed text-texto-2">
+          {conteudo.mockups.length} mockups · {conteudo.formatos.length} formatos de peça · {conteudo.formatos.reduce((soma, formato) => soma + formato.exemplos.length, 0)} exemplos
+        </p>
       )
 
     case "mercado": {

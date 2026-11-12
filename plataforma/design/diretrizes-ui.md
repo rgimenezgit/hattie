@@ -244,6 +244,51 @@ As prévias de marca da cliente usam a fonte dela (`font-serif`, Fraunces na Rai
 
 Integração: as fontes carregam pela API de CSS do Google Fonts (sem chave). A lista de fontes vem de `/api/fontes`: com `GOOGLE_FONTS_API_KEY` no ambiente, é o catálogo completo da API do Google, guardado por um dia; sem a chave, uma lista curada de 40 fontes.
 
+### Estilo fotográfico
+
+Segue o playbook de imagens de marca (registro emocional e seis camadas). Bloco "estilos" com abas, uma por estilo, e "Criar outro estilo" (parte de um estilo existente; nome, uso, descrição, registro e imagens de referência próprios).
+
+Em cada estilo:
+1. **Briefing**: nome, status ("briefing para aprovar" em atenção ou "aprovado" em sucesso), uso, o registro emocional em `destaque` com a descrição do estilo logo abaixo (texto secundário), a prévia (paleta com hex e três esboços de composição nas cores do estilo: luz, detalhe, ambiente) e um resumo de seis linhas. Enquanto for briefing, um aviso de informação com "Aprovar e gerar" e "Ajustar com o Hattie". "Editar" muda nome, uso, descrição e registro. Abaixo da prévia, "Imagens de referência" no modo compacto do envio de imagens: miniaturas e um quadrado "Adicionar"; o ideal é de 15 a 30 imagens, que guiam a geração.
+2. **Imagens do estilo** (depois de aprovar): cards com o esboço, a cena, o enquadramento e a nota média como tag ("4,7 · pronta" em sucesso, "revisar" em atenção). "Notas por camada" abre as seis notas de 1 a 5 em barras (verde de 4 a 5, amarelo em 3, vermelho em 2 ou menos). "Copiar prompt" monta o prompt com as seis camadas, a paleta e o que evitar. "Gerar mais" acrescenta imagens. Se uma camada muda depois, aparece um aviso de atenção com "Gerar de novo".
+3. **Camadas do estilo**: um card por camada (cor, luz, câmera e composição, sujeitos e personas, ambiente e produção, acabamento), com ícone, a pergunta que a camada responde, os campos em rótulo e valor, a paleta na cor e as tags "fora do estilo" em erro; mais o card "O que evitar". Cada um tem "Editar", que abre só aquela camada.
+4. **Como avalio cada imagem**: a escala de 1 a 5, a regra "pronta para uso" (média 4 ou mais e nenhuma camada com 2 ou menos), o teste às cegas e onde o estilo costuma escorregar.
+
+Nesta versão, as imagens são esboços de composição; o prompt de cada uma já está pronto para o gerador.
+
+### Ilustração
+
+Mesma estrutura do estilo fotográfico (abas por estilo, briefing com prévia, imagens com nota por camada, camadas editáveis, avaliação), num módulo só (`SecaoEstiloImagem`) com configuração própria. As seis camadas da ilustração: cor, traço e linha, forma e construção, textura e acabamento, figuras e pessoas, composição e espaço. A prévia e os cards mostram esboços em SVG (`Ilustracao`) nas cores da camada de cor, com traço único e grão leve; paisagem e padrão preenchem o quadro, os outros desenhos cabem inteiros sobre a cor de fundo.
+
+### Motion
+
+Página com os números do movimento da marca da cliente, sempre exemplificados ao vivo:
+1. **Conceito** em `destaque` e quatro números de resumo (duração padrão, curva principal, deslocamento, intervalo entre palavras).
+2. **Princípios**: card com número, título, texto e uma tag com o número que prova o princípio.
+3. **Curvas**: gráfico da curva com as alças, uma bolinha que percorre o trilho com a curva e outra, clara, em velocidade constante para comparar (1200 ms). Valor em CSS para copiar e influência de saída e de entrada para o After Effects. Curva fora da marca leva tag de erro.
+4. **Durações**: barras que crescem no próprio tempo; "Repetir" toca de novo.
+5. **Distâncias e cadência** em listas de rótulo e valor.
+6. **Exemplos** em abas (palavras e frases, imagens, logo e peças): palco na cor de fundo da marca, com a fonte display escolhida, título, descrição, "Repetir" e os parâmetros em tags.
+7. **Coreografia**: um story animado ao lado da linha do tempo de cada elemento, com cursor que corre junto.
+8. **Faça, evite e acessibilidade** e **tokens** em CSS para copiar.
+
+Os exemplos ficam pausados até entrar na tela (`.demo-motion` + `data-ativo`). Com "reduzir movimento", viram só opacidade.
+
+### Aplicações
+
+Tudo é montado com `useSistemaMarca`, que junta logo, paleta, combinação tipográfica (escolhida ou a aposta), grafismos e estilos de foto e ilustração. Na ordem:
+1. **De onde vêm as peças**: links para cada diretriz, com tag "aprovada", "escolhida" ou "proposta".
+2. **Mockups**: frasco, sacola, cartão de visita, etiqueta de lote, perfil do Instagram e site, em palco cinza.
+3. **Regras de diagramação**: número grande, título e texto.
+4. **Peças de comunicação**: abas por formato; card com medida, margem, colunas, título e zona segura e as regras do formato; exemplos por baixo, sem caixa. "Mostrar grid" desenha margem, colunas e zona segura em vermelho de erro por cima das peças.
+5. **Explorações gráficas**: peças quadradas com a ideia e os recursos usados em tags.
+
+As peças (`Peca`) usam medidas em `cqmin`, então o mesmo layout vale do story ao banner. Em formatos com zona segura, o conteúdo desce e sobe para ficar fora dela.
+
+### Envio de imagens
+
+Componente `EnvioImagens` para referências e anexos de imagem. Rótulo em `detalhe`, área de arrastar tracejada em `preenchimento` (vira `acao-suave` com borda `acao-forte` enquanto a pessoa arrasta), botão "escolha do computador" sublinhado e uma dica curta. As imagens viram miniaturas quadradas com raio de 12 px e um botão de remover (aparece no hover no computador, sempre visível no celular), mais o contador "3 de 30 imagens". No modo compacto, depois da primeira imagem, a área de arrastar some e fica só o quadrado "Adicionar" no fim da grade. Só aceita imagens.
+
 ### Demais peças
 
 | Componente | Uso | Forma |

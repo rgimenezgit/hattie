@@ -492,3 +492,79 @@
     background: radial-gradient(circle at 100% 0, transparent calc(var(--r) - 0.5px), var(--fundo) var(--r));
   }
 }
+
+/*
+ * Exemplos de motion da marca da cliente (cérebro de marca › Motion).
+ * Duração, curva, atraso e distância vêm dos dados, pelo estilo inline. Pausados até entrar na tela.
+ * Com "reduzir movimento", todos viram só opacidade, como a diretriz pede.
+ */
+@keyframes demo-subir {
+  from {
+    opacity: 0;
+    translate: 0 var(--demo-distancia, 16px);
+  }
+}
+
+@keyframes demo-linha {
+  from {
+    translate: 0 110%;
+  }
+}
+
+@keyframes demo-desfoque {
+  from {
+    opacity: 0;
+    scale: 1.04;
+    filter: blur(8px);
+  }
+}
+
+@keyframes demo-escala {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@keyframes demo-mascara {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes demo-trilho {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 16px);
+  }
+}
+
+@keyframes demo-cursor {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes demo-barra {
+  from {
+    scale: 0 1;
+  }
+}
+
+.demo-motion:not([data-ativo]) * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-motion * {
+    animation-name: aparecer !important;
+  }
+}

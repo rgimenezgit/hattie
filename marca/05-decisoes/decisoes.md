@@ -2,6 +2,13 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 12/11/2026
+- Estilo fotográfico segue o playbook de imagens de marca: registro emocional e seis camadas (cor, luz, câmera e composição, sujeitos, ambiente, acabamento), mais o que evitar. Cada estilo começa como briefing com prévia; aprovado, gera imagens de exemplo com nota de 1 a 5 por camada. Dá para criar outros estilos e editar cada camada.
+- Novo estilo (de foto ou de ilustração) pede descrição do estilo e imagens de referência (o ideal é de 15 a 30). As duas aparecem no briefing e podem mudar depois.
+- Ilustração usa a mesma estrutura da fotografia, com camadas próprias: cor, traço e linha, forma e construção, textura e acabamento, figuras e pessoas, composição e espaço.
+- Motion da marca com números fechados: conceito, quatro princípios, curvas em cubic-bezier (com os valores para After Effects), cinco durações, distâncias, cadência entre letras, palavras, linhas e itens, coreografia de uma peça, exemplos ao vivo (palavras, frases, imagens, logo e peças), faça e evite, regras para reduzir movimento e tokens para copiar.
+- Aplicações juntam todas as diretrizes: mockups, regras de diagramação, peças por formato (post quadrado, post retrato, story, banner, e-mail, cartaz A3 e cartão) com medida, margem, colunas, zona segura e vários exemplos, e explorações gráficas. As peças usam o logo, a paleta, a tipografia escolhida, os grafismos e os estilos de foto e ilustração, e mudam quando uma diretriz muda.
+
 ## 11/11/2026
 - Tipografia: na primeira visita, combinações de display, texto e sistema com exemplos da marca; a escolha gera o sistema completo (fontes, escala de headline a interface para tela e celular, espaçamento e guias, aplicações) e um espaço de teste no estilo de um site de fontes, ligado ao Google Fonts.
 - Logo: na primeira visita, briefing do logo e três ideias para escolher; a escolha gera o sistema. Gerado, o logo traz versões composta, símbolo e tipográfica em todas as cores da paleta, cada uma com baixar, ajustar com o Hattie e pedir a um parceiro, mais regras de uso, área de proteção e tamanho mínimo.

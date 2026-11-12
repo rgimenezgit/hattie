@@ -24,6 +24,10 @@ export type ConteudoSecao =
   | { tipo: "palavras"; palavras: string[] }
   | { tipo: "cores"; cores: Cor[] }
   | ({ tipo: "tipografia" } & GuiaTipografia)
+  | { tipo: "fotografia"; estilos: EstiloFoto[] }
+  | { tipo: "ilustracao"; estilos: EstiloFoto[] }
+  | ({ tipo: "motion" } & GuiaMotion)
+  | ({ tipo: "aplicacoes" } & GuiaAplicacoes)
   | ({ tipo: "logo" } & SistemaLogo)
   | { tipo: "imagens"; descricao: string; legendas: string[] }
   | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
@@ -227,6 +231,50 @@ export type GuiaTipografia = {
   regras: { titulo: string; texto: string }[]
 }
 
+/** Camadas da fotografia (cor, luz, câmera, sujeitos, ambiente, acabamento) e da ilustração (cor, traço, forma, textura, figuras, composição). */
+export type IdCamadaFoto = "cor" | "luz" | "camera" | "sujeitos" | "ambiente" | "acabamento" | "traco" | "forma" | "textura" | "figuras" | "composicao"
+
+/** Desenhos de exemplo da ilustração. */
+export type DesenhoIlustracao = "pequi" | "baru" | "buriti" | "paisagem" | "frasco" | "padrao"
+
+/** Uma camada do estilo fotográfico (playbook de imagens de marca): campos de rótulo e valor, paleta e proibidos. */
+export type CamadaFoto = {
+  id: IdCamadaFoto
+  titulo: string
+  pergunta: string
+  campos: { rotulo: string; valor: string }[]
+  paleta?: { nome: string; hex: string }[]
+  proibidos?: string[]
+}
+
+/** Imagem de exemplo gerada no estilo, com a nota de 1 a 5 em cada camada (ordem de IdCamadaFoto). */
+export type ImagemFoto = {
+  id: string
+  cena: string
+  enquadramento: string
+  notas: number[]
+  fundo: string
+  luz: string
+  borda: "left" | "right" | "top" | "bottom"
+  /** Só na ilustração: qual desenho de exemplo mostrar. */
+  desenho?: DesenhoIlustracao
+}
+
+/** Estilo fotográfico: o registro emocional, as seis camadas, o que evitar e as imagens de exemplo. */
+export type EstiloFoto = {
+  id: string
+  nome: string
+  uso: string
+  registro: string
+  descricao?: string
+  referencias?: { id: string; nome: string; url: string }[]
+  status: "briefing" | "pronto"
+  camadas: CamadaFoto[]
+  evitar: string[]
+  imagens: ImagemFoto[]
+  desatualizado?: boolean
+}
+
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }
 
 export type Secao = {
@@ -260,3 +308,76 @@ export type Projeto = { id: string; nome: string; editado: string }
 export type Categoria = { id: string; rotulo: string; icone: string; emBreve?: boolean }
 
 export type Modelo = { id: string; categoria: string; titulo: string; descricao: string; pedido: string }
+
+/* ---------- Motion ---------- */
+
+/** Curva de aceleração em cubic-bezier (x1, y1, x2, y2). */
+export type CurvaMotion = { id: string; nome: string; valores: [number, number, number, number]; uso: string; sensacao: string; fora?: boolean }
+export type DuracaoMotion = { id: string; nome: string; ms: number; uso: string }
+export type MedidaMotion = { nome: string; valor: string; uso: string }
+export type EfeitoMotion = "letras" | "palavras" | "linhas" | "desfoque" | "mascara" | "escala" | "logo" | "story" | "lista"
+export type ExemploMotion = {
+  id: string
+  grupo: "texto" | "imagem" | "marca" | "peca"
+  titulo: string
+  descricao: string
+  efeito: EfeitoMotion
+  texto?: string
+  duracao: number
+  curva: string
+  intervalo?: number
+  deslocamento?: number
+}
+export type PassoCoreografia = { elemento: string; inicio: number; duracao: number; curva: string }
+export type GuiaMotion = {
+  conceito: string
+  resumo: { rotulo: string; valor: string }[]
+  principios: { titulo: string; texto: string; numero: string }[]
+  curvas: CurvaMotion[]
+  duracoes: DuracaoMotion[]
+  distancias: MedidaMotion[]
+  cadencia: MedidaMotion[]
+  coreografia: PassoCoreografia[]
+  exemplos: ExemploMotion[]
+  faca: string[]
+  evite: string[]
+  acessibilidade: string[]
+}
+
+/* ---------- Aplicações ---------- */
+
+export type LayoutPeca = "foto-cheia" | "tipografico" | "dividido" | "grafismo" | "ilustracao" | "oferta" | "citacao" | "lote" | "gradiente" | "moldura" | "padrao" | "carimbo"
+export type RecursoPeca = "logo" | "cores" | "tipografia" | "fotografia" | "ilustracao" | "grafismos" | "gradiente"
+export type ExemploPeca = {
+  id: string
+  nome: string
+  layout: LayoutPeca
+  sobretitulo?: string
+  titulo: string
+  texto?: string
+  cta?: string
+  destaque?: string
+  recursos: RecursoPeca[]
+}
+export type FormatoPeca = {
+  id: string
+  nome: string
+  grupo: "Redes sociais" | "Digital" | "Impresso"
+  medida: string
+  proporcao: [number, number]
+  margem: string
+  colunas: number
+  /** Área que a interface da rede cobre, em % da altura, no topo e na base. */
+  zonaSegura?: { texto: string; topo: number; base: number }
+  titulo: string
+  regras: string[]
+  exemplos: ExemploPeca[]
+}
+export type SuporteMockup = "frasco" | "sacola" | "cartao" | "etiqueta" | "perfil" | "site"
+export type MockupMarca = { id: string; nome: string; suporte: SuporteMockup; descricao: string; especificacao: string }
+export type GuiaAplicacoes = {
+  regras: { titulo: string; texto: string; numero: string }[]
+  mockups: MockupMarca[]
+  formatos: FormatoPeca[]
+  exploracoes: (ExemploPeca & { ideia: string })[]
+}
