@@ -712,17 +712,119 @@ export const SECOES: Secao[] = [
     id: "arquetipo",
     titulo: "Arquétipo",
     grupo: "personalidade",
-    resumo: "Cuidador, com um toque de Explorador.",
-    porque: "O Cuidador protege e acolhe; o Explorador traz o cerrado e a origem para perto.",
-    conteudo: { tipo: "texto", texto: "Cuidador, com um toque de Explorador." },
+    resumo: "Cuidador, com um toque de Explorador: acolhe como quem cuida e leva a cliente até a origem de cada ingrediente.",
+    porque:
+      "Você descreveu a marca como uma amiga que entende de pele, e as clientes voltam porque confiam. Isso é o Cuidador. O cerrado, as cooperativas e a vontade de mostrar de onde tudo vem trazem o Explorador, em dose menor, para a marca não ficar só no colo.",
+    conteudo: {
+      tipo: "arquetipos",
+      mistura:
+        "A Raiz Natural cuida primeiro e convida para descobrir depois. O Cuidador define como ela trata cada cliente; o Explorador dá o assunto: o cerrado, a colheita e a origem de cada gota.",
+      primario: {
+        id: "cuidador",
+        nome: "Cuidador",
+        peso: 70,
+        lema: "Cuidar de quem está perto",
+        essencia:
+          "O Cuidador protege, acolhe e se antecipa ao que a outra pessoa precisa. Ganha confiança pelo jeito de tratar, com paciência e atenção aos detalhes.",
+        motivacao: "Fazer a pessoa se sentir segura e bem cuidada",
+        desejo: "Que a cliente confie de olhos fechados",
+        medo: "Ser descuidada ou causar algum mal",
+        naMarca:
+          "Na Raiz Natural, cuidar é explicar cada ingrediente antes de vender, indicar o produto certo para cada pele e avisar quando algo atrasa. O cuidado aparece no rótulo, no atendimento e na embalagem.",
+        comportamentos: [
+          "Pergunta como está a pele antes de indicar um produto",
+          "Explica o que cada ingrediente faz, em linguagem simples",
+          "Avisa antes do problema: atraso, troca de lote, reação",
+          "Manda amostra para quem está em dúvida",
+        ],
+        exagero: "O acolhimento pode virar tom maternal ou excesso de diminutivos. A cliente é adulta e decide sozinha.",
+      },
+      secundario: {
+        id: "explorador",
+        nome: "Explorador",
+        peso: 30,
+        lema: "Descobrir de onde tudo vem",
+        essencia:
+          "O Explorador busca o novo, o autêntico e o que está fora do comum. Valoriza liberdade e a sensação de descoberta.",
+        motivacao: "Viver algo verdadeiro e diferente",
+        desejo: "Mostrar um mundo que pouca gente conhece",
+        medo: "Ficar igual a todo mundo",
+        naMarca:
+          "Na Raiz Natural, o Explorador leva a cliente até o cerrado: conta a colheita, mostra as cooperativas e apresenta ingredientes que ela ainda não conhece, como o pequi e o baru.",
+        comportamentos: [
+          "Mostra a colheita e as pessoas por trás de cada lote",
+          "Apresenta um ingrediente do cerrado por vez, com a história dele",
+          "Usa fotos de lugar e de estação do ano",
+        ],
+        exagero: "A aventura pode tomar o lugar do cuidado. A cliente quer conhecer a origem, sem precisar de expedição.",
+      },
+    },
   },
   {
     id: "atributos",
     titulo: "Atributos",
     grupo: "personalidade",
-    resumo: "Cuidadosa, honesta e acolhedora.",
-    porque: "Escolhi três palavras concretas para guiar cada decisão de texto e visual.",
-    conteudo: { tipo: "palavras", palavras: ["Cuidadosa", "Honesta", "Acolhedora"] },
+    resumo: "Cuidadosa, honesta, acolhedora e curiosa: quatro atributos para guiar cada texto, imagem e atendimento.",
+    porque:
+      "Escolhi atributos que aparecem nas mensagens das suas clientes e que combinam com o Cuidador e o Explorador. Cada um tem uma frase e exemplos para virar decisão no dia a dia.",
+    conteudo: {
+      tipo: "atributos",
+      resumo: "Quatro atributos para guiar cada texto, imagem e atendimento. Os três primeiros vêm do Cuidador; a curiosidade vem do Explorador.",
+      atributos: [
+        {
+          id: "cuidadosa",
+          nome: "Cuidadosa",
+          titulo: "Pensa em cada detalhe antes de entregar",
+          significado: "Ser cuidadosa é fazer com atenção: escolher o ingrediente, conferir o lote e pensar em quem vai usar.",
+          naMarca: "A Raiz Natural confere cada lote, explica o uso e embala como presente, mesmo quando é para a própria cliente.",
+          ondeSeVe: [
+            { onde: "Rótulo", como: "Lote, cooperativa e modo de usar em letras que dá para ler" },
+            { onde: "Embalagem", como: "Papel de seda, cartão escrito e amostra quando faz sentido" },
+            { onde: "Atendimento", como: "Pergunta sobre a pele antes de indicar" },
+          ],
+          arquetipo: "Cuidador",
+        },
+        {
+          id: "honesta",
+          nome: "Honesta",
+          titulo: "Diz o que o produto faz e o que ele não faz",
+          significado: "Ser honesta é falar a verdade mesmo quando ela vende menos: sem promessa de milagre e com a origem à vista.",
+          naMarca: "A marca mostra de onde vem cada ingrediente, avisa quando algo atrasa e indica outra opção quando o produto não serve.",
+          ondeSeVe: [
+            { onde: "Posts", como: "Resultado real, com tempo de uso, sem antes e depois milagroso" },
+            { onde: "Rótulo", como: "Lista completa de ingredientes com nome comum ao lado" },
+            { onde: "Atendimento", como: "Avisa atraso antes da cliente perguntar" },
+          ],
+          arquetipo: "Cuidador",
+        },
+        {
+          id: "acolhedora",
+          nome: "Acolhedora",
+          titulo: "Recebe cada cliente pelo nome",
+          significado: "Ser acolhedora é fazer a pessoa se sentir bem-vinda, ouvida e sem pressa para decidir.",
+          naMarca: "A Raiz Natural chama a cliente pelo nome, responde com calma no WhatsApp e lembra do que ela comprou da última vez.",
+          ondeSeVe: [
+            { onde: "WhatsApp", como: "Resposta com o nome e sem roteiro pronto" },
+            { onde: "E-mail", como: "Assinado pela Bia, com espaço para responder" },
+            { onde: "Feiras", como: "Amostra para provar sem compromisso" },
+          ],
+          arquetipo: "Cuidador",
+        },
+        {
+          id: "curiosa",
+          nome: "Curiosa",
+          titulo: "Quer mostrar o que o cerrado tem de novo",
+          significado: "Ser curiosa é ter vontade de descobrir e de dividir o que descobriu, com entusiasmo e sem exagero.",
+          naMarca: "A marca apresenta ingredientes pouco conhecidos, conta a colheita de cada estação e convida a cliente a experimentar.",
+          ondeSeVe: [
+            { onde: "Stories", como: "Bastidores da colheita e das cooperativas" },
+            { onde: "Lançamentos", como: "Um ingrediente novo por vez, com a história dele" },
+            { onde: "Rótulo", como: "Curiosidade curta sobre o ingrediente principal" },
+          ],
+          arquetipo: "Explorador",
+        },
+      ],
+    },
   },
   {
     id: "comportamento",

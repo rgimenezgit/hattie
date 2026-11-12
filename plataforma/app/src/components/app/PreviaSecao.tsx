@@ -142,6 +142,27 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       )
     }
 
+    case "arquetipos":
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-medium">
+            {conteudo.primario.nome} {conteudo.primario.peso}%{conteudo.secundario && ` · ${conteudo.secundario.nome} ${conteudo.secundario.peso}%`}
+          </p>
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.mistura}</p>
+        </div>
+      )
+
+    case "atributos":
+      return (
+        <ul className="flex flex-wrap gap-1.5">
+          {conteudo.atributos.map((atributo) => (
+            <li key={atributo.id}>
+              <Tag tamanho={card ? "md" : "lg"}>{atributo.nome}</Tag>
+            </li>
+          ))}
+        </ul>
+      )
+
     case "voz":
       return (
         <div className="flex flex-col gap-2">

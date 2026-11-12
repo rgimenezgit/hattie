@@ -3,6 +3,8 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Arquétipo com a mistura (proporção entre primário e secundário) e um card por arquétipo: essência, motivação, desejo, medo, como a marca age dentro dele e o risco do exagero.
+- Atributos com um card por atributo: nome, frase-título, o que significa, como aparece na marca e onde se vê.
 - Cores de estado da plataforma, fora da paleta da marca: sucesso em verde `#1F9D55`, atenção em amarelo dourado `#F2B705` e erro em vermelho `#E0352B`, cada uma com versão de texto e versão suave. Lima segue só como ação. Entram em avisos, alertas, tags, campos, faça e evite, disponibilidade e botão de perigo.
 - Abas da plataforma num componente próprio (`Abas`): trilha em pílula, aba ativa em lima sem sombra, quantidade opcional. Substitui as abas genéricas na Home e no Tom de voz.
 - Tom de voz: introdução, traços e espectro de tom; exemplos navegáveis por tipo (falas, posts, legendas, chamadas, e-mails) em cards que imitam o canal; faça e evite com exemplos; glossário e palavras que a marca evita, com a troca e o motivo.

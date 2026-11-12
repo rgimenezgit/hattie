@@ -210,6 +210,15 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 3. **Faça e evite**: duas colunas com uma regra por linha e um exemplo entre aspas; no "Evite", o exemplo vem riscado em cinza.
 4. **Glossário** e 5. **Palavras que a marca evita** lado a lado: termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
 
+### Arquétipo
+
+1. **A mistura**: a frase de como os arquétipos se combinam, em `destaque`, e uma barra fina de proporção (primário em preto, secundário em cinza-médio) com a legenda nome, peso e papel.
+2. **Arquétipo primário** e 3. **arquétipo secundário**: um card cada. Ícone do arquétipo num círculo neutro, nome em Clash minúsculo (32 px no primário, 24 no secundário), tag com papel e peso, e o lema. Abaixo, em duas colunas: "O que é" (a essência do arquétipo em geral, com motivação, desejo e medo) e "Como a marca age como…" (como a marca vive o arquétipo, com comportamentos em lista). No pé, uma linha discreta com ícone dourado: "Cuidado com o exagero", o risco de levar o arquétipo longe demais.
+
+### Atributos
+
+Bloco "como a marca é" com um card por atributo, numerado. À esquerda: número, de qual arquétipo vem (tag), o nome em Clash e a frase-título em `destaque`. À direita, separados por linha vertical: "O que significa", "Como aparece na marca" e "Onde se vê" (pontos de contato como rótulo, atendimento e posts, cada um com o como).
+
 ### Demais peças
 
 | Componente | Uso | Forma |

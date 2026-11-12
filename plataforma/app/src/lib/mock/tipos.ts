@@ -31,6 +31,8 @@ export type ConteudoSecao =
   | { tipo: "diferenciais"; principal: string; clusters: ClusterDiferencial[] }
   | { tipo: "nome"; processo: ProcessoNome; opcoes: OpcaoNome[] }
   | ({ tipo: "voz" } & GuiaVoz)
+  | { tipo: "arquetipos"; mistura: string; primario: Arquetipo; secundario?: Arquetipo }
+  | { tipo: "atributos"; resumo: string; atributos: Atributo[] }
 
 export type Dado = { rotulo: string; valor: string }
 
@@ -144,6 +146,32 @@ export type GuiaVoz = {
   evite: { regra: string; exemplo: string }[]
   glossario: { termo: string; uso: string }[]
   proibidas: { palavra: string; troca: string; motivo: string }[]
+}
+
+/** Arquétipo de marca: o modelo geral e como esta marca vive dentro dele. peso: quanto da personalidade (%). */
+export type Arquetipo = {
+  id: string
+  nome: string
+  peso: number
+  lema: string
+  essencia: string
+  motivacao: string
+  desejo: string
+  medo: string
+  naMarca: string
+  comportamentos: string[]
+  exagero: string
+}
+
+/** Atributo de personalidade: nome, uma frase-título, o que significa e como aparece na marca. */
+export type Atributo = {
+  id: string
+  nome: string
+  titulo: string
+  significado: string
+  naMarca: string
+  ondeSeVe: { onde: string; como: string }[]
+  arquetipo?: string
 }
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }
