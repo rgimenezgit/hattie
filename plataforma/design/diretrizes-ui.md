@@ -231,6 +231,19 @@ Bloco "como a marca é" com um card por atributo, numerado. À esquerda: número
 
 As prévias de marca da cliente usam a fonte dela (`font-serif`, Fraunces na Raiz Natural) e nunca as fontes do Hattie.
 
+### Tipografia
+
+**Primeira visita.** "escolha uma combinação": três cards. No topo de cada um, o nome da combinação em Clash, "minha aposta" quando for o caso, a ideia e "Gerar sistema com esta". Depois, uma linha por papel: à esquerda o papel em tag (Display, Texto, Sistema), o nome da fonte e para que ela serve; à direita a amostra na própria fonte (a frase da marca, um parágrafo, um botão com número de lote). No pé, "Por que funciona" em três colunas. Abaixo, o espaço de teste com as fontes das três combinações. Gerar mostra "montando o sistema tipográfico" e, ao terminar, o selo tcharam.
+
+**Sistema gerado.**
+1. **As fontes**: um card por papel com "Fonte display/texto/sistema" e o uso no topo, link para o Google Fonts, "Aa" e o nome da fonte escritos nela mesma num bloco cinza, o alfabeto e os pesos usados.
+2. **Escala tipográfica**: headline, subheadline, H1, H2, H3, texto, texto pequeno, legenda, CTA e interface. Cada linha traz nome, fonte, peso, tamanho/entrelinha, espaçamento entre letras e uso, com o exemplo no próprio estilo. Abas "Tela grande" e "Celular". "Copiar CSS" entrega o `@import` do Google Fonts, as variáveis e as classes com a versão de celular.
+3. **Espaçamento e guias**: um trecho de texto com as faixas de espaço medidas (8, 16, 24 px) e as regras (comprimento de linha, ritmo de 8 px, depois do título, entre parágrafos, alinhamento, caixa alta).
+4. **Aplicações**: post do Instagram, rótulo e e-mail montados com o sistema e as cores da marca.
+5. **Teste as fontes**: espaço no estilo de um site de fontes. Botões para as fontes da marca, busca de qualquer fonte do Google Fonts, tamanho, peso, entrelinha e espaçamento entre letras; o texto se escreve direto na prévia e aparece em cascata de 64 a 13 px.
+
+Integração: as fontes carregam pela API de CSS do Google Fonts (sem chave). A lista de fontes vem de `/api/fontes`: com `GOOGLE_FONTS_API_KEY` no ambiente, é o catálogo completo da API do Google, guardado por um dia; sem a chave, uma lista curada de 40 fontes.
+
 ### Demais peças
 
 | Componente | Uso | Forma |

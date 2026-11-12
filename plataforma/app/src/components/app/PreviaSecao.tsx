@@ -65,21 +65,19 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </ul>
       )
 
-    case "tipografia":
-      return card ? (
-        <p className="font-serif text-[38px] leading-none tracking-tight" aria-label={`${conteudo.display} e ${conteudo.texto}`}>
-          Aa <span className="font-sans font-medium">Aa</span>
-        </p>
-      ) : (
-        <div className="flex flex-col gap-3 rounded-2xl bg-preenchimento p-5">
-          <p className="font-serif text-[38px] leading-tight">{conteudo.amostra}</p>
-          <p className="font-sans text-titulo-3">Todo frasco diz de qual lote e de qual cooperativa veio.</p>
-          <p className="text-sm text-texto-2">
-            Títulos em <span className="font-medium text-ink">{conteudo.display}</span> · texto em{" "}
-            <span className="font-medium text-ink">{conteudo.texto}</span>
+    case "tipografia": {
+      const combinacao = conteudo.combinacoes.find((item) => item.aposta) ?? conteudo.combinacoes[0]
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="font-serif text-[38px] leading-none tracking-tight" aria-hidden>
+            Aa <span className="font-sans font-medium">Aa</span>
+          </p>
+          <p className="text-xs text-texto-3">
+            {conteudo.combinacoes.length} combinações · minha aposta: {combinacao.display.familia} e {combinacao.texto.familia}
           </p>
         </div>
       )
+    }
 
     case "logo": {
       const ideia = conteudo.ideias.find((item) => item.aposta) ?? conteudo.ideias[0]

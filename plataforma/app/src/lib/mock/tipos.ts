@@ -23,7 +23,7 @@ export type ConteudoSecao =
   | { tipo: "blocos"; blocos: { titulo: string; texto: string }[] }
   | { tipo: "palavras"; palavras: string[] }
   | { tipo: "cores"; cores: Cor[] }
-  | { tipo: "tipografia"; display: string; texto: string; amostra: string }
+  | ({ tipo: "tipografia" } & GuiaTipografia)
   | ({ tipo: "logo" } & SistemaLogo)
   | { tipo: "imagens"; descricao: string; legendas: string[] }
   | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
@@ -187,6 +187,44 @@ export type SistemaLogo = {
   ideias: IdeiaLogo[]
   regras: { faca: string[]; evite: { tipo: ErroLogo; texto: string }[] }
   espacamento: { protecao: string; minimos: { versao: string; digital: string; impresso: string }[] }
+}
+
+export type PapelFonte = "display" | "texto" | "sistema"
+
+/** Fonte de uma combinação: família do Google Fonts, categoria, pesos usados e para que serve. */
+export type FonteMarca = { familia: string; categoria: "serif" | "sans-serif" | "display" | "monospace"; pesos: number[]; uso: string }
+
+export type CombinacaoTipografica = {
+  id: string
+  nome: string
+  ideia: string
+  display: FonteMarca
+  texto: FonteMarca
+  sistema: FonteMarca
+  porque: string[]
+  aposta?: boolean
+}
+
+/** Estilo do sistema tipográfico. Tamanhos em px; entrelinha em px; espaçamento entre letras em %. */
+export type EstiloTipografico = {
+  id: string
+  nome: string
+  papel: PapelFonte
+  peso: number
+  tela: { tamanho: number; linha: number }
+  celular: { tamanho: number; linha: number }
+  letras: number
+  caixa?: "normal" | "alta"
+  uso: string
+  exemplo: string
+}
+
+export type GuiaTipografia = {
+  frase: string
+  paragrafo: string
+  combinacoes: CombinacaoTipografica[]
+  estilos: EstiloTipografico[]
+  regras: { titulo: string; texto: string }[]
 }
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }

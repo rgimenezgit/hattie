@@ -18,3 +18,11 @@ Mais recente primeiro. Formato: data, decisão, motivo.
 - 2026-11-03: shadcn/ui inicializado com base Radix (`-b radix`) e preset Nova. Tokens do Hattie plugados em `src/app/hattie-tokens.css` + mapeamento em `globals.css` (`--color-primary` = `--action` etc.), em vez da paleta cinza padrão do shadcn. Tema por `data-theme` no `<html>` (`gabinete`/`noturno`/`palco`/`intenso`). O ajuste do `dark:` está na entrada acima.
 - 2026-11-03: Instalado `react-bits` (componente `SplitText` via registry shadcn) e `dithercn` (engine de dither via registry shadcn) para os grafismos/efeitos visuais da plataforma. `p5`, `ogl` e `calligraph` instalados como dependências para prototipar grafismos, shaders e o zuum — ainda não usados em nenhuma tela.
 - 2026-11-03: Avaliado e NÃO instalado o Astryx Design System (`@astryxdesign/*` + StyleX) — StyleX é um motor de estilos (CSS-in-JS atômico) concorrente do Tailwind, e misturar os dois no mesmo app criaria duas formas de estilizar a mesma coisa. Fica como referência de padrões, não como dependência.
+
+
+## 11/11/2026 · Google Fonts na Tipografia
+
+- **Carregar fontes**: API de CSS do Google Fonts (`fonts.googleapis.com/css2`), injetada sob demanda por `lib/usarFonteGoogle.ts`. Não precisa de chave.
+- **Catálogo**: rota `app/api/fontes/route.ts`. Com `GOOGLE_FONTS_API_KEY` no ambiente (`.env.local`), busca a Web Fonts Developer API do Google ordenada por popularidade e guarda por um dia (`use cache` + `cacheLife("days")`). Sem a chave, devolve a lista curada de `lib/fontes.ts`.
+- **Motivo**: o espaço de teste da Tipografia funciona como um site de fontes; o protótipo roda sem chave e ganha o catálogo inteiro quando ela existir.
+- **Fonte da cliente**: Fraunces via `next/font/google` (`--font-marca`, sem preload), só para prévias de marca da cliente.

@@ -3,6 +3,7 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Tipografia: na primeira visita, combinações de display, texto e sistema com exemplos da marca; a escolha gera o sistema completo (fontes, escala de headline a interface para tela e celular, espaçamento e guias, aplicações) e um espaço de teste no estilo de um site de fontes, ligado ao Google Fonts.
 - Logo: na primeira visita, briefing do logo e três ideias para escolher; a escolha gera o sistema. Gerado, o logo traz versões composta, símbolo e tipográfica em todas as cores da paleta, cada uma com baixar, ajustar com o Hattie e pedir a um parceiro, mais regras de uso, área de proteção e tamanho mínimo.
 - Arquétipo com a mistura (proporção entre primário e secundário) e um card por arquétipo: essência, motivação, desejo, medo, como a marca age dentro dele e o risco do exagero.
 - Atributos com um card por atributo: nome, frase-título, o que significa, como aparece na marca e onde se vê.

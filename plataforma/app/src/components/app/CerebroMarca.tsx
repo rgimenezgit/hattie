@@ -42,6 +42,7 @@ import { SecaoLogo } from "./SecaoLogo"
 import { SecaoNome } from "./SecaoNome"
 import { SecaoArquetipos, SecaoAtributos } from "./SecaoPersonalidade"
 import { SecaoPublico } from "./SecaoPublico"
+import { SecaoTipografia } from "./SecaoTipografia"
 import { SecaoVoz } from "./SecaoVoz"
 import { useMidia } from "./useMidia"
 
@@ -373,7 +374,7 @@ function VisaoGeral({ aoEditar }: { aoEditar: (id: string) => void }) {
 
 function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string) => void }) {
   const marca = useMarca()
-  const { aprovar, reabrir, secoes, logoEscolhido } = useEstado()
+  const { aprovar, reabrir, secoes, logoEscolhido, tipografiaEscolhida } = useEstado()
   const aprovada = secoes[secao.id] === "aprovada"
   const indice = SECOES.findIndex((item) => item.id === secao.id)
   const proxima = SECOES[indice + 1]
@@ -397,6 +398,8 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoAtributos secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "logo" ? (
         <SecaoLogo secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "tipografia" ? (
+        <SecaoTipografia secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
@@ -413,7 +416,8 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        {secao.conteudo.tipo === "nome" || (secao.conteudo.tipo === "logo" && !aprovada && !logoEscolhido) ? null : aprovada ? (
+        {secao.conteudo.tipo === "nome" || (secao.conteudo.tipo === "logo" && !aprovada && !logoEscolhido) ||
+          (secao.conteudo.tipo === "tipografia" && !aprovada && !tipografiaEscolhida) ? null : aprovada ? (
           <Botao variante="secundario" onClick={() => reabrir(secao.id)}>
             <RotateCcw /> Reabrir para ajustes
           </Botao>
