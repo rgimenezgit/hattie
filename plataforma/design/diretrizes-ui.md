@@ -156,6 +156,22 @@ A seção tem três camadas, de cima para baixo:
 
 Diálogos da plataforma usam `Janela` (branco, raio 24, sem contorno, rodapé com a ação). Campos de texto longo e de lista: `CampoArea` e `CampoLista`. Com erro, o foco vai ao primeiro campo com problema.
 
+### Mercado e concorrentes
+
+1. **Referências**: marcas que inspiram, em cards de três colunas. Cada uma traz o nome, a área, "O que levar" e de onde veio ("Você citou no briefing" ou "Sugerida pelo Hattie"). "Adicionar referência" pede a marca, a área e o que a pessoa admira nela.
+2. **Concorrentes**: dois cards, diretos (vendem o mesmo para a mesma pessoa) e indiretos (resolvem a mesma vontade de outro jeito). No topo de cada um, a leitura do Hattie em lima-suave com ícone de lâmpada: é o insight do grupo. Abaixo, uma tabela leve com marca, preço e onde vende, forte em, e brecha para você (em peso 500, porque é o que interessa). No celular, cada linha vira uma lista de rótulo e valor. Concorrente novo entra como rascunho com "Analisar com o Hattie".
+3. **Mercado esta semana**: painel que o Hattie atualiza toda segunda. Quatro cartões de indicador (rótulo, valor em Poppins 600, variação em 4 semanas com seta, minilinha de 8 semanas e a fonte) e o card "O que eu vi esta semana" com até três insights marcados como oportunidade, tendência ou atenção. "Atualizar agora" e a data da última leitura ficam no cabeçalho.
+
+`Minilinha`: linha de 2 px em cinza-médio `#6B6B6B`, semana atual em lima-forte `#77A00F` com anel branco; ao passar o mouse ou tocar, mostra a semana e o valor num balão preto; leitores de tela recebem a série numa tabela. Sem eixo e sem grade: o número grande e a variação contam a história, a linha mostra a direção.
+
+### Diferenciais
+
+1. **O que mais diferencia**: o diferencial principal em `destaque` e quatro fatos (frentes ativas, total, fortes hoje, em construção).
+2. **Por frente**: um card por frente ativa (funcionais, emocionais, sociais, ambientais, econômicos), com ícone neutro, a pergunta que a frente responde e os diferenciais em lista: título, força (ponto lima-forte para "forte", anel vazio para "em construção"), descrição e prova.
+3. **Ficou de fora**: frentes que não fazem sentido para a marca agora, em card de contorno tracejado, com o motivo e "Conversar sobre isso". O Hattie decide quais frentes entram a partir do briefing e dos objetivos.
+
+Botões de adicionar no cabeçalho de bloco encurtam para "Adicionar" no celular (o resto do rótulo continua para leitores de tela). Cabeçalhos de bloco e de tela quebram de linha quando falta espaço.
+
 ### Demais peças
 
 | Componente | Uso | Forma |

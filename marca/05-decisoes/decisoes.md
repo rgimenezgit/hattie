@@ -3,6 +3,8 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Mercado e concorrentes: referências de marca (citadas no briefing ou sugeridas pelo Hattie), concorrentes diretos e indiretos com a leitura do Hattie por grupo, e um painel de mercado atualizado toda segunda com indicadores e insights.
+- Diferenciais separados em cinco frentes (funcionais, emocionais, sociais, ambientais e econômicos). Só entram as frentes que fazem sentido para a marca; as outras aparecem com o motivo. A seção passa a se chamar Diferenciais.
 - Regras de hierarquia da plataforma: uma camada de caixa (card branco sobre o palco, sem caixa cinza dentro), títulos de bloco fora do card, três níveis de texto, listas de atributos em texto, títulos em Clash sempre em minúsculas (menos nome de marca e de conversa). Toda mudança de UI passa por revisão de hierarquia antes de ser entregue.
 - Público e personas em três camadas: público macro, públicos com demografia e psicografia e personas detalhadas (frase, história, objetivos, dores, motivações, objeções, gatilhos, canais, referências, como a marca ajuda e mensagem). Dá para adicionar públicos e personas; os novos entram como rascunho para o Hattie completar.
 - Casca do app em palco cinza com três abas brancas que saem da margem (topo, navegação e conta), com cantos côncavos. Fechada, a aba do topo mostra só o símbolo do Hattie; aberta, mostra a logomarca e o seletor de marca. Colunas laterais viram painéis brancos sobre o palco.

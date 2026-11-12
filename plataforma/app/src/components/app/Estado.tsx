@@ -8,9 +8,11 @@ import {
   SECOES,
   STATUS_INICIAL,
   getSecao,
+  type Concorrente,
   type Mensagem,
   type Persona,
   type Publico,
+  type Referencia,
   type StatusPasso,
   type StatusSecao,
 } from "@/lib/mock"
@@ -35,6 +37,10 @@ type EstadoApp = {
   personasNovas: Persona[]
   adicionarPublico: (publico: Publico) => void
   adicionarPersona: (persona: Persona) => void
+  referenciasNovas: Referencia[]
+  concorrentesNovos: Concorrente[]
+  adicionarReferencia: (referencia: Referencia) => void
+  adicionarConcorrente: (concorrente: Concorrente) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -79,6 +85,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [secoes, setSecoes] = useState<Record<string, StatusSecao>>(STATUS_INICIAL)
   const [publicosNovos, setPublicosNovos] = useState<Publico[]>([])
   const [personasNovas, setPersonasNovas] = useState<Persona[]>([])
+  const [referenciasNovas, setReferenciasNovas] = useState<Referencia[]>([])
+  const [concorrentesNovos, setConcorrentesNovos] = useState<Concorrente[]>([])
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -194,6 +202,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
 
   const adicionarPublico = useCallback((publico: Publico) => setPublicosNovos((atual) => [...atual, publico]), [])
   const adicionarPersona = useCallback((persona: Persona) => setPersonasNovas((atual) => [...atual, persona]), [])
+  const adicionarReferencia = useCallback((referencia: Referencia) => setReferenciasNovas((atual) => [...atual, referencia]), [])
+  const adicionarConcorrente = useCallback((concorrente: Concorrente) => setConcorrentesNovos((atual) => [...atual, concorrente]), [])
 
   const valor = useMemo<EstadoApp>(
     () => ({
@@ -214,6 +224,10 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       personasNovas,
       adicionarPublico,
       adicionarPersona,
+      referenciasNovas,
+      concorrentesNovos,
+      adicionarReferencia,
+      adicionarConcorrente,
     }),
     [
       nomeMarca,
@@ -233,6 +247,10 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       personasNovas,
       adicionarPublico,
       adicionarPersona,
+      referenciasNovas,
+      concorrentesNovos,
+      adicionarReferencia,
+      adicionarConcorrente,
     ],
   )
 

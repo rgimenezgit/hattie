@@ -36,6 +36,8 @@ import { useEstado } from "./Estado"
 import { Canvas, CabecalhoCanvas, ColunaLateral } from "./Layout"
 import { useMarca } from "./MarcaContexto"
 import { PreviaSecao } from "./PreviaSecao"
+import { SecaoDiferenciais } from "./SecaoDiferenciais"
+import { SecaoMercado } from "./SecaoMercado"
 import { SecaoPublico } from "./SecaoPublico"
 import { useMidia } from "./useMidia"
 
@@ -377,6 +379,10 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
     <div className="flex flex-col gap-5">
       {secao.conteudo.tipo === "publico" ? (
         <SecaoPublico secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "mercado" ? (
+        <SecaoMercado secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "diferenciais" ? (
+        <SecaoDiferenciais secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">

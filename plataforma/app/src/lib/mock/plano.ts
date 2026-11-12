@@ -81,7 +81,7 @@ export const RESPOSTAS_EXEMPLO: Record<string, string> = {
   canais: "Instagram e WhatsApp, e feiras aos fins de semana.",
   produto: "Ingredientes do cerrado e produção em pequenos lotes.",
   personalidade: "Calma e acolhedora, como uma amiga que entende de pele.",
-  referencias: "Gosto muito de como a Aesop mostra os produtos.",
+  referencias: "Gosto muito de como a Aesop mostra os produtos e de como a Patagonia conta de onde vem cada peça.",
   ingredientes: "Compro de duas cooperativas em Goiás.",
   embalagem: "Vidro âmbar com rótulo simples. Quero algo mais bonito e sustentável.",
 }

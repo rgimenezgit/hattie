@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, type FormEvent, type ReactNode } from "react"
+import { useRef, useState, type FormEvent } from "react"
 import {
   ArrowUpRight,
   Ban,
@@ -25,6 +25,7 @@ import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Marca, Persona, Publico, Secao } from "@/lib/mock"
+import { CabecalhoBloco } from "./Blocos"
 import { useEstado } from "./Estado"
 import { corDoTexto } from "./PreviaSecao"
 
@@ -71,7 +72,7 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
       <section aria-labelledby="titulo-publicos" className="flex flex-col gap-3">
         <CabecalhoBloco id="titulo-publicos" titulo="públicos" quantidade={publicos.length}>
           <Botao variante="secundario" tamanho="sm" onClick={() => setNovoPublico(true)}>
-            <Plus /> Adicionar público
+            <Plus /> Adicionar<span className="max-sm:sr-only"> público</span>
           </Botao>
         </CabecalhoBloco>
         <div className="flex flex-col gap-3">
@@ -84,7 +85,7 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
       <section aria-labelledby="titulo-personas" className="flex flex-col gap-3">
         <CabecalhoBloco id="titulo-personas" titulo="personas" quantidade={personas.length}>
           <Botao variante="secundario" tamanho="sm" onClick={() => setNovaPersona(true)}>
-            <Plus /> Adicionar persona
+            <Plus /> Adicionar<span className="max-sm:sr-only"> persona</span>
           </Botao>
         </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 @5xl:grid-cols-2">
@@ -98,19 +99,6 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
 
       <FormPublico aberta={novoPublico} aoMudar={setNovoPublico} />
       <FormPersona aberta={novaPersona} aoMudar={setNovaPersona} publicos={publicos} />
-    </div>
-  )
-}
-
-/** Cabeçalho das três camadas: título em Clash, quantidade discreta e a ação à direita. */
-function CabecalhoBloco({ id, titulo, quantidade, children }: { id: string; titulo: string; quantidade?: number; children: ReactNode }) {
-  return (
-    <div className="flex min-h-8 items-center justify-between gap-3">
-      <h2 id={id} className="flex items-baseline gap-2 font-heading text-titulo-3 font-medium lowercase">
-        {titulo}
-        {quantidade !== undefined && <span className="font-sans text-xs font-medium text-texto-3 tabular-nums">{quantidade}</span>}
-      </h2>
-      {children}
     </div>
   )
 }

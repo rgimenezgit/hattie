@@ -27,6 +27,8 @@ export type ConteudoSecao =
   | { tipo: "logo"; descricao: string; opcoes: string[] }
   | { tipo: "imagens"; descricao: string; legendas: string[] }
   | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
+  | { tipo: "mercado"; referencias: Referencia[]; concorrentes: Concorrente[]; leituras: Record<TipoConcorrente, string>; painel: PainelMercado }
+  | { tipo: "diferenciais"; principal: string; clusters: ClusterDiferencial[] }
 
 export type Dado = { rotulo: string; valor: string }
 
@@ -65,6 +67,38 @@ export type Persona = {
   mensagem: string
   rascunho?: boolean
 }
+
+/** Marca que inspira: citada pela pessoa no briefing ou sugerida pelo Hattie. */
+export type Referencia = { id: string; nome: string; segmento: string; origem: "briefing" | "hattie"; levar: string; rascunho?: boolean }
+
+export type TipoConcorrente = "direto" | "indireto"
+
+/** Direto: vende o mesmo para a mesma pessoa. Indireto: resolve a mesma vontade de outro jeito. */
+export type Concorrente = {
+  id: string
+  nome: string
+  tipo: TipoConcorrente
+  descricao: string
+  preco: string
+  onde: string
+  forte: string
+  brecha: string
+  rascunho?: boolean
+}
+
+/** Indicador do painel: valor atual, variação em % contra 4 semanas atrás e 8 semanas de série. */
+export type Indicador = { id: string; rotulo: string; valor: string; variacao: number; serie: number[]; unidade: string; nota: string }
+
+export type InsightMercado = { id: string; tipo: "tendencia" | "oportunidade" | "atencao"; titulo: string; texto: string }
+
+export type PainelMercado = { atualizado: string; proxima: string; semanas: string[]; indicadores: Indicador[]; insights: InsightMercado[] }
+
+export type TipoCluster = "funcional" | "emocional" | "social" | "ambiental" | "economico"
+
+export type Diferencial = { titulo: string; descricao: string; prova: string; forca: "forte" | "em construção" }
+
+/** Cluster de diferenciais. Sem diferenciais, explica por que ficou de fora para esta marca. */
+export type ClusterDiferencial = { id: TipoCluster; diferenciais: Diferencial[]; foraPorque?: string }
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }
 

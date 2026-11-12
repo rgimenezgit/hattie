@@ -118,6 +118,30 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </ul>
       )
 
+    case "mercado": {
+      const diretos = conteudo.concorrentes.filter((item) => item.tipo === "direto").length
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.leituras.direto}</p>
+          <p className="text-xs text-texto-3">
+            {diretos} diretos · {conteudo.concorrentes.length - diretos} indiretos · {conteudo.referencias.length} referências
+          </p>
+        </div>
+      )
+    }
+
+    case "diferenciais": {
+      const ativos = conteudo.clusters.filter((cluster) => cluster.diferenciais.length > 0).length
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.principal}</p>
+          <p className="text-xs text-texto-3">
+            Diferenciais em {ativos} de {conteudo.clusters.length} frentes
+          </p>
+        </div>
+      )
+    }
+
     case "publico":
       return (
         <div className="flex flex-col gap-3">

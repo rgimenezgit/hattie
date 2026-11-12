@@ -54,10 +54,10 @@ export function CabecalhoCanvas({
 }) {
   return (
     <header className="flex flex-col gap-0.5 border-b border-borda-sutil pb-3">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
         <h1
           className={cn(
-            "min-w-0 font-heading font-medium",
+            "min-w-0 flex-1 basis-48 font-heading font-medium",
             !nomeProprio && "lowercase",
             grande ? "text-titulo-2 @3xl:text-titulo-1" : "text-titulo-3 @xl:text-titulo-2",
           )}
