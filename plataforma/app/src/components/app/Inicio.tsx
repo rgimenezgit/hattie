@@ -4,7 +4,7 @@ import Link from "next/link"
 import type { Route } from "next"
 import { useRef, useSyncExternalStore } from "react"
 import { ArrowRight, Globe, Image as IconeImagem, LayoutGrid, Plus, Presentation, Smile, Telescope, Video, Wrench, type LucideIcon } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
 import { Botao } from "@/components/hattie/Botao"
 import { Composer, type ComposerHandle } from "@/components/hattie/Composer"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
@@ -124,33 +124,21 @@ export function Inicio() {
             <h2 id="titulo-criar" className="sr-only">
               Criar a partir de um modelo
             </h2>
-            <Tabs defaultValue="imagem" className="gap-4">
-              <div className="no-scrollbar -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
-                <TabsList className="h-auto w-max gap-0.5 rounded-full bg-branco p-1 md:mx-auto">
-                  {CATEGORIAS.map((categoria) => {
-                    const Icone = ICONES[categoria.icone]
-                    return (
-                      <TabsTrigger
-                        key={categoria.id}
-                        value={categoria.id}
-                        className="h-9 flex-none gap-1.5 rounded-full border-0 px-3 text-sm font-medium text-texto-2 data-active:bg-lima-suave data-active:text-preto data-active:shadow-none"
-                      >
-                        <Icone className="size-4" strokeWidth={1.75} aria-hidden />
-                        {categoria.rotulo}
-                      </TabsTrigger>
-                    )
-                  })}
-                </TabsList>
-              </div>
+            <Abas defaultValue="imagem" className="gap-4">
+              <ListaAbas
+                rotulo="Tipos de modelo"
+                centro
+                itens={CATEGORIAS.map((categoria) => ({ valor: categoria.id, rotulo: categoria.rotulo, icone: ICONES[categoria.icone] }))}
+              />
               {CATEGORIAS.map((categoria) => (
-                <TabsContent key={categoria.id} value={categoria.id}>
-                  <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <ConteudoAba key={categoria.id} value={categoria.id}>
+                  <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
                     {MODELOS.filter((modelo) => modelo.categoria === categoria.id).map((modelo) => (
                       <li key={modelo.id}>
                         <button
                           type="button"
                           onClick={() => composer.current?.preencher(modelo.pedido)}
-                          className="flex h-full w-full gap-3 rounded-2xl bg-branco p-2.5 text-left transition-[box-shadow] duration-150 hover:shadow-[0_0_0_2px_var(--ink)]"
+                          className="clique flex h-full w-full gap-3 rounded-2xl bg-superficie p-2.5 text-left hover:shadow-(--sombra-flutuante)"
                         >
                           <span aria-hidden className="relative min-h-20 w-16 shrink-0 self-stretch overflow-hidden rounded-xl bg-lima-suave">
                             <span className="absolute inset-0" style={fillStyle("gradient", { color: "var(--lima)", edge: "bottom", length: 20 })} />
@@ -166,9 +154,9 @@ export function Inicio() {
                       </li>
                     ))}
                   </ul>
-                </TabsContent>
+                </ConteudoAba>
               ))}
-            </Tabs>
+            </Abas>
           </section>
         </div>
       </div>

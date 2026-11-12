@@ -8,7 +8,7 @@ type Props = { status: StatusSecao; compacto?: boolean; className?: string }
 export function StatusBadge({ status, compacto = false, className }: Props) {
   if (status === "aprovada") {
     return (
-      <Tag tom="feita" className={cn(compacto && "w-6 justify-center px-0", className)}>
+      <Tag tom="sucesso" className={cn(compacto && "w-6 justify-center px-0", className)}>
         <Check strokeWidth={2.5} aria-hidden />
         <span className={cn(compacto && "sr-only")}>Aprovada</span>
       </Tag>

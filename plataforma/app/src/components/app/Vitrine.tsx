@@ -6,15 +6,22 @@ import {
   Check,
   CircleCheck,
   Download,
+  MessageCircle,
+  MousePointerClick,
   FolderOpen,
+  Mail,
   Plus,
   RotateCcw,
   Share2,
   Sparkle,
+  SquareLibrary,
   SquarePen,
+  Type,
   Trash2,
   UserPlus,
 } from "lucide-react"
+import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
+import { Aviso } from "@/components/hattie/Aviso"
 import { Botao } from "@/components/hattie/Botao"
 import { Busca } from "@/components/hattie/Busca"
 import { Campo } from "@/components/hattie/Campo"
@@ -37,6 +44,7 @@ const SECOES = [
   { id: "botoes", titulo: "botões" },
   { id: "plimm", titulo: "plimm" },
   { id: "tags", titulo: "tags e status" },
+  { id: "abas", titulo: "abas" },
   { id: "campos", titulo: "campos" },
   { id: "alertas", titulo: "alertas" },
   { id: "nota", titulo: "porquê do hattie" },
@@ -55,7 +63,7 @@ const PALETA = [
   { nome: "lilás", hex: "#B19DFC", classe: "bg-lilas", uso: "Palco da entrada e selo tcharam" },
   { nome: "violeta", hex: "#7F3AEF", classe: "bg-violeta", uso: "Pontos do palco (até 2%)" },
   { nome: "rosa", hex: "#FF8AE5", classe: "bg-rosa", uso: "Designer parceiro" },
-  { nome: "rosa-forte", hex: "#F53890", classe: "bg-rosa-forte", uso: "Erro: só borda e ícone" },
+  { nome: "rosa-forte", hex: "#F53890", classe: "bg-rosa-forte", uso: "Logo e peças de marca" },
   { nome: "azul", hex: "#8AD3FA", classe: "bg-azul", uso: "Dica e informação, diluído" },
 ]
 
@@ -65,6 +73,33 @@ const NEUTROS = [
   { nome: "cinza-médio", hex: "#6B6B6B", classe: "bg-cinza-medio" },
   { nome: "grafite", hex: "#333333", classe: "bg-grafite" },
   { nome: "preto", hex: "#101010", classe: "bg-preto" },
+]
+
+const ESTADOS = [
+  {
+    nome: "sucesso",
+    hex: "forte #1F9D55 · texto #13703B · suave #E1F4E8",
+    uso: "Aprovado, livre, faça, positivo",
+    forte: "bg-sucesso",
+    texto: "bg-sucesso-texto",
+    suave: "bg-sucesso-suave",
+  },
+  {
+    nome: "atenção",
+    hex: "forte #F2B705 · texto #7A5A00 · suave #FDF2C8",
+    uso: "A confirmar, em construção, cuidado",
+    forte: "bg-atencao",
+    texto: "bg-atencao-texto",
+    suave: "bg-atencao-suave",
+  },
+  {
+    nome: "erro",
+    hex: "forte #E0352B · texto #B3261E · suave #FCE6E4",
+    uso: "Falha, em uso, evite, apagar",
+    forte: "bg-erro",
+    texto: "bg-erro-texto",
+    suave: "bg-erro-suave",
+  },
 ]
 
 const PAPEIS = [
@@ -80,7 +115,7 @@ const PAPEIS = [
   { token: "texto-2", receita: "grafite #333333", classe: "bg-texto-2", uso: "Texto de apoio, ícones" },
   { token: "texto-3", receita: "cinza-médio #6B6B6B", classe: "bg-texto-3", uso: "Placeholder e metadado (só sobre branco)" },
   { token: "acao-suave", receita: "lima-suave #F1F4C9", classe: "bg-acao-suave", uso: "Tag esperando o ok" },
-  { token: "erro-suave", receita: "rosa-forte #F53890 a 10%", classe: "bg-erro-suave", uso: "Fundo de campo com erro" },
+
   { token: "info-suave", receita: "azul #8AD3FA a 22%", classe: "bg-info-suave", uso: "Dica do Hattie" },
 ]
 
@@ -201,6 +236,22 @@ export function Vitrine() {
               ))}
             </div>
           </Linha>
+          <Linha rotulo="Estados (fora da paleta da marca; só marcam resultado)">
+            <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3">
+              {ESTADOS.map((estado) => (
+                <div key={estado.nome} className="flex flex-col gap-2 rounded-2xl bg-superficie p-3">
+                  <div className="flex gap-1.5">
+                    <span className={cn("h-10 flex-1 rounded-lg", estado.forte)} title="forte" />
+                    <span className={cn("h-10 flex-1 rounded-lg", estado.texto)} title="texto" />
+                    <span className={cn("h-10 flex-1 rounded-lg outline outline-1 -outline-offset-1 outline-borda-sutil", estado.suave)} title="suave" />
+                  </div>
+                  <span className="text-sm font-medium">{estado.nome}</span>
+                  <span className="text-xs text-texto-2 tabular-nums">{estado.hex}</span>
+                  <span className="text-xs text-texto-2">{estado.uso}</span>
+                </div>
+              ))}
+            </div>
+          </Linha>
           <Linha rotulo="Papéis (tokens da plataforma)">
             <div className="w-full overflow-hidden rounded-2xl bg-canvas p-1.5">
               <ul className="grid gap-1 sm:grid-cols-2">
@@ -297,6 +348,14 @@ export function Vitrine() {
               <Trash2 />
             </Botao>
           </Linha>
+          <Linha rotulo="Perigo: apagar ou desfazer de vez">
+            <Botao variante="perigo">
+              <Trash2 /> Apagar marca
+            </Botao>
+            <Botao variante="perigo" tamanho="sm">
+              <Trash2 /> Apagar
+            </Botao>
+          </Linha>
           <Linha rotulo="Desabilitado">
             <Botao variante="primario" disabled>
               Aprovar
@@ -347,6 +406,17 @@ export function Vitrine() {
               <Check strokeWidth={2.5} /> feita
             </Tag>
           </Linha>
+          <Linha rotulo="Estados">
+            <Tag tom="sucesso" ponto>
+              livre
+            </Tag>
+            <Tag tom="atencao" ponto>
+              a confirmar
+            </Tag>
+            <Tag tom="erro" ponto>
+              em uso
+            </Tag>
+          </Linha>
           <Linha rotulo="Tamanhos: sm 20 · md 24 · lg 32">
             <Tag tamanho="sm">artesanal</Tag>
             <Tag tamanho="md">artesanal</Tag>
@@ -361,9 +431,50 @@ export function Vitrine() {
         </Secao>
 
         <Secao
+          id="abas"
+          titulo="abas"
+          descricao="Trilha em pílula com abas de 32 px. Repouso em grafite #333333, hover em preenchimento neutro, ativa em pílula lima #E6F344 sem sombra. Ícone de 16 px e quantidade opcional. Sobre o palco a trilha é branca; sobre um card, cinza. Setas do teclado andam entre as abas."
+        >
+          <div className="flex flex-col gap-4 rounded-2xl bg-canvas p-4">
+            <Rotulo>Sobre o palco, com ícone e quantidade</Rotulo>
+            <Abas defaultValue="fala">
+              <ListaAbas
+                rotulo="Exemplo de abas sobre o palco"
+                itens={[
+                  { valor: "fala", rotulo: "Falas", icone: MessageCircle, quantidade: 3 },
+                  { valor: "post", rotulo: "Posts", icone: SquareLibrary, quantidade: 3 },
+                  { valor: "legenda", rotulo: "Legendas", icone: Type, quantidade: 2 },
+                  { valor: "cta", rotulo: "Chamadas", icone: MousePointerClick, quantidade: 4 },
+                  { valor: "email", rotulo: "E-mails", icone: Mail, quantidade: 2 },
+                ]}
+              />
+              {["fala", "post", "legenda", "cta", "email"].map((valor) => (
+                <ConteudoAba key={valor} value={valor} className="text-sm text-texto-2">
+                  Conteúdo da aba {valor}.
+                </ConteudoAba>
+              ))}
+            </Abas>
+          </div>
+          <div className="flex flex-col gap-4 rounded-2xl bg-superficie p-4">
+            <Rotulo>Sobre um card, só texto</Rotulo>
+            <Abas defaultValue="diretos">
+              <ListaAbas
+                rotulo="Exemplo de abas sobre um card"
+                fundo="cartao"
+                itens={[
+                  { valor: "todos", rotulo: "Todos" },
+                  { valor: "diretos", rotulo: "Diretos" },
+                  { valor: "indiretos", rotulo: "Indiretos" },
+                ]}
+              />
+            </Abas>
+          </div>
+        </Secao>
+
+        <Secao
           id="campos"
           titulo="campos"
-          descricao="Preenchimento neutro, sem contorno em repouso. No foco o campo clareia e ganha contorno de 1 px em preto a 16% e um halo leve. Erro em rosa-forte #F53890 só na borda e no ícone."
+          descricao="Preenchimento neutro, sem contorno em repouso. No foco o campo clareia e ganha contorno de 1 px em preto a 16% e um halo leve. Erro em vermelho: borda e ícone #E0352B, mensagem #B3261E, fundo #FCE6E4."
         >
           <div className="grid w-full gap-4 sm:grid-cols-2">
             <Campo rotulo="E-mail" placeholder="voce@suamarca.com.br" type="email" />
@@ -394,13 +505,38 @@ export function Vitrine() {
         <Secao
           id="alertas"
           titulo="alertas"
-          descricao="Cartão preto #101010 flutuante, sem contorno. Círculo à esquerda com a forma do selo, título em Poppins 600 e texto curto. Erro troca o círculo para rosa-forte #F53890 e não leva selo."
+          descricao="Flutuante: cartão preto #101010 com círculo à esquerda (selo em lima, sucesso em verde, atenção em amarelo, erro em vermelho). Dentro da página: o Aviso, em fundo suave da mesma cor, com título e ação opcional."
         >
           <div className="flex flex-col gap-3">
             <CartaoAlerta titulo="guardei no cérebro" texto="A seção Propósito está aprovada." som="cling" aoFechar={() => {}} />
             <CartaoAlerta titulo="link copiado" texto="Qualquer pessoa com o link vê o cérebro." tipo="sucesso" aoFechar={() => {}} />
+            <CartaoAlerta titulo="falta confirmar o registro" texto="O INPI ainda não respondeu sobre Raiz Natural." tipo="atencao" aoFechar={() => {}} />
             <CartaoAlerta titulo="não consegui salvar" texto="A conexão caiu. Tenta de novo em alguns segundos." tipo="erro" aoFechar={() => {}} />
           </div>
+          <Linha rotulo="Aviso dentro da página (Aviso)">
+            <div className="flex w-full flex-col gap-2">
+              <Aviso tipo="info" titulo="O painel atualiza toda segunda">
+                A próxima leitura sai em 17 de novembro.
+              </Aviso>
+              <Aviso tipo="sucesso" titulo="Domínio livre">
+                raiznaturalcerrado.com.br pode ser registrado agora.
+              </Aviso>
+              <Aviso
+                tipo="atencao"
+                titulo="Antes de registrar"
+                acao={
+                  <Botao variante="secundario" tamanho="sm">
+                    Ver no INPI
+                  </Botao>
+                }
+              >
+                INPI · Classe 3, cosméticos: falta confirmar.
+              </Aviso>
+              <Aviso tipo="erro" titulo="Não consegui salvar">
+                A conexão caiu. Tenta de novo em alguns segundos.
+              </Aviso>
+            </div>
+          </Linha>
           <Linha rotulo="Disparar de verdade">
             <Botao variante="secundario" tamanho="sm" onClick={() => notificar({ titulo: "guardei no cérebro", texto: "A seção Propósito está aprovada.", som: "cling" })}>
               Com selo

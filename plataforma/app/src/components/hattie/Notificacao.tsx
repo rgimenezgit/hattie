@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, CircleAlert, X } from "lucide-react"
+import { Check, CircleAlert, TriangleAlert, X } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import { FORMA_DO_SOM, type Som } from "./SeloSom"
@@ -10,17 +10,18 @@ type Opcoes = {
   titulo: string
   texto?: string
   som?: Som
-  tipo?: "padrao" | "sucesso" | "erro"
+  tipo?: "padrao" | "sucesso" | "atencao" | "erro"
 }
 
 /**
  * Alerta. Cartão preto #101010 com sombra, sem contorno.
- * À esquerda, um círculo de 32 px: forma do selo ou check em lima #E6F344, alerta em rosa-forte #F53890.
+ * À esquerda, um círculo de 32 px: forma do selo em lima #E6F344, check em verde #1F9D55,
+ * atenção em amarelo #F2B705 e erro em vermelho #E0352B.
  * No meio, o nome do selo em Clash 600 lima (quando há som), título em Poppins 600 e texto em 13 px.
  * Erro não leva selo nem piada.
  */
 export function CartaoAlerta({ titulo, texto, som, tipo = "padrao", aoFechar }: Opcoes & { aoFechar?: () => void }) {
-  const comSelo = som && tipo !== "erro"
+  const comSelo = som && tipo !== "erro" && tipo !== "atencao"
   return (
     <div
       role={tipo === "erro" ? "alert" : "status"}
@@ -28,10 +29,15 @@ export function CartaoAlerta({ titulo, texto, som, tipo = "padrao", aoFechar }: 
     >
       <span
         aria-hidden
-        className={cn("grid size-8 shrink-0 place-items-center rounded-full", tipo === "erro" ? "bg-erro text-branco" : "bg-lima text-preto")}
+        className={cn(
+          "grid size-8 shrink-0 place-items-center rounded-full",
+          tipo === "erro" ? "bg-erro text-branco" : tipo === "atencao" ? "bg-atencao text-preto" : tipo === "sucesso" ? "bg-sucesso text-branco" : "bg-lima text-preto",
+        )}
       >
         {tipo === "erro" ? (
           <CircleAlert className="size-4" strokeWidth={2.25} />
+        ) : tipo === "atencao" ? (
+          <TriangleAlert className="size-4" strokeWidth={2.25} />
         ) : comSelo ? (
           <IconeHattie nome={FORMA_DO_SOM[som]} tamanho={16} />
         ) : (

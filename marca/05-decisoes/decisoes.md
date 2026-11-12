@@ -3,6 +3,9 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Cores de estado da plataforma, fora da paleta da marca: sucesso em verde `#1F9D55`, atenção em amarelo dourado `#F2B705` e erro em vermelho `#E0352B`, cada uma com versão de texto e versão suave. Lima segue só como ação. Entram em avisos, alertas, tags, campos, faça e evite, disponibilidade e botão de perigo.
+- Abas da plataforma num componente próprio (`Abas`): trilha em pílula, aba ativa em lima sem sombra, quantidade opcional. Substitui as abas genéricas na Home e no Tom de voz.
+- Tom de voz: introdução, traços e espectro de tom; exemplos navegáveis por tipo (falas, posts, legendas, chamadas, e-mails) em cards que imitam o canal; faça e evite com exemplos; glossário e palavras que a marca evita, com a troca e o motivo.
 - Nome: na primeira visita, a pessoa escolhe entre opções, cada uma com significado, por que funciona, como soa, ponto de atenção e disponibilidade. Escolhido, o nome aparece com o porquê organizado e as outras opções. O processo (funil, o que o Hattie ouviu, territórios e critérios) aparece nos dois momentos. Escolher um nome troca o nome da marca no app.
 - Mercado e concorrentes: referências de marca (citadas no briefing ou sugeridas pelo Hattie), concorrentes diretos e indiretos com a leitura do Hattie por grupo, e um painel de mercado atualizado toda segunda com indicadores e insights.
 - Diferenciais separados em cinco frentes (funcionais, emocionais, sociais, ambientais e econômicos). Só entram as frentes que fazem sentido para a marca; as outras aparecem com o motivo. A seção passa a se chamar Diferenciais.

@@ -40,6 +40,7 @@ import { SecaoDiferenciais } from "./SecaoDiferenciais"
 import { SecaoMercado } from "./SecaoMercado"
 import { SecaoNome } from "./SecaoNome"
 import { SecaoPublico } from "./SecaoPublico"
+import { SecaoVoz } from "./SecaoVoz"
 import { useMidia } from "./useMidia"
 
 type MensagemEdicao = { id: number; autor: "hattie" | "pessoa"; texto: string }
@@ -386,6 +387,8 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoDiferenciais secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "nome" ? (
         <SecaoNome secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "voz" ? (
+        <SecaoVoz secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">

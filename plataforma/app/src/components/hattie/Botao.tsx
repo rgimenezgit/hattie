@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
  * secundario: ação de apoio (preto #101010 a 5%).
  * fantasma: ícones e ações discretas, fundo só no hover.
  * link: ação em texto, sublinha no hover.
+ * perigo: ação que apaga ou desfaz algo de vez (vermelho de erro #B3261E, texto branco).
  * O plimm (lima #E6F344) é componente próprio.
  */
 export const botaoVariants = cva(
@@ -26,6 +27,7 @@ export const botaoVariants = cva(
         secundario: "bg-preenchimento text-texto hover:bg-preenchimento-hover active:bg-preenchimento-ativo",
         fantasma: "text-texto-2 hover:bg-preenchimento hover:text-texto active:bg-preenchimento-hover",
         link: "text-texto underline-offset-4 hover:underline",
+        perigo: "bg-erro-texto text-branco hover:bg-[color-mix(in_oklch,var(--erro-texto)_86%,black)]",
       },
       tamanho: {
         sm: "h-8 gap-1.5 px-3 text-detalhe [&_svg]:size-3.5",

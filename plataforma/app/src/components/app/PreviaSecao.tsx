@@ -142,6 +142,20 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       )
     }
 
+    case "voz":
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.intro}</p>
+          <ul className="flex flex-wrap gap-1.5">
+            {conteudo.tracos.map((traco) => (
+              <li key={traco.nome}>
+                <Tag tamanho="sm">{traco.nome}</Tag>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+
     case "nome":
       return (
         <div className="flex flex-col gap-2">

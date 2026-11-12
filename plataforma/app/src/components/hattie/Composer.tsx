@@ -164,7 +164,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
       />
 
       {erro && (
-        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 px-1 text-detalhe font-medium">
+        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 px-1 text-detalhe font-medium text-erro-texto">
           <CircleAlert className="size-4 shrink-0 text-erro" strokeWidth={2} aria-hidden />
           {erro}
         </p>

@@ -88,7 +88,14 @@
   --color-acao-suave: var(--lima-suave);
   --color-acao-forte: var(--lima-forte);
   --color-erro: var(--erro);
+  --color-erro-texto: var(--erro-texto);
   --color-erro-suave: var(--erro-suave);
+  --color-sucesso: var(--sucesso);
+  --color-sucesso-texto: var(--sucesso-texto);
+  --color-sucesso-suave: var(--sucesso-suave);
+  --color-atencao: var(--atencao);
+  --color-atencao-texto: var(--atencao-texto);
+  --color-atencao-suave: var(--atencao-suave);
   --color-info-suave: var(--info-suave);
 
   /* Escala tipográfica. Clash Display em minúsculas nos títulos; Poppins no resto. */
@@ -166,9 +173,19 @@
     --texto: var(--preto);
     --texto-2: var(--grafite);
     --texto-3: var(--cinza-medio);
-    /* Erro em rosa-forte #F53890 só na borda e no ícone; a mensagem fica em preto. */
-    --erro: var(--rosa-forte);
-    --erro-suave: color-mix(in oklch, var(--rosa-forte) 10%, var(--branco));
+    /* Cores de estado da plataforma. Ficam fora da paleta da marca e só marcam resultado:
+       sucesso (positivo, faça), atenção (cuidado, pendente) e erro (negativo, evite, falha).
+       Cada uma tem a cor forte (ícone, ponto, borda), a de texto (≥ 4,5:1 sobre branco e sobre a suave) e a suave (fundo). */
+    --sucesso: #1f9d55;
+    --sucesso-texto: #13703b;
+    --sucesso-suave: #e1f4e8;
+    /* Amarelo dourado, longe do lima #E6F344. Sobre branco só como fundo, com ícone preto por cima. */
+    --atencao: #f2b705;
+    --atencao-texto: #7a5a00;
+    --atencao-suave: #fdf2c8;
+    --erro: #e0352b;
+    --erro-texto: #b3261e;
+    --erro-suave: #fce6e4;
     /* Dica e informação: azul #8AD3FA bem diluído. */
     --info-suave: color-mix(in oklch, var(--azul) 22%, var(--branco));
     --sombra-flutuante: 0 1px 2px oklch(0 0 0 / 0.05), 0 12px 32px -8px oklch(0 0 0 / 0.16);

@@ -30,6 +30,7 @@ export type ConteudoSecao =
   | { tipo: "mercado"; referencias: Referencia[]; concorrentes: Concorrente[]; leituras: Record<TipoConcorrente, string>; painel: PainelMercado }
   | { tipo: "diferenciais"; principal: string; clusters: ClusterDiferencial[] }
   | { tipo: "nome"; processo: ProcessoNome; opcoes: OpcaoNome[] }
+  | ({ tipo: "voz" } & GuiaVoz)
 
 export type Dado = { rotulo: string; valor: string }
 
@@ -126,6 +127,23 @@ export type ProcessoNome = {
   territorios: { nome: string; ideia: string }[]
   criterios: string[]
   funil: { gerados: number; passaram: number; finalistas: number }
+}
+
+export type TipoExemplo = "fala" | "post" | "legenda" | "cta" | "email"
+
+/** Exemplo de comunicação. titulo: chamada do post ou assunto do e-mail. extra: hashtags ou assinatura. */
+export type ExemploVoz = { id: string; tipo: TipoExemplo; situacao: string; texto: string; titulo?: string; extra?: string }
+
+/** Guia de voz: como a marca fala, exemplos por canal, regras e vocabulário. */
+export type GuiaVoz = {
+  intro: string
+  tracos: { nome: string; descricao: string }[]
+  espectro: { esquerda: string; direita: string; valor: number }[]
+  exemplos: ExemploVoz[]
+  faca: { regra: string; exemplo: string }[]
+  evite: { regra: string; exemplo: string }[]
+  glossario: { termo: string; uso: string }[]
+  proibidas: { palavra: string; troca: string; motivo: string }[]
 }
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }

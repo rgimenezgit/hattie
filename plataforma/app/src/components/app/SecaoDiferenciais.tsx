@@ -102,7 +102,7 @@ function Fato({ rotulo, valor, divisoria = false }: { rotulo: string; valor: str
 function Forca({ forca }: { forca: Diferencial["forca"] }) {
   return (
     <span className="inline-flex shrink-0 items-center gap-1.5 text-xs text-texto-2">
-      <span aria-hidden className={cn("size-2 rounded-full", forca === "forte" ? "bg-acao-forte" : "border-[1.5px] border-texto-3")} />
+      <span aria-hidden className={cn("size-2 rounded-full", forca === "forte" ? "bg-sucesso" : "bg-atencao")} />
       {forca}
     </span>
   )

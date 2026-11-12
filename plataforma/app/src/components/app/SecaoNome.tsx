@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Check, CircleDashed, CircleMinus, Info, MessageCircle, Plus, RotateCcw, TriangleAlert } from "lucide-react"
+import { Check, CircleDashed, CircleMinus, MessageCircle, Plus, RotateCcw, TriangleAlert } from "lucide-react"
+import { Aviso } from "@/components/hattie/Aviso"
 import { Botao } from "@/components/hattie/Botao"
 import { Campo, CampoArea } from "@/components/hattie/Campo"
 import { Janela } from "@/components/hattie/Janela"
@@ -130,16 +131,12 @@ function ConfirmacaoNome({ opcao, cor }: { opcao: OpcaoNome; cor: string }) {
       </div>
 
       {pendentes.length > 0 && (
-        <div role="note" className="flex gap-3 rounded-2xl bg-info-suave p-4">
-          <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-superficie">
-            <Info className="size-4" strokeWidth={2} />
-          </span>
-          <div className="flex min-w-0 flex-col gap-1.5">
-            <p className="text-sm font-semibold">Antes de registrar</p>
-            <ul className="flex flex-col gap-1 text-sm">
+        <Aviso tipo={pendentes.some((checagem) => checagem.status === "em uso") ? "erro" : "atencao"} titulo="Antes de registrar">
+          <div className="flex flex-col gap-1.5">
+            <ul className="flex flex-col gap-1">
               {pendentes.map((checagem) => (
                 <li key={checagem.canal}>
-                  <span className="font-medium">{checagem.canal}</span>
+                  <span className="font-medium text-texto">{checagem.canal}</span>
                   <span className="text-texto-2">
                     {" "}
                     · {checagem.valor}: {checagem.status === "em uso" ? "já está em uso" : "falta confirmar"}
@@ -148,12 +145,12 @@ function ConfirmacaoNome({ opcao, cor }: { opcao: OpcaoNome; cor: string }) {
               ))}
             </ul>
             {livres.length > 0 && (
-              <p className="text-xs text-texto-2">
+              <p className="text-xs">
                 {livres.length > 1 ? `${livres.slice(0, -1).join(", ")} e ${livres[livres.length - 1]} estão livres.` : `${livres[0]} está livre.`}
               </p>
             )}
           </div>
-        </div>
+        </Aviso>
       )}
 
       <p className="text-xs text-texto-3">O nome passa a valer em todo o cérebro da marca. Dá para trocar depois.</p>
@@ -161,10 +158,10 @@ function ConfirmacaoNome({ opcao, cor }: { opcao: OpcaoNome; cor: string }) {
   )
 }
 
-const STATUS: Record<Checagem["status"], { rotulo: string; icone: typeof Check; classe: string }> = {
-  livre: { rotulo: "livre", icone: Check, classe: "text-acao-forte" },
-  verificar: { rotulo: "a confirmar", icone: CircleDashed, classe: "text-texto-3" },
-  "em uso": { rotulo: "em uso", icone: CircleMinus, classe: "text-texto-3" },
+const STATUS: Record<Checagem["status"], { rotulo: string; icone: typeof Check; classe: string; texto: string }> = {
+  livre: { rotulo: "livre", icone: Check, classe: "text-sucesso", texto: "text-sucesso-texto" },
+  verificar: { rotulo: "a confirmar", icone: CircleDashed, classe: "text-atencao-texto", texto: "text-atencao-texto" },
+  "em uso": { rotulo: "em uso", icone: CircleMinus, classe: "text-erro", texto: "text-erro-texto" },
 }
 
 function Checagens({ checagens }: { checagens: Checagem[] }) {
@@ -176,7 +173,7 @@ function Checagens({ checagens }: { checagens: Checagem[] }) {
           <li key={checagem.canal} className="grid grid-cols-[72px_minmax(0,1fr)_auto] items-baseline gap-x-3 text-xs">
             <span className="text-texto-3">{checagem.canal}</span>
             <span className="truncate text-texto-2">{checagem.valor}</span>
-            <span className={cn("flex items-center gap-1 self-center font-medium", checagem.status === "livre" ? "text-texto" : "text-texto-2")}>
+            <span className={cn("flex items-center gap-1 self-center font-medium", status.texto)}>
               <status.icone className={cn("size-3.5", status.classe)} strokeWidth={2.5} aria-hidden />
               {status.rotulo}
             </span>
@@ -214,7 +211,7 @@ function CartaoOpcao({ opcao, atual, aoEscolher }: { opcao: OpcaoNome; atual: bo
             <ul className="flex flex-col gap-1 text-sm">
               {opcao.porque.map((motivo) => (
                 <li key={motivo} className="flex gap-2">
-                  <Check className="mt-0.5 size-3.5 shrink-0 text-acao-forte" strokeWidth={2.5} aria-hidden />
+                  <Check className="mt-0.5 size-3.5 shrink-0 text-sucesso" strokeWidth={2.5} aria-hidden />
                   {motivo}
                 </li>
               ))}
@@ -227,7 +224,7 @@ function CartaoOpcao({ opcao, atual, aoEscolher }: { opcao: OpcaoNome; atual: bo
         </p>
         {opcao.atencao && (
           <p className="flex gap-2 text-sm text-texto-2">
-            <TriangleAlert className="mt-0.5 size-3.5 shrink-0 text-texto-3" strokeWidth={2} aria-hidden />
+            <TriangleAlert className="mt-0.5 size-3.5 shrink-0 text-atencao-texto" strokeWidth={2.25} aria-hidden />
             <span>
               <span className="sr-only">Ponto de atenção: </span>
               {opcao.atencao}

@@ -192,10 +192,10 @@ function Celula({ rotulo, destaque = false, children }: { rotulo: string; destaq
   )
 }
 
-const INSIGHT: Record<InsightMercado["tipo"], { rotulo: string; icone: LucideIcon; fundo: string }> = {
-  oportunidade: { rotulo: "Oportunidade", icone: Sparkles, fundo: "bg-acao" },
-  tendencia: { rotulo: "Tendência", icone: TrendingUp, fundo: "bg-info-suave" },
-  atencao: { rotulo: "Atenção", icone: Eye, fundo: "bg-preenchimento-ativo" },
+const INSIGHT: Record<InsightMercado["tipo"], { rotulo: string; icone: LucideIcon; fundo: string; tom: "neutra" | "sucesso" | "atencao" }> = {
+  oportunidade: { rotulo: "Oportunidade", icone: Sparkles, fundo: "bg-acao", tom: "sucesso" },
+  tendencia: { rotulo: "Tendência", icone: TrendingUp, fundo: "bg-info-suave", tom: "neutra" },
+  atencao: { rotulo: "Atenção", icone: Eye, fundo: "bg-atencao", tom: "atencao" },
 }
 
 function Painel({ painel }: { painel: PainelMercado }) {
@@ -244,7 +244,9 @@ function Painel({ painel }: { painel: PainelMercado }) {
                 <div className="flex min-w-0 flex-col gap-0.5">
                   <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
                     <span className="text-sm font-semibold">{insight.titulo}</span>
-                    <Tag tamanho="sm">{tipo.rotulo}</Tag>
+                    <Tag tamanho="sm" tom={tipo.tom}>
+                      {tipo.rotulo}
+                    </Tag>
                   </p>
                   <p className="text-sm text-texto-2">{insight.texto}</p>
                 </div>

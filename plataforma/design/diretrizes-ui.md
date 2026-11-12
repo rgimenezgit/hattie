@@ -65,11 +65,25 @@ Contorno preto fica fora de campos, botões e cards. O único contorno de 1 px q
 | `acao-suave` | lima-suave `#F1F4C9` | Tag "esperando seu ok", banner de pendências, hover de resposta rápida |
 | `acao-forte` | lima-forte `#77A00F` | Ponto de status, onda do plimm, opção escolhida |
 | Confirmar | preto `#101010` com texto branco `#F5F5F5` | Botão primário, alerta, mensagem da pessoa no chat (texto lima) |
-| `erro` | rosa-forte `#F53890` | Só borda de campo e ícone; a mensagem fica em preto |
-| `erro-suave` | rosa-forte a 10% sobre o branco | Fundo de campo com erro |
+| `info-suave` (já existia) | azul `#8AD3FA` a 22% | Aviso informativo |
 | `info-suave` | azul `#8AD3FA` a 22% sobre o branco | Dica e informação |
 | Parceiro | rosa `#FF8AE5` | Designer parceiro |
 | Palco | lilás `#B19DFC` e violeta `#7F3AEF` | Painel da entrada e selo tcharam; fora das telas do app |
+
+### Estados
+
+Cores fora da paleta da marca, só para marcar resultado. Cada estado tem três tons: forte (ícone, ponto, borda, fundo de círculo), texto (≥ 4,5:1 sobre o branco e sobre a suave) e suave (fundo de aviso e de tag). Lima continua sendo ação; estado nunca usa lima.
+
+| Estado | Forte | Texto | Suave | Quando |
+|---|---|---|---|---|
+| `sucesso` | verde `#1F9D55` | `#13703B` | `#E1F4E8` | Aprovado, livre, faça, positivo, forte |
+| `atencao` | amarelo dourado `#F2B705` | `#7A5A00` | `#FDF2C8` | A confirmar, em construção, cuidado, ponto de atenção |
+| `erro` | vermelho `#E0352B` | `#B3261E` | `#FCE6E4` | Falha, em uso, evite, campo inválido, apagar |
+
+- O amarelo forte tem 1,7:1 sobre o branco: entra sempre como fundo, com ícone preto por cima (10,5:1). Ícone ou texto de atenção solto usa `atencao-texto`.
+- O verde forte tem 3,2:1 e o vermelho forte 4,1:1 sobre o branco: servem para ícone e ponto; texto usa a versão `-texto`.
+- Rosa-forte `#F53890` volta a ser só cor de marca (logo e peças).
+- Estado sempre vem com ícone e rótulo, nunca só com cor.
 
 O Figma usava rosa para "pendente de aprovação". Ficou lima-suave: rosa é a cor do designer parceiro, e esperar aprovação é um convite para agir. Lilás saiu do alerta e do porquê do Hattie (10/11/2026).
 
@@ -137,10 +151,11 @@ Botão age, tag descreve. As duas formas nunca se confundem:
 | `secundario` | Ação de apoio: Editar com o Hattie, Reabrir, Baixar | `preenchimento`, hover `preenchimento-hover` |
 | `fantasma` | Ícones e ações discretas | Sem fundo; `preenchimento` no hover |
 | `link` | Ação em texto: Contratar um parceiro | Sublinha no hover |
+| `perigo` | Apagar ou desfazer de vez | Vermelho `#B3261E` com texto branco (6:1), sem onda |
 
 Tamanhos: `sm` 32 px (13 px), `md` 40 px (14 px), `lg` 48 px (16 px); só ícone em 32, 36 e 44 px. Em tela de toque, `md` e `icone` sobem para 44 px.
 
-`Tag` tem os tons `neutra`, `acao` (lima-suave com ponto lima-forte) e `feita` (com check), em 20, 24 e 32 px. `StatusBadge` usa a tag.
+`Tag` tem os tons `neutra`, `acao` (lima-suave com ponto lima-forte), `feita` e os de estado `sucesso`, `atencao` e `erro` (fundo suave e texto escuro do mesmo tom; "Aprovada" usa `sucesso`), em 20, 24 e 32 px. `StatusBadge` usa a tag.
 
 ### Página de uma proposta
 
@@ -188,17 +203,26 @@ Escolher abre a confirmação em três camadas: a prévia "Como vai aparecer" co
 
 Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes gerados, os que passaram nos critérios, os finalistas) e três colunas com o que o Hattie ouviu, os territórios e os critérios. Na página do nome, a aprovação acontece pela escolha, então o botão "Aprovar" genérico não aparece.
 
+### Tom de voz
+
+1. **Como a marca fala**: a introdução em `destaque`; abaixo, os traços da voz (nome em 600 e uma frase) e o espectro de tom: quatro trilhas (formal–informal, séria–bem-humorada, técnica–simples, distante–próxima) com um ponto preto; o lado para onde a marca pende fica em peso 600. Leitores de tela ouvem "mais informal que formal".
+2. **Exemplos**: abas por tipo (falas, posts, legendas, chamadas, e-mails), com a quantidade em cada uma; a aba ativa fica em lima. Cada aba é um carrossel horizontal com encaixe por card, o card seguinte aparecendo cortado na borda e setas que andam um card por vez. Os cards imitam o canal com as cores da marca da cliente: balão de WhatsApp, post quadrado, legenda com @ e hashtags, chamada em pílula, e-mail com assunto e assinatura. Todo card tem "Copiar".
+3. **Faça e evite**: duas colunas com uma regra por linha e um exemplo entre aspas; no "Evite", o exemplo vem riscado em cinza.
+4. **Glossário** e 5. **Palavras que a marca evita** lado a lado: termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
+
 ### Demais peças
 
 | Componente | Uso | Forma |
 |---|---|---|
 | `Plimm` | Enviar para o Hattie e criar | Pílula lima 36/44 px (44 px em toque), ✱ e "plimm" em Clash 600 preto. Sobe 2 px com sombra sólida no hover, afunda no clique, ✱ dá meia-volta e solta faíscas |
 | `Composer` | Conversa com o Hattie | Card branco raio 24, sem contorno, sombra suave. No foco ganha contorno de 1 px em `borda-tag` e sombra maior. Arrastando arquivo: anel lima-forte |
-| `Campo` | Formulários | 44 px, raio 12, `preenchimento` sem contorno. Foco: clareia, contorno `borda-tag` e halo de 4 px. Erro: borda e ícone rosa-forte, fundo `erro-suave`, mensagem em preto ligada ao campo |
+| `Campo` | Formulários | 44 px, raio 12, `preenchimento` sem contorno. Foco: clareia, contorno `borda-tag` e halo de 4 px. Erro: borda e ícone em vermelho `#E0352B`, fundo `erro-suave`, mensagem em `erro-texto` `#B3261E` ligada ao campo |
 | `Busca` | Filtrar listas | 32 px, pílula, `preenchimento`, ícone de 14 px, Esc limpa |
+| `Abas` (`Abas`, `ListaAbas`, `ConteudoAba`) | Trocar entre conjuntos de conteúdo na mesma tela (modelos da Home, exemplos do Tom de voz) | Trilha em pílula com 4 px de respiro: branca sobre o palco (`fundo="palco"`), cinza sobre card (`fundo="cartao"`). Abas de 32 px, Poppins 500 em 14 px, ícone opcional de 16 px e quantidade opcional em `texto-3`. Repouso em grafite `#333333`; hover em `preenchimento`; ativa em pílula lima `#E6F344` com texto preto, sem sombra e sem contorno. Foco do teclado em anel preto por dentro da aba; setas andam entre as abas. Quando não cabe, a trilha rola na horizontal sem barra, e a aba focada entra na tela. `centro` centraliza a trilha no desktop |
+| `Aviso` | Aviso dentro da página | Bloco de raio 16 em fundo suave do estado (`info`, `sucesso`, `atencao`, `erro`), ícone num círculo da cor forte, título Poppins 600, texto em grafite e ação opcional à direita |
 | `Segmentado` | Duas opções exclusivas | Trilho `preenchimento`, opção ativa em lima, 36 px |
 | `PorqueHattie` | Por que o Hattie propôs algo | Discreto: ícone de informação de 32 px (fantasma, com dica "Por que eu propus isso") no canto do container da proposta. Abre um diálogo branco, raio 24, sem contorno, com o Hattie num círculo lima de 36 px, título em Clash, o assunto em 12 px, texto de 15 px e "Perguntar mais", que fecha o diálogo e abre a edição com o Hattie |
-| Alerta (`notificar`) | Avisos depois de uma ação | Cartão preto flutuante de até 400 px, sem contorno. Círculo de 32 px à esquerda (forma do selo ou check em lima, alerta em rosa-forte), nome do selo em Clash 600 lima, título Poppins 600, texto 13 px, botão de fechar. Erro sem selo |
+| Alerta (`notificar`) | Avisos depois de uma ação | Cartão preto flutuante de até 400 px, sem contorno. Círculo de 32 px à esquerda (forma do selo em lima, check em verde, atenção em amarelo, erro em vermelho), nome do selo em Clash 600 lima, título Poppins 600, texto 13 px, botão de fechar. Erro sem selo |
 | `MenuAcoes` | ⋮ de cards, mensagens, conversas | Itens com ícone Lucide, 36 px de altura |
 | `EmptyState` | Áreas sem conteúdo | Ícone em círculo, título em Clash e uma frase |
 | `SeloSom` | Plimm, cling, tcharam, zuum | Um selo por momento |

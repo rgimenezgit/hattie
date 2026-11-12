@@ -20,7 +20,7 @@ function Moldura({ id, rotulo, erro, dica, className, children }: { id: string; 
       </label>
       {children}
       {erro ? (
-        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-detalhe">
+        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-detalhe font-medium text-erro-texto">
           <CircleAlert className="size-3.5 shrink-0 text-erro" strokeWidth={2.25} aria-hidden />
           {erro}
         </p>
@@ -126,7 +126,7 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo({ rotulo
         )}
       </div>
       {erro ? (
-        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-detalhe">
+        <p id={`${id}-erro`} role="alert" className="flex items-center gap-1.5 text-detalhe font-medium text-erro-texto">
           <CircleAlert className="size-3.5 shrink-0 text-erro" strokeWidth={2.25} aria-hidden />
           {erro}
         </p>

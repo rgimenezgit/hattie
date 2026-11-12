@@ -543,13 +543,131 @@ export const SECOES: Secao[] = [
     id: "tom-de-voz",
     titulo: "Tom de voz",
     grupo: "verbal",
-    resumo: "Próxima, clara e calma. Explica o ingrediente antes do benefício.",
-    porque: "Sua cliente lê o rótulo inteiro. Um tom calmo e claro mostra respeito por esse cuidado.",
+    resumo: "Calma, acolhedora e transparente. Explica o ingrediente antes do benefício e chama a cliente pelo nome.",
+    porque:
+      "Sua cliente lê o rótulo inteiro e compra por confiança. Um tom calmo, que mostra a origem e explica o que cada ingrediente faz, respeita esse cuidado. Montei os exemplos a partir das mensagens que você troca no WhatsApp.",
     conteudo: {
-      tipo: "blocos",
-      blocos: [
-        { titulo: "Assim", texto: "Esse óleo de pequi vem de uma cooperativa em Goiás. Ele hidrata sem pesar." },
-        { titulo: "Evite", texto: "Frases de urgência, promessas milagrosas e excesso de exclamações." },
+      tipo: "voz",
+      intro:
+        "A Raiz Natural fala como uma amiga que entende de pele: com calma, pelo nome, mostrando de onde vem cada ingrediente e o que ele faz. Prefere explicar a convencer.",
+      tracos: [
+        { nome: "Calma", descricao: "Fala devagar, explica com tempo e deixa a cliente decidir." },
+        { nome: "Acolhedora", descricao: "Chama pelo nome e conversa de perto, como no WhatsApp." },
+        { nome: "Transparente", descricao: "Mostra lote, cooperativa e lugar em vez de adjetivos." },
+        { nome: "Precisa", descricao: "Usa o nome real do ingrediente e diz o que ele faz." },
+      ],
+      espectro: [
+        { esquerda: "Formal", direita: "Informal", valor: 65 },
+        { esquerda: "Séria", direita: "Bem-humorada", valor: 35 },
+        { esquerda: "Técnica", direita: "Simples", valor: 70 },
+        { esquerda: "Distante", direita: "Próxima", valor: 88 },
+      ],
+      exemplos: [
+        {
+          id: "fala-indicacao",
+          tipo: "fala",
+          situacao: "Quando a cliente pergunta qual produto usar",
+          texto:
+            "Oi, Carla! Para pele que resseca com álcool em gel, eu indicaria o hidratante de pequi. Ele é mais encorpado e segura a hidratação o dia todo. Quer que eu mande uma amostra junto do pedido?",
+        },
+        {
+          id: "fala-atraso",
+          tipo: "fala",
+          situacao: "Quando o pedido vai atrasar",
+          texto: "Carla, seu pedido sai amanhã de manhã, um dia depois do combinado. A cooperativa entregou o lote novo hoje e eu quis mandar fresquinho. Desculpa a espera.",
+        },
+        {
+          id: "fala-reacao",
+          tipo: "fala",
+          situacao: "Quando alguém conta que teve reação",
+          texto: "Sinto muito, Ana. Me conta onde você passou e como foi? Vamos descobrir juntas qual ingrediente pode ter causado e, se fizer sentido, eu troco por outra opção.",
+        },
+        {
+          id: "post-lote",
+          tipo: "post",
+          situacao: "Chegada de lote novo",
+          titulo: "Lote 12, colhido em Pirenópolis.",
+          texto: "O pequi deste hidratante veio da cooperativa da dona Lúcia, em setembro.",
+        },
+        {
+          id: "post-rotulo",
+          tipo: "post",
+          situacao: "Produto em destaque",
+          titulo: "9 ingredientes. Todos com nome.",
+          texto: "Você lê o rótulo inteiro em menos de um minuto.",
+        },
+        {
+          id: "post-ritual",
+          tipo: "post",
+          situacao: "Ritual de cuidado",
+          titulo: "Um minuto só seu.",
+          texto: "Depois do banho, aqueça o óleo nas mãos e respire.",
+        },
+        {
+          id: "legenda-lote",
+          tipo: "legenda",
+          situacao: "Post de lote novo",
+          texto:
+            "O lote 12 do hidratante de pequi chegou. Colhido em setembro pela cooperativa de Pirenópolis, com frutos que caíram do pé. Tem foto da colheita nos stories.",
+          extra: "#raiznatural #cosmeticonatural #pequi",
+        },
+        {
+          id: "legenda-dica",
+          tipo: "legenda",
+          situacao: "Dica de uso",
+          texto:
+            "Pele que resseca no ar-condicionado pede pouco produto e mais vezes. Uma gota do óleo de pequi nas mãos antes do plantão já ajuda. Conta pra gente: como é a sua rotina?",
+          extra: "#cuidadodiario #peleseca",
+        },
+        { id: "cta-origem", tipo: "cta", situacao: "Post de produto", texto: "Ver de onde vem" },
+        { id: "cta-whats", tipo: "cta", situacao: "Stories e bio", texto: "Pedir pelo WhatsApp" },
+        { id: "cta-kit", tipo: "cta", situacao: "Campanha de fim de ano", texto: "Montar meu kit" },
+        { id: "cta-amostra", tipo: "cta", situacao: "Primeira compra", texto: "Quero uma amostra" },
+        {
+          id: "email-boas-vindas",
+          tipo: "email",
+          situacao: "Boas-vindas depois da primeira compra",
+          titulo: "Bem-vinda, Carla. Seu hidratante tem nome e endereço",
+          texto:
+            "Oi, Carla! Obrigada pela primeira compra. Junto do pedido vai um cartão com o lote e a cooperativa de onde veio o pequi. Se quiser saber mais da colheita, é só responder este e-mail.",
+          extra: "Um abraço, Bia",
+        },
+        {
+          id: "email-reposicao",
+          tipo: "email",
+          situacao: "Lembrete de reposição",
+          titulo: "Seu hidratante deve estar no fim",
+          texto:
+            "Oi, Carla! Faz 30 dias da sua última compra, então o hidratante deve estar acabando. O lote 13 chega na sexta. Quer que eu separe um para você?",
+          extra: "Bia, da Raiz Natural",
+        },
+      ],
+      faca: [
+        { regra: "Chame a cliente pelo nome", exemplo: "Oi, Carla! Seu pedido saiu hoje." },
+        { regra: "Diga de onde vem", exemplo: "Pequi da cooperativa de Pirenópolis, lote 12." },
+        { regra: "Explique o que o ingrediente faz", exemplo: "O pequi segura a hidratação por mais tempo." },
+        { regra: "Assuma quando algo atrasar", exemplo: "Seu pedido sai amanhã, um dia depois do combinado." },
+      ],
+      evite: [
+        { regra: "Promessa de resultado rápido", exemplo: "Pele nova em 7 dias!" },
+        { regra: "Termos vagos sobre natureza", exemplo: "Fórmula 100% pura e natural." },
+        { regra: "Urgência forçada", exemplo: "Últimas unidades, corre!" },
+        { regra: "Medo como argumento", exemplo: "Você está envelhecendo sua pele com química." },
+      ],
+      glossario: [
+        { termo: "Lote", uso: "Cada produção, com número, data e cooperativa." },
+        { termo: "Cooperativa", uso: "Quem colhe os ingredientes. Sempre com nome e cidade." },
+        { termo: "Origem", uso: "De onde vem o ingrediente. Sempre acompanhada do lugar." },
+        { termo: "Ritual", uso: "O momento de cuidado. Curto e possível no dia a dia." },
+        { termo: "Reposição", uso: "A recompra mensal. Usada no lugar de assinatura." },
+      ],
+      proibidas: [
+        { palavra: "milagre", troca: "constância", motivo: "Promete o que cosmético não entrega" },
+        { palavra: "anti-idade", troca: "cuidado diário", motivo: "Trata envelhecer como problema" },
+        { palavra: "100% natural", troca: "de origem natural", motivo: "Só vale quando dá para provar" },
+        { palavra: "químico", troca: "sintético", motivo: "Usado como ofensa, assusta sem explicar" },
+        { palavra: "barato", troca: "acessível", motivo: "Puxa a marca para a briga de preço" },
+        { palavra: "detox", troca: "limpeza", motivo: "Promessa sem base para a pele" },
       ],
     },
   },

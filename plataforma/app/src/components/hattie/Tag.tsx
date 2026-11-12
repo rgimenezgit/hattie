@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
  * neutra: palavras, categorias, anexos.
  * acao: espera o ok da pessoa (lima-suave #F1F4C9, ponto lima-forte #77A00F).
  * feita: concluída (texto em grafite #333333 com check).
+ * sucesso, atencao, erro: estados da plataforma, em fundo suave com texto escuro do mesmo tom.
  */
 const tagVariants = cva("inline-flex shrink-0 items-center gap-1.5 rounded-md border font-normal whitespace-nowrap [&_svg]:shrink-0", {
   variants: {
@@ -15,6 +16,9 @@ const tagVariants = cva("inline-flex shrink-0 items-center gap-1.5 rounded-md bo
       neutra: "border-borda-tag text-texto-2",
       acao: "border-transparent bg-acao-suave text-texto",
       feita: "border-borda-sutil text-texto-2",
+      sucesso: "border-transparent bg-sucesso-suave text-sucesso-texto",
+      atencao: "border-transparent bg-atencao-suave text-atencao-texto",
+      erro: "border-transparent bg-erro-suave text-erro-texto",
     },
     tamanho: {
       sm: "h-5 px-1.5 text-micro [&_svg]:size-2.5",
@@ -25,12 +29,21 @@ const tagVariants = cva("inline-flex shrink-0 items-center gap-1.5 rounded-md bo
   defaultVariants: { tom: "neutra", tamanho: "md" },
 })
 
+const PONTO: Record<string, string> = {
+  neutra: "bg-texto-3",
+  acao: "bg-acao-forte",
+  feita: "bg-texto-3",
+  sucesso: "bg-sucesso",
+  atencao: "bg-atencao",
+  erro: "bg-erro",
+}
+
 type Props = ComponentProps<"span"> & VariantProps<typeof tagVariants> & { ponto?: boolean }
 
 export function Tag({ tom, tamanho, ponto = false, className, children, ...props }: Props) {
   return (
     <span className={cn(tagVariants({ tom, tamanho }), className)} {...props}>
-      {ponto && <span aria-hidden className={cn("size-1.5 rounded-full", tom === "acao" ? "bg-acao-forte" : "bg-texto-3")} />}
+      {ponto && <span aria-hidden className={cn("size-1.5 rounded-full", PONTO[tom ?? "neutra"])} />}
       {children}
     </span>
   )
