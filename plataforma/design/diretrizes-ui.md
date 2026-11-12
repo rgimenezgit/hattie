@@ -104,6 +104,19 @@ Clash Display 500 em minúsculas para títulos. Poppins para todo o resto, agora
 
 A hierarquia vem do contraste: título de card em 600 contra corpo em 400, botão em 500 contra tag em 400. 14 px como base da interface segue em validação (`marca/05-decisoes/alinhamentos.md` #21). Rótulos da interface em português.
 
+## 3b. Hierarquia e organização
+
+Regras que saíram da revisão de 11/11/2026, para todas as telas:
+
+1. **Uma camada de caixa.** Conteúdo vai num card branco sobre o palco cinza. Dentro do card, os grupos se separam por espaço e por linhas finas (`borda-sutil`), nunca por outra caixa cinza. Preenchimento cinza dentro do card fica para campos e botões.
+2. **Títulos de bloco fora do card.** Clash `titulo-3` em minúsculas, com a quantidade discreta ao lado (`text-xs`, `texto-3`) e a ação à direita (botão secundário `sm`).
+3. **Três níveis de texto dentro do card.** Título do card em Poppins 600 `text-base`; título de grupo em `text-xs` 600 `texto-2`; rótulo de dado em `text-xs` `texto-3` com o valor em `text-sm`.
+4. **Listas de atributos viram texto.** Com mais de três itens, os valores aparecem separados por " · ". Tags ficam para status e para poucos rótulos.
+5. **Dados lado a lado com divisória.** Fatos curtos (idade, região, renda) ficam em colunas separadas por uma linha vertical fina, abaixo de uma linha horizontal.
+6. **Títulos em Clash sempre em minúsculas**, inclusive o título da tela. Nome de marca e de conversa mantém a grafia.
+7. **Destaque vai para o conteúdo.** O que a pessoa veio ver (resumo, macro, frase da persona) ganha `destaque` ou a barra lima; explicações do Hattie ficam no ícone de informação.
+8. **Grades com base de uma coluna** (`grid-cols-1`), para nada estourar a largura no celular.
+
 ## 4. Componentes
 
 ### Botões e tags
@@ -131,7 +144,17 @@ Tamanhos: `sm` 32 px (13 px), `md` 40 px (14 px), `lg` 48 px (16 px); só ícone
 
 ### Página de uma proposta
 
-O conteúdo manda. A proposta fica num container branco (`superficie`, raio 24, respiro de 20 a 24 px) sobre o canvas, com o nome da seção (ex.: "Propósito") em 12 px no topo e o ícone de informação no canto direito. Dentro dele: o resumo em `destaque` e a prévia da seção; blocos internos usam `preenchimento` para se separar do branco. Abaixo do container ficam as ações (Aprovar, Editar com o Hattie, Contratar um parceiro) e a navegação entre seções. O porquê do Hattie sai da página e mora no diálogo do `PorqueHattie`.
+O conteúdo manda. A proposta fica num container branco (`superficie`, raio 24, respiro de 20 a 24 px) sobre o canvas, com o nome da seção (ex.: "Propósito") em 12 px no topo e o ícone de informação no canto direito. Dentro dele: o resumo em `destaque` e a prévia da seção; blocos internos (ex.: Para quem, O que entrega) ficam em colunas com divisória fina. Abaixo do container ficam as ações (Aprovar, Editar com o Hattie, Contratar um parceiro) e a navegação entre seções. O porquê do Hattie sai da página e mora no diálogo do `PorqueHattie`.
+
+### Público e personas
+
+A seção tem três camadas, de cima para baixo:
+
+1. **Público macro**: título de bloco com o ícone do porquê; card branco com quem a marca atende numa frase (`destaque`) e quatro fatos em colunas com divisória (idade, região, renda, onde compra).
+2. **Públicos**: um card por recorte, com nome, peso na venda (tag) e quantas personas tem. Abaixo de uma linha fina, demografia à esquerda (idade, gênero, renda, escolaridade, ocupação, onde mora) e psicografia à direita (valores, interesses, estilo de vida, como compra, onde se informa, em texto separado por " · "), divididas por uma linha vertical. "Adicionar público" abre um diálogo com nome e descrição; o público novo entra como rascunho e o Hattie completa.
+3. **Personas**: cards em uma coluna (duas em telas muito largas). Cada card traz avatar com a cor da marca da cliente, nome, idade, ocupação, cidade e público, a frase dela em itálico com barra lima à esquerda, objetivos e dores, e no rodapé "Onde ela está" e "Ver completa". "Ver persona completa" abre um diálogo com história, motivações, objeções na compra, o que faz ela decidir, onde ela está, referências que admira, como a marca ajuda e o que dizer para ela. "Adicionar persona" pede nome, idade, ocupação, cidade, público e uma frase; o resto o Hattie completa.
+
+Diálogos da plataforma usam `Janela` (branco, raio 24, sem contorno, rodapé com a ação). Campos de texto longo e de lista: `CampoArea` e `CampoLista`. Com erro, o foco vai ao primeiro campo com problema.
 
 ### Demais peças
 
@@ -212,6 +235,7 @@ Com "reduzir movimento", escala, onda, giro e faíscas saem e a cor continua mud
 
 1. Segue a estrutura da seção 1, os papéis de cor da seção 2 e a escala da seção 3, sem tamanho de texto solto.
 2. Um plimm e no máximo um selo. Nenhum contorno preto em campo, botão ou card.
+2b. Segue as regras de hierarquia da seção 3b: uma camada de caixa, títulos de bloco fora do card, três níveis de texto.
 3. Foco visível, alvos de 44 px nas ações principais e 32 px no resto, tudo alcançável pelo teclado.
 4. Testada com "reduzir movimento" e em 375 px.
 5. Texto conferido com a skill `hattie-voz` e sem as palavras evitadas do glossário.

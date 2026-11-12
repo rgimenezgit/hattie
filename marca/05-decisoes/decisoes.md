@@ -3,6 +3,8 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 11/11/2026
+- Regras de hierarquia da plataforma: uma camada de caixa (card branco sobre o palco, sem caixa cinza dentro), títulos de bloco fora do card, três níveis de texto, listas de atributos em texto, títulos em Clash sempre em minúsculas (menos nome de marca e de conversa). Toda mudança de UI passa por revisão de hierarquia antes de ser entregue.
+- Público e personas em três camadas: público macro, públicos com demografia e psicografia e personas detalhadas (frase, história, objetivos, dores, motivações, objeções, gatilhos, canais, referências, como a marca ajuda e mensagem). Dá para adicionar públicos e personas; os novos entram como rascunho para o Hattie completar.
 - Casca do app em palco cinza com três abas brancas que saem da margem (topo, navegação e conta), com cantos côncavos. Fechada, a aba do topo mostra só o símbolo do Hattie; aberta, mostra a logomarca e o seletor de marca. Colunas laterais viram painéis brancos sobre o palco.
 - O rail fica colado na margem da página: aberto, a margem branca estica por cima do canvas com cantos côncavos e sombra levíssima. Itens em repouso em cinza-médio `#6B6B6B`, ativo em pílula lima com ícone cheio. O Hattie passa a ser o segundo item, logo abaixo do Início.
 - O canvas ganha uma sombra interna muito fina, como se o branco estivesse um degrau acima do cinza.

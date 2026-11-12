@@ -26,7 +26,45 @@ export type ConteudoSecao =
   | { tipo: "tipografia"; display: string; texto: string; amostra: string }
   | { tipo: "logo"; descricao: string; opcoes: string[] }
   | { tipo: "imagens"; descricao: string; legendas: string[] }
-  | { tipo: "persona"; nome: string; idade: number; descricao: string; habitos: string[] }
+  | { tipo: "publico"; macro: PublicoMacro; publicos: Publico[]; personas: Persona[] }
+
+export type Dado = { rotulo: string; valor: string }
+
+/** Visão de cima: quem a marca atende, em uma frase e poucos números. */
+export type PublicoMacro = { descricao: string; destaques: Dado[] }
+
+/** Um recorte do macro, com dados de quem é (demografia) e de como pensa e vive (psicografia). */
+export type Publico = {
+  id: string
+  nome: string
+  descricao: string
+  peso: string
+  demografia: Dado[]
+  psicografia: { titulo: string; itens: string[] }[]
+  rascunho?: boolean
+}
+
+/** Persona: uma pessoa que representa um público, com o que ela quer, o que trava e como decide. */
+export type Persona = {
+  id: string
+  publicoId: string
+  nome: string
+  idade: number
+  ocupacao: string
+  cidade: string
+  frase: string
+  historia: string
+  objetivos: string[]
+  dores: string[]
+  motivacoes: string[]
+  objecoes: string[]
+  gatilhos: string[]
+  canais: string[]
+  referencias: string[]
+  comoAjudamos: string
+  mensagem: string
+  rascunho?: boolean
+}
 
 export type AcaoExtra = { rotulo: string; icone: "download" | "copiar" }
 

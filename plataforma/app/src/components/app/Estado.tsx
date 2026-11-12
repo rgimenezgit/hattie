@@ -9,6 +9,8 @@ import {
   STATUS_INICIAL,
   getSecao,
   type Mensagem,
+  type Persona,
+  type Publico,
   type StatusPasso,
   type StatusSecao,
 } from "@/lib/mock"
@@ -29,6 +31,10 @@ type EstadoApp = {
   concluirCriacao: () => void
   aprovar: (id: string) => void
   reabrir: (id: string) => void
+  publicosNovos: Publico[]
+  personasNovas: Persona[]
+  adicionarPublico: (publico: Publico) => void
+  adicionarPersona: (persona: Persona) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -71,6 +77,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [mensagens, setMensagens] = useState<Mensagem[]>(conversaPronta)
   const [digitando, setDigitando] = useState(false)
   const [secoes, setSecoes] = useState<Record<string, StatusSecao>>(STATUS_INICIAL)
+  const [publicosNovos, setPublicosNovos] = useState<Publico[]>([])
+  const [personasNovas, setPersonasNovas] = useState<Persona[]>([])
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -184,6 +192,9 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
     setSecoes((atual) => ({ ...atual, [id]: "pendente" }))
   }, [])
 
+  const adicionarPublico = useCallback((publico: Publico) => setPublicosNovos((atual) => [...atual, publico]), [])
+  const adicionarPersona = useCallback((persona: Persona) => setPersonasNovas((atual) => [...atual, persona]), [])
+
   const valor = useMemo<EstadoApp>(
     () => ({
       nomeMarca,
@@ -199,8 +210,30 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       concluirCriacao,
       aprovar,
       reabrir,
+      publicosNovos,
+      personasNovas,
+      adicionarPublico,
+      adicionarPersona,
     }),
-    [nomeMarca, etapa, passos, mensagens, digitando, secoes, iniciarCriacao, responder, pularPasso, irParaPasso, concluirCriacao, aprovar, reabrir],
+    [
+      nomeMarca,
+      etapa,
+      passos,
+      mensagens,
+      digitando,
+      secoes,
+      iniciarCriacao,
+      responder,
+      pularPasso,
+      irParaPasso,
+      concluirCriacao,
+      aprovar,
+      reabrir,
+      publicosNovos,
+      personasNovas,
+      adicionarPublico,
+      adicionarPersona,
+    ],
   )
 
   return <Contexto value={valor}>{children}</Contexto>

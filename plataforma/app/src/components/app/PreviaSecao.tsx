@@ -17,11 +17,11 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       return card ? (
         <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{secao.resumo}</p>
       ) : (
-        <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {conteudo.blocos.map((bloco) => (
-            <div key={bloco.titulo} className="flex flex-col gap-1 rounded-2xl bg-preenchimento p-4">
-              <dt className="text-sm font-medium text-texto-2">{bloco.titulo}</dt>
-              <dd className="text-corpo leading-relaxed">{bloco.texto}</dd>
+        <dl className="grid grid-cols-1 gap-y-4 border-t border-borda-sutil pt-4 @2xl:grid-cols-3">
+          {conteudo.blocos.map((bloco, indice) => (
+            <div key={bloco.titulo} className={cn("flex flex-col gap-1 @2xl:pe-5", indice > 0 && "@2xl:border-s @2xl:border-borda-sutil @2xl:ps-5")}>
+              <dt className="text-xs font-semibold text-texto-2">{bloco.titulo}</dt>
+              <dd className="text-sm leading-relaxed">{bloco.texto}</dd>
             </div>
           ))}
         </dl>
@@ -118,28 +118,37 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </ul>
       )
 
-    case "persona":
-      return card ? (
-        <p className="line-clamp-3 leading-relaxed text-texto-2">
-          <span className="font-medium text-ink">
-            {conteudo.nome}, {conteudo.idade}.
-          </span>{" "}
-          {conteudo.descricao}
-        </p>
-      ) : (
-        <div className="flex flex-col gap-3 rounded-2xl bg-preenchimento p-5">
-          <p className="font-heading text-titulo-3 font-medium">
-            {conteudo.nome}, {conteudo.idade}
-          </p>
-          <p className="max-w-[60ch] leading-relaxed">{conteudo.descricao}</p>
-          <ul className="flex flex-wrap gap-2">
-            {conteudo.habitos.map((habito) => (
-              <li key={habito} className="flex h-9 items-center rounded-full bg-preenchimento px-3.5 text-sm">
-                {habito}
-              </li>
-            ))}
-          </ul>
+    case "publico":
+      return (
+        <div className="flex flex-col gap-3">
+          <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.macro.descricao}</p>
+          <div className="flex items-center gap-2.5">
+            <span className="flex -space-x-2" aria-hidden>
+              {conteudo.personas.map((persona, indice) => (
+                <span
+                  key={persona.id}
+                  className="grid size-7 place-items-center rounded-full text-xs font-semibold ring-2 ring-superficie"
+                  style={{ backgroundColor: marca.paleta[indice % marca.paleta.length].hex, color: corDoTexto(marca.paleta[indice % marca.paleta.length].hex) }}
+                >
+                  {persona.nome[0]}
+                </span>
+              ))}
+            </span>
+            <span className="text-xs text-texto-2">
+              {conteudo.publicos.length} públicos · {conteudo.personas.length} personas
+            </span>
+          </div>
         </div>
       )
   }
+}
+
+/** Preto #101010 ou branco #F5F5F5, o que der mais contraste sobre a cor da marca da cliente. */
+export function corDoTexto(hex: string) {
+  const [r, g, b] = [1, 3, 5].map((inicio) => {
+    const canal = parseInt(hex.slice(inicio, inicio + 2), 16) / 255
+    return canal <= 0.04045 ? canal / 12.92 : ((canal + 0.055) / 1.055) ** 2.4
+  })
+  const luz = 0.2126 * r + 0.7152 * g + 0.0722 * b
+  return luz > 0.18 ? "var(--preto)" : "var(--branco)"
 }

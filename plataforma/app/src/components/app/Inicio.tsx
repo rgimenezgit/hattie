@@ -104,10 +104,10 @@ export function Inicio() {
               {PROJETOS.map((projeto) => (
                 <li key={projeto.id}>
                   <Link href={`/marca/${marca.slug}/projetos` as Route} className="group flex flex-col gap-2 rounded-2xl">
-                    <span className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-preenchimento-ativo transition-[background-color] duration-150 group-hover:bg-[color-mix(in_oklch,var(--preto)_20%,transparent)]">
+                    <span className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-superficie transition-[box-shadow] duration-150 group-hover:shadow-(--sombra-campo)">
                       <span
                         aria-hidden
-                        className="absolute inset-0 bg-[radial-gradient(var(--branco)_2px,transparent_2.5px)] bg-size-[20px_20px] bg-position-[10px_10px]"
+                        className="absolute inset-0 bg-[radial-gradient(var(--cinza)_1.5px,transparent_2px)] bg-size-[16px_16px] bg-position-[8px_8px]"
                       />
                     </span>
                     <span className="flex flex-col px-1">

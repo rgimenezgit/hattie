@@ -43,11 +43,14 @@ export function CabecalhoCanvas({
   subtitulo,
   acoes,
   grande = false,
+  nomeProprio = false,
 }: {
   titulo: string
   subtitulo?: string
   acoes?: ReactNode
   grande?: boolean
+  /** Nome de marca ou de conversa: mantém a grafia. Títulos de área e de seção ficam em minúsculas. */
+  nomeProprio?: boolean
 }) {
   return (
     <header className="flex flex-col gap-0.5 border-b border-borda-sutil pb-3">
@@ -55,6 +58,7 @@ export function CabecalhoCanvas({
         <h1
           className={cn(
             "min-w-0 font-heading font-medium",
+            !nomeProprio && "lowercase",
             grande ? "text-titulo-2 @3xl:text-titulo-1" : "text-titulo-3 @xl:text-titulo-2",
           )}
         >

@@ -36,6 +36,7 @@ import { useEstado } from "./Estado"
 import { Canvas, CabecalhoCanvas, ColunaLateral } from "./Layout"
 import { useMarca } from "./MarcaContexto"
 import { PreviaSecao } from "./PreviaSecao"
+import { SecaoPublico } from "./SecaoPublico"
 import { useMidia } from "./useMidia"
 
 type MensagemEdicao = { id: number; autor: "hattie" | "pessoa"; texto: string }
@@ -355,7 +356,7 @@ function VisaoGeral({ aoEditar }: { aoEditar: (id: string) => void }) {
           </Botao>
         </div>
       )}
-      <div className="grid gap-3 @2xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {VISAO_GERAL.map((id, indice) => (
           <CardSecao key={id} secao={getSecao(id)!} destaque={indice === 0} aoEditar={aoEditar} />
         ))}
@@ -374,18 +375,22 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
 
   return (
     <div className="flex flex-col gap-5">
-      <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
-        <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
-          <p className="text-xs font-medium text-texto-3">{secao.titulo}</p>
-          <PorqueHattie assunto={secao.titulo} aoPerguntar={() => aoEditar(secao.id)}>
-            <p>{secao.porque}</p>
-          </PorqueHattie>
-        </div>
-        {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
-          <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
-        )}
-        <PreviaSecao secao={secao} modo="completo" marca={marca} />
-      </section>
+      {secao.conteudo.tipo === "publico" ? (
+        <SecaoPublico secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : (
+        <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
+          <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
+            <p className="text-xs font-medium text-texto-3">{secao.titulo}</p>
+            <PorqueHattie assunto={secao.titulo} aoPerguntar={() => aoEditar(secao.id)}>
+              <p>{secao.porque}</p>
+            </PorqueHattie>
+          </div>
+          {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
+            <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
+          )}
+          <PreviaSecao secao={secao} modo="completo" marca={marca} />
+        </section>
+      )}
 
       <div className="flex flex-wrap items-center gap-2">
         {aprovada ? (
@@ -495,6 +500,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
             )}
             <CabecalhoCanvas
               titulo={secao ? secao.titulo : nome}
+              nomeProprio={!secao}
               subtitulo={secao ? undefined : "visão geral"}
               grande={!secao}
               acoes={
