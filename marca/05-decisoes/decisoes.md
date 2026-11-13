@@ -3,6 +3,8 @@
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
 ## 12/11/2026
+- Biblioteca organizada em três níveis: coluna lateral para onde olhar (tudo, favoritos, tipos e projetos), uma barra só para buscar e filtrar (filtros num botão, o que está valendo em pílulas) e os arquivos agrupados por data. Um título só em Clash, com o lugar atual.
+- Biblioteca vira o acervo da marca: tudo que foi criado com o Hattie, enviado pela pessoa ou entregue por parceiros. Busca por frase com o Hattie mostrando o que entendeu (tipo, quem aparece, cor, data, quem fez, projeto), tipos em pílulas, filtros por projeto, quem aparece (produtos, pessoas e personagens), data e quem fez, coleções de projetos e favoritos, grade agrupada por data ou lista, seleção em lote e painel de detalhe com a descrição de cada arquivo, cores, etiquetas e onde foi usado.
 - Botões que mandam algo (enviar mensagem, pedido ou prompt) usam o plimm: lima `#E6F344` com texto preto, Clash Display, o ícone da ação e as faíscas no clique. O plimm sem ícone segue como botão de criar. O primário preto com texto lima fica para confirmar e seguir.
 - Nenhum card, campo ou hover usa contorno: sai a borda lima dos cards que esperam o ok (a tag "Esperando seu ok" já avisa), sai o contorno de foco dos campos (o fundo muda) e sai o contorno preto no hover dos cards de marca. Contorno fica só nas tags e no anel de foco do teclado.
 - Botão primário da plataforma passa a ser preto `#101010` com texto lima `#E6F344` (antes, texto branco). A outra combinação da marca, lima com texto preto, fica com o plimm e com o que está escolhido ou ativo.

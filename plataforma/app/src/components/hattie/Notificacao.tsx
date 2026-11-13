@@ -11,6 +11,8 @@ type Opcoes = {
   texto?: string
   som?: Som
   tipo?: "padrao" | "sucesso" | "atencao" | "erro"
+  /** Ação curta dentro do aviso, como "Desfazer". */
+  acao?: { rotulo: string; aoClicar: () => void }
 }
 
 /**
@@ -20,7 +22,7 @@ type Opcoes = {
  * No meio, o nome do selo em Clash 600 lima (quando há som), título em Poppins 600 e texto em 13 px.
  * Erro não leva selo nem piada.
  */
-export function CartaoAlerta({ titulo, texto, som, tipo = "padrao", aoFechar }: Opcoes & { aoFechar?: () => void }) {
+export function CartaoAlerta({ titulo, texto, som, tipo = "padrao", acao, aoFechar }: Opcoes & { aoFechar?: () => void }) {
   const comSelo = som && tipo !== "erro" && tipo !== "atencao"
   return (
     <div
@@ -48,6 +50,18 @@ export function CartaoAlerta({ titulo, texto, som, tipo = "padrao", aoFechar }: 
         {comSelo && <span className="font-heading text-xs leading-none font-semibold text-lima lowercase">{som}</span>}
         <p className="text-sm font-semibold first-letter:uppercase">{titulo}</p>
         {texto && <p className="text-detalhe text-cinza">{texto}</p>}
+        {acao && (
+          <button
+            type="button"
+            onClick={() => {
+              acao.aoClicar()
+              aoFechar?.()
+            }}
+            className="mt-1 self-start text-sm font-semibold text-lima underline-offset-4 hover:underline"
+          >
+            {acao.rotulo}
+          </button>
+        )}
       </div>
       {aoFechar && (
         <button

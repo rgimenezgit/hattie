@@ -10,3 +10,4 @@ export function getMarca(slug: string) {
   return MARCAS.find((marca) => marca.slug === slug)
 }
 export * from "./parceiros"
+export * from "./biblioteca"

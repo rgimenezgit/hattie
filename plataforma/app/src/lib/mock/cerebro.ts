@@ -44,7 +44,7 @@ const RECURSOS_PECA: Record<LayoutPeca, RecursoPeca[]> = {
   carimbo: ["fotografia", "grafismos", "tipografia"],
 }
 
-function peca(id: string, nome: string, layout: LayoutPeca): ExemploPeca {
+export function peca(id: string, nome: string, layout: LayoutPeca): ExemploPeca {
   return { id, nome, layout, ...TEXTOS_PECA[layout], recursos: RECURSOS_PECA[layout] }
 }
 

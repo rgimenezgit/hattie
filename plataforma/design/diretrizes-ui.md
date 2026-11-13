@@ -303,16 +303,31 @@ As peças (`Peca`) usam medidas em `cqmin`, então o mesmo layout vale do story 
 
 **Cores de estado em Parceiros:** verde de sucesso só para "aceitando projetos" e proposta aprovada; amarelo de atenção para agenda cheia; vermelho fica de fora, porque nenhuma ação da área apaga algo de vez. Azul diluído marca a fala do Hattie. Destaque e verificado são selos neutros.
 
+### Biblioteca
+
+Tudo que a marca criou com o Hattie, enviou ou recebeu de parceiros, num só lugar (`components/app/biblioteca/`). Pensada para quem não sabe o nome do arquivo: procura-se como se fala. A tela tem três níveis, do mais largo para o mais fino, cada um num lugar só:
+
+1. **Onde olhar: coluna lateral** "biblioteca", no padrão do cérebro e de parceiros. Tudo e Favoritos; Tipos (fotos, ilustrações, grafismos, peças, apresentações, vídeos, logos, documentos) e Projetos (mais "Sem projeto"), cada um com ícone e quantidade; ativo em lima-suave. No pé, o espaço usado. No celular, a coluna some e o próprio título ("tudo ▾") abre a mesma lista.
+2. **O que procurar: uma barra só.** Busca por frase (44 px, "/" como atalho) e, ao lado, Filtros (um botão que abre quem aparece, data, feito por e situação; lima com a quantidade quando há filtro ligado), ordem e grade ou lista. Com o campo vazio e em foco, o Hattie mostra frases de exemplo logo abaixo. O que está valendo, da busca e dos filtros, aparece numa única linha de pílulas que dá para tirar, com "Limpar tudo". Se a busca precisou deixar um critério de fora, uma nota pequena avisa. A lógica (`lib/biblioteca.ts`) está pronta para ser trocada por busca vetorial sem mudar a tela.
+3. **Os arquivos**, agrupados por data (Hoje, Ontem, Esta semana, Mais cedo no mês, meses anteriores), com o grupo em Poppins 14 semibold e a quantidade em cinza. Na busca, a ordem é a relevância e não há grupos.
+
+Hierarquia de texto: um título só em Clash (o lugar: "tudo", "fotos" ou o nome do projeto) com a quantidade em cinza ao lado; grupos em Poppins; nome do arquivo em até duas linhas. Nenhuma fileira de pílulas compete com outra.
+
+- **Card**: miniatura 4:3 desenhada com o sistema da marca (peças na proporção real, centradas), nome, tipo, data e "rascunho" quando for o caso. Estrela e caixa de marcar aparecem no hover; no toque, só a estrela dos favoritos. Selecionado ganha fundo lima-suave, sem contorno.
+- **Seleção em lote**: "Selecionar" no cabeçalho liga o modo (no celular, é o único jeito); no computador, Shift marca o intervalo e Cmd/Ctrl marca um a um. Barra preta flutuante embaixo com Baixar (texto lima), mover para projeto e apagar. Apagar toca o puff e oferece Desfazer.
+- **Detalhe** em painel à direita (tela cheia no celular): prévia grande, Baixar (primário), Copiar link, Editar com o Hattie; favoritar, mais ações e setas (← →) no topo. Abaixo, a descrição que o Hattie fez para a busca, dados do arquivo, quem aparece e etiquetas (viram filtro com um clique), cores com hex e onde o arquivo foi usado.
+- **Enviar** (secundário no cabeçalho) abre uma janela com a área de soltar e o projeto; "guardar na biblioteca" é plimm com ícone.
+
 ### Envio de imagens
 
-Componente `EnvioImagens` para referências e anexos de imagem. Rótulo em `detalhe`, área de arrastar tracejada em `preenchimento` (vira `acao-suave` com borda `acao-forte` enquanto a pessoa arrasta), botão "escolha do computador" sublinhado e uma dica curta. As imagens viram miniaturas quadradas com raio de 12 px e um botão de remover (aparece no hover no computador, sempre visível no celular), mais o contador "3 de 30 imagens". No modo compacto, depois da primeira imagem, a área de arrastar some e fica só o quadrado "Adicionar" no fim da grade. Só aceita imagens.
+Componente `EnvioImagens` para referências e anexos de imagem. Rótulo em `detalhe`, área de arrastar em `preenchimento`, sem contorno (vira `acao-suave` enquanto a pessoa arrasta), botão "escolha do computador" sublinhado e uma dica curta. As imagens viram miniaturas quadradas com raio de 12 px e um botão de remover (aparece no hover no computador, sempre visível no celular), mais o contador "3 de 30 imagens". No modo compacto, depois da primeira imagem, a área de arrastar some e fica só o quadrado "Adicionar" no fim da grade. Só aceita imagens.
 
 ### Demais peças
 
 | Componente | Uso | Forma |
 |---|---|---|
 | `Plimm` | Enviar para o Hattie e criar | Pílula lima 36/44 px (44 px em toque), ✱ e "plimm" em Clash 600 preto. Sobe 2 px com sombra sólida no hover, afunda no clique, ✱ dá meia-volta e solta faíscas |
-| `Composer` | Conversa com o Hattie | Card branco raio 24, sem contorno, sombra suave. No foco ganha contorno de 1 px em `borda-tag` e sombra maior. Arrastando arquivo: anel lima-forte |
+| `Composer` | Conversa com o Hattie | Card branco raio 24, sem contorno, sombra suave. No foco, só a sombra cresce. Arrastando arquivo: fundo lima-suave |
 | `Campo` | Formulários | 44 px, raio 12, `preenchimento` sem contorno. Foco: clareia, contorno `borda-tag` e halo de 4 px. Erro: borda e ícone em vermelho `#E0352B`, fundo `erro-suave`, mensagem em `erro-texto` `#B3261E` ligada ao campo |
 | `Busca` | Filtrar listas | 32 px, pílula, `preenchimento`, ícone de 14 px, Esc limpa |
 | `Abas` (`Abas`, `ListaAbas`, `ConteudoAba`) | Trocar entre conjuntos de conteúdo na mesma tela (modelos da Home, exemplos do Tom de voz) | Trilha em pílula com 4 px de respiro: branca sobre o palco (`fundo="palco"`), cinza sobre card (`fundo="cartao"`). Abas de 32 px, Poppins 500 em 14 px, ícone opcional de 16 px e quantidade opcional em `texto-3`. Repouso em grafite `#333333`; hover em `preenchimento`; ativa em pílula lima `#E6F344` com texto preto, sem sombra e sem contorno. Foco do teclado em anel preto por dentro da aba; setas andam entre as abas. Quando não cabe, a trilha rola na horizontal sem barra, e a aba focada entra na tela. `centro` centraliza a trilha no desktop |
