@@ -6,6 +6,7 @@ import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
 import { Botao } from "@/components/hattie/Botao"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { ExemploVoz, GuiaVoz, Marca, Secao, TipoExemplo } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
@@ -43,10 +44,10 @@ export function SecaoVoz({ secao, marca, aoEditar }: Props) {
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{guia.intro}</p>
-          <div className="grid grid-cols-1 gap-6 border-t border-borda-sutil pt-4 @3xl:grid-cols-2 @3xl:gap-0">
-            <div className="flex flex-col gap-3 @3xl:pe-6">
+          <div className="flex flex-col gap-3 border-t border-borda-sutil pt-4">
+            <div className="flex flex-col gap-3">
               <h3 className="text-xs font-semibold text-texto-2">Traços da voz</h3>
-              <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 @4xl:grid-cols-4">
                 {guia.tracos.map((traco) => (
                   <div key={traco.nome} className="flex flex-col gap-0.5">
                     <dt className="text-sm font-semibold">{traco.nome}</dt>
@@ -54,10 +55,6 @@ export function SecaoVoz({ secao, marca, aoEditar }: Props) {
                   </div>
                 ))}
               </dl>
-            </div>
-            <div className="flex flex-col gap-3 @3xl:border-s @3xl:border-borda-sutil @3xl:ps-6">
-              <h3 className="text-xs font-semibold text-texto-2">Onde ela fica</h3>
-              <Espectro linhas={guia.espectro} />
             </div>
           </div>
         </div>
@@ -77,6 +74,15 @@ export function SecaoVoz({ secao, marca, aoEditar }: Props) {
         <Glossario glossario={guia.glossario} />
         <Proibidas proibidas={guia.proibidas} />
       </div>
+
+      <VerMais resumo="Onde o tom fica entre os extremos: formal ou informal, sério ou leve">
+        <section aria-labelledby="titulo-espectro" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-espectro" titulo="onde o tom fica" />
+          <div className="rounded-3xl bg-superficie p-5 md:p-6">
+            <Espectro linhas={guia.espectro} />
+          </div>
+        </section>
+      </VerMais>
     </div>
   )
 }
@@ -309,7 +315,7 @@ function Regras({ titulo, regras, tipo }: { titulo: string; regras: GuiaVoz["fac
 function Glossario({ glossario }: { glossario: GuiaVoz["glossario"] }) {
   return (
     <section aria-labelledby="titulo-glossario" className="flex flex-col gap-3">
-      <CabecalhoBloco id="titulo-glossario" titulo="glossário" quantidade={glossario.length} />
+      <CabecalhoBloco id="titulo-glossario" titulo="palavras que a marca usa" quantidade={glossario.length} />
       <dl className="flex flex-1 flex-col rounded-3xl bg-superficie px-5 md:px-6">
         {glossario.map((item) => (
           <div key={item.termo} className="grid grid-cols-[104px_minmax(0,1fr)] gap-3 border-b border-borda-sutil py-3.5 last:border-b-0">

@@ -230,7 +230,6 @@ const OUTRA_TAREFA = "outra"
 const GRUPOS_CEREBRO: { id: Secao["grupo"]; rotulo: string }[] = [
   { id: "estrategia", rotulo: "Estratégia" },
   { id: "verbal", rotulo: "Verbal" },
-  { id: "personalidade", rotulo: "Personalidade" },
   { id: "visual", rotulo: "Visual" },
 ]
 

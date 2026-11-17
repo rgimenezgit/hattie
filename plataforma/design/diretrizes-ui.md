@@ -130,6 +130,30 @@ Regras que saíram da revisão de 11/11/2026, para todas as telas:
 6. **Títulos em Clash sempre em minúsculas**, inclusive o título da tela. Nome de marca e de conversa mantém a grafia.
 7. **Destaque vai para o conteúdo.** O que a pessoa veio ver (resumo, macro, frase da persona) ganha `destaque` ou a barra lima; explicações do Hattie ficam no ícone de informação.
 8. **Grades com base de uma coluna** (`grid-cols-1`), para nada estourar a largura no celular.
+9. **Essencial primeiro, avançado a um clique.** O cérebro atende duas pessoas: quem quer só uma marca que funcione (a dona dos salgados) e quem trabalha com marca todo dia (designer, consultor). Cada seção mostra por padrão o mínimo para decidir; o técnico (escala, espaçamentos, curvas, luz, regras finas, números) fica no componente `VerMais`, sempre no fim da seção. Nada fica escondido de vez, e ninguém escolhe "modo simples" no cadastro.
+
+### Opções avançadas (`VerMais`)
+
+Faixa clara (`superficie` a 60%, raio 24, sem contorno) com ícone de ajustes, "Opções avançadas" em 600 e, embaixo, em `text-xs`, o que tem dentro ("Escala de tamanhos, espaçamento entre título e texto…"). A seta gira ao abrir e o título vira "Esconder opções avançadas". Aberta, aparece a caixa "Deixar sempre aberto, em todas as seções", para designers e consultores; a escolha fica guardada no navegador e vale para todas as seções. Um `VerMais` por seção (por estilo, em fotografia e ilustração).
+
+| Seção | Fica visível | Vai para opções avançadas |
+|---|---|---|
+| Mercado | Referências e concorrentes | Painel da semana |
+| Produtos e serviços | O que é, preço, características, diferenciais | Para quem, como usar, ingredientes |
+| Diferenciais | O que mais diferencia e as frentes | Números e frentes que ficaram de fora |
+| Público e personas | Público macro e personas | Públicos em detalhe |
+| Personalidade | Palavras e explicações | "Se a marca fosse" |
+| Arquétipo | Mistura, essência e como a marca vive cada um | Motivação, desejo, medo, comportamentos, exagero |
+| Atributos | Frase de cada força e o que significa | Como aparece e onde se vê |
+| Nome | Opções ou nome escolhido | Processo (funil, territórios, critérios) |
+| Mensagens-chave | Frase, explicação e palavras de cada mensagem | Exemplos prontos de uso |
+| Tom de voz | Traços, exemplos, faça e evite, palavras que usa e que evita | Espectro do tom |
+| Logo | Logo, versões e regras de uso | Área de proteção e tamanho mínimo |
+| Tipografia | Combinações com peças aplicadas, fontes e aplicações | Escala, espaçamento e guias, teste das fontes |
+| Grafismos e elementos gráficos | Peças aplicadas, grafismos, gradiente e ícones | Faça e evite |
+| Fotografia e ilustração | Briefing, paleta, referências, peças aplicadas e imagens | Camadas (luz, câmera, traço…) e como avalio |
+| Motion | Conceito, princípios e exemplos | Números, curvas, durações, distâncias, coreografia, acessibilidade, tokens |
+| Aplicações | Diretrizes usadas, mockups e peças | Regras de diagramação e explorações gráficas |
 
 ## 4. Componentes
 
@@ -206,19 +230,41 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 
 ### Tom de voz
 
-1. **Como a marca fala**: a introdução em `destaque`; abaixo, os traços da voz (nome em 600 e uma frase) e o espectro de tom: quatro trilhas (formal–informal, séria–bem-humorada, técnica–simples, distante–próxima) com um ponto preto; o lado para onde a marca pende fica em peso 600. Leitores de tela ouvem "mais informal que formal".
+1. **Como a marca fala**: a introdução em `destaque` e, abaixo, os traços da voz (nome em 600 e uma frase), em até quatro colunas.
 2. **Exemplos**: abas por tipo (falas, posts, legendas, chamadas, e-mails), com a quantidade em cada uma; a aba ativa fica em lima. Cada aba é um carrossel horizontal com encaixe por card, o card seguinte aparecendo cortado na borda e setas que andam um card por vez. Os cards imitam o canal com as cores da marca da cliente: balão de WhatsApp, post quadrado, legenda com @ e hashtags, chamada em pílula, e-mail com assunto e assinatura. Todo card tem "Copiar".
 3. **Faça e evite**: duas colunas com uma regra por linha e um exemplo entre aspas; no "Evite", o exemplo vem riscado em cinza.
-4. **Glossário** e 5. **Palavras que a marca evita** lado a lado: termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
+4. **Palavras que a marca usa** e 5. **Palavras que a marca evita** lado a lado (absorvem o antigo Vocabulário): termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
+6. **Opções avançadas**: o espectro de tom, quatro trilhas (formal–informal, séria–bem-humorada, técnica–simples, distante–próxima) com um ponto preto; o lado para onde a marca pende fica em peso 600. Leitores de tela ouvem "mais informal que formal".
 
 ### Arquétipo
 
 1. **A mistura**: a frase de como os arquétipos se combinam, em `destaque`, e uma barra fina de proporção (primário em preto, secundário em cinza-médio) com a legenda nome, peso e papel.
-2. **Arquétipo primário** e 3. **arquétipo secundário**: um card cada. Ícone do arquétipo num círculo neutro, nome em Clash minúsculo (32 px no primário, 24 no secundário), tag com papel e peso, e o lema. Abaixo, em duas colunas: "O que é" (a essência do arquétipo em geral, com motivação, desejo e medo) e "Como a marca age como…" (como a marca vive o arquétipo, com comportamentos em lista). No pé, uma linha discreta com ícone dourado: "Cuidado com o exagero", o risco de levar o arquétipo longe demais.
+2. **Os arquétipos** lado a lado, um card cada: ícone num círculo neutro, nome em Clash minúsculo, tag com papel e peso, o lema, "O que é" (a essência) e "Na marca" (como a marca vive o arquétipo).
+3. **Opções avançadas**: cada arquétipo em detalhe, com motivação, desejo e medo, comportamentos em lista e, no pé, "Cuidado com o exagero" com ícone dourado.
+
+### Assim fica numa peça (`NaPeca`)
+
+Nos cards de escolha (combinação tipográfica, estilo de foto ou de ilustração, elementos gráficos), a opção aparece aplicada em peças reais da marca: post, story e banner na mesma altura (176 px, 208 px em tela larga), com legenda em `micro`. Quem não é designer vê o resultado antes de decidir. As peças usam o `Peca` com a fonte da combinação (`comCombinacao`) ou as cores do estilo (`imagem`, `coresIlustracao`). No celular, a fileira rola de lado.
+
+### Mensagens-chave
+
+As ideias que a marca repete, em até três cards: número e nome curto, a frase em `destaque` 500, uma explicação e "Palavras que carregam essa ideia" em tags. Substitui as antigas Palavras-chave e Vocabulário: as palavras ficam junto da mensagem que elas sustentam. Exemplos prontos (rótulo, post, loja, e-mail) nas opções avançadas.
+
+### Grafismos e elementos gráficos
+
+Grafismos, gradiente e ícones numa seção só. No topo, o resumo e as peças aplicadas (folhas, gradiente, carimbo, padrão). Depois, um card por grafismo com o desenho e onde usar; o gradiente com os dois hex e a regra de uso; os ícones de traço fino na cor principal. Faça e evite nas opções avançadas. Ilustração segue como seção própria.
+
+### Personalidade
+
+O jeito da marca em palavras (calma, acolhedora, simples…), cada uma num card com a palavra em Clash minúsculo, uma explicação curta e "Na prática" com um exemplo. Fica dentro de Estratégia, antes da voz e do visual, porque define o clima de tudo. Personalidade diz o jeito; atributos dizem as forças. Nas opções avançadas, "se a marca fosse" uma pessoa, um lugar, um som e um material.
+
+### Produtos e serviços
+
+O que a marca vende, separado do que a marca é. Um card por produto ou serviço: ícone, nome, tag "carro-chefe" quando for o caso, categoria e preço, o que é numa frase, características em tags e "O que tem de diferente" em lista. "Adicionar" abre uma janela curta (nome, produto ou serviço, o que é, características, preço); o novo entra como rascunho para o Hattie completar os diferenciais. Nas opções avançadas, a ficha de cada produto: para quem, como usar e ingredientes.
 
 ### Atributos
 
-Bloco "como a marca é" com um card por atributo, numerado. À esquerda: número, de qual arquétipo vem (tag), o nome em Clash e a frase-título em `destaque`. À direita, separados por linha vertical: "O que significa", "Como aparece na marca" e "Onde se vê" (pontos de contato como rótulo, atendimento e posts, cada um com o como).
+Bloco "as forças da marca": atributo é frase sobre o que a marca tem e faz de melhor ("Cada frasco diz de onde veio, quem colheu e quando"). Cards em duas colunas, numerados: número, nome curto e de qual arquétipo vem numa linha pequena; a frase em `destaque` 500; "o que significa" em `text-sm`. Nas opções avançadas, por atributo: como aparece na marca e onde se vê (rótulo, atendimento, posts).
 
 ### Logo
 

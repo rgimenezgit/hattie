@@ -7,13 +7,16 @@ import { Botao } from "@/components/hattie/Botao"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { FONTES_CURADAS, pilhaDaFonte, urlEspecime, type FonteCatalogo } from "@/lib/fontes"
 import { carregarFonteGoogle, useFontesGoogle } from "@/lib/usarFonteGoogle"
 import { cn } from "@/lib/utils"
-import type { CombinacaoTipografica, EstiloTipografico, FonteMarca, GuiaTipografia, Marca, PapelFonte, Secao } from "@/lib/mock"
+import { peca, type CombinacaoTipografica, type EstiloTipografico, type FonteMarca, type GuiaTipografia, type Marca, type PapelFonte, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
 import { useEstado } from "./Estado"
+import { NaPeca, type PecaExemplo } from "./NaPeca"
+import { comCombinacao, useSistemaMarca } from "./SistemaMarca"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -93,7 +96,9 @@ export function SecaoTipografia({ secao, marca, aoEditar }: Props) {
             ))}
           </ul>
         </section>
-        <EspacoDeTeste guia={guia} combinacoes={guia.combinacoes} />
+        <VerMais resumo="Espaço para testar as combinações com o seu próprio texto">
+          <EspacoDeTeste guia={guia} combinacoes={guia.combinacoes} />
+        </VerMais>
       </div>
     )
 
@@ -105,7 +110,14 @@ export function SecaoTipografia({ secao, marca, aoEditar }: Props) {
  * (Display, Texto, Sistema), cada uma com o rótulo do papel, a fonte e o uso à esquerda e a amostra na própria fonte à direita;
  * no pé, por que a combinação funciona.
  */
+const PECAS_TIPO: PecaExemplo[] = [
+  { exemplo: peca("tipo-post", "Post só com texto", "tipografico"), proporcao: [4, 5], legenda: "Post" },
+  { exemplo: peca("tipo-story", "Story com foto", "foto-cheia"), proporcao: [9, 16], legenda: "Story" },
+  { exemplo: peca("tipo-banner", "Banner do site", "dividido"), proporcao: [16, 9], legenda: "Banner do site" },
+]
+
 function CartaoCombinacao({ combinacao, guia, aoGerar }: { combinacao: CombinacaoTipografica; guia: GuiaTipografia; aoGerar: () => void }) {
+  const sistema = useSistemaMarca()
   return (
     <article aria-labelledby={`combinacao-${combinacao.id}`} className="flex flex-col rounded-3xl bg-superficie p-5 md:p-6">
       <header className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-start sm:justify-between">
@@ -126,6 +138,8 @@ function CartaoCombinacao({ combinacao, guia, aoGerar }: { combinacao: Combinaca
           <Sparkles /> Gerar sistema com esta
         </Botao>
       </header>
+
+      <NaPeca pecas={PECAS_TIPO} sistema={comCombinacao(sistema, combinacao)} className="pb-5" />
 
       <dl className="flex flex-col">
         {PAPEIS.map((papel) => {
@@ -207,10 +221,12 @@ function Sistema({
           ))}
         </ul>
       </section>
-      <Escala guia={guia} combinacao={combinacao} />
-      <Espacamento guia={guia} combinacao={combinacao} />
       <Aplicacoes guia={guia} combinacao={combinacao} marca={marca} />
-      <EspacoDeTeste guia={guia} combinacoes={[combinacao]} />
+      <VerMais resumo="Escala de tamanhos, espaçamento entre título e texto, guias e espaço para testar as fontes">
+        <Escala guia={guia} combinacao={combinacao} />
+        <Espacamento guia={guia} combinacao={combinacao} />
+        <EspacoDeTeste guia={guia} combinacoes={[combinacao]} />
+      </VerMais>
     </div>
   )
 }

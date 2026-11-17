@@ -3,6 +3,7 @@
 import { Coins, HandHeart, Heart, Leaf, MessageCircle, Settings2, type LucideIcon } from "lucide-react"
 import { Botao } from "@/components/hattie/Botao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { ClusterDiferencial, Diferencial, Secao, TipoCluster } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
@@ -39,12 +40,6 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{principal}</p>
-          <dl className="grid grid-cols-2 gap-y-4 border-t border-borda-sutil pt-4 @3xl:grid-cols-4">
-            <Fato rotulo="Frentes ativas" valor={`${ativos.length} de ${clusters.length}`} />
-            <Fato rotulo="Diferenciais" valor={String(todos.length)} divisoria />
-            <Fato rotulo="Fortes hoje" valor={String(fortes)} divisoria />
-            <Fato rotulo="Em construção" valor={String(todos.length - fortes)} divisoria />
-          </dl>
         </div>
       </section>
 
@@ -61,31 +56,42 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
         </ul>
       </section>
 
-      {fora.length > 0 && (
-        <section aria-labelledby="titulo-fora" className="flex flex-col gap-3">
-          <CabecalhoBloco id="titulo-fora" titulo="ficou de fora" quantidade={fora.length} />
-          <ul className="flex flex-col gap-3">
-            {fora.map((cluster) => {
-              const info = CLUSTER[cluster.id]
-              return (
-                <li key={cluster.id} className="flex flex-col gap-3 rounded-3xl border border-dashed border-borda-tag p-5 @3xl:flex-row @3xl:items-start @3xl:gap-5">
-                  <div className="flex items-center gap-3 @3xl:w-56 @3xl:shrink-0">
-                    <IconeCluster icone={info.icone} apagado />
-                    <div className="flex flex-col">
-                      <h3 className="text-base font-semibold text-texto-2">{info.titulo}</h3>
-                      <p className="text-xs text-texto-3">{info.pergunta}</p>
+      <VerMais resumo="Números por frente e as frentes que ficaram de fora, com o motivo">
+      <section aria-labelledby="titulo-numeros-diferenciais" className="flex flex-col gap-3">
+        <CabecalhoBloco id="titulo-numeros-diferenciais" titulo="em números" />
+        <dl className="grid grid-cols-2 gap-y-4 rounded-3xl bg-superficie p-5 md:p-6 @3xl:grid-cols-4">
+          <Fato rotulo="Frentes ativas" valor={`${ativos.length} de ${clusters.length}`} />
+          <Fato rotulo="Diferenciais" valor={String(todos.length)} divisoria />
+          <Fato rotulo="Fortes hoje" valor={String(fortes)} divisoria />
+          <Fato rotulo="Em construção" valor={String(todos.length - fortes)} divisoria />
+        </dl>
+      </section>
+        {fora.length > 0 && (
+          <section aria-labelledby="titulo-fora" className="flex flex-col gap-3">
+            <CabecalhoBloco id="titulo-fora" titulo="ficou de fora" quantidade={fora.length} />
+            <ul className="flex flex-col gap-3">
+              {fora.map((cluster) => {
+                const info = CLUSTER[cluster.id]
+                return (
+                  <li key={cluster.id} className="flex flex-col gap-3 rounded-3xl bg-superficie/50 p-5 @3xl:flex-row @3xl:items-start @3xl:gap-5">
+                    <div className="flex items-center gap-3 @3xl:w-56 @3xl:shrink-0">
+                      <IconeCluster icone={info.icone} apagado />
+                      <div className="flex flex-col">
+                        <h3 className="text-base font-semibold text-texto-2">{info.titulo}</h3>
+                        <p className="text-xs text-texto-3">{info.pergunta}</p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="flex-1 text-sm text-texto-2">{cluster.foraPorque}</p>
-                  <Botao variante="secundario" tamanho="sm" className="self-start" onClick={aoEditar}>
-                    <MessageCircle /> Conversar sobre isso
-                  </Botao>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      )}
+                    <p className="flex-1 text-sm text-texto-2">{cluster.foraPorque}</p>
+                    <Botao variante="secundario" tamanho="sm" className="self-start" onClick={aoEditar}>
+                      <MessageCircle /> Conversar sobre isso
+                    </Botao>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )}
+      </VerMais>
     </div>
   )
 }

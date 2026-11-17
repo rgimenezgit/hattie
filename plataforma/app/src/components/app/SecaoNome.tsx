@@ -8,6 +8,7 @@ import { Campo, CampoArea } from "@/components/hattie/Campo"
 import { Janela } from "@/components/hattie/Janela"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Checagem, Marca, OpcaoNome, ProcessoNome, Secao } from "@/lib/mock"
@@ -81,7 +82,9 @@ export function SecaoNome({ secao, marca, aoEditar }: Props) {
         </section>
       )}
 
-      <Processo processo={processo} singular={Boolean(escolhida)} />
+      <VerMais resumo="Como cheguei nos nomes: funil, o que ouvi de você, territórios e critérios">
+        <Processo processo={processo} singular={Boolean(escolhida)} />
+      </VerMais>
 
       <Janela
         aberta={confirmar !== null}

@@ -2,6 +2,16 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 17/11/2026 · Simplificação da experiência (branch `simplificacao-ux`)
+- O cérebro atende duas pessoas: o empreendedor que quer só uma marca que funcione e o designer ou consultor que usa o Hattie no trabalho. Cada seção mostra o essencial por padrão e guarda o técnico em "Opções avançadas", um clique abaixo. Quem quiser pode deixar sempre aberto. Não há escolha de "modo simples" no cadastro, para ninguém ficar preso a ela.
+- Estratégia em nova ordem, do mais aberto ao mais fechado: Briefing, Objetivos, Mercado e concorrentes, Produtos e serviços (Negócio); Propósito, Posicionamento, Diferenciais, Público e personas (Marca); Personalidade, Arquétipo, Atributos (Personalidade). Diferenciais da marca ficam junto do posicionamento.
+- Nova seção Produtos e serviços: o que é vendido, características e diferenciais de cada produto, separados do que é a marca. Dá para adicionar produtos e serviços.
+- Personalidade sai do grupo próprio e entra em Estratégia, antes da Identidade Verbal e Visual, porque define o clima da marca. "Como a marca age" sai e dá lugar a Personalidade: palavras-chave (calma, acolhedora, simples…) com uma explicação curta cada.
+- Personalidade e atributos se separam: personalidade são palavras sobre o jeito da marca; atributos são frases sobre as principais características e forças dela.
+- Identidade Verbal enxuta: Nome, Tagline, Mensagens-chave e Tom de voz. Palavras-chave e Vocabulário saem. Os adjetivos das palavras-chave já estão em Personalidade; as palavras que a marca repete passam para cada mensagem-chave; o que a marca usa e o que evita fica no Tom de voz, à vista.
+- Grafismos, Gradiente e Ícones viram uma categoria só: Grafismos e elementos gráficos. Ilustração continua separada.
+- Os cards de escolha de tipografia, estilo fotográfico, ilustração e elementos gráficos mostram a opção aplicada em peças reais da marca (post, story, banner), para quem não é designer ver o resultado antes de decidir.
+
 ## 12/11/2026
 - Biblioteca organizada em três níveis: coluna lateral para onde olhar (tudo, favoritos, tipos e projetos), uma barra só para buscar e filtrar (filtros num botão, o que está valendo em pílulas) e os arquivos agrupados por data. Um título só em Clash, com o lugar atual.
 - Biblioteca vira o acervo da marca: tudo que foi criado com o Hattie, enviado pela pessoa ou entregue por parceiros. Busca por frase com o Hattie mostrando o que entendeu (tipo, quem aparece, cor, data, quem fez, projeto), tipos em pílulas, filtros por projeto, quem aparece (produtos, pessoas e personagens), data e quem fez, coleções de projetos e favoritos, grade agrupada por data ou lista, seleção em lote e painel de detalhe com a descrição de cada arquivo, cores, etiquetas e onde foi usado.

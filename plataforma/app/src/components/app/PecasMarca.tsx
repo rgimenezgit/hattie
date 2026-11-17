@@ -4,7 +4,7 @@ import type { CSSProperties, ReactNode } from "react"
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { cn } from "@/lib/utils"
 import type { ExemploPeca, FormatoPeca, SuporteMockup } from "@/lib/mock"
-import { Carimbo, GrafismoFolhas, Ilustracao } from "./Ilustracao"
+import { Carimbo, GrafismoFolhas, Ilustracao, type CoresDesenho } from "./Ilustracao"
 import { Simbolo } from "./Logo"
 import type { SistemaMarca } from "./SistemaMarca"
 
@@ -68,11 +68,15 @@ type PropsPeca = {
   grade?: Pick<FormatoPeca, "colunas" | "zonaSegura"> | false
   /** Área coberta pela interface da rede: o conteúdo fica fora dela. */
   zona?: FormatoPeca["zonaSegura"]
+  /** Cores da foto, para mostrar a peça com outro estilo fotográfico (cards de escolha). */
+  imagem?: { fundo: string; cor: string }
+  /** Cores da ilustração, para mostrar a peça com outro estilo de ilustração. */
+  coresIlustracao?: CoresDesenho
   className?: string
 }
 
 /** Uma peça de comunicação no layout pedido, com as cores, as fontes, o logo, os grafismos e as imagens da marca. */
-export function Peca({ exemplo, proporcao, sistema, grade, zona, className }: PropsPeca) {
+export function Peca({ exemplo, proporcao, sistema, grade, zona, imagem, coresIlustracao, className }: PropsPeca) {
   const [largura, altura] = proporcao
   return (
     <div
@@ -81,7 +85,7 @@ export function Peca({ exemplo, proporcao, sistema, grade, zona, className }: Pr
       className={cn("relative w-full overflow-hidden [container-type:size]", className)}
       style={{ aspectRatio: `${largura} / ${altura}`, "--zona-topo": `${zona?.topo ?? 0}cqh`, "--zona-base": `${zona?.base ?? 0}cqh` } as CSSProperties}
     >
-      <Layout exemplo={exemplo} sistema={sistema} horizontal={largura / altura >= 1.4} />
+      <Layout exemplo={exemplo} sistema={sistema} horizontal={largura / altura >= 1.4} imagem={imagem} coresIlustracao={coresIlustracao} />
       {grade && <Grade colunas={grade.colunas} zona={grade.zonaSegura} />}
     </div>
   )
@@ -106,8 +110,21 @@ function Grade({ colunas, zona }: { colunas: number; zona?: FormatoPeca["zonaSeg
   )
 }
 
-function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistema: SistemaMarca; horizontal: boolean }) {
+function Layout({
+  exemplo,
+  sistema,
+  horizontal,
+  imagem,
+  coresIlustracao,
+}: {
+  exemplo: ExemploPeca
+  sistema: SistemaMarca
+  horizontal: boolean
+  imagem?: { fundo: string; cor: string }
+  coresIlustracao?: CoresDesenho
+}) {
   const { principal, apoio, fundo, escuro, destaque } = sistema.cores
+  const desenho = coresIlustracao ?? sistema.cores
   const t = textos(sistema)
   const margem = cq(6)
   /** Margem de 6% nas laterais; em cima e embaixo, o que for maior entre a margem e a zona segura do formato. */
@@ -126,7 +143,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
     case "foto-cheia":
       return (
         <>
-          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={principal} cor={apoio} borda="right" />
+          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? principal} cor={imagem?.cor ?? apoio} borda="right" />
           <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${principal} 34%, color-mix(in srgb, ${principal} 70%, transparent) 52%, transparent 78%)` }} />
           {coluna(
             <>
@@ -176,7 +193,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
         <div className={cn("grid size-full", horizontal ? "grid-cols-2" : "grid-rows-[52%_minmax(0,1fr)]")} style={{ backgroundColor: fundo }}>
           {horizontal && texto}
           <div className="min-h-0 overflow-hidden">
-            <Ilustracao desenho={horizontal ? "paisagem" : "pequi"} cores={sistema.cores} />
+            <Ilustracao desenho={horizontal ? "paisagem" : "pequi"} cores={desenho} />
           </div>
           {!horizontal && texto}
         </div>
@@ -214,7 +231,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
       )
       return (
         <div className={cn("grid size-full", horizontal ? "grid-cols-2" : "grid-rows-[54%_minmax(0,1fr)]")} style={{ backgroundColor: fundo }}>
-          <BlocoImagem className="size-full rounded-none outline-0" fundo={apoio} cor={fundo} borda={horizontal ? "left" : "bottom"} />
+          <BlocoImagem className="size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda={horizontal ? "left" : "bottom"} />
           {texto}
         </div>
       )
@@ -282,7 +299,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
       const produto = (
         <div className="grid min-h-0 place-items-center">
           <div className="aspect-square overflow-hidden rounded-full" style={{ width: cq(horizontal ? 70 : 52), backgroundColor: fundo }}>
-            <Ilustracao desenho="frasco" cores={sistema.cores} grao={0} />
+            <Ilustracao desenho="frasco" cores={desenho} grao={0} />
           </div>
         </div>
       )
@@ -310,7 +327,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
       return (
         <div className="relative flex size-full flex-col" style={{ backgroundColor: fundo, ...pad, gap: cq(3) }}>
           <div className="relative min-h-0 flex-1">
-            <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={apoio} cor={principal} borda="bottom" />
+            <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? principal} borda="bottom" />
             <GrafismoFolhas cor={principal} traco={2} className="absolute -top-[3cqmin] -left-[4cqmin] w-[60%] -rotate-12" />
             <GrafismoFolhas cor={principal} traco={2} className="absolute -right-[4cqmin] -bottom-[3cqmin] w-[60%] rotate-[168deg]" />
           </div>
@@ -328,7 +345,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
       return (
         <div className="relative grid size-full place-items-center">
           <div className="absolute inset-0">
-            <Ilustracao desenho="padrao" cores={sistema.cores} />
+            <Ilustracao desenho="padrao" cores={desenho} />
           </div>
           <div className="relative flex max-w-[70%] flex-col items-center text-center" style={{ backgroundColor: fundo, padding: cq(6), gap: cq(2.4), borderRadius: cq(3) }}>
             <Sobretitulo sistema={sistema} texto={exemplo.sobretitulo} cor={principal} />
@@ -341,7 +358,7 @@ function Layout({ exemplo, sistema, horizontal }: { exemplo: ExemploPeca; sistem
     case "carimbo":
       return (
         <>
-          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={apoio} cor={fundo} borda="left" />
+          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda="left" />
           {coluna(
             <>
               <p className="max-w-[60%]" style={t.titulo(10, escuro)}>

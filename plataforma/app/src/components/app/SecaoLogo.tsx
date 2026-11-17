@@ -11,6 +11,7 @@ import { Botao } from "@/components/hattie/Botao"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { ErroLogo, IdeiaLogo, Marca, Secao, SistemaLogo } from "@/lib/mock"
@@ -238,7 +239,9 @@ function Sistema({
       </section>
 
       <Regras regras={sistema.regras} ideia={ideia} marca={marca} nome={nome} />
-      <Espacamento espacamento={sistema.espacamento} ideia={ideia} marca={marca} nome={nome} />
+      <VerMais resumo="Área de proteção e tamanho mínimo do logo">
+        <Espacamento espacamento={sistema.espacamento} ideia={ideia} marca={marca} nome={nome} />
+      </VerMais>
     </div>
   )
 }

@@ -43,7 +43,10 @@ import { SecaoFotografia, SecaoIlustracao } from "./SecaoEstiloImagem"
 import { SecaoMotion } from "./SecaoMotion"
 import { SecaoLogo } from "./SecaoLogo"
 import { SecaoNome } from "./SecaoNome"
-import { SecaoArquetipos, SecaoAtributos } from "./SecaoPersonalidade"
+import { SecaoArquetipos, SecaoAtributos, SecaoPersonalidadeMarca } from "./SecaoPersonalidade"
+import { SecaoProdutos } from "./SecaoProdutos"
+import { SecaoMensagens } from "./SecaoMensagens"
+import { SecaoElementos } from "./SecaoElementos"
 import { SecaoPublico } from "./SecaoPublico"
 import { SecaoTipografia } from "./SecaoTipografia"
 import { SecaoVoz } from "./SecaoVoz"
@@ -176,11 +179,13 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
               </button>
               {aberto && (
                 <ul id={idLista} className="ms-5 flex flex-col border-s border-borda-sutil ps-2">
-                  {itens.map((secao) => {
+                  {itens.map((secao, indice) => {
                     const ativa = secao.id === secaoAtual
                     const pendente = secoes[secao.id] === "pendente"
+                    const abreBloco = !termo && secao.subgrupo && secao.subgrupo !== itens[indice - 1]?.subgrupo
                     return (
                       <li key={secao.id}>
+                        {abreBloco && <p className={cn("px-3 pb-1 text-micro font-medium text-texto-3", indice > 0 ? "pt-3" : "pt-1")}>{secao.subgrupo}</p>}
                         <Link
                           href={`/marca/${marca.slug}/cerebro/${secao.id}` as Route}
                           onClick={aoNavegar}
@@ -394,6 +399,14 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoNome secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "voz" ? (
         <SecaoVoz secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "mensagens" ? (
+        <SecaoMensagens secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "elementos" ? (
+        <SecaoElementos secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "produtos" ? (
+        <SecaoProdutos secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.conteudo.tipo === "personalidade" ? (
+        <SecaoPersonalidadeMarca secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "arquetipos" ? (
         <SecaoArquetipos secao={secao} marca={marca} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "atributos" ? (

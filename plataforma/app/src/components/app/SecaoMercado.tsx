@@ -8,6 +8,7 @@ import { Janela } from "@/components/hattie/Janela"
 import { Minilinha } from "@/components/hattie/Minilinha"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Concorrente, Indicador, InsightMercado, PainelMercado, Referencia, Secao, TipoConcorrente } from "@/lib/mock"
@@ -68,7 +69,9 @@ export function SecaoMercado({ secao, aoEditar }: Props) {
         ))}
       </section>
 
-      <Painel painel={painel} />
+      <VerMais resumo="Painel do mercado com indicadores da semana e o que mudou">
+        <Painel painel={painel} />
+      </VerMais>
 
       <FormReferencia aberta={novaReferencia} aoMudar={setNovaReferencia} />
       <FormConcorrente aberta={novoConcorrente} aoMudar={setNovoConcorrente} />
