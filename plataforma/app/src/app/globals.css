@@ -196,6 +196,7 @@
     --sombra-canvas: inset 0 2px 6px -1px oklch(0 0 0 / 0.08), inset 0 0 10px oklch(0 0 0 / 0.035), inset 0 0 0 1px oklch(0 0 0 / 0.03);
     /* Coluna lateral sobre o palco: o conteúdo que rola de lado passa por baixo dela. */
     --sombra-coluna: 0 0 0 1px oklch(0 0 0 / 0.02), 6px 0 14px -8px oklch(0 0 0 / 0.14);
+    --sombra-coluna-direita: 0 0 0 1px oklch(0 0 0 / 0.02), -6px 0 14px -8px oklch(0 0 0 / 0.14);
   }
   [data-theme="noturno"] {
     --plimm-sombra: var(--lima-forte);
@@ -583,5 +584,86 @@
 @media (prefers-reduced-motion: reduce) {
   .demo-motion * {
     animation-name: aparecer !important;
+  }
+}
+
+/*
+ * Chapéu animado da tela de criação (ChapeuAnimado). Pula com amassa e estica e a copa chacoalha
+ * como quem procura algo lá dentro. Mouse por cima agita mais.
+ */
+.chapeu-corpo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: chapeu-pulo 1.3s ease-in-out infinite;
+}
+.chapeu-copa {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: chapeu-copa 0.65s ease-in-out infinite alternate;
+}
+.chapeu-sombra {
+  animation: chapeu-sombra 1.3s ease-in-out infinite;
+}
+.chapeu-palco[data-agitado] .chapeu-corpo,
+.chapeu-palco[data-agitado] .chapeu-sombra {
+  animation-duration: 0.85s;
+}
+.chapeu-palco[data-agitado] .chapeu-copa {
+  animation-duration: 0.26s;
+}
+@keyframes chapeu-pulo {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  8% {
+    transform: translateY(0) scale(1.1, 0.88);
+  }
+  20% {
+    transform: translateY(-6%) scale(0.94, 1.08);
+  }
+  45% {
+    transform: translateY(-24%) scale(1, 1);
+  }
+  72% {
+    transform: translateY(-4%) scale(0.97, 1.04);
+  }
+  80% {
+    transform: translateY(0) scale(1.12, 0.86);
+  }
+  90% {
+    transform: translateY(0) scale(0.98, 1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes chapeu-copa {
+  from {
+    transform: rotate(-7deg) skewX(5deg);
+  }
+  to {
+    transform: rotate(8deg) skewX(-6deg);
+  }
+}
+@keyframes chapeu-sombra {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  45% {
+    transform: scaleX(0.55);
+    opacity: 0.45;
+  }
+  80% {
+    transform: scaleX(1.12);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapeu-corpo,
+  .chapeu-copa,
+  .chapeu-sombra {
+    animation: none;
   }
 }

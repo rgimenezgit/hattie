@@ -186,14 +186,66 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       )
 
     case "atributos":
-      return (
+      return card ? (
         <ul className="flex flex-wrap gap-1.5">
           {conteudo.atributos.map((atributo) => (
             <li key={atributo.id}>
-              <Tag tamanho={card ? "md" : "lg"}>{atributo.nome}</Tag>
+              <Tag>{atributo.nome}</Tag>
             </li>
           ))}
         </ul>
+      ) : (
+        <ul className="flex flex-col gap-1.5">
+          {conteudo.atributos.map((atributo) => (
+            <li key={atributo.id} className="text-sm">
+              {atributo.titulo}
+            </li>
+          ))}
+        </ul>
+      )
+
+    case "mensagens":
+      return (
+        <ul className="flex flex-col gap-1">
+          {conteudo.mensagens.map((mensagem) => (
+            <li key={mensagem.id} className={cn("leading-snug", card ? "text-sm" : "text-destaque")}>
+              {mensagem.frase}
+            </li>
+          ))}
+        </ul>
+      )
+
+    case "elementos":
+      return (
+        <div className="flex items-center gap-2">
+          <span aria-hidden className="h-10 w-16 rounded-xl" style={{ background: `linear-gradient(to bottom, ${conteudo.gradiente.de}, ${conteudo.gradiente.para})` }} />
+          <p className={cn("text-texto-2", card ? "line-clamp-2 text-sm" : "text-sm")}>{conteudo.resumo}</p>
+        </div>
+      )
+
+    case "personalidade":
+      return (
+        <ul className="flex flex-wrap gap-x-3 gap-y-1">
+          {conteudo.tracos.map((traco) => (
+            <li key={traco.id} className={cn("font-heading font-medium lowercase", card ? "text-destaque" : "text-titulo-3")}>
+              {traco.palavra}
+            </li>
+          ))}
+        </ul>
+      )
+
+    case "produtos":
+      return (
+        <div className="flex flex-col gap-2">
+          <ul className="flex flex-wrap gap-1.5">
+            {conteudo.produtos.map((produto) => (
+              <li key={produto.id}>
+                <Tag tamanho={card ? "md" : "lg"}>{produto.nome}</Tag>
+              </li>
+            ))}
+          </ul>
+          {!card && <p className="text-sm text-texto-2">{conteudo.resumo}</p>}
+        </div>
       )
 
     case "voz":

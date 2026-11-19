@@ -22,10 +22,12 @@ import { Campo, CampoArea, CampoLista } from "@/components/hattie/Campo"
 import { Janela } from "@/components/hattie/Janela"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Marca, Persona, Publico, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 import { corDoTexto } from "./PreviaSecao"
 
@@ -55,6 +57,7 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="o público macro" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{macro.descricao}</p>
@@ -66,19 +69,6 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
               </div>
             ))}
           </dl>
-        </div>
-      </section>
-
-      <section aria-labelledby="titulo-publicos" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-publicos" titulo="públicos" quantidade={publicos.length}>
-          <Botao variante="secundario" tamanho="sm" onClick={() => setNovoPublico(true)}>
-            <Plus /> Adicionar<span className="max-sm:sr-only"> público</span>
-          </Botao>
-        </CabecalhoBloco>
-        <div className="flex flex-col gap-3">
-          {publicos.map((publico) => (
-            <CartaoPublico key={publico.id} publico={publico} personas={personas.filter((persona) => persona.publicoId === publico.id).length} aoCompletar={aoEditar} />
-          ))}
         </div>
       </section>
 
@@ -96,6 +86,21 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
           ))}
         </ul>
       </section>
+
+      <VerMais resumo="Os públicos em detalhe: quem são, como vivem e quanto pesam nas vendas">
+        <section aria-labelledby="titulo-publicos" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-publicos" titulo="públicos" quantidade={publicos.length}>
+            <Botao variante="secundario" tamanho="sm" onClick={() => setNovoPublico(true)}>
+              <Plus /> Adicionar<span className="max-sm:sr-only"> público</span>
+            </Botao>
+          </CabecalhoBloco>
+          <div className="flex flex-col gap-3">
+            {publicos.map((publico) => (
+              <CartaoPublico key={publico.id} publico={publico} personas={personas.filter((persona) => persona.publicoId === publico.id).length} aoCompletar={aoEditar} />
+            ))}
+          </div>
+        </section>
+      </VerMais>
 
       <FormPublico aberta={novoPublico} aoMudar={setNovoPublico} />
       <FormPersona aberta={novaPersona} aoMudar={setNovaPersona} publicos={publicos} />
@@ -116,6 +121,7 @@ function CartaoPublico({ publico, personas, aoCompletar }: { publico: Publico; p
           <span className="text-xs text-texto-3">
             {personas === 1 ? "1 persona" : `${personas} personas`}
           </span>
+          <MenuPonto ponto={`o público ${publico.nome}`} className="-me-2 ms-auto" />
         </div>
         {publico.descricao && <p className="max-w-[70ch] text-sm text-texto-2">{publico.descricao}</p>}
       </header>
@@ -218,6 +224,7 @@ function CartaoPersona({
           </p>
         </div>
         {persona.rascunho ? <Tag tamanho="sm">rascunho</Tag> : publico && <Tag tamanho="sm">{publico}</Tag>}
+        <MenuPonto ponto={`a persona ${persona.nome}`} className="-me-2" />
       </header>
 
       {persona.frase && (

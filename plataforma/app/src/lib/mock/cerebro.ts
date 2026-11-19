@@ -3,7 +3,6 @@ import type { ExemploPeca, GrupoCerebro, LayoutPeca, RecursoPeca, Secao, StatusS
 export const GRUPOS_CEREBRO: GrupoCerebro[] = [
   { id: "estrategia", titulo: "Estratégia" },
   { id: "verbal", titulo: "Verbal" },
-  { id: "personalidade", titulo: "Personalidade" },
   { id: "visual", titulo: "Visual" },
 ]
 
@@ -48,7 +47,8 @@ export function peca(id: string, nome: string, layout: LayoutPeca): ExemploPeca 
   return { id, nome, layout, ...TEXTOS_PECA[layout], recursos: RECURSOS_PECA[layout] }
 }
 
-export const SECOES: Secao[] = [
+/** Seções na ordem em que foram escritas. A ordem de leitura fica em ORDEM_SECOES, logo abaixo. */
+const SECOES_BASE: Secao[] = [
   {
     id: "briefing",
     titulo: "Briefing de marca",
@@ -58,6 +58,71 @@ export const SECOES: Secao[] = [
     conteudo: {
       tipo: "texto",
       texto: "Raiz Natural faz cosméticos naturais em pequenos lotes, em Ribeirão Preto, com ingredientes de cooperativas do cerrado, para mulheres que leem o rótulo antes de comprar. Hoje vende pelo Instagram, pelo WhatsApp e em feiras, e quer chegar a três lojas da região e a clientes de fora de São Paulo no próximo ano.",
+    },
+  },
+  {
+    id: "produtos",
+    titulo: "Produtos e serviços",
+    grupo: "estrategia",
+    resumo: "Quatro produtos, todos com um ingrediente do cerrado como estrela. O óleo de pequi é o carro-chefe.",
+    porque:
+      "Separei o que a Raiz Natural vende do que a marca é. Assim, quando entrar um produto novo, a marca continua a mesma e só esta lista cresce. Montei a partir do catálogo que você mandou.",
+    conteudo: {
+      tipo: "produtos",
+      resumo: "O que a Raiz Natural vende hoje, o que cada produto tem e o que ele tem de diferente.",
+      produtos: [
+        {
+          id: "oleo-pequi",
+          tipo: "produto",
+          nome: "Óleo de pequi",
+          categoria: "Óleo para pele e cabelo",
+          oQueE: "Óleo puro de pequi, prensado a frio, para hidratar a pele e as pontas do cabelo.",
+          preco: "R$ 68 · 60 ml",
+          caracteristicas: ["Prensado a frio", "Sem fragrância", "Frasco de vidro âmbar"],
+          diferenciais: ["Lote rastreável da cooperativa de Pirenópolis", "Absorve rápido e não deixa a pele oleosa"],
+          paraQuem: "Pele seca e cabelo com pontas ressecadas",
+          comoUsar: "Três gotas na pele ainda úmida, depois do banho.",
+          ingredientes: ["Óleo de pequi (Caryocar brasiliense)"],
+          principal: true,
+        },
+        {
+          id: "hidratante-baru",
+          tipo: "produto",
+          nome: "Hidratante de baru",
+          categoria: "Hidratante corporal",
+          oQueE: "Creme leve com óleo de baru, para usar todo dia.",
+          preco: "R$ 54 · 200 g",
+          caracteristicas: ["Textura leve", "Vegano", "Pote reutilizável"],
+          diferenciais: ["Baru da cooperativa do norte de Goiás", "Cheiro suave de castanha, sem perfume adicionado"],
+          paraQuem: "Quem quer hidratação diária sem sensação pegajosa",
+          comoUsar: "No corpo todo, depois do banho.",
+          ingredientes: ["Óleo de baru", "Manteiga de cupuaçu", "Glicerina vegetal"],
+        },
+        {
+          id: "sabonete-buriti",
+          tipo: "produto",
+          nome: "Sabonete de buriti",
+          categoria: "Sabonete em barra",
+          oQueE: "Barra feita à mão com óleo de buriti, que limpa sem ressecar.",
+          preco: "R$ 22 · 90 g",
+          caracteristicas: ["Feito à mão", "Cura de 40 dias", "Sem embalagem plástica"],
+          diferenciais: ["Cor laranja natural do buriti, sem corante", "Cada barra é cortada e embalada uma a uma"],
+          paraQuem: "Pele normal a seca, rosto e corpo",
+          comoUsar: "Faça espuma nas mãos e enxágue com água morna.",
+          ingredientes: ["Óleo de buriti", "Óleo de coco", "Manteiga de karité"],
+        },
+        {
+          id: "kit-presente",
+          tipo: "produto",
+          nome: "Kit de presente",
+          categoria: "Kit",
+          oQueE: "Óleo de pequi, hidratante de baru e sabonete de buriti numa caixa de papel semente.",
+          preco: "R$ 129",
+          caracteristicas: ["Três produtos", "Caixa de papel semente", "Cartão escrito à mão"],
+          diferenciais: ["A caixa pode ser plantada", "Vem com a história de cada ingrediente"],
+          paraQuem: "Quem compra para presentear, principalmente no fim do ano",
+        },
+      ],
     },
   },
   {
@@ -694,6 +759,7 @@ export const SECOES: Secao[] = [
         { termo: "Origem", uso: "De onde vem o ingrediente. Sempre acompanhada do lugar." },
         { termo: "Ritual", uso: "O momento de cuidado. Curto e possível no dia a dia." },
         { termo: "Reposição", uso: "A recompra mensal. Usada no lugar de assinatura." },
+        { termo: "Rotina", uso: "O uso de todo dia. Sempre com um gesto possível." },
       ],
       proibidas: [
         { palavra: "milagre", troca: "constância", motivo: "Promete o que cosmético não entrega" },
@@ -702,6 +768,7 @@ export const SECOES: Secao[] = [
         { palavra: "químico", troca: "sintético", motivo: "Usado como ofensa, assusta sem explicar" },
         { palavra: "barato", troca: "acessível", motivo: "Puxa a marca para a briga de preço" },
         { palavra: "detox", troca: "limpeza", motivo: "Promessa sem base para a pele" },
+        { palavra: "instantâneo", troca: "diário", motivo: "Promete pressa; a marca vende constância" },
       ],
     },
   },
@@ -709,43 +776,56 @@ export const SECOES: Secao[] = [
     id: "mensagens",
     titulo: "Mensagens-chave",
     grupo: "verbal",
-    resumo: "Origem rastreável, pequenos lotes, cuidado diário.",
-    porque: "Três ideias que se repetem em todo post e rótulo deixam a marca reconhecível.",
+    resumo: "Origem rastreável, pequenos lotes e cuidado que cabe no dia: três ideias que aparecem em todo post, rótulo e conversa.",
+    porque:
+      "Três ideias repetidas sempre do mesmo jeito deixam a marca reconhecível. Cada uma vem com as palavras que a carregam, para você saber o que precisa aparecer no texto, e com exemplos prontos.",
     conteudo: {
-      tipo: "blocos",
-      blocos: [
-        { titulo: "Origem", texto: "Você sabe de onde vem cada gota." },
-        { titulo: "Lote", texto: "Feito em pequenos lotes, com calma." },
-        { titulo: "Rotina", texto: "Cuidado que cabe no seu dia." },
+      tipo: "mensagens",
+      resumo: "O que a Raiz Natural quer que fique na cabeça de quem lê. Se um texto não carrega pelo menos uma dessas ideias, falta alguma coisa.",
+      mensagens: [
+        {
+          id: "origem",
+          titulo: "Origem",
+          frase: "Você sabe de onde vem cada gota.",
+          explicacao: "Mostra o lugar, a cooperativa e o lote. A prova vem junto da promessa.",
+          palavras: ["origem", "cerrado", "cooperativa", "lote"],
+          exemplos: [
+            { onde: "Rótulo", texto: "Pequi da cooperativa de Pirenópolis, lote 12." },
+            { onde: "Post", texto: "Esse óleo veio de Pirenópolis. A Dona Cida colheu em setembro." },
+          ],
+        },
+        {
+          id: "lote",
+          titulo: "Lote pequeno",
+          frase: "Feito em pequenos lotes, com calma.",
+          explicacao: "Pouca quantidade, conferida uma a uma. Quando acaba, a marca espera o próximo.",
+          palavras: ["lote", "pequeno", "calma", "feito à mão"],
+          exemplos: [
+            { onde: "Loja", texto: "Lote 12 acabou. O próximo sai em dezembro." },
+            { onde: "Stories", texto: "Hoje é dia de envasar o lote 13, frasco por frasco." },
+          ],
+        },
+        {
+          id: "rotina",
+          titulo: "Rotina",
+          frase: "Cuidado que cabe no seu dia.",
+          explicacao: "Gestos curtos e possíveis, sem promessa de milagre. Constância vale mais que exagero.",
+          palavras: ["cuidado", "rotina", "diário", "constância"],
+          exemplos: [
+            { onde: "Rótulo", texto: "Três gotas depois do banho. Todo dia." },
+            { onde: "E-mail", texto: "Dois minutos por dia e um mês depois a pele agradece." },
+          ],
+        },
       ],
     },
   },
-  {
-    id: "palavras-chave",
-    titulo: "Palavras-chave",
-    grupo: "verbal",
-    resumo: "Cuidadosa, honesta, acolhedora, natural, artesanal.",
-    porque: "Essas palavras aparecem nas avaliações das suas clientes e combinam com o seu jeito de falar.",
-    conteudo: { tipo: "palavras", palavras: ["Cuidadosa", "Honesta", "Acolhedora", "Natural", "Artesanal"] },
-  },
-  {
-    id: "vocabulario",
-    titulo: "Vocabulário",
-    grupo: "verbal",
-    resumo: "Usa lote, origem, cerrado e cuidado. Troca milagre e instantâneo por rotina e constância.",
-    porque: "As palavras certas reforçam a confiança que você quer passar.",
-    conteudo: {
-      tipo: "blocos",
-      blocos: [
-        { titulo: "Usa", texto: "lote, origem, cerrado, cuidado, rotina" },
-        { titulo: "Troca", texto: "milagre por constância, instantâneo por diário" },
-      ],
-    },
-  },
+
+
+
   {
     id: "arquetipo",
     titulo: "Arquétipo",
-    grupo: "personalidade",
+    grupo: "estrategia",
     resumo: "Cuidador, com um toque de Explorador: acolhe como quem cuida e leva a cliente até a origem de cada ingrediente.",
     porque:
       "Você descreveu a marca como uma amiga que entende de pele, e as clientes voltam porque confiam. Isso é o Cuidador. O cerrado, as cooperativas e a vontade de mostrar de onde tudo vem trazem o Explorador, em dose menor, para a marca não ficar só no colo.",
@@ -797,76 +877,118 @@ export const SECOES: Secao[] = [
   {
     id: "atributos",
     titulo: "Atributos",
-    grupo: "personalidade",
-    resumo: "Cuidadosa, honesta, acolhedora e curiosa: quatro atributos para guiar cada texto, imagem e atendimento.",
+    grupo: "estrategia",
+    resumo: "Rastreável, feita em lote pequeno, com ingredientes do cerrado e atendimento de perto: as quatro forças que sustentam a Raiz Natural.",
     porque:
-      "Escolhi atributos que aparecem nas mensagens das suas clientes e que combinam com o Cuidador e o Explorador. Cada um tem uma frase e exemplos para virar decisão no dia a dia.",
+      "Atributo é o que a marca tem e faz de melhor, dito em frase. Juntei o que as suas clientes mais elogiam com o que nenhum concorrente da região consegue provar. Cada um vem com onde ele aparece, para virar decisão no dia a dia.",
     conteudo: {
       tipo: "atributos",
-      resumo: "Quatro atributos para guiar cada texto, imagem e atendimento. Os três primeiros vêm do Cuidador; a curiosidade vem do Explorador.",
+      resumo: "Quatro forças da marca, em frases. Personalidade diz o jeito; atributo diz o que a Raiz Natural tem de forte.",
       atributos: [
         {
-          id: "cuidadosa",
-          nome: "Cuidadosa",
-          titulo: "Pensa em cada detalhe antes de entregar",
-          significado: "Ser cuidadosa é fazer com atenção: escolher o ingrediente, conferir o lote e pensar em quem vai usar.",
-          naMarca: "A Raiz Natural confere cada lote, explica o uso e embala como presente, mesmo quando é para a própria cliente.",
+          id: "rastreavel",
+          nome: "Rastreável",
+          titulo: "Cada frasco diz de onde veio, quem colheu e quando",
+          significado: "A cliente consegue seguir o ingrediente da cooperativa até a prateleira dela, pelo número do lote.",
+          naMarca: "O rótulo traz lote, cooperativa e data da colheita, e o site mostra a história de cada lote.",
           ondeSeVe: [
-            { onde: "Rótulo", como: "Lote, cooperativa e modo de usar em letras que dá para ler" },
-            { onde: "Embalagem", como: "Papel de seda, cartão escrito e amostra quando faz sentido" },
-            { onde: "Atendimento", como: "Pergunta sobre a pele antes de indicar" },
-          ],
-          arquetipo: "Cuidador",
-        },
-        {
-          id: "honesta",
-          nome: "Honesta",
-          titulo: "Diz o que o produto faz e o que ele não faz",
-          significado: "Ser honesta é falar a verdade mesmo quando ela vende menos: sem promessa de milagre e com a origem à vista.",
-          naMarca: "A marca mostra de onde vem cada ingrediente, avisa quando algo atrasa e indica outra opção quando o produto não serve.",
-          ondeSeVe: [
-            { onde: "Posts", como: "Resultado real, com tempo de uso, sem antes e depois milagroso" },
-            { onde: "Rótulo", como: "Lista completa de ingredientes com nome comum ao lado" },
-            { onde: "Atendimento", como: "Avisa atraso antes da cliente perguntar" },
-          ],
-          arquetipo: "Cuidador",
-        },
-        {
-          id: "acolhedora",
-          nome: "Acolhedora",
-          titulo: "Recebe cada cliente pelo nome",
-          significado: "Ser acolhedora é fazer a pessoa se sentir bem-vinda, ouvida e sem pressa para decidir.",
-          naMarca: "A Raiz Natural chama a cliente pelo nome, responde com calma no WhatsApp e lembra do que ela comprou da última vez.",
-          ondeSeVe: [
-            { onde: "WhatsApp", como: "Resposta com o nome e sem roteiro pronto" },
-            { onde: "E-mail", como: "Assinado pela Bia, com espaço para responder" },
-            { onde: "Feiras", como: "Amostra para provar sem compromisso" },
-          ],
-          arquetipo: "Cuidador",
-        },
-        {
-          id: "curiosa",
-          nome: "Curiosa",
-          titulo: "Quer mostrar o que o cerrado tem de novo",
-          significado: "Ser curiosa é ter vontade de descobrir e de dividir o que descobriu, com entusiasmo e sem exagero.",
-          naMarca: "A marca apresenta ingredientes pouco conhecidos, conta a colheita de cada estação e convida a cliente a experimentar.",
-          ondeSeVe: [
-            { onde: "Stories", como: "Bastidores da colheita e das cooperativas" },
-            { onde: "Lançamentos", como: "Um ingrediente novo por vez, com a história dele" },
-            { onde: "Rótulo", como: "Curiosidade curta sobre o ingrediente principal" },
+            { onde: "Rótulo", como: "Lote, cooperativa e data da colheita escritos à mão" },
+            { onde: "Site", como: "Página de cada lote com fotos da colheita" },
+            { onde: "Posts", como: "Série mensal sobre o lote que acabou de sair" },
           ],
           arquetipo: "Explorador",
+        },
+        {
+          id: "lote-pequeno",
+          nome: "Lote pequeno",
+          titulo: "Feita em lotes pequenos, com tempo para conferir cada um",
+          significado: "A produção é curta de propósito: cada lote é conferido antes de sair e nada fica parado no estoque.",
+          naMarca: "A Raiz Natural produz por estação e avisa quando um lote acaba, em vez de trocar o ingrediente.",
+          ondeSeVe: [
+            { onde: "Loja", como: "Aviso de lote limitado e data do próximo" },
+            { onde: "Embalagem", como: "Número do lote em destaque" },
+            { onde: "Atendimento", como: "Lista de espera quando acaba" },
+          ],
+          arquetipo: "Cuidador",
+        },
+        {
+          id: "cerrado",
+          nome: "Ingredientes do cerrado",
+          titulo: "Usa pequi, baru e buriti, que quase nenhuma marca usa",
+          significado: "Os ingredientes vêm de um bioma pouco explorado na cosmética, com cooperativas que cuidam da colheita.",
+          naMarca: "Cada produto tem um ingrediente do cerrado como estrela, com a história dele contada no rótulo.",
+          ondeSeVe: [
+            { onde: "Rótulo", como: "Curiosidade curta sobre o ingrediente principal" },
+            { onde: "Lançamentos", como: "Um ingrediente novo por vez" },
+            { onde: "Ilustração", como: "Frutos do cerrado desenhados no estilo da marca" },
+          ],
+          arquetipo: "Explorador",
+        },
+        {
+          id: "perto",
+          nome: "Atendimento de perto",
+          titulo: "Atende cada cliente pelo nome, do WhatsApp à feira",
+          significado: "Quem compra fala com a Bia: a marca conhece as clientes e lembra do que cada uma comprou.",
+          naMarca: "Resposta no WhatsApp com o nome da cliente, amostra para quem está em dúvida e bilhete escrito à mão no pedido.",
+          ondeSeVe: [
+            { onde: "WhatsApp", como: "Resposta com o nome e sem roteiro pronto" },
+            { onde: "Pedido", como: "Bilhete escrito à mão e amostra" },
+            { onde: "Feiras", como: "Provar sem compromisso" },
+          ],
+          arquetipo: "Cuidador",
         },
       ],
     },
   },
   {
-    id: "comportamento",
-    titulo: "Como a marca age",
-    grupo: "personalidade",
-    resumo: "Explica sem pressa, mostra a origem e responde cada cliente pelo nome.",
-    porque: "O jeito de agir precisa bater com o que a marca promete.",
-    conteudo: { tipo: "texto", texto: "Explica sem pressa, mostra a origem e responde cada cliente pelo nome." },
+    id: "personalidade",
+    titulo: "Personalidade",
+    grupo: "estrategia",
+    resumo: "Calma, acolhedora, honesta, curiosa e simples: o jeito da Raiz Natural em cinco palavras.",
+    porque:
+      "Personalidade é o clima da marca. Ela vem antes da voz e do visual porque decide como a marca fala, como se mostra e como atende. Tirei as palavras do jeito que você descreveu a Raiz Natural e do que as clientes dizem dela.",
+    conteudo: {
+      tipo: "personalidade",
+      resumo: "Se a Raiz Natural fosse uma pessoa, seria aquela amiga que entende de pele, fala devagar e te leva para conhecer de onde vem cada coisa.",
+      tracos: [
+        {
+          id: "calma",
+          palavra: "Calma",
+          explicacao: "Sem pressa e sem urgência de venda. A marca dá tempo para a cliente ler, provar e decidir.",
+          naPratica: "Nada de contagem regressiva ou \"últimas unidades\" inventado.",
+        },
+        {
+          id: "acolhedora",
+          palavra: "Acolhedora",
+          explicacao: "Recebe cada cliente como alguém conhecido, pelo nome, e escuta antes de indicar.",
+          naPratica: "Pergunta como está a pele antes de sugerir um produto.",
+        },
+        {
+          id: "honesta",
+          palavra: "Honesta",
+          explicacao: "Diz o que o produto faz e mostra de onde ele vem, sem promessa de milagre.",
+          naPratica: "Resultado real, com tempo de uso, e lista completa de ingredientes.",
+        },
+        {
+          id: "curiosa",
+          palavra: "Curiosa",
+          explicacao: "Gosta de descobrir e dividir o que o cerrado tem de novo, com entusiasmo na medida.",
+          naPratica: "Um ingrediente por vez, com a história de quem colhe.",
+        },
+        {
+          id: "simples",
+          palavra: "Simples",
+          explicacao: "Despojada, sem luxo de vitrine. O cuidado está no detalhe, e o visual respira.",
+          naPratica: "Rótulo limpo, papel kraft e frases curtas.",
+        },
+      ],
+      seFosse: [
+        { titulo: "Uma pessoa", texto: "A amiga que mora no interior, faz as próprias receitas e sempre manda um potinho para você provar." },
+        { titulo: "Um lugar", texto: "Uma varanda de fazenda no fim da tarde, com cheiro de terra molhada." },
+        { titulo: "Um som", texto: "Viola caipira baixinha, tocando enquanto alguém conversa." },
+        { titulo: "Um material", texto: "Papel kraft, vidro âmbar e madeira clara." },
+      ],
+    },
   },
   {
     id: "logo",
@@ -1011,28 +1133,38 @@ export const SECOES: Secao[] = [
   },
   {
     id: "grafismos",
-    titulo: "Grafismos",
+    titulo: "Grafismos e elementos gráficos",
     grupo: "visual",
-    resumo: "Linhas de folhas desenhadas à mão e carimbo de lote.",
-    porque: "As linhas à mão conversam com a produção artesanal e ficam bem nas etiquetas.",
-    conteudo: { tipo: "imagens", descricao: "Linhas de folhas desenhadas à mão e carimbo de lote.", legendas: ["Linhas de folha", "Carimbo de lote"] },
+    resumo: "Folhas desenhadas à mão, carimbo de lote, padrão do cerrado, gradiente do creme à argila e ícones de traço fino.",
+    porque:
+      "Juntei tudo que decora e organiza as peças: grafismos, gradiente e ícones. As linhas à mão conversam com a produção artesanal, o gradiente dá profundidade sem competir com o rótulo e os ícones seguem a folha do logo.",
+    conteudo: {
+      tipo: "elementos",
+      resumo: "Os desenhos de apoio da Raiz Natural. Entram nas bordas, nos fundos e nas etiquetas, sempre com espaço para o produto.",
+      grafismos: [
+        { id: "folhas", nome: "Folhas do cerrado", uso: "Cantos de post, papel de seda e etiqueta", desenho: "folhas" },
+        { id: "carimbo", nome: "Carimbo de lote", uso: "Rótulo, selo de lançamento e posts de rastreio", desenho: "carimbo" },
+        { id: "padrao", nome: "Padrão do cerrado", uso: "Fundo de presente, papel de embrulho e datas especiais", desenho: "padrao" },
+      ],
+      gradiente: { nome: "Creme para argila", de: "#F2EBDD", para: "#C9A27E", uso: "Só no fundo de posts e stories, de cima para baixo" },
+      icones: [
+        { id: "folha", nome: "Folha", desenho: "folha" },
+        { id: "gota", nome: "Gota", desenho: "gota" },
+        { id: "lote", nome: "Lote", desenho: "lote" },
+        { id: "sol", nome: "Colheita", desenho: "sol" },
+        { id: "lugar", nome: "Origem", desenho: "lugar" },
+        { id: "reciclar", nome: "Refil", desenho: "reciclar" },
+      ],
+      estiloIcones: "Traço fino de 1,5 px, pontas arredondadas, na cor principal. Nada de ícone preenchido.",
+      regras: {
+        faca: ["Use um grafismo por peça, nas bordas", "Deixe o gradiente só no fundo", "Use ícones do mesmo tamanho lado a lado"],
+        evite: ["Grafismo por cima do produto ou do texto", "Gradiente com outras cores da paleta", "Misturar ícone de traço com ícone preenchido"],
+      },
+    },
   },
-  {
-    id: "gradiente",
-    titulo: "Gradiente",
-    grupo: "visual",
-    resumo: "Do creme à argila, suave, só em fundos de post.",
-    porque: "Um gradiente discreto dá profundidade às fotos sem competir com o rótulo.",
-    conteudo: { tipo: "imagens", descricao: "Do creme à argila, suave, só em fundos de post.", legendas: ["Creme para argila"] },
-  },
-  {
-    id: "icones",
-    titulo: "Ícones",
-    grupo: "visual",
-    resumo: "Traço fino e arredondado, inspirado na folha do logo.",
-    porque: "Ícones de traço fino combinam com a serifa suave e ficam elegantes nas embalagens.",
-    conteudo: { tipo: "imagens", descricao: "Traço fino e arredondado, inspirado na folha do logo.", legendas: ["Folha", "Gota", "Lote"] },
-  },
+
+
+
   {
     id: "fotografia",
     titulo: "Estilo fotográfico",
@@ -1487,7 +1619,44 @@ export const SECOES: Secao[] = [
   },
 ]
 
-export const VISAO_GERAL = ["briefing", "proposito", "logo", "tipografia", "cores", "palavras-chave", "publico", "fotografia", "ilustracao"]
+/**
+ * Ordem de leitura do cérebro. Estratégia começa pelo mais aberto (briefing), passa pela parte analítica
+ * (objetivos, mercado, produtos), chega no coração da marca (propósito, posicionamento, diferenciais, público)
+ * e termina na personalidade, que decide o clima da voz e do visual.
+ */
+const ORDEM_SECOES: { id: string; subgrupo?: string }[] = [
+  { id: "briefing", subgrupo: "Negócio" },
+  { id: "objetivos", subgrupo: "Negócio" },
+  { id: "mercado", subgrupo: "Negócio" },
+  { id: "produtos", subgrupo: "Negócio" },
+  { id: "proposito", subgrupo: "Marca" },
+  { id: "posicionamento", subgrupo: "Marca" },
+  { id: "diferencial", subgrupo: "Marca" },
+  { id: "publico", subgrupo: "Marca" },
+  { id: "personalidade", subgrupo: "Personalidade" },
+  { id: "arquetipo", subgrupo: "Personalidade" },
+  { id: "atributos", subgrupo: "Personalidade" },
+  { id: "nome" },
+  { id: "tagline" },
+  { id: "mensagens" },
+  { id: "tom-de-voz" },
+  { id: "logo" },
+  { id: "cores" },
+  { id: "tipografia" },
+  { id: "grafismos" },
+  { id: "fotografia" },
+  { id: "ilustracao" },
+  { id: "aplicacoes" },
+  { id: "movimento" },
+]
+
+export const SECOES: Secao[] = ORDEM_SECOES.map(({ id, subgrupo }) => {
+  const secao = SECOES_BASE.find((item) => item.id === id)
+  if (!secao) throw new Error(`Seção ${id} não existe`)
+  return subgrupo ? { ...secao, subgrupo } : secao
+})
+
+export const VISAO_GERAL = ["briefing", "proposito", "personalidade", "logo", "tipografia", "cores", "publico", "fotografia", "ilustracao"]
 
 export const STATUS_INICIAL: Record<string, StatusSecao> = Object.fromEntries(
   SECOES.map((secao) => [secao.id, ["posicionamento", "publico", "cores"].includes(secao.id) ? "aprovada" : "pendente"]),

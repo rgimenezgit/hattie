@@ -7,10 +7,12 @@ import { ChevronRight, Grid3x3 } from "lucide-react"
 import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
 import { Botao } from "@/components/hattie/Botao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { ExemploPeca, FormatoPeca, RecursoPeca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useMarca } from "./MarcaContexto"
 import { Mockup, Peca } from "./PecasMarca"
 import { useSistemaMarca, type SistemaMarca } from "./SistemaMarca"
@@ -82,7 +84,9 @@ export function SecaoAplicacoes({ secao, aoEditar }: Props) {
       </section>
 
       <section aria-labelledby="titulo-mockups" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-mockups" titulo="mockups" quantidade={guia.mockups.length} />
+        <CabecalhoBloco id="titulo-mockups" titulo="mockups" quantidade={guia.mockups.length}>
+          <MenuPonto ponto="os mockups" />
+        </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 @4xl:grid-cols-3">
           {guia.mockups.map((mockup) => (
             <li key={mockup.id} className="flex min-w-0">
@@ -100,29 +104,12 @@ export function SecaoAplicacoes({ secao, aoEditar }: Props) {
         </ul>
       </section>
 
-      <section aria-labelledby="titulo-diagramacao" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-diagramacao" titulo="regras de diagramação" quantidade={guia.regras.length} />
-        <ul className="grid grid-cols-1 gap-x-6 rounded-3xl bg-superficie p-5 sm:grid-cols-2 md:p-6 @4xl:grid-cols-4">
-          {guia.regras.map((regra) => (
-            <li key={regra.titulo} className="flex flex-col gap-1 border-t border-borda-sutil py-4 first:border-t-0 first:pt-0 sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(2)]:pt-0 @4xl:[&:nth-child(-n+4)]:border-t-0 @4xl:[&:nth-child(-n+4)]:pt-0">
-              <span className="font-heading text-titulo-3 font-medium">{regra.numero}</span>
-              <h3 className="text-sm font-semibold">{regra.titulo}</h3>
-              <p className="text-sm text-texto-2">{regra.texto}</p>
-              {regra.titulo === "Tipografia" && (
-                <p className="text-xs text-texto-3">
-                  {sistema.combinacao.display.familia}, {sistema.combinacao.texto.familia} e {sistema.combinacao.sistema.familia}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <section aria-labelledby="titulo-pecas" className="flex flex-col gap-3">
         <CabecalhoBloco id="titulo-pecas" titulo="peças de comunicação" quantidade={guia.formatos.length}>
           <Botao variante="secundario" tamanho="sm" aria-pressed={grade} onClick={() => setGrade((valor) => !valor)}>
             <Grid3x3 /> {grade ? "Esconder grid" : "Mostrar grid"}
           </Botao>
+          <MenuPonto ponto="as peças de comunicação" />
         </CabecalhoBloco>
         <Abas defaultValue={guia.formatos[0].id}>
           <ListaAbas rotulo="Formatos" itens={guia.formatos.map((formato) => ({ valor: formato.id, rotulo: formato.nome }))} />
@@ -134,17 +121,38 @@ export function SecaoAplicacoes({ secao, aoEditar }: Props) {
         </Abas>
       </section>
 
-      <section aria-labelledby="titulo-exploracoes" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-exploracoes" titulo="explorações gráficas" quantidade={guia.exploracoes.length} />
-        <p className="max-w-[70ch] text-sm text-texto-2">Jeitos de combinar os recursos da marca que dão variedade ao feed sem sair do sistema.</p>
-        <ul className="grid grid-cols-1 gap-x-3 gap-y-6 sm:grid-cols-2 @4xl:grid-cols-3">
-          {guia.exploracoes.map((exploracao) => (
-            <li key={exploracao.id} className="min-w-0">
-              <FiguraPeca exemplo={exploracao} proporcao={[1, 1]} sistema={sistema} descricao={exploracao.ideia} />
-            </li>
-          ))}
-        </ul>
-      </section>
+
+      <VerMais resumo="Regras de diagramação e explorações gráficas para variar o feed sem sair do sistema">
+        <section aria-labelledby="titulo-diagramacao" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-diagramacao" titulo="regras de diagramação" quantidade={guia.regras.length} />
+          <ul className="grid grid-cols-1 gap-x-6 rounded-3xl bg-superficie p-5 sm:grid-cols-2 md:p-6 @4xl:grid-cols-4">
+            {guia.regras.map((regra) => (
+              <li key={regra.titulo} className="flex flex-col gap-1 border-t border-borda-sutil py-4 first:border-t-0 first:pt-0 sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(2)]:pt-0 @4xl:[&:nth-child(-n+4)]:border-t-0 @4xl:[&:nth-child(-n+4)]:pt-0">
+                <span className="font-heading text-titulo-3 font-medium">{regra.numero}</span>
+                <h3 className="text-sm font-semibold">{regra.titulo}</h3>
+                <p className="text-sm text-texto-2">{regra.texto}</p>
+                {regra.titulo === "Tipografia" && (
+                  <p className="text-xs text-texto-3">
+                    {sistema.combinacao.display.familia}, {sistema.combinacao.texto.familia} e {sistema.combinacao.sistema.familia}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="titulo-exploracoes" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-exploracoes" titulo="explorações gráficas" quantidade={guia.exploracoes.length} />
+          <p className="max-w-[70ch] text-sm text-texto-2">Jeitos de combinar os recursos da marca que dão variedade ao feed sem sair do sistema.</p>
+          <ul className="grid grid-cols-1 gap-x-3 gap-y-6 sm:grid-cols-2 @4xl:grid-cols-3">
+            {guia.exploracoes.map((exploracao) => (
+              <li key={exploracao.id} className="min-w-0">
+                <FiguraPeca exemplo={exploracao} proporcao={[1, 1]} sistema={sistema} descricao={exploracao.ideia} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      </VerMais>
     </div>
   )
 }

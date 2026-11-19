@@ -152,7 +152,7 @@ export function TopoParceiros({ titulo, subtitulo, acoes }: { titulo: string; su
           })}
         </div>
       </nav>
-      <CabecalhoCanvas titulo={titulo} subtitulo={subtitulo} acoes={acoes} />
+      <CabecalhoCanvas titulo={titulo} subtitulo={subtitulo} acoes={acoes} coluna />
     </div>
   )
 }

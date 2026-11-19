@@ -12,12 +12,16 @@ import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { Janela } from "@/components/hattie/Janela"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
-import type { CamadaFoto, EstiloFoto, IdCamadaFoto, ImagemFoto, Secao } from "@/lib/mock"
+import { peca, type CamadaFoto, type EstiloFoto, type IdCamadaFoto, type ImagemFoto, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { Ilustracao, type CoresDesenho } from "./Ilustracao"
 import { useEstado } from "./Estado"
+import { NaPeca, type PecaExemplo } from "./NaPeca"
+import { useSistemaMarca } from "./SistemaMarca"
 
 type Props = { secao: Secao; aoEditar: () => void }
 
@@ -59,6 +63,28 @@ export function coresDaPaleta(paleta: Paleta, fundo?: string): CoresDesenho {
 }
 
 const paletaDe = (estilo: EstiloFoto) => estilo.camadas.find((camada) => camada.id === "cor")?.paleta ?? []
+
+const PECAS_FOTO: PecaExemplo[] = [
+  { exemplo: peca("foto-post", "Post com foto", "foto-cheia"), proporcao: [4, 5], legenda: "Post" },
+  { exemplo: peca("foto-story", "Story com foto e texto", "dividido"), proporcao: [9, 16], legenda: "Story" },
+  { exemplo: peca("foto-banner", "Banner do site", "dividido"), proporcao: [16, 9], legenda: "Banner do site" },
+]
+const PECAS_ILUSTRACAO: PecaExemplo[] = [
+  { exemplo: peca("ilu-post", "Post com ilustração", "ilustracao"), proporcao: [4, 5], legenda: "Post" },
+  { exemplo: peca("ilu-padrao", "Story com padrão", "padrao"), proporcao: [9, 16], legenda: "Story" },
+  { exemplo: peca("ilu-banner", "Banner com ilustração", "ilustracao"), proporcao: [16, 9], legenda: "Banner do site" },
+]
+
+/** O estilo aplicado em peças da marca, para ver o resultado antes de aprovar. */
+function EstiloNaPeca({ config, estilo }: { config: ConfigEstilo; estilo: EstiloFoto }) {
+  const sistema = useSistemaMarca()
+  const paleta = paletaDe(estilo)
+  return config.tipo === "fotografia" ? (
+    <NaPeca pecas={PECAS_FOTO} sistema={sistema} imagem={{ fundo: paleta[0]?.hex ?? sistema.cores.principal, cor: paleta[1]?.hex ?? sistema.cores.apoio }} />
+  ) : (
+    <NaPeca pecas={PECAS_ILUSTRACAO} sistema={sistema} coresIlustracao={coresDaPaleta(paleta)} />
+  )
+}
 
 const FOTOGRAFIA: ConfigEstilo = {
   tipo: "fotografia",
@@ -220,6 +246,7 @@ function SecaoEstiloImagem({ secao, aoEditar, config }: Props & { config: Config
               <Briefing config={config} estilo={estilo} gerando={gerandoId === estilo.id} aoAprovar={() => gerar(estilo)} aoEditar={aoEditar} aoEditarBriefing={() => setEditando("briefing")}
                 aoMudarReferencias={(imagens) => atualizar(estilo.id, (atual) => ({ ...atual, referencias: imagens }))}
               />
+              <EstiloNaPeca config={config} estilo={estilo} />
               {estilo.status === "pronto" && gerandoId !== estilo.id && (
                 <Imagens
                   config={config}
@@ -232,13 +259,16 @@ function SecaoEstiloImagem({ secao, aoEditar, config }: Props & { config: Config
                   }}
                 />
               )}
-              <Camadas config={config} estilo={estilo} aoEditarCamada={setEditando} />
+              <VerMais
+                resumo={config.tipo === "fotografia" ? "Luz, câmera, cor, pessoas e acabamento, camada por camada" : "Cor, traço, forma, textura e composição, camada por camada"}
+              >
+                <Camadas config={config} estilo={estilo} aoEditarCamada={setEditando} />
+                <Avaliacao config={config} />
+              </VerMais>
             </ConteudoAba>
           ))}
         </Abas>
       </section>
-
-      <Avaliacao config={config} />
 
       <EditarCamada
         estilo={ativo}
@@ -305,9 +335,12 @@ function Briefing({
         </div>
         <p className="text-xs text-texto-2">{estilo.uso}</p>
         </div>
-        <Botao variante="fantasma" tamanho="sm" onClick={aoEditarBriefing} aria-label={`Editar nome, uso e registro de ${estilo.nome}`}>
-          <SquarePen /> Editar
-        </Botao>
+        <div className="flex shrink-0 items-center gap-1">
+          <Botao variante="fantasma" tamanho="sm" onClick={aoEditarBriefing} aria-label={`Editar nome, uso e registro de ${estilo.nome}`}>
+            <SquarePen /> Editar
+          </Botao>
+          <MenuPonto ponto={`o estilo ${estilo.nome}`} />
+        </div>
       </header>
       <div className="flex flex-col gap-2">
         <p className="max-w-[62ch] text-destaque font-light">{estilo.registro}</p>
@@ -335,15 +368,6 @@ function Briefing({
         />
       </div>
 
-      <dl className="grid grid-cols-1 gap-y-3 border-t border-borda-sutil pt-4 sm:grid-cols-2 @4xl:grid-cols-3">
-        {config.resumo.map(([rotulo, camada, campo]) => [rotulo, valor(camada, campo)]).map(([rotulo, texto]) => (
-          <div key={rotulo} className="flex flex-col gap-0.5 pe-4">
-            <dt className="text-xs text-texto-3">{rotulo}</dt>
-            <dd className="text-sm">{texto}</dd>
-          </div>
-        ))}
-      </dl>
-
       {gerando ? (
         <div aria-live="polite" className="flex items-center gap-3 rounded-2xl bg-preenchimento p-4">
           <IconeHattie nome="asterisco" tamanho={18} className="animate-spin [animation-duration:1.4s] motion-reduce:animate-none" />
@@ -367,7 +391,9 @@ function Briefing({
               </div>
             }
           >
-            Confira as camadas abaixo. Dá para editar cada uma antes de aprovar.
+            {config.tipo === "fotografia"
+              ? "Se quiser ajustar luz, câmera e acabamento antes, abra as opções avançadas logo abaixo."
+              : "Se quiser ajustar traço, forma e textura antes, abra as opções avançadas logo abaixo."}
           </Aviso>
         )
       )}

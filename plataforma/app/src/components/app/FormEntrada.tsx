@@ -52,7 +52,7 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 [@media(max-height:880px)]:gap-4">
       <div className="flex flex-col gap-2 text-center">
         <h1 className="font-heading text-titulo-1 font-medium lowercase">
           {criar ? "criar conta" : "que bom te ver"}
@@ -70,7 +70,7 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
 
       <form
         noValidate
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-5 [@media(max-height:880px)]:gap-3"
         onSubmit={(evento) => {
           evento.preventDefault()
           enviar()

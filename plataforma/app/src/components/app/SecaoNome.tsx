@@ -8,10 +8,12 @@ import { Campo, CampoArea } from "@/components/hattie/Campo"
 import { Janela } from "@/components/hattie/Janela"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Checagem, Marca, OpcaoNome, ProcessoNome, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
@@ -81,7 +83,9 @@ export function SecaoNome({ secao, marca, aoEditar }: Props) {
         </section>
       )}
 
-      <Processo processo={processo} singular={Boolean(escolhida)} />
+      <VerMais resumo="Como cheguei nos nomes: funil, o que ouvi de você, territórios e critérios">
+        <Processo processo={processo} singular={Boolean(escolhida)} />
+      </VerMais>
 
       <Janela
         aberta={confirmar !== null}
@@ -265,6 +269,7 @@ function NomeEscolhido({
           <Botao variante="secundario" tamanho="sm" onClick={aoReabrir}>
             <RotateCcw /> Ver as opções de novo
           </Botao>
+          <MenuPonto ponto="o nome da marca" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="flex flex-col gap-2">

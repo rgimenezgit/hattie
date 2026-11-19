@@ -561,7 +561,7 @@ export const CEREBRO_POR_ESPECIALIDADE: Record<EspecialidadeParceiro, string[]> 
   Site: ["logo", "cores", "tipografia", "tom-de-voz"],
   "Estratégia de marca": ["briefing", "posicionamento", "publico", "mercado"],
   Motion: ["movimento", "logo", "cores"],
-  "Texto e copy": ["tom-de-voz", "mensagens", "vocabulario"],
+  "Texto e copy": ["tom-de-voz", "mensagens", "tagline"],
   Naming: ["briefing", "posicionamento", "nome"],
 }
 

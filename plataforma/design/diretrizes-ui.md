@@ -4,9 +4,11 @@ Regras de UI da plataforma Hattie, a partir das telas que o Raphael desenhou no 
 
 ## 1. Estrutura das telas
 
-**Entrada** (`/criar-conta`, `/entrar`): duas colunas. À esquerda o logo grande centralizado, o título e o formulário. À direita um painel Palco (lilás `#B19DFC`, raio 32) com selo plimm, frase do Hattie, gradiente de pontos em violeta `#7F3AEF` e o personagem. No celular, só a coluna do formulário.
+**Entrada** (`/criar-conta`, `/entrar`): duas colunas que cabem na altura da janela (em tela baixa, só o formulário rola e os espaços encolhem). À esquerda o logo, o título e o formulário. À direita um painel Palco (lilás `#B19DFC`, raio 32) com selo plimm, frase do Hattie, o símbolo principal grande no canto e o `CampoMagico`, que segue a escala das faíscas da marca: cada ponto da malha vira ponto, mais, brilho ou asterisco conforme a intensidade. Pontos e mais em violeta `#7F3AEF`, brilhos e asteriscos em lima `#E6F344`. Malha espaçada (36 px). Manchas fluem pelo card abaixo da frase, nascendo, viajando e sumindo; o mouse acende uma luz (asteriscos no centro, brilhos em volta, mais na borda) e o caminho fica aceso e se apaga devagar, como rastro; o clique solta uma onda. No celular, só a coluna do formulário.
 
-**Primeiro acesso** (`/comecar`): tela limpa, logo no canto, chapéu do Hattie, título "vamos tirar sua marca do chapéu", seletor Criar marca / Importar marca e o campo de conversa.
+**Primeiro acesso** (`/comecar`): tela limpa, logo no canto, o Hattie feliz, título "vamos tirar sua marca do chapéu", seletor Criar marca / Importar marca e o campo de conversa. A página começa do alto, para o topo não pular ao trocar de modo. Em Importar, uma área grande de soltar arquivos (sem contorno, lima-suave ao arrastar) entrega os arquivos ao campo. "Como preencher" abre o passo a passo do modo, com um exemplo para usar. Embaixo, o carrossel "aprenda em um minuto" com os vídeos de tutorial (marcadores até os vídeos chegarem).
+
+**Criando a marca** (`/marca/[marca]/criando`): o chapéu animado (`ChapeuAnimado`) pula com amassa e estica e a copa chacoalha como quem procura algo lá dentro; mouse por cima agita mais, clique solta faíscas. Fundo com o `CampoMagico` em modo subida, enxuto: sem pontos de base e sem degradê (degradê suave não é da marca). Faixas horizontais de faíscas sobem de baixo, uma de cada vez, vibrando de leve, pela escala da marca (mais e brilho em lilás `#B19DFC` e violeta `#7F3AEF`, alguns asteriscos lima `#E6F344`), e somem antes da primeira etapa da lista ("Lendo tudo que você me contou"). Acima disso o fundo fica limpo.
 
 **App da marca** (`/marca/[marca]/…`), sempre igual. Um palco cinza ocupa a tela, e a margem branca entra nele em três abas, com cantos côncavos onde encontra o cinza:
 
@@ -17,9 +19,9 @@ Regras de UI da plataforma Hattie, a partir das telas que o Raphael desenhou no 
 | Aba do meio | Navegação. Fechada (76 px), acompanha a coluna de ícones em itens de 40 px; aberta (216 px), os itens viram pílulas de 184 px com rótulo |
 | Aba da base | Avatar da conta (76 × 64 px) |
 | Palco | Cinza `#D3D3D3` a 62% com raio 28. O conteúdo vai até a borda do palco e rola por baixo da margem branca; a sombra da margem (`--sombra-canvas`) é desenhada por cima do conteúdo, em `.palco::after`. À esquerda, o conteúdo começa a 64 px, livre das abas |
-| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco, a 8 px do topo e da base: conversas (no Hattie), sumário (na Marca) ou áreas (em Parceiros). O conteúdo que rola de lado passa por baixo dela, com sombra leve (`--sombra-coluna`) |
+| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco, a 8 px do topo e da base: conversas (no Hattie), sumário (na Marca), áreas (em Parceiros e na Biblioteca). O conteúdo que rola de lado passa por baixo dela, com sombra leve (`--sombra-coluna`). Recolhe e volta pelo botão antes do título da página; a escolha vale para todas as áreas e fica no navegador |
 | Canvas | Área transparente sobre o palco, onde o conteúdo vive e rola; respiro interno de 24 × 20 px (16 px no celular) |
-| Coluna direita (256–320 px, opcional) | Painel branco: plano da criação ou "editar com o hattie" |
+| Coluna direita (256–320 px, opcional) | Painel branco: plano da criação ou "editar com o hattie". Mesmo respiro de 8 px da borda do palco que a esquerda, com a sombra virada para dentro (`--sombra-coluna-direita`) |
 
 As três abas abrem juntas (a da base fica igual) no hover, com 120 ms de espera, no foco pelo teclado e enquanto o menu de marcas está aberto. Clicar num item não deixa a espinha presa aberta: ela só fica aberta pelo foco quando ele vem do teclado. A aba aberta passa por cima do palco, com sombra levíssima só do lado do cinza. Desenho das abas: `.aba` em `globals.css`; casca em `components/app/AppShell.tsx`. Desenho de referência: Figma do Raphael, 11/11/2026.
 
@@ -130,6 +132,30 @@ Regras que saíram da revisão de 11/11/2026, para todas as telas:
 6. **Títulos em Clash sempre em minúsculas**, inclusive o título da tela. Nome de marca e de conversa mantém a grafia.
 7. **Destaque vai para o conteúdo.** O que a pessoa veio ver (resumo, macro, frase da persona) ganha `destaque` ou a barra lima; explicações do Hattie ficam no ícone de informação.
 8. **Grades com base de uma coluna** (`grid-cols-1`), para nada estourar a largura no celular.
+9. **Essencial primeiro, avançado a um clique.** O cérebro atende duas pessoas: quem quer só uma marca que funcione (a dona dos salgados) e quem trabalha com marca todo dia (designer, consultor). Cada seção mostra por padrão o mínimo para decidir; o técnico (escala, espaçamentos, curvas, luz, regras finas, números) fica no componente `VerMais`, sempre no fim da seção. Nada fica escondido de vez, e ninguém escolhe "modo simples" no cadastro.
+
+### Opções avançadas (`VerMais`)
+
+Faixa clara (`superficie` a 60%, raio 24, sem contorno) com ícone de ajustes, "Opções avançadas" em 600 e, embaixo, em `text-xs`, o que tem dentro ("Escala de tamanhos, espaçamento entre título e texto…"). A seta gira ao abrir e o título vira "Esconder opções avançadas". Aberta, aparece a caixa "Deixar sempre aberto, em todas as seções", para designers e consultores; a escolha fica guardada no navegador e vale para todas as seções. Um `VerMais` por seção (por estilo, em fotografia e ilustração).
+
+| Seção | Fica visível | Vai para opções avançadas |
+|---|---|---|
+| Mercado | Referências e concorrentes | Painel da semana |
+| Produtos e serviços | O que é, preço, características, diferenciais | Para quem, como usar, ingredientes |
+| Diferenciais | O que mais diferencia e as frentes | Números e frentes que ficaram de fora |
+| Público e personas | Público macro e personas | Públicos em detalhe |
+| Personalidade | Palavras e explicações | "Se a marca fosse" |
+| Arquétipo | Mistura, essência e como a marca vive cada um | Motivação, desejo, medo, comportamentos, exagero |
+| Atributos | Frase de cada força e o que significa | Como aparece e onde se vê |
+| Nome | Opções ou nome escolhido | Processo (funil, territórios, critérios) |
+| Mensagens-chave | Frase, explicação e palavras de cada mensagem | Exemplos prontos de uso |
+| Tom de voz | Traços, exemplos, faça e evite, palavras que usa e que evita | Espectro do tom |
+| Logo | Logo, versões e regras de uso | Área de proteção e tamanho mínimo |
+| Tipografia | Combinações com peças aplicadas, fontes e aplicações | Escala, espaçamento e guias, teste das fontes |
+| Grafismos e elementos gráficos | Peças aplicadas, grafismos, gradiente e ícones | Faça e evite |
+| Fotografia e ilustração | Briefing, paleta, referências, peças aplicadas e imagens | Camadas (luz, câmera, traço…) e como avalio |
+| Motion | Conceito, princípios e exemplos | Números, curvas, durações, distâncias, coreografia, acessibilidade, tokens |
+| Aplicações | Diretrizes usadas, mockups e peças | Regras de diagramação e explorações gráficas |
 
 ## 4. Componentes
 
@@ -206,19 +232,53 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 
 ### Tom de voz
 
-1. **Como a marca fala**: a introdução em `destaque`; abaixo, os traços da voz (nome em 600 e uma frase) e o espectro de tom: quatro trilhas (formal–informal, séria–bem-humorada, técnica–simples, distante–próxima) com um ponto preto; o lado para onde a marca pende fica em peso 600. Leitores de tela ouvem "mais informal que formal".
+1. **Como a marca fala**: a introdução em `destaque` e, abaixo, os traços da voz (nome em 600 e uma frase), em até quatro colunas.
 2. **Exemplos**: abas por tipo (falas, posts, legendas, chamadas, e-mails), com a quantidade em cada uma; a aba ativa fica em lima. Cada aba é um carrossel horizontal com encaixe por card, o card seguinte aparecendo cortado na borda e setas que andam um card por vez. Os cards imitam o canal com as cores da marca da cliente: balão de WhatsApp, post quadrado, legenda com @ e hashtags, chamada em pílula, e-mail com assunto e assinatura. Todo card tem "Copiar".
 3. **Faça e evite**: duas colunas com uma regra por linha e um exemplo entre aspas; no "Evite", o exemplo vem riscado em cinza.
-4. **Glossário** e 5. **Palavras que a marca evita** lado a lado: termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
+4. **Palavras que a marca usa** e 5. **Palavras que a marca evita** lado a lado (absorvem o antigo Vocabulário): termo e uso; palavra riscada → troca em 600, com o motivo embaixo.
+6. **Opções avançadas**: o espectro de tom, quatro trilhas (formal–informal, séria–bem-humorada, técnica–simples, distante–próxima) com um ponto preto; o lado para onde a marca pende fica em peso 600. Leitores de tela ouvem "mais informal que formal".
 
 ### Arquétipo
 
 1. **A mistura**: a frase de como os arquétipos se combinam, em `destaque`, e uma barra fina de proporção (primário em preto, secundário em cinza-médio) com a legenda nome, peso e papel.
-2. **Arquétipo primário** e 3. **arquétipo secundário**: um card cada. Ícone do arquétipo num círculo neutro, nome em Clash minúsculo (32 px no primário, 24 no secundário), tag com papel e peso, e o lema. Abaixo, em duas colunas: "O que é" (a essência do arquétipo em geral, com motivação, desejo e medo) e "Como a marca age como…" (como a marca vive o arquétipo, com comportamentos em lista). No pé, uma linha discreta com ícone dourado: "Cuidado com o exagero", o risco de levar o arquétipo longe demais.
+2. **Os arquétipos** lado a lado, um card cada: ícone num círculo neutro, nome em Clash minúsculo, tag com papel e peso, o lema, "O que é" (a essência) e "Na marca" (como a marca vive o arquétipo).
+3. **Opções avançadas**: cada arquétipo em detalhe, com motivação, desejo e medo, comportamentos em lista e, no pé, "Cuidado com o exagero" com ícone dourado.
+
+### Ações de cada ponto da marca (`MenuPonto`)
+
+Todo container com conteúdo único da marca (um produto, uma persona, um traço de personalidade, o logo, uma combinação de fontes, um estilo de foto, um grafismo, o propósito…) tem o menu de três pontos no canto, com duas ações para aquele ponto: "Editar com o Hattie" abre o painel de edição focado nele ("Produtos e serviços › Óleo de pequi") e "Contratar um parceiro" leva a Parceiros com o pedido já escrito e as indicações prontas. Os cards da visão geral seguem com o menu da seção (aprovar, editar, contratar).
+
+### Contratar um parceiro (`BotaoParceiro`)
+
+No fim de cada seção, ao lado de Aprovar e Editar com o Hattie, uma pílula rosa (`#FF8AE5` a 30%, a cor dos parceiros) com três rostos de parceiros da especialidade daquela seção, "Contratar um parceiro" em 500, a especialidade embaixo e uma seta. Leva a Parceiros com o pedido escrito.
+
+### Olha como ficou (`/marca/[marca]/pronta`)
+
+Depois que o Hattie cria a marca, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`).
+
+### Assim fica numa peça (`NaPeca`)
+
+Nos cards de escolha (combinação tipográfica, estilo de foto ou de ilustração, elementos gráficos), a opção aparece aplicada em peças reais da marca: post, story e banner na mesma altura (176 px, 208 px em tela larga), com legenda em `micro`. Quem não é designer vê o resultado antes de decidir. As peças usam o `Peca` com a fonte da combinação (`comCombinacao`) ou as cores do estilo (`imagem`, `coresIlustracao`). No celular, a fileira rola de lado.
+
+### Mensagens-chave
+
+As ideias que a marca repete, em até três cards: número e nome curto, a frase em `destaque` 500, uma explicação e "Palavras que carregam essa ideia" em tags. Substitui as antigas Palavras-chave e Vocabulário: as palavras ficam junto da mensagem que elas sustentam. Exemplos prontos (rótulo, post, loja, e-mail) nas opções avançadas.
+
+### Grafismos e elementos gráficos
+
+Grafismos, gradiente e ícones numa seção só. No topo, o resumo e as peças aplicadas (folhas, gradiente, carimbo, padrão). Depois, um card por grafismo com o desenho e onde usar; o gradiente com os dois hex e a regra de uso; os ícones de traço fino na cor principal. Faça e evite nas opções avançadas. Ilustração segue como seção própria.
+
+### Personalidade
+
+O jeito da marca em palavras (calma, acolhedora, simples…), cada uma num card com a palavra em Clash minúsculo, uma explicação curta e "Na prática" com um exemplo. Fica dentro de Estratégia, antes da voz e do visual, porque define o clima de tudo. Personalidade diz o jeito; atributos dizem as forças. Nas opções avançadas, "se a marca fosse" uma pessoa, um lugar, um som e um material.
+
+### Produtos e serviços
+
+O que a marca vende, separado do que a marca é. Um card por produto ou serviço: ícone, nome, tag "carro-chefe" quando for o caso, categoria e preço, o que é numa frase, características em tags e "O que tem de diferente" em lista. "Adicionar" abre uma janela curta (nome, produto ou serviço, o que é, características, preço); o novo entra como rascunho para o Hattie completar os diferenciais. Nas opções avançadas, a ficha de cada produto: para quem, como usar e ingredientes.
 
 ### Atributos
 
-Bloco "como a marca é" com um card por atributo, numerado. À esquerda: número, de qual arquétipo vem (tag), o nome em Clash e a frase-título em `destaque`. À direita, separados por linha vertical: "O que significa", "Como aparece na marca" e "Onde se vê" (pontos de contato como rótulo, atendimento e posts, cada um com o como).
+Bloco "as forças da marca": atributo é frase sobre o que a marca tem e faz de melhor ("Cada frasco diz de onde veio, quem colheu e quando"). Cards em duas colunas, numerados: número, nome curto e de qual arquétipo vem numa linha pequena; a frase em `destaque` 500; "o que significa" em `text-sm`. Nas opções avançadas, por atributo: como aparece na marca e onde se vê (rótulo, atendimento, posts).
 
 ### Logo
 

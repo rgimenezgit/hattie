@@ -20,7 +20,7 @@ export type SistemaMarca = {
   fontes: { id: string; titulo: string; detalhe: string; status: StatusSecao; definida: boolean }[]
 }
 
-const pilha = (familia: string, categoria: string) => `"${familia}", ${categoria === "monospace" ? "ui-monospace, monospace" : categoria === "serif" ? "Georgia, serif" : "system-ui, sans-serif"}`
+export const pilha = (familia: string, categoria: string) => `"${familia}", ${categoria === "monospace" ? "ui-monospace, monospace" : categoria === "serif" ? "Georgia, serif" : "system-ui, sans-serif"}`
 
 /**
  * Junta as diretrizes que já existem no cérebro de marca para as seções que aplicam a marca (motion, aplicações):
@@ -75,10 +75,23 @@ export function useSistemaMarca(): SistemaMarca {
       { id: "logo", titulo: "Logo", detalhe: ideia?.nome ?? "A definir", status: status("logo"), definida: Boolean(logoEscolhido) },
       { id: "cores", titulo: "Cores", detalhe: paleta.map((cor) => cor.nome).join(", "), status: status("cores"), definida: false },
       { id: "tipografia", titulo: "Tipografia", detalhe: `${combinacao.display.familia} + ${combinacao.texto.familia}`, status: status("tipografia"), definida: Boolean(tipografiaEscolhida) },
-      { id: "grafismos", titulo: "Grafismos", detalhe: "Linhas de folha e carimbo de lote", status: status("grafismos"), definida: false },
+      { id: "grafismos", titulo: "Grafismos", detalhe: "Folhas, carimbo, gradiente e ícones", status: status("grafismos"), definida: false },
       { id: "fotografia", titulo: "Estilo fotográfico", detalhe: estiloFoto?.nome ?? "A definir", status: status("fotografia"), definida: estiloFoto?.status === "pronto" },
       { id: "ilustracao", titulo: "Ilustração", detalhe: estiloIlustracao?.nome ?? "A definir", status: status("ilustracao"), definida: estiloIlustracao?.status === "pronto" },
       { id: "movimento", titulo: "Motion", detalhe: "Assentar, 400 ms", status: status("movimento"), definida: false },
     ],
+  }
+}
+
+/** O mesmo sistema com outra combinação tipográfica, para mostrar cada opção aplicada numa peça antes da escolha. */
+export function comCombinacao(sistema: SistemaMarca, combinacao: CombinacaoTipografica): SistemaMarca {
+  return {
+    ...sistema,
+    combinacao,
+    fonte: {
+      display: pilha(combinacao.display.familia, combinacao.display.categoria),
+      texto: pilha(combinacao.texto.familia, combinacao.texto.categoria),
+      sistema: pilha(combinacao.sistema.familia, combinacao.sistema.categoria),
+    },
   }
 }

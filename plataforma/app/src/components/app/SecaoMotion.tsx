@@ -7,10 +7,12 @@ import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Botao } from "@/components/hattie/Botao"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { CurvaMotion, ExemploMotion, GuiaMotion, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { Carimbo, Ilustracao } from "./Ilustracao"
 import { Simbolo } from "./Logo"
 import { useSistemaMarca, type SistemaMarca } from "./SistemaMarca"
@@ -75,18 +77,12 @@ export function SecaoMotion({ secao, aoEditar }: Props) {
           </PorqueHattie>
         </div>
         <p className="max-w-[62ch] text-destaque font-light">{guia.conceito}</p>
-        <dl className="grid grid-cols-2 gap-y-4 border-t border-borda-sutil pt-4 @3xl:grid-cols-4">
-          {guia.resumo.map((item) => (
-            <div key={item.rotulo} className="flex flex-col gap-0.5 pe-4">
-              <dt className="text-xs text-texto-3">{item.rotulo}</dt>
-              <dd className="font-heading text-titulo-3 font-medium">{item.valor}</dd>
-            </div>
-          ))}
-        </dl>
       </section>
 
       <section aria-labelledby="titulo-principios-motion" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-principios-motion" titulo="princípios" quantidade={guia.principios.length} />
+        <CabecalhoBloco id="titulo-principios-motion" titulo="princípios" quantidade={guia.principios.length}>
+          <MenuPonto ponto="os princípios de motion" />
+        </CabecalhoBloco>
         <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 @4xl:grid-cols-4">
           {guia.principios.map((principio, indice) => (
             <li key={principio.titulo} className="flex flex-col gap-2 rounded-3xl bg-superficie p-5">
@@ -101,13 +97,27 @@ export function SecaoMotion({ secao, aoEditar }: Props) {
         </ol>
       </section>
 
-      <Curvas curvas={guia.curvas} cor={sistema.cores.principal} />
-      <Duracoes guia={guia} curva={bezier(curva("assentar"))} cor={sistema.cores.principal} />
-      <Medidas guia={guia} />
       <Exemplos guia={guia} sistema={sistema} />
-      <Coreografia guia={guia} sistema={sistema} />
-      <Regras guia={guia} />
-      <Tokens guia={guia} nome={sistema.nome} />
+
+      <VerMais resumo="Números, curvas, durações, distâncias, coreografia, acessibilidade e tokens para o site">
+        <section aria-labelledby="titulo-numeros-motion" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-numeros-motion" titulo="os números" />
+          <dl className="grid grid-cols-2 gap-y-4 rounded-3xl bg-superficie p-5 md:p-6 @3xl:grid-cols-4">
+            {guia.resumo.map((item) => (
+              <div key={item.rotulo} className="flex flex-col gap-0.5 pe-4">
+                <dt className="text-xs text-texto-3">{item.rotulo}</dt>
+                <dd className="font-heading text-titulo-3 font-medium">{item.valor}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+        <Curvas curvas={guia.curvas} cor={sistema.cores.principal} />
+        <Duracoes guia={guia} curva={bezier(curva("assentar"))} cor={sistema.cores.principal} />
+        <Medidas guia={guia} />
+        <Coreografia guia={guia} sistema={sistema} />
+        <Regras guia={guia} />
+        <Tokens guia={guia} nome={sistema.nome} />
+      </VerMais>
     </div>
   )
 }

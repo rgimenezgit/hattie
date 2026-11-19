@@ -11,10 +11,12 @@ import { Botao } from "@/components/hattie/Botao"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { ErroLogo, IdeiaLogo, Marca, Secao, SistemaLogo } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 import { baixarLogo, Logo, variacoesDeCor, type TipoLogo, type VariacaoCor } from "./Logo"
 
@@ -203,6 +205,7 @@ function Sistema({
           <Botao variante="secundario" tamanho="sm" onClick={aoVoltar}>
             <RotateCcw /> Ver as ideias<span className="max-sm:sr-only"> de novo</span>
           </Botao>
+          <MenuPonto ponto="o logo" />
         </CabecalhoBloco>
         <div className="flex flex-col overflow-hidden rounded-3xl bg-superficie">
           <div className="grid min-h-56 place-items-center px-6 py-12" style={{ backgroundColor: positiva.fundo }}>
@@ -238,7 +241,9 @@ function Sistema({
       </section>
 
       <Regras regras={sistema.regras} ideia={ideia} marca={marca} nome={nome} />
-      <Espacamento espacamento={sistema.espacamento} ideia={ideia} marca={marca} nome={nome} />
+      <VerMais resumo="Área de proteção e tamanho mínimo do logo">
+        <Espacamento espacamento={sistema.espacamento} ideia={ideia} marca={marca} nome={nome} />
+      </VerMais>
     </div>
   )
 }

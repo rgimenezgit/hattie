@@ -37,6 +37,10 @@ export type ConteudoSecao =
   | ({ tipo: "voz" } & GuiaVoz)
   | { tipo: "arquetipos"; mistura: string; primario: Arquetipo; secundario?: Arquetipo }
   | { tipo: "atributos"; resumo: string; atributos: Atributo[] }
+  | { tipo: "produtos"; resumo: string; produtos: ProdutoMarca[] }
+  | { tipo: "mensagens"; resumo: string; mensagens: MensagemChave[] }
+  | ({ tipo: "elementos" } & ElementosGraficos)
+  | { tipo: "personalidade"; resumo: string; tracos: TracoPersonalidade[]; seFosse: { titulo: string; texto: string }[] }
 
 export type Dado = { rotulo: string; valor: string }
 
@@ -168,6 +172,49 @@ export type Arquetipo = {
 }
 
 /** Atributo de personalidade: nome, uma frase-título, o que significa e como aparece na marca. */
+/** Produto ou serviço que a marca vende. Fica separado da marca: o que se vende, como é e o que tem de diferente. */
+export type ProdutoMarca = {
+  id: string
+  tipo: "produto" | "servico"
+  nome: string
+  categoria: string
+  /** O que é, numa frase. */
+  oQueE: string
+  preco?: string
+  caracteristicas: string[]
+  diferenciais: string[]
+  paraQuem?: string
+  comoUsar?: string
+  ingredientes?: string[]
+  principal?: boolean
+  /** Acabou de entrar e o Hattie ainda vai completar. */
+  rascunho?: boolean
+}
+
+/** Mensagem-chave: uma ideia que a marca repete, a frase que a resume e as palavras que carregam essa ideia. */
+export type MensagemChave = {
+  id: string
+  titulo: string
+  frase: string
+  explicacao: string
+  palavras: string[]
+  exemplos: { onde: string; texto: string }[]
+}
+
+/** Grafismos, gradiente e ícones da marca, numa categoria só. */
+export type ElementosGraficos = {
+  resumo: string
+  grafismos: { id: string; nome: string; uso: string; desenho: "folhas" | "carimbo" | "padrao" }[]
+  gradiente: { nome: string; de: string; para: string; uso: string }
+  icones: { id: string; nome: string; desenho: "folha" | "gota" | "lote" | "sol" | "lugar" | "reciclar" }[]
+  estiloIcones: string
+  regras: { faca: string[]; evite: string[] }
+}
+
+/** Traço de personalidade: uma palavra sobre o jeito da marca e uma explicação curta. */
+export type TracoPersonalidade = { id: string; palavra: string; explicacao: string; naPratica: string }
+
+/** Atributo: frase sobre uma característica forte da marca, o que ela tem e faz de melhor. */
 export type Atributo = {
   id: string
   nome: string
@@ -281,6 +328,8 @@ export type Secao = {
   id: string
   titulo: string
   grupo: string
+  /** Bloco dentro do grupo, para a navegação (em Estratégia: Negócio, Marca, Personalidade). */
+  subgrupo?: string
   resumo: string
   porque: string
   conteudo: ConteudoSecao
