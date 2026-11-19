@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Check, CircleDashed, CircleMinus, MessageCircle, Plus, RotateCcw, TriangleAlert } from "lucide-react"
+import { Check, ChevronDown, CircleDashed, CircleMinus, MessageCircle, Plus, RotateCcw, TriangleAlert } from "lucide-react"
 import { Aviso } from "@/components/hattie/Aviso"
 import { Botao } from "@/components/hattie/Botao"
 import { Campo, CampoArea } from "@/components/hattie/Campo"
@@ -67,7 +67,7 @@ export function SecaoNome({ secao, marca, aoEditar }: Props) {
           <p className="max-w-[70ch] text-sm text-texto-2">
             Trouxe {opcoes.length} caminhos, cada um de um território. Escolha o que mais parece com a sua marca; dá para trocar depois.
           </p>
-          <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-2">
+          <ul className="grid grid-cols-1 items-start gap-3 @4xl:grid-cols-2">
             {opcoes.map((opcao) => (
               <li key={opcao.id} className="flex min-w-0">
                 <CartaoOpcao opcao={opcao} atual={opcao.id === nomeEscolhido} aoEscolher={() => setConfirmar(opcao)} />
@@ -188,7 +188,14 @@ function Checagens({ checagens }: { checagens: Checagem[] }) {
   )
 }
 
+/**
+ * Opção de nome. De cara, só o território, o nome e a frase do que ele quer dizer, mais "Escolher".
+ * "Ver mais", dentro do card, abre por que funciona, como soa, o ponto de atenção e a disponibilidade
+ * (domínio, Instagram e INPI). Cada card abre sozinho.
+ */
 function CartaoOpcao({ opcao, atual, aoEscolher }: { opcao: OpcaoNome; atual: boolean; aoEscolher: () => void }) {
+  const [aberto, setAberto] = useState(false)
+  const detalhes = `detalhes-nome-${opcao.id}`
   return (
     <article aria-labelledby={`nome-${opcao.id}`} className="flex w-full min-w-0 flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
       <header className="flex flex-col gap-2">
@@ -208,7 +215,8 @@ function CartaoOpcao({ opcao, atual, aoEscolher }: { opcao: OpcaoNome; atual: bo
         <p className="text-corpo text-texto">{opcao.significado}</p>
       </header>
 
-      <div className="flex flex-1 flex-col gap-4 border-t border-borda-sutil pt-4">
+      {aberto && (
+      <div id={detalhes} className="flex flex-col gap-4 border-t border-borda-sutil pt-4 motion-safe:animate-[aparecer_240ms_var(--ease-saida)]">
         {opcao.porque.length > 0 && (
           <div className="flex flex-col gap-1.5">
             <h4 className="text-xs font-semibold text-texto-2">Por que funciona</h4>
@@ -235,12 +243,19 @@ function CartaoOpcao({ opcao, atual, aoEscolher }: { opcao: OpcaoNome; atual: bo
             </span>
           </p>
         )}
+        <div className="border-t border-borda-sutil pt-4">
+          <Checagens checagens={opcao.checagens} />
+        </div>
       </div>
+      )}
 
-      <footer className="flex flex-col gap-4 border-t border-borda-sutil pt-4">
-        <Checagens checagens={opcao.checagens} />
-        <Botao variante={opcao.aposta ? "primario" : "secundario"} tamanho="sm" className="self-start" onClick={aoEscolher}>
+      <footer className="mt-auto flex flex-wrap items-center gap-2 pt-1">
+        <Botao variante={opcao.aposta ? "primario" : "secundario"} tamanho="sm" onClick={aoEscolher}>
           <Check /> Escolher {opcao.nome}
+        </Botao>
+        <Botao variante="fantasma" tamanho="sm" aria-expanded={aberto} aria-controls={detalhes} onClick={() => setAberto(!aberto)}>
+          {aberto ? "Ver menos" : "Ver mais"}
+          <ChevronDown className={cn("transition-[rotate] duration-200", aberto && "rotate-180")} />
         </Botao>
       </footer>
     </article>

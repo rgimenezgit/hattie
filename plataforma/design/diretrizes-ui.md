@@ -148,7 +148,7 @@ Faixa clara (`superficie` a 60%, raio 24, sem contorno) com ícone de ajustes, "
 | Personalidade | Palavras e explicações | "Se a marca fosse" |
 | Arquétipo | A mistura: frase, proporção e o lema de cada um | O que é cada um, como a marca vive cada um, motivação, desejo, medo, comportamentos, exagero |
 | Atributos | Frase de cada força e o que significa | Como aparece e onde se vê |
-| Nome | Opções ou nome escolhido | Processo (funil, territórios, critérios) |
+| Nome | Opções (território, nome e frase) ou nome escolhido | Processo (funil, territórios, critérios); dentro de cada card, "Ver mais" com por que funciona, como soa e disponibilidade |
 | Mensagens-chave | Frase, explicação e palavras de cada mensagem | Exemplos prontos de uso |
 | Tom de voz | Traços, exemplos, faça e evite, palavras que usa e que evita | Espectro do tom |
 | Logo | Logo, versões e regras de uso | Área de proteção e tamanho mínimo |
@@ -222,9 +222,10 @@ A página tem dois momentos.
 
 **Escolher (primeira visita, nome pendente).** O bloco "escolha um nome" vem primeiro, com o ícone do porquê e "Sugerir um nome". Cada opção é um card com:
 - território (tag) e "minha aposta" na opção que o Hattie recomenda;
-- o nome em Clash 32 com a grafia original e o que ele quer dizer;
-- "Por que funciona" em lista com check lima-forte, "Como soa" e, quando houver, um ponto de atenção;
-- disponibilidade de domínio, Instagram e INPI (livre, a confirmar, em uso) e o botão "Escolher". A aposta leva o botão primário; as outras, o secundário.
+- o nome em Clash 32 com a grafia original e a frase do que ele quer dizer;
+- no pé, o botão "Escolher" (primário na aposta, secundário nas outras) e, ao lado, "Ver mais" em fantasma com seta.
+
+"Ver mais" abre dentro do próprio card, só nele: "Por que funciona" em lista com check lima-forte, "Como soa", o ponto de atenção quando houver e a disponibilidade de domínio, Instagram e INPI (livre, a confirmar, em uso). Os cards ficam alinhados pelo topo, para o vizinho não esticar quando um abre.
 
 Escolher abre a confirmação em três camadas: a prévia "Como vai aparecer" com o nome na fonte e na cor da marca da cliente e o significado; o aviso "Antes de registrar" em azul de informação (`info-suave`), só quando algum canal falta confirmar ou está em uso, com o canal em peso 500 e o que falta; e a consequência numa linha discreta no fim. Ao confirmar, o nome passa a valer no app inteiro e a seção fica aprovada, com o selo cling. "Pedir outras opções" abre a conversa com o Hattie; "Sugerir um nome" adiciona uma opção da pessoa para o Hattie checar.
 
@@ -270,7 +271,7 @@ Nos cards de escolha (combinação tipográfica, estilo de foto ou de ilustraç�
 
 ### Mensagens-chave
 
-As ideias que a marca repete, em até três cards: número e nome curto, a frase em `destaque` 500, uma explicação e "Palavras que carregam essa ideia" em tags. Substitui as antigas Palavras-chave e Vocabulário: as palavras ficam junto da mensagem que elas sustentam. Exemplos prontos (rótulo, post, loja, e-mail) nas opções avançadas.
+As ideias que a marca repete, três cards por linha: número e nome curto, a frase em `destaque` 500, uma explicação e "Palavras que carregam essa ideia" em tags. Substitui as antigas Palavras-chave e Vocabulário: as palavras ficam junto da mensagem que elas sustentam. Exemplos prontos (rótulo, post, loja, e-mail) nas opções avançadas. "Adicionar mensagem" pede a frase e, opcionais, um nome curto e as palavras; a nova entra como rascunho e o Hattie completa a explicação e os exemplos. Cada mensagem sai pelo menu de três pontos; fica pelo menos uma.
 
 ### Grafismos e elementos gráficos
 

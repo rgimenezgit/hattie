@@ -11,6 +11,7 @@ import {
   type Concorrente,
   type EstiloFoto,
   type Mensagem,
+  type MensagemChave,
   type ObjetivoMarca,
   type Persona,
   type ProdutoMarca,
@@ -64,6 +65,9 @@ type EstadoApp = {
   /** Lista de produtos e serviços depois da primeira mudança. */
   produtos: ProdutoMarca[] | null
   salvarProdutos: (produtos: ProdutoMarca[]) => void
+  /** Mensagens-chave depois da primeira mudança. */
+  mensagensChave: MensagemChave[] | null
+  salvarMensagensChave: (mensagens: MensagemChave[]) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -118,6 +122,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [removidos, setRemovidos] = useState<Record<string, true>>({})
   const [objetivos, salvarObjetivos] = useState<ObjetivoMarca[] | null>(null)
   const [produtos, salvarProdutos] = useState<ProdutoMarca[] | null>(null)
+  const [mensagensChave, salvarMensagensChave] = useState<MensagemChave[] | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -288,6 +293,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       salvarObjetivos,
       produtos,
       salvarProdutos,
+      mensagensChave,
+      salvarMensagensChave,
     }),
     [
       nomeMarca,
@@ -322,6 +329,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       restaurar,
       objetivos,
       produtos,
+      mensagensChave,
     ],
   )
 

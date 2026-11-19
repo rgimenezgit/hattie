@@ -9,6 +9,8 @@ Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../dir
 - Diferenciais: à vista, o que mais diferencia e os principais, um por frente, com a tag da frente. Todos os diferenciais, com descrição e prova, ficam em opções avançadas.
 - Arquétipo: à vista, só a mistura, com a proporção e o lema de cada arquétipo. O que cada um é e como aparece na marca vão para opções avançadas.
 - Apagar não pede confirmação: o item some e o aviso traz "Desfazer".
+- Nome: na primeira apresentação, cada opção mostra só o território, o nome e a frase do que ele quer dizer. Por que funciona, como soa e a disponibilidade (domínio, Instagram, INPI) ficam no "Ver mais" de cada card.
+- Mensagens-chave: dá para adicionar e apagar mensagens. Fica pelo menos uma.
 
 ## 18/11/2026 · Entrada, primeiro acesso e criação (branch `simplificacao-ux`)
 - Criar conta e entrar cabem na altura da janela. O painel lilás ganha o símbolo principal grande e um campo interativo que segue a escala das faíscas da marca (ponto, mais, brilho, asterisco): manchas que fluem, luz no mouse que deixa rastro e onda no clique.

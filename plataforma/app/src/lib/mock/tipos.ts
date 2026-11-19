@@ -209,6 +209,8 @@ export type MensagemChave = {
   explicacao: string
   palavras: string[]
   exemplos: { onde: string; texto: string }[]
+  /** Acabou de entrar e o Hattie ainda vai completar a explicação e os exemplos. */
+  rascunho?: boolean
 }
 
 /** Grafismos, gradiente e ícones da marca, numa categoria só. */
