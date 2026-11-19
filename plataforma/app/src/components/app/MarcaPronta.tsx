@@ -3,14 +3,27 @@
 import Image from "next/image"
 import Link from "next/link"
 import type { Route } from "next"
-import { ArrowRight, LayoutGrid } from "lucide-react"
+import { ArrowRight, Image as ImageIcon, LayoutGrid } from "lucide-react"
+import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Botao } from "@/components/hattie/Botao"
 import { SeloSom } from "@/components/hattie/SeloSom"
+import { cn } from "@/lib/utils"
 import { PESSOA, SECOES, getSecao, peca } from "@/lib/mock"
 import { Logo } from "./Logo"
 import { useMarca } from "./MarcaContexto"
 import { Peca } from "./PecasMarca"
 import { useSistemaMarca } from "./SistemaMarca"
+
+/**
+ * Mockups da primeira apresentação: um grande e três menores. `src` vazio mostra o espaço reservado;
+ * quando as imagens chegarem, basta apontar o caminho (ex.: /mockups/raiz-natural/1.jpg).
+ */
+const MOCKUPS: { id: string; legenda: string; src?: string }[] = [
+  { id: "destaque", legenda: "Mockup principal" },
+  { id: "um", legenda: "Mockup 2" },
+  { id: "dois", legenda: "Mockup 3" },
+  { id: "tres", legenda: "Mockup 4" },
+]
 
 const APLICACOES = [
   { exemplo: peca("pronta-post", "Post de lançamento", "foto-cheia"), proporcao: [4, 5] as [number, number], legenda: "Post" },
@@ -22,7 +35,8 @@ const APLICACOES = [
 
 /**
  * "Olha como ficou": primeiro impacto depois que o Hattie cria a marca, antes da validação ponto a ponto.
- * Mostra o nome com o logo, a tagline, o propósito, a personalidade, a tipografia, as cores e algumas aplicações.
+ * Mostra o nome com o logo, a tagline, quatro mockups (um grande e três menores), o propósito, a personalidade,
+ * a tipografia, as cores e algumas aplicações.
  * O botão principal começa a validação pela primeira seção; o secundário abre a visão geral do cérebro.
  */
 export function MarcaPronta() {
@@ -56,6 +70,33 @@ export function MarcaPronta() {
               {tagline}
             </p>
           )}
+        </section>
+
+        <section aria-label="Mockups da marca" className="grid grid-cols-3 gap-2 sm:gap-3">
+          {MOCKUPS.map((mockup, indice) => (
+            <figure
+              key={mockup.id}
+              className={cn("relative overflow-hidden rounded-3xl", indice === 0 ? "col-span-3 aspect-[4/3] sm:aspect-video" : "aspect-square rounded-2xl sm:aspect-[4/3] sm:rounded-3xl")}
+              style={{ backgroundColor: cores.fundo }}
+            >
+              {mockup.src ? (
+                <Image src={mockup.src} alt={mockup.legenda} fill sizes={indice === 0 ? "(min-width: 1024px) 1024px, 100vw" : "(min-width: 1024px) 340px, 33vw"} className="object-cover" />
+              ) : (
+                <>
+                  <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={cores.fundo} cor={cores.apoio} borda={indice === 0 ? "bottom" : "right"} />
+                  <figcaption
+                    className={cn(
+                      "absolute bottom-2 left-2 flex items-center gap-1.5 rounded-full bg-superficie/90 py-1.5 text-xs font-medium sm:bottom-3 sm:left-3 sm:px-3",
+                      indice === 0 ? "px-3" : "px-1.5",
+                    )}
+                  >
+                    <ImageIcon className="size-3.5" strokeWidth={2} aria-hidden />
+                    <span className={cn(indice > 0 && "sr-only sm:not-sr-only")}>{mockup.legenda}</span>
+                  </figcaption>
+                </>
+              )}
+            </figure>
+          ))}
         </section>
 
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">

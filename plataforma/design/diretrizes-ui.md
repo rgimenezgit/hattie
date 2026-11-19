@@ -254,7 +254,7 @@ No fim de cada seção, ao lado de Aprovar e Editar com o Hattie, uma pílula ro
 
 ### Olha como ficou (`/marca/[marca]/pronta`)
 
-Depois que o Hattie cria a marca, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção.
+Depois que o Hattie cria a marca, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`).
 
 ### Assim fica numa peça (`NaPeca`)
 

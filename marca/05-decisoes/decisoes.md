@@ -7,6 +7,7 @@ Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../dir
 - Primeiro acesso: o Hattie feliz no lugar do avatar; a tela para de pular ao trocar entre criar e importar; Importar marca ganha uma área grande para soltar arquivos; os dois modos têm "Como preencher", com passo a passo e exemplo; embaixo, carrossel de vídeos de tutorial (marcadores até os vídeos chegarem).
 - Tela de criação: chapéu animado (pula, amassa e estica, chacoalha), sem objetos saindo dele, e, no lugar do gradiente roxo parado, faixas de faíscas que sobem de baixo, uma de cada vez, sem pontos de base e sem degradê, só abaixo da lista de etapas. Degradê suave fica fora da marca.
 - As colunas da direita (plano, editar com o Hattie) ganham o mesmo respiro da borda que a coluna da esquerda. A segunda coluna da esquerda pode ser recolhida em todas as áreas pelo botão antes do título.
+- "Olha como ficou" ganha quatro mockups da marca logo abaixo do logo: um grande e três menores embaixo. As imagens vêm do Raphael; até lá, cada espaço mostra um bloco pontilhado nas cores da marca.
 
 ## 17/11/2026 · Simplificação da experiência (branch `simplificacao-ux`)
 - O cérebro atende duas pessoas: o empreendedor que quer só uma marca que funcione e o designer ou consultor que usa o Hattie no trabalho. Cada seção mostra o essencial por padrão e guarda o técnico em "Opções avançadas", um clique abaixo. Quem quiser pode deixar sempre aberto. Não há escolha de "modo simples" no cadastro, para ninguém ficar preso a ela.
