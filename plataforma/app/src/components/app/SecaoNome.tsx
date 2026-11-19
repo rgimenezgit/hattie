@@ -13,6 +13,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Checagem, Marca, OpcaoNome, ProcessoNome, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
@@ -268,6 +269,7 @@ function NomeEscolhido({
           <Botao variante="secundario" tamanho="sm" onClick={aoReabrir}>
             <RotateCcw /> Ver as opções de novo
           </Botao>
+          <MenuPonto ponto="o nome da marca" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="flex flex-col gap-2">

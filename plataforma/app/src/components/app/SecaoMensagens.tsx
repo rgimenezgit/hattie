@@ -5,6 +5,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { VerMais } from "@/components/hattie/VerMais"
 import type { Marca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -32,6 +33,7 @@ export function SecaoMensagens({ secao, marca, aoEditar }: Props) {
                 <p className="flex items-center gap-2 text-xs text-texto-3 tabular-nums">
                   {String(indice + 1).padStart(2, "0")}
                   <span className="font-semibold text-texto-2">{mensagem.titulo}</span>
+                  <MenuPonto ponto={`a mensagem ${mensagem.titulo.toLowerCase()}`} className="-my-1 -me-2 ms-auto" />
                 </p>
                 <h3 id={`mensagem-${mensagem.id}`} className="text-destaque leading-snug font-medium">
                   {mensagem.frase}

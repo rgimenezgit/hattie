@@ -12,6 +12,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { ExemploPeca, FormatoPeca, RecursoPeca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useMarca } from "./MarcaContexto"
 import { Mockup, Peca } from "./PecasMarca"
 import { useSistemaMarca, type SistemaMarca } from "./SistemaMarca"
@@ -83,7 +84,9 @@ export function SecaoAplicacoes({ secao, aoEditar }: Props) {
       </section>
 
       <section aria-labelledby="titulo-mockups" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-mockups" titulo="mockups" quantidade={guia.mockups.length} />
+        <CabecalhoBloco id="titulo-mockups" titulo="mockups" quantidade={guia.mockups.length}>
+          <MenuPonto ponto="os mockups" />
+        </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 @4xl:grid-cols-3">
           {guia.mockups.map((mockup) => (
             <li key={mockup.id} className="flex min-w-0">
@@ -106,6 +109,7 @@ export function SecaoAplicacoes({ secao, aoEditar }: Props) {
           <Botao variante="secundario" tamanho="sm" aria-pressed={grade} onClick={() => setGrade((valor) => !valor)}>
             <Grid3x3 /> {grade ? "Esconder grid" : "Mostrar grid"}
           </Botao>
+          <MenuPonto ponto="as peças de comunicação" />
         </CabecalhoBloco>
         <Abas defaultValue={guia.formatos[0].id}>
           <ListaAbas rotulo="Formatos" itens={guia.formatos.map((formato) => ({ valor: formato.id, rotulo: formato.nome }))} />

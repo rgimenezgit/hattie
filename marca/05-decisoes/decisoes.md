@@ -11,6 +11,9 @@ Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../dir
 - Identidade Verbal enxuta: Nome, Tagline, Mensagens-chave e Tom de voz. Palavras-chave e Vocabulário saem. Os adjetivos das palavras-chave já estão em Personalidade; as palavras que a marca repete passam para cada mensagem-chave; o que a marca usa e o que evita fica no Tom de voz, à vista.
 - Grafismos, Gradiente e Ícones viram uma categoria só: Grafismos e elementos gráficos. Ilustração continua separada.
 - Os cards de escolha de tipografia, estilo fotográfico, ilustração e elementos gráficos mostram a opção aplicada em peças reais da marca (post, story, banner), para quem não é designer ver o resultado antes de decidir.
+- Primeiro impacto antes da validação: quando o Hattie termina de criar a marca, a pessoa vê uma tela "olha como ficou" com nome, logo, tagline, propósito, personalidade, tipografia, cores e algumas aplicações. Só depois começa a validação ponto a ponto, por um botão.
+- Contratar um parceiro ganha destaque: pílula rosa com rostos de parceiros da especialidade da seção, no lugar do link discreto.
+- Todo container com conteúdo único da marca tem o menu de três pontos com "Editar com o Hattie" e "Contratar um parceiro" para aquele ponto específico. O pedido chega escrito em Parceiros.
 
 ## 12/11/2026
 - Biblioteca organizada em três níveis: coluna lateral para onde olhar (tudo, favoritos, tipos e projetos), uma barra só para buscar e filtrar (filtros num botão, o que está valendo em pílulas) e os arquivos agrupados por data. Um título só em Clash, com o lugar atual.

@@ -7,6 +7,7 @@ import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { ClusterDiferencial, Diferencial, Secao, TipoCluster } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 
 type Props = { secao: Secao; aoEditar: () => void }
 
@@ -37,6 +38,7 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="o que mais diferencia" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{principal}</p>
@@ -144,6 +146,7 @@ function CartaoCluster({ cluster }: { cluster: ClusterDiferencial }) {
           </h3>
           <p className="text-xs text-texto-2">{info.pergunta}</p>
         </div>
+        <MenuPonto ponto={`os diferenciais ${info.titulo.toLowerCase()}`} className="-me-2" />
       </header>
       <ul className="flex flex-col">
         {cluster.diferenciais.map((diferencial) => (

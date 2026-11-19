@@ -5,6 +5,7 @@ import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { VerMais } from "@/components/hattie/VerMais"
 import { peca, type ElementosGraficos, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { Carimbo, GrafismoFolhas, Ilustracao } from "./Ilustracao"
 import { NaPeca, type PecaExemplo } from "./NaPeca"
 import { useSistemaMarca } from "./SistemaMarca"
@@ -44,6 +45,7 @@ export function SecaoElementos({ secao, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="os elementos da marca" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{resumo}</p>
@@ -66,7 +68,10 @@ export function SecaoElementos({ secao, aoEditar }: Props) {
                 )}
               </div>
               <div className="flex flex-col gap-0.5 p-4">
-                <h3 className="text-sm font-semibold">{grafismo.nome}</h3>
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-sm font-semibold">{grafismo.nome}</h3>
+                  <MenuPonto ponto={grafismo.nome} className="-me-2 -mt-1.5" />
+                </div>
                 <p className="text-xs text-texto-2">{grafismo.uso}</p>
               </div>
             </li>
@@ -76,7 +81,9 @@ export function SecaoElementos({ secao, aoEditar }: Props) {
 
       <div className="grid grid-cols-1 gap-10 @4xl:grid-cols-2 @4xl:gap-3">
         <section aria-labelledby="titulo-gradiente" className="flex flex-col gap-3">
-          <CabecalhoBloco id="titulo-gradiente" titulo="gradiente" />
+          <CabecalhoBloco id="titulo-gradiente" titulo="gradiente">
+            <MenuPonto ponto="o gradiente" />
+          </CabecalhoBloco>
           <div className="flex flex-1 flex-col overflow-hidden rounded-3xl bg-superficie">
             <div aria-hidden className="h-32" style={{ background: `linear-gradient(to bottom, ${gradiente.de}, ${gradiente.para})` }} />
             <div className="flex flex-col gap-1 p-4">
@@ -90,7 +97,9 @@ export function SecaoElementos({ secao, aoEditar }: Props) {
         </section>
 
         <section aria-labelledby="titulo-icones" className="flex flex-col gap-3">
-          <CabecalhoBloco id="titulo-icones" titulo="ícones" quantidade={icones.length} />
+          <CabecalhoBloco id="titulo-icones" titulo="ícones" quantidade={icones.length}>
+            <MenuPonto ponto="os ícones" />
+          </CabecalhoBloco>
           <div className="flex flex-1 flex-col gap-4 rounded-3xl bg-superficie p-5">
             <ul className="grid grid-cols-3 gap-3 sm:grid-cols-6 @4xl:grid-cols-3">
               {icones.map((icone) => {

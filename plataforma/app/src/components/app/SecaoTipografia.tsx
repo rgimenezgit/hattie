@@ -14,6 +14,7 @@ import { carregarFonteGoogle, useFontesGoogle } from "@/lib/usarFonteGoogle"
 import { cn } from "@/lib/utils"
 import { peca, type CombinacaoTipografica, type EstiloTipografico, type FonteMarca, type GuiaTipografia, type Marca, type PapelFonte, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 import { NaPeca, type PecaExemplo } from "./NaPeca"
 import { comCombinacao, useSistemaMarca } from "./SistemaMarca"
@@ -134,9 +135,12 @@ function CartaoCombinacao({ combinacao, guia, aoGerar }: { combinacao: Combinaca
           </div>
           <p className="text-sm text-texto-2">{combinacao.ideia}</p>
         </div>
-        <Botao variante={combinacao.aposta ? "primario" : "secundario"} tamanho="sm" className="shrink-0 self-start" onClick={aoGerar}>
-          <Sparkles /> Gerar sistema com esta
-        </Botao>
+        <div className="flex shrink-0 items-center gap-1 self-start">
+          <Botao variante={combinacao.aposta ? "primario" : "secundario"} tamanho="sm" onClick={aoGerar}>
+            <Sparkles /> Gerar sistema com esta
+          </Botao>
+          <MenuPonto ponto={`a combinação ${combinacao.nome}`} />
+        </div>
       </header>
 
       <NaPeca pecas={PECAS_TIPO} sistema={comCombinacao(sistema, combinacao)} className="pb-5" />
@@ -212,6 +216,7 @@ function Sistema({
           <Botao variante="secundario" tamanho="sm" onClick={aoVoltar}>
             <RotateCcw /> Ver as combinações<span className="max-sm:sr-only"> de novo</span>
           </Botao>
+          <MenuPonto ponto="as fontes" />
         </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
           {PAPEIS.map((papel) => (

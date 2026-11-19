@@ -11,6 +11,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { VerMais } from "@/components/hattie/VerMais"
 import type { Marca, ProdutoMarca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -120,6 +121,7 @@ function CartaoProduto({ produto }: { produto: ProdutoMarca }) {
             {produto.preco && ` · ${produto.preco}`}
           </p>
         </div>
+        <MenuPonto ponto={produto.nome} className="-me-2 -mt-1" />
       </header>
       <p className="text-sm">{produto.oQueE}</p>
       {produto.caracteristicas.length > 0 && (

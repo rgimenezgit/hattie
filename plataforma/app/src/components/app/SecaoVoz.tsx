@@ -10,6 +10,7 @@ import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { ExemploVoz, GuiaVoz, Marca, Secao, TipoExemplo } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { corDoTexto } from "./PreviaSecao"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
@@ -41,6 +42,7 @@ export function SecaoVoz({ secao, marca, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="como a marca fala" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{guia.intro}</p>
@@ -63,7 +65,9 @@ export function SecaoVoz({ secao, marca, aoEditar }: Props) {
       <Exemplos exemplos={guia.exemplos} marca={marca} />
 
       <section aria-labelledby="titulo-regras" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-regras" titulo="faça e evite" />
+        <CabecalhoBloco id="titulo-regras" titulo="faça e evite">
+          <MenuPonto ponto="faça e evite" />
+        </CabecalhoBloco>
         <div className="grid grid-cols-1 gap-6 rounded-3xl bg-superficie p-5 md:p-6 @3xl:grid-cols-2 @3xl:gap-0">
           <Regras titulo="Faça" regras={guia.faca} tipo="faca" />
           <Regras titulo="Evite" regras={guia.evite} tipo="evite" />

@@ -27,6 +27,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { Marca, Persona, Publico, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 import { corDoTexto } from "./PreviaSecao"
 
@@ -56,6 +57,7 @@ export function SecaoPublico({ secao, marca, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="o público macro" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{macro.descricao}</p>
@@ -119,6 +121,7 @@ function CartaoPublico({ publico, personas, aoCompletar }: { publico: Publico; p
           <span className="text-xs text-texto-3">
             {personas === 1 ? "1 persona" : `${personas} personas`}
           </span>
+          <MenuPonto ponto={`o público ${publico.nome}`} className="-me-2 ms-auto" />
         </div>
         {publico.descricao && <p className="max-w-[70ch] text-sm text-texto-2">{publico.descricao}</p>}
       </header>
@@ -221,6 +224,7 @@ function CartaoPersona({
           </p>
         </div>
         {persona.rascunho ? <Tag tamanho="sm">rascunho</Tag> : publico && <Tag tamanho="sm">{publico}</Tag>}
+        <MenuPonto ponto={`a persona ${persona.nome}`} className="-me-2" />
       </header>
 
       {persona.frase && (

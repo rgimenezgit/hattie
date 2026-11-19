@@ -7,6 +7,7 @@ import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { Arquetipo, Atributo, Marca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -49,9 +50,12 @@ export function SecaoPersonalidadeMarca({ secao, marca, aoEditar }: Props) {
           {tracos.map((traco) => (
             <li key={traco.id} className="flex min-w-0">
               <article aria-labelledby={`traco-${traco.id}`} className="flex w-full flex-col gap-2 rounded-3xl bg-superficie p-5">
-                <h3 id={`traco-${traco.id}`} className="font-heading text-titulo-2 font-medium lowercase">
-                  {traco.palavra}
-                </h3>
+                <div className="flex items-start justify-between gap-2">
+                  <h3 id={`traco-${traco.id}`} className="font-heading text-titulo-2 font-medium lowercase">
+                    {traco.palavra}
+                  </h3>
+                  <MenuPonto ponto={traco.palavra.toLowerCase()} className="-me-2" />
+                </div>
                 <p className="text-sm">{traco.explicacao}</p>
                 <p className="mt-auto pt-2 text-xs text-texto-2">
                   <span className="font-semibold text-texto">Na prática: </span>
@@ -98,6 +102,7 @@ export function SecaoArquetipos({ secao, marca, aoEditar }: Props) {
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
+          <MenuPonto ponto="a mistura" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
           <p className="max-w-[62ch] text-destaque font-light">{mistura}</p>
@@ -159,6 +164,7 @@ function CartaoArquetipo({ arquetipo, papel, marca }: { arquetipo: Arquetipo; pa
           </div>
           <p className="text-sm text-texto-2">{arquetipo.lema}</p>
         </div>
+        <MenuPonto ponto={`o arquétipo ${arquetipo.nome}`} className="-me-2 -mt-1" />
       </header>
       <div className="flex flex-col gap-4 border-t border-borda-sutil pt-4">
         <div className="flex flex-col gap-1">
@@ -259,6 +265,7 @@ function CartaoAtributo({ atributo, numero }: { atributo: Atributo; numero: numb
         {String(numero).padStart(2, "0")}
         <span className="font-semibold text-texto-2">{atributo.nome}</span>
         {atributo.arquetipo && <Tag tamanho="sm">do {atributo.arquetipo}</Tag>}
+        <MenuPonto ponto={atributo.nome} className="-my-1 -me-2 ms-auto" />
       </p>
       <h3 id={`atributo-${atributo.id}`} className="text-destaque leading-snug font-medium">
         {atributo.titulo}

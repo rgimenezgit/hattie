@@ -15,6 +15,7 @@ import { Plimm } from "@/components/hattie/Plimm"
 import { Busca } from "@/components/hattie/Busca"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { cn } from "@/lib/utils"
+import { esquecerPedidoParceiro, lerPedidoParceiro } from "@/lib/pedidoParceiro"
 import { ESPECIALIDADES, FAIXAS, PARCEIROS, PESSOA, type EspecialidadeParceiro, type Parceiro } from "@/lib/mock"
 import { CabecalhoBloco } from "../Blocos"
 import { useEstado } from "../Estado"
@@ -133,6 +134,22 @@ export function ContratarParceiros() {
   const listaRef = useRef<HTMLElement>(null)
   useEffect(() => () => {
     if (timer.current) clearTimeout(timer.current)
+  }, [])
+
+  // Pedido vindo de um ponto da marca (menu de três pontos ou botão de parceiro no cérebro): preenche e já indica.
+  useEffect(() => {
+    const vindo = lerPedidoParceiro()
+    if (!vindo) return
+    const quadro = requestAnimationFrame(() => {
+      esquecerPedidoParceiro()
+      setPedido(vindo)
+      setLendo(true)
+      timer.current = setTimeout(() => {
+        setIndicacao(indicar(vindo))
+        setLendo(false)
+      }, 1400)
+    })
+    return () => cancelAnimationFrame(quadro)
   }, [])
 
   const filtrando = busca.trim() !== "" || (Object.keys(PADRAO) as (keyof Filtros)[]).some((chave) => chave !== "ordem" && filtros[chave] !== PADRAO[chave])

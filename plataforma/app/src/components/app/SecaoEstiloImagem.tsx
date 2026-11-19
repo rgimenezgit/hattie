@@ -17,6 +17,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import { peca, type CamadaFoto, type EstiloFoto, type IdCamadaFoto, type ImagemFoto, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { Ilustracao, type CoresDesenho } from "./Ilustracao"
 import { useEstado } from "./Estado"
 import { NaPeca, type PecaExemplo } from "./NaPeca"
@@ -334,9 +335,12 @@ function Briefing({
         </div>
         <p className="text-xs text-texto-2">{estilo.uso}</p>
         </div>
-        <Botao variante="fantasma" tamanho="sm" onClick={aoEditarBriefing} aria-label={`Editar nome, uso e registro de ${estilo.nome}`}>
-          <SquarePen /> Editar
-        </Botao>
+        <div className="flex shrink-0 items-center gap-1">
+          <Botao variante="fantasma" tamanho="sm" onClick={aoEditarBriefing} aria-label={`Editar nome, uso e registro de ${estilo.nome}`}>
+            <SquarePen /> Editar
+          </Botao>
+          <MenuPonto ponto={`o estilo ${estilo.nome}`} />
+        </div>
       </header>
       <div className="flex flex-col gap-2">
         <p className="max-w-[62ch] text-destaque font-light">{estilo.registro}</p>

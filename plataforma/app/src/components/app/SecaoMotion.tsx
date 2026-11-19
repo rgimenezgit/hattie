@@ -12,6 +12,7 @@ import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { CurvaMotion, ExemploMotion, GuiaMotion, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto } from "./AcoesPonto"
 import { Carimbo, Ilustracao } from "./Ilustracao"
 import { Simbolo } from "./Logo"
 import { useSistemaMarca, type SistemaMarca } from "./SistemaMarca"
@@ -79,7 +80,9 @@ export function SecaoMotion({ secao, aoEditar }: Props) {
       </section>
 
       <section aria-labelledby="titulo-principios-motion" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-principios-motion" titulo="princípios" quantidade={guia.principios.length} />
+        <CabecalhoBloco id="titulo-principios-motion" titulo="princípios" quantidade={guia.principios.length}>
+          <MenuPonto ponto="os princípios de motion" />
+        </CabecalhoBloco>
         <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 @4xl:grid-cols-4">
           {guia.principios.map((principio, indice) => (
             <li key={principio.titulo} className="flex flex-col gap-2 rounded-3xl bg-superficie p-5">

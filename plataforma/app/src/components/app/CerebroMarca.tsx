@@ -3,7 +3,6 @@
 import Link from "next/link"
 import type { Route } from "next"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
-import { useRouter } from "next/navigation"
 import {
   ArrowLeft,
   ArrowRight,
@@ -32,6 +31,8 @@ import { notificar } from "@/components/hattie/Notificacao"
 import { StatusBadge } from "@/components/hattie/StatusBadge"
 import { cn } from "@/lib/utils"
 import { GRUPOS_CEREBRO, SECOES, VISAO_GERAL, getSecao, type Secao } from "@/lib/mock"
+import { AcoesPontoProvider, MenuPonto, usePedirParceiro } from "./AcoesPonto"
+import { BotaoParceiro } from "./BotaoParceiro"
 import { useEstado } from "./Estado"
 import { Canvas, CabecalhoCanvas, ColunaLateral } from "./Layout"
 import { useMarca } from "./MarcaContexto"
@@ -57,8 +58,7 @@ type MensagemEdicao = { id: number; autor: "hattie" | "pessoa"; texto: string }
 const APROVAR = "Gostei, pode aprovar"
 
 function useAcoesSecao(secao: Secao, aoEditar: (id: string) => void) {
-  const router = useRouter()
-  const marca = useMarca()
+  const pedirParceiro = usePedirParceiro()
   const { secoes, aprovar, reabrir } = useEstado()
   const aprovada = secoes[secao.id] === "aprovada"
 
@@ -78,7 +78,7 @@ function useAcoesSecao(secao: Secao, aoEditar: (id: string) => void) {
           },
         },
     { rotulo: "Editar com o Hattie", icone: SquarePen, abrePainel: true, onSelect: () => aoEditar(secao.id) },
-    { rotulo: "Contratar um parceiro", icone: UsersRound, onSelect: () => router.push(`/marca/${marca.slug}/parceiros` as Route) },
+    { rotulo: "Contratar um parceiro", icone: UsersRound, onSelect: () => pedirParceiro(secao.id) },
   ]
   if (secao.extra) {
     const extra = secao.extra
@@ -248,7 +248,7 @@ function CardSecao({ secao, destaque = false, aoEditar }: { secao: Secao; destaq
   )
 }
 
-function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => void }) {
+function PainelEdicao({ secaoId, foco, aoFechar }: { secaoId: string; foco?: string; aoFechar: () => void }) {
   const { secoes, aprovar } = useEstado()
   const secao = getSecao(secaoId)!
   const aprovada = secoes[secao.id] === "aprovada"
@@ -308,12 +308,12 @@ function PainelEdicao({ secaoId, aoFechar }: { secaoId: string; aoFechar: () => 
         <div className="mt-auto flex items-start gap-3">
           <IconeHattie nome="hattie" tamanho={32} label="Hattie" className="shrink-0 text-preto" />
           <p className="font-heading text-destaque leading-tight font-medium lowercase">
-            {aprovada ? "quer ajustar alguma coisa aqui?" : "isso resume bem a sua marca?"}
+            {foco ? "o que você quer mudar aqui?" : aprovada ? "quer ajustar alguma coisa aqui?" : "isso resume bem a sua marca?"}
           </p>
         </div>
         <div className="rounded-2xl bg-preenchimento p-4 text-sm">
-          <p className="mb-2 text-sm font-medium text-texto-2">{secao.titulo}</p>
-          <p className="leading-relaxed">{secao.resumo}</p>
+          <p className="mb-2 text-sm font-medium text-texto-2">{foco ? `${secao.titulo} › ${foco}` : secao.titulo}</p>
+          <p className="leading-relaxed">{foco ? `Vou mexer só em ${foco}. O resto de ${secao.titulo.toLowerCase()} fica como está.` : secao.resumo}</p>
         </div>
         {mensagens.map((mensagem) =>
           mensagem.autor === "pessoa" ? (
@@ -427,9 +427,12 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">
             <p className="text-xs font-medium text-texto-3">{secao.titulo}</p>
-            <PorqueHattie assunto={secao.titulo} aoPerguntar={() => aoEditar(secao.id)}>
-              <p>{secao.porque}</p>
-            </PorqueHattie>
+            <div className="flex items-center">
+              <PorqueHattie assunto={secao.titulo} aoPerguntar={() => aoEditar(secao.id)}>
+                <p>{secao.porque}</p>
+              </PorqueHattie>
+              <MenuPonto ponto={secao.titulo} />
+            </div>
           </div>
           {!(secao.conteudo.tipo === "texto" && secao.conteudo.texto === secao.resumo) && (
             <p className="max-w-[60ch] text-destaque font-light">{secao.resumo}</p>
@@ -458,9 +461,7 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <Botao variante="secundario" data-editar onClick={() => aoEditar(secao.id)}>
           <SquarePen /> Editar com o Hattie
         </Botao>
-        <Botao variante="link" asChild>
-          <Link href={`/marca/${marca.slug}/parceiros` as Route}>Contratar um parceiro</Link>
-        </Botao>
+        <BotaoParceiro secaoId={secao.id} />
       </div>
 
       <nav aria-label="Outras seções" className="flex justify-between gap-4 border-t border-borda-sutil pt-5 text-sm">
@@ -490,6 +491,12 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
   const marca = useMarca()
   const { nomeMarca, secoes } = useEstado()
   const [editando, setEditando] = useState<string | null>(null)
+  /** Ponto específico em edição (um produto, uma persona…), vindo do menu de três pontos. */
+  const [foco, setFoco] = useState<string | undefined>()
+  const editar = (id: string, ponto?: string) => {
+    setFoco(ponto)
+    setEditando(id)
+  }
   const [sumarioCelular, setSumarioCelular] = useState(false)
   const secao = secaoId ? getSecao(secaoId) : undefined
   const nome = marca.slug === "raiz-natural" ? nomeMarca : marca.nome
@@ -569,7 +576,13 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
                 </>
               }
             />
-            {secao ? <DetalheSecao secao={secao} aoEditar={setEditando} /> : <VisaoGeral aoEditar={setEditando} />}
+            {secao ? (
+              <AcoesPontoProvider secaoId={secao.id} editar={editar}>
+                <DetalheSecao secao={secao} aoEditar={(id) => editar(id)} />
+              </AcoesPontoProvider>
+            ) : (
+              <VisaoGeral aoEditar={(id) => editar(id)} />
+            )}
           </div>
         </div>
       </Canvas>
@@ -584,7 +597,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
             </Botao>
           }
         >
-          <PainelEdicao key={secaoEditada.id} secaoId={secaoEditada.id} aoFechar={fecharEdicao} />
+          <PainelEdicao key={`${secaoEditada.id}-${foco ?? ""}`} secaoId={secaoEditada.id} foco={foco} aoFechar={fecharEdicao} />
         </ColunaLateral>
       )}
       {secaoEditada && !telaLarga && (
@@ -592,7 +605,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
           <SheetContent side="right" className="w-full gap-0 bg-background p-4 data-[side=right]:sm:max-w-sm">
             <SheetTitle className="mb-3 font-heading text-titulo-3 font-medium lowercase">editar com o hattie</SheetTitle>
             <SheetDescription className="sr-only">Ajuste de {secaoEditada.titulo}</SheetDescription>
-            <PainelEdicao key={`m-${secaoEditada.id}`} secaoId={secaoEditada.id} aoFechar={fecharEdicao} />
+            <PainelEdicao key={`m-${secaoEditada.id}-${foco ?? ""}`} secaoId={secaoEditada.id} foco={foco} aoFechar={fecharEdicao} />
           </SheetContent>
         </Sheet>
       )}

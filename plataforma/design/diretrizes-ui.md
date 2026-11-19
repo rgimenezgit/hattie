@@ -242,6 +242,18 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 2. **Os arquétipos** lado a lado, um card cada: ícone num círculo neutro, nome em Clash minúsculo, tag com papel e peso, o lema, "O que é" (a essência) e "Na marca" (como a marca vive o arquétipo).
 3. **Opções avançadas**: cada arquétipo em detalhe, com motivação, desejo e medo, comportamentos em lista e, no pé, "Cuidado com o exagero" com ícone dourado.
 
+### Ações de cada ponto da marca (`MenuPonto`)
+
+Todo container com conteúdo único da marca (um produto, uma persona, um traço de personalidade, o logo, uma combinação de fontes, um estilo de foto, um grafismo, o propósito…) tem o menu de três pontos no canto, com duas ações para aquele ponto: "Editar com o Hattie" abre o painel de edição focado nele ("Produtos e serviços › Óleo de pequi") e "Contratar um parceiro" leva a Parceiros com o pedido já escrito e as indicações prontas. Os cards da visão geral seguem com o menu da seção (aprovar, editar, contratar).
+
+### Contratar um parceiro (`BotaoParceiro`)
+
+No fim de cada seção, ao lado de Aprovar e Editar com o Hattie, uma pílula rosa (`#FF8AE5` a 30%, a cor dos parceiros) com três rostos de parceiros da especialidade daquela seção, "Contratar um parceiro" em 500, a especialidade embaixo e uma seta. Leva a Parceiros com o pedido escrito.
+
+### Olha como ficou (`/marca/[marca]/pronta`)
+
+Depois que o Hattie cria a marca, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção.
+
 ### Assim fica numa peça (`NaPeca`)
 
 Nos cards de escolha (combinação tipográfica, estilo de foto ou de ilustração, elementos gráficos), a opção aparece aplicada em peças reais da marca: post, story e banner na mesma altura (176 px, 208 px em tela larga), com legenda em `micro`. Quem não é designer vê o resultado antes de decidir. As peças usam o `Peca` com a fonte da combinação (`comCombinacao`) ou as cores do estilo (`imagem`, `coresIlustracao`). No celular, a fileira rola de lado.

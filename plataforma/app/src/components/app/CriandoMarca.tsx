@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Check } from "lucide-react"
 import { IconeHattie } from "@/components/hattie/IconeHattie"
-import { notificar } from "@/components/hattie/Notificacao"
 import { SeloSom } from "@/components/hattie/SeloSom"
 import { fillStyle } from "@/lib/dither/style"
 import { cn } from "@/lib/utils"
@@ -21,13 +20,11 @@ export function CriandoMarca() {
   const [etapa, setEtapa] = useState(0)
 
   useEffect(() => {
-    const destino = `/marca/${marca.slug}/cerebro` as Route
+    // Antes da validação ponto a ponto, a pessoa vê a marca inteira ("olha como ficou").
+    const destino = `/marca/${marca.slug}/pronta` as Route
     router.prefetch(destino)
     const intervalo = setInterval(() => setEtapa((atual) => Math.min(atual + 1, ETAPAS_CRIACAO.length)), DURACAO_ETAPA)
-    const fim = setTimeout(() => {
-      router.replace(destino)
-      notificar({ titulo: `a ${marca.nome.toLowerCase()} saiu do chapéu`, texto: "Bia, cada proposta está esperando o seu ok. Você já pode usar o resto do Hattie enquanto isso.", som: "tcharam" })
-    }, DURACAO_ETAPA * (ETAPAS_CRIACAO.length + 1))
+    const fim = setTimeout(() => router.replace(destino), DURACAO_ETAPA * (ETAPAS_CRIACAO.length + 1))
     return () => {
       clearInterval(intervalo)
       clearTimeout(fim)
@@ -49,7 +46,7 @@ export function CriandoMarca() {
         </div>
 
         <p role="status" className="sr-only">
-          {etapa < ETAPAS_CRIACAO.length ? ETAPAS_CRIACAO[etapa] : "Marca pronta. Abrindo o cérebro da sua marca."}
+          {etapa < ETAPAS_CRIACAO.length ? ETAPAS_CRIACAO[etapa] : "Marca pronta. Abrindo a primeira versão."}
         </p>
         <ol className="flex w-full flex-col gap-1 rounded-[28px] bg-branco p-3 text-left" aria-label="Etapas da criação">
           {ETAPAS_CRIACAO.map((texto, indice) => {

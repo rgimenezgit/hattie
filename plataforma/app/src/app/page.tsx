@@ -18,6 +18,7 @@ const FLUXOS: { titulo: string; descricao: string; telas: { rotulo: string; href
     telas: [
       { rotulo: "Conversa de criação com o plano", href: "/marca/raiz-natural/hattie/criacao" },
       { rotulo: "O Hattie criando a marca", href: "/marca/raiz-natural/criando" },
+      { rotulo: "Olha como ficou (antes da validação)", href: "/marca/raiz-natural/pronta" },
       { rotulo: "Cérebro da marca: visão geral", href: "/marca/raiz-natural/cerebro" },
       { rotulo: "Cérebro da marca: uma seção", href: "/marca/raiz-natural/cerebro/proposito" },
     ],
