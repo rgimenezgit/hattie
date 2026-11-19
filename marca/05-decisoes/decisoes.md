@@ -2,6 +2,12 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 18/11/2026 · Entrada, primeiro acesso e criação (branch `simplificacao-ux`)
+- Criar conta e entrar cabem na altura da janela. O painel lilás ganha o símbolo principal grande e um campo interativo que segue a escala das faíscas da marca (ponto, mais, brilho, asterisco): manchas que fluem, luz no mouse que deixa rastro e onda no clique.
+- Primeiro acesso: o Hattie feliz no lugar do avatar; a tela para de pular ao trocar entre criar e importar; Importar marca ganha uma área grande para soltar arquivos; os dois modos têm "Como preencher", com passo a passo e exemplo; embaixo, carrossel de vídeos de tutorial (marcadores até os vídeos chegarem).
+- Tela de criação: chapéu animado (pula, amassa e estica, chacoalha), sem objetos saindo dele, e, no lugar do gradiente roxo parado, faixas de faíscas que sobem de baixo, uma de cada vez, sem pontos de base e sem degradê, só abaixo da lista de etapas. Degradê suave fica fora da marca.
+- As colunas da direita (plano, editar com o Hattie) ganham o mesmo respiro da borda que a coluna da esquerda. A segunda coluna da esquerda pode ser recolhida em todas as áreas pelo botão antes do título.
+
 ## 17/11/2026 · Simplificação da experiência (branch `simplificacao-ux`)
 - O cérebro atende duas pessoas: o empreendedor que quer só uma marca que funcione e o designer ou consultor que usa o Hattie no trabalho. Cada seção mostra o essencial por padrão e guarda o técnico em "Opções avançadas", um clique abaixo. Quem quiser pode deixar sempre aberto. Não há escolha de "modo simples" no cadastro, para ninguém ficar preso a ela.
 - Estratégia em nova ordem, do mais aberto ao mais fechado: Briefing, Objetivos, Mercado e concorrentes, Produtos e serviços (Negócio); Propósito, Posicionamento, Diferenciais, Público e personas (Marca); Personalidade, Arquétipo, Atributos (Personalidade). Diferenciais da marca ficam junto do posicionamento.

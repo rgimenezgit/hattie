@@ -2,12 +2,12 @@
 
 import Image from "next/image"
 import type { Route } from "next"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Check } from "lucide-react"
-import { IconeHattie } from "@/components/hattie/IconeHattie"
+import { CampoMagico } from "@/components/hattie/CampoMagico"
+import { ChapeuAnimado } from "@/components/hattie/ChapeuAnimado"
 import { SeloSom } from "@/components/hattie/SeloSom"
-import { fillStyle } from "@/lib/dither/style"
 import { cn } from "@/lib/utils"
 import { ETAPAS_CRIACAO } from "@/lib/mock"
 import { useMarca } from "./MarcaContexto"
@@ -18,6 +18,8 @@ export function CriandoMarca() {
   const router = useRouter()
   const marca = useMarca()
   const [etapa, setEtapa] = useState(0)
+  /** As faíscas sobem só até abaixo da primeira etapa ("Lendo tudo que você me contou"). */
+  const primeiraEtapa = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
     // Antes da validação ponto a ponto, a pessoa vê a marca inteira ("olha como ficou").
@@ -32,11 +34,11 @@ export function CriandoMarca() {
   }, [router, marca])
 
   return (
-    <div className="relative flex min-h-svh flex-col overflow-hidden bg-background px-4 py-6 md:px-10">
-      <Image src="/logos/hattie-logomarca.svg" alt="Hattie" width={160} height={34} priority className="h-8 w-auto self-start" />
+    <div className="relative isolate flex min-h-svh flex-col overflow-hidden bg-background px-4 py-6 md:px-10">
+      <Image src="/logos/hattie-logomarca.svg" alt="Hattie" width={160} height={34} priority className="relative z-10 h-8 w-auto self-start" />
 
       <main className="relative z-10 mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center gap-6 py-8 text-center">
-        <IconeHattie nome="hattie" tamanho={104} className="text-preto motion-safe:animate-[flutuar_3s_ease-in-out_infinite]" />
+        <ChapeuAnimado largura={200} />
         <div className="flex flex-col items-center gap-4">
           <SeloSom som="zuum" fixo />
           <h1 className="font-heading text-titulo-1 font-medium lowercase">
@@ -55,6 +57,7 @@ export function CriandoMarca() {
             return (
               <li
                 key={texto}
+                ref={indice === 0 ? primeiraEtapa : undefined}
                 aria-current={agora ? "step" : undefined}
                 className={cn("flex h-10 items-center gap-3 rounded-xl px-3 text-sm", agora && "bg-preenchimento")}
               >
@@ -75,7 +78,14 @@ export function CriandoMarca() {
         </ol>
       </main>
 
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40" style={fillStyle("gradient", { color: "var(--lilas)", edge: "bottom", length: 36 })} />
+      <CampoMagico
+        cores={{ ponto: "--lilas", mais: "--lilas", brilho: "--violeta", asterisco: "--violeta", acento: "--lima" }}
+        ambiente="subida"
+        limite={primeiraEtapa}
+        semPontos
+        intervalo={210}
+        espaco={28}
+      />
     </div>
   )
 }

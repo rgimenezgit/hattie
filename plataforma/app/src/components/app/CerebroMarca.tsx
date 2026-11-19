@@ -554,6 +554,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
             )}
             <CabecalhoCanvas
               titulo={secao ? secao.titulo : nome}
+              coluna
               nomeProprio={!secao}
               subtitulo={secao ? undefined : "visão geral"}
               grande={!secao}
@@ -589,6 +590,7 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
 
       {secaoEditada && telaLarga && (
         <ColunaLateral
+          lado="direita"
           titulo="editar com o hattie"
           className="w-80"
           acao={

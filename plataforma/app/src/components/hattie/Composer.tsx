@@ -13,7 +13,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { cn } from "@/lib/utils"
 import { Plimm } from "./Plimm"
 
-export type ComposerHandle = { preencher: (texto: string) => void; focar: () => void }
+export type ComposerHandle = {
+  preencher: (texto: string) => void
+  focar: () => void
+  /** Anexa arquivos vindos de fora do campo (ex.: uma área de soltar maior). */
+  anexar: (lista: FileList | null) => void
+}
 
 type Props = {
   placeholder: string
@@ -72,6 +77,12 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
   const id = useId()
 
   useImperativeHandle(ref, () => ({
+    anexar: (lista) => {
+      if (!lista?.length) return
+      const nomes = Array.from(lista).map((item) => item.name)
+      setAnexos((atual) => [...atual, ...nomes])
+      setErro("")
+    },
     preencher: (novo) => {
       setTexto(novo)
       setErro("")

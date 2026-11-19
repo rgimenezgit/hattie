@@ -60,7 +60,7 @@ import {
   type ArquivoBiblioteca,
   type TipoArquivo,
 } from "@/lib/mock"
-import { Canvas, ColunaLateral } from "../Layout"
+import { BotaoColuna, Canvas, ColunaLateral } from "../Layout"
 import { useMarca } from "../MarcaContexto"
 import { useSistemaMarca, type SistemaMarca } from "../SistemaMarca"
 import { DetalheArquivo, feitoPor, MenuArquivo, type AcoesArquivo } from "./DetalheArquivo"
@@ -293,6 +293,7 @@ export function Biblioteca() {
           <div className="flex flex-col gap-5">
             <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-borda-sutil pb-3">
               <div className="flex min-w-0 flex-1 items-center gap-2">
+                <BotaoColuna />
                 <h1 className={cn("min-w-0 font-heading text-titulo-3 font-medium @xl:text-titulo-2", !nomeProprio && "lowercase")}>
                   <span className="hidden truncate lg:block">{titulo}</span>
                   <NavCelular arquivos={arquivos} lugar={lugar} aoIr={irPara}>

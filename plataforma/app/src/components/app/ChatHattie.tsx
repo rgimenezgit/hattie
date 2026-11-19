@@ -340,6 +340,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
         <div className="flex min-h-0 flex-1 flex-col px-4 pt-4 md:px-6 md:pt-5">
           <CabecalhoCanvas
             titulo={titulo}
+            coluna
             nomeProprio
             acoes={
               <>
@@ -426,6 +427,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
 
       {criacao && planoAberto && (
         <ColunaLateral
+          lado="direita"
           titulo="plano"
           className="hidden xl:flex"
           acao={

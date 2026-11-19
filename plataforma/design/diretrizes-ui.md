@@ -4,9 +4,11 @@ Regras de UI da plataforma Hattie, a partir das telas que o Raphael desenhou no 
 
 ## 1. Estrutura das telas
 
-**Entrada** (`/criar-conta`, `/entrar`): duas colunas. À esquerda o logo grande centralizado, o título e o formulário. À direita um painel Palco (lilás `#B19DFC`, raio 32) com selo plimm, frase do Hattie, gradiente de pontos em violeta `#7F3AEF` e o personagem. No celular, só a coluna do formulário.
+**Entrada** (`/criar-conta`, `/entrar`): duas colunas que cabem na altura da janela (em tela baixa, só o formulário rola e os espaços encolhem). À esquerda o logo, o título e o formulário. À direita um painel Palco (lilás `#B19DFC`, raio 32) com selo plimm, frase do Hattie, o símbolo principal grande no canto e o `CampoMagico`, que segue a escala das faíscas da marca: cada ponto da malha vira ponto, mais, brilho ou asterisco conforme a intensidade. Pontos e mais em violeta `#7F3AEF`, brilhos e asteriscos em lima `#E6F344`. Malha espaçada (36 px). Manchas fluem pelo card abaixo da frase, nascendo, viajando e sumindo; o mouse acende uma luz (asteriscos no centro, brilhos em volta, mais na borda) e o caminho fica aceso e se apaga devagar, como rastro; o clique solta uma onda. No celular, só a coluna do formulário.
 
-**Primeiro acesso** (`/comecar`): tela limpa, logo no canto, chapéu do Hattie, título "vamos tirar sua marca do chapéu", seletor Criar marca / Importar marca e o campo de conversa.
+**Primeiro acesso** (`/comecar`): tela limpa, logo no canto, o Hattie feliz, título "vamos tirar sua marca do chapéu", seletor Criar marca / Importar marca e o campo de conversa. A página começa do alto, para o topo não pular ao trocar de modo. Em Importar, uma área grande de soltar arquivos (sem contorno, lima-suave ao arrastar) entrega os arquivos ao campo. "Como preencher" abre o passo a passo do modo, com um exemplo para usar. Embaixo, o carrossel "aprenda em um minuto" com os vídeos de tutorial (marcadores até os vídeos chegarem).
+
+**Criando a marca** (`/marca/[marca]/criando`): o chapéu animado (`ChapeuAnimado`) pula com amassa e estica e a copa chacoalha como quem procura algo lá dentro; mouse por cima agita mais, clique solta faíscas. Fundo com o `CampoMagico` em modo subida, enxuto: sem pontos de base e sem degradê (degradê suave não é da marca). Faixas horizontais de faíscas sobem de baixo, uma de cada vez, vibrando de leve, pela escala da marca (mais e brilho em lilás `#B19DFC` e violeta `#7F3AEF`, alguns asteriscos lima `#E6F344`), e somem antes da primeira etapa da lista ("Lendo tudo que você me contou"). Acima disso o fundo fica limpo.
 
 **App da marca** (`/marca/[marca]/…`), sempre igual. Um palco cinza ocupa a tela, e a margem branca entra nele em três abas, com cantos côncavos onde encontra o cinza:
 
@@ -17,9 +19,9 @@ Regras de UI da plataforma Hattie, a partir das telas que o Raphael desenhou no 
 | Aba do meio | Navegação. Fechada (76 px), acompanha a coluna de ícones em itens de 40 px; aberta (216 px), os itens viram pílulas de 184 px com rótulo |
 | Aba da base | Avatar da conta (76 × 64 px) |
 | Palco | Cinza `#D3D3D3` a 62% com raio 28. O conteúdo vai até a borda do palco e rola por baixo da margem branca; a sombra da margem (`--sombra-canvas`) é desenhada por cima do conteúdo, em `.palco::after`. À esquerda, o conteúdo começa a 64 px, livre das abas |
-| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco, a 8 px do topo e da base: conversas (no Hattie), sumário (na Marca) ou áreas (em Parceiros). O conteúdo que rola de lado passa por baixo dela, com sombra leve (`--sombra-coluna`) |
+| Coluna esquerda (256 px, opcional) | Painel branco de raio 24 sobre o palco, a 8 px do topo e da base: conversas (no Hattie), sumário (na Marca), áreas (em Parceiros e na Biblioteca). O conteúdo que rola de lado passa por baixo dela, com sombra leve (`--sombra-coluna`). Recolhe e volta pelo botão antes do título da página; a escolha vale para todas as áreas e fica no navegador |
 | Canvas | Área transparente sobre o palco, onde o conteúdo vive e rola; respiro interno de 24 × 20 px (16 px no celular) |
-| Coluna direita (256–320 px, opcional) | Painel branco: plano da criação ou "editar com o hattie" |
+| Coluna direita (256–320 px, opcional) | Painel branco: plano da criação ou "editar com o hattie". Mesmo respiro de 8 px da borda do palco que a esquerda, com a sombra virada para dentro (`--sombra-coluna-direita`) |
 
 As três abas abrem juntas (a da base fica igual) no hover, com 120 ms de espera, no foco pelo teclado e enquanto o menu de marcas está aberto. Clicar num item não deixa a espinha presa aberta: ela só fica aberta pelo foco quando ele vem do teclado. A aba aberta passa por cima do palco, com sombra levíssima só do lado do cinza. Desenho das abas: `.aba` em `globals.css`; casca em `components/app/AppShell.tsx`. Desenho de referência: Figma do Raphael, 11/11/2026.
 
