@@ -140,12 +140,13 @@ Faixa clara (`superficie` a 60%, raio 24, sem contorno) com ícone de ajustes, "
 
 | Seção | Fica visível | Vai para opções avançadas |
 |---|---|---|
-| Mercado | Referências e concorrentes | Painel da semana |
-| Produtos e serviços | O que é, preço, características, diferenciais | Para quem, como usar, ingredientes |
-| Diferenciais | O que mais diferencia e as frentes | Números e frentes que ficaram de fora |
+| Objetivos | Todos os objetivos | — |
+| Mercado | Referências e concorrentes diretos | Concorrentes indiretos e painel da semana |
+| Produtos e serviços | Foto, o que é, preço, características, públicos, diferenciais | Para quem, como usar, ingredientes |
+| Diferenciais | O que mais diferencia e os principais, um por frente, com a tag da frente | Todos os diferenciais por frente com a prova, números e frentes que ficaram de fora |
 | Público e personas | Público macro e personas | Públicos em detalhe |
 | Personalidade | Palavras e explicações | "Se a marca fosse" |
-| Arquétipo | Mistura, essência e como a marca vive cada um | Motivação, desejo, medo, comportamentos, exagero |
+| Arquétipo | A mistura: frase, proporção e o lema de cada um | O que é cada um, como a marca vive cada um, motivação, desejo, medo, comportamentos, exagero |
 | Atributos | Frase de cada força e o que significa | Como aparece e onde se vê |
 | Nome | Opções ou nome escolhido | Processo (funil, territórios, critérios) |
 | Mensagens-chave | Frase, explicação e palavras de cada mensagem | Exemplos prontos de uso |
@@ -200,17 +201,18 @@ Diálogos da plataforma usam `Janela` (branco, raio 24, sem contorno, rodapé co
 
 ### Mercado e concorrentes
 
-1. **Referências**: marcas que inspiram, em cards de três colunas. Cada uma traz o nome, a área, "O que levar" e de onde veio ("Você citou no briefing" ou "Sugerida pelo Hattie"). "Adicionar referência" pede a marca, a área e o que a pessoa admira nela.
-2. **Concorrentes**: dois cards, diretos (vendem o mesmo para a mesma pessoa) e indiretos (resolvem a mesma vontade de outro jeito). No topo de cada um, a leitura do Hattie em lima-suave com ícone de lâmpada: é o insight do grupo. Abaixo, uma tabela leve com marca, preço e onde vende, forte em, e brecha para você (em peso 500, porque é o que interessa). No celular, cada linha vira uma lista de rótulo e valor. Concorrente novo entra como rascunho com "Analisar com o Hattie".
+1. **Referências**: marcas que inspiram, em cards de três colunas. Cada uma traz o nome, a área, "O que levar", de onde veio ("Você citou no briefing" ou "Sugerida pelo Hattie") e, quando há, o link do site ou perfil, curto e com ícone de corrente, que abre em outra aba. "Adicionar referência" pede a marca, o link, a área e o que a pessoa admira nela; só o link já basta (o nome sai do perfil ou do domínio, e "@perfil" vira Instagram).
+2. **Concorrentes**: à vista, só os diretos (vendem o mesmo para a mesma pessoa); os indiretos (resolvem a mesma vontade de outro jeito) ficam nas opções avançadas, junto do painel. "Adicionar concorrente" também aceita o link. No topo de cada um, a leitura do Hattie em lima-suave com ícone de lâmpada: é o insight do grupo. Abaixo, uma tabela leve com marca, preço e onde vende, forte em, e brecha para você (em peso 500, porque é o que interessa). No celular, cada linha vira uma lista de rótulo e valor. Concorrente novo entra como rascunho com "Analisar com o Hattie". Cada referência e cada concorrente tem o menu de três pontos com "Excluir".
 3. **Mercado esta semana**: painel que o Hattie atualiza toda segunda. Quatro cartões de indicador (rótulo, valor em Poppins 600, variação em 4 semanas com seta, minilinha de 8 semanas e a fonte) e o card "O que eu vi esta semana" com até três insights marcados como oportunidade, tendência ou atenção. "Atualizar agora" e a data da última leitura ficam no cabeçalho.
 
 `Minilinha`: linha de 2 px em cinza-médio `#6B6B6B`, semana atual em lima-forte `#77A00F` com anel branco; ao passar o mouse ou tocar, mostra a semana e o valor num balão preto; leitores de tela recebem a série numa tabela. Sem eixo e sem grade: o número grande e a variação contam a história, a linha mostra a direção.
 
 ### Diferenciais
 
-1. **O que mais diferencia**: o diferencial principal em `destaque` e quatro fatos (frentes ativas, total, fortes hoje, em construção).
-2. **Por frente**: um card por frente ativa (funcionais, emocionais, sociais, ambientais, econômicos), com ícone neutro, a pergunta que a frente responde e os diferenciais em lista: título, força (ponto lima-forte para "forte", anel vazio para "em construção"), descrição e prova.
-3. **Ficou de fora**: frentes que não fazem sentido para a marca agora, em card de contorno tracejado, com o motivo e "Conversar sobre isso". O Hattie decide quais frentes entram a partir do briefing e dos objetivos.
+1. **O que mais diferencia**: o diferencial principal em `destaque`.
+2. **Principais**: um diferencial por frente ativa, o mais forte, em card com a tag da frente (funcional, emocional, social…), a força, o título e a descrição.
+3. **Opções avançadas, todos por frente**: um card por frente ativa (funcionais, emocionais, sociais, ambientais, econômicos), com ícone neutro, a pergunta que a frente responde e os diferenciais em lista: título, força (ponto lima-forte para "forte", anel vazio para "em construção"), descrição e prova.
+Também nas opções avançadas: quatro fatos (frentes ativas, total, fortes hoje, em construção) e **ficou de fora**, frentes que não fazem sentido para a marca agora, em card de contorno tracejado, com o motivo e "Conversar sobre isso". O Hattie decide quais frentes entram a partir do briefing e dos objetivos.
 
 Botões de adicionar no cabeçalho de bloco encurtam para "Adicionar" no celular (o resto do rótulo continua para leitores de tela). Cabeçalhos de bloco e de tela quebram de linha quando falta espaço.
 
@@ -240,13 +242,19 @@ Nos dois momentos, "como cheguei nesses nomes" fecha a página: o funil (nomes g
 
 ### Arquétipo
 
-1. **A mistura**: a frase de como os arquétipos se combinam, em `destaque`, e uma barra fina de proporção (primário em preto, secundário em cinza-médio) com a legenda nome, peso e papel.
-2. **Os arquétipos** lado a lado, um card cada: ícone num círculo neutro, nome em Clash minúsculo, tag com papel e peso, o lema, "O que é" (a essência) e "Na marca" (como a marca vive o arquétipo).
-3. **Opções avançadas**: cada arquétipo em detalhe, com motivação, desejo e medo, comportamentos em lista e, no pé, "Cuidado com o exagero" com ícone dourado.
+1. **A mistura**, a única parte à vista: a frase de como os arquétipos se combinam, em `destaque`, e uma barra fina de proporção (primário em preto, secundário em cinza-médio) com a legenda nome, peso, papel e, embaixo, o lema de cada um.
+2. **Opções avançadas, os arquétipos** lado a lado, um card cada: ícone num círculo neutro, nome em Clash minúsculo, tag com papel e peso, o lema, "O que é" (a essência) e "Na marca" (como a marca vive o arquétipo).
+3. Ainda nas opções avançadas, cada arquétipo em detalhe, com motivação, desejo e medo, comportamentos em lista e, no pé, "Cuidado com o exagero" com ícone dourado.
 
 ### Ações de cada ponto da marca (`MenuPonto`)
 
 Todo container com conteúdo único da marca (um produto, uma persona, um traço de personalidade, o logo, uma combinação de fontes, um estilo de foto, um grafismo, o propósito…) tem o menu de três pontos no canto, com duas ações para aquele ponto: "Editar com o Hattie" abre o painel de edição focado nele ("Produtos e serviços › Óleo de pequi") e "Contratar um parceiro" leva a Parceiros com o pedido já escrito e as indicações prontas. Os cards da visão geral seguem com o menu da seção (aprovar, editar, contratar).
+
+Onde a pessoa pode tirar itens (objetivos, referências, concorrentes, produtos), o menu ganha "Excluir" no fim, depois de uma linha. Apagar não pede confirmação: o item some na hora e o alerta com selo puff traz "Desfazer". Quando o item não pode sair (o último objetivo), "Excluir" aparece em cinza, sem ação, com o motivo ao lado ("fica pelo menos um"). Ações próprias do item entram antes das padrão (em produtos, "Editar e adicionar fotos").
+
+### Objetivos
+
+Cabeçalho "aonde a marca quer chegar" com a quantidade, o porquê do Hattie e "Adicionar objetivo". Embaixo, o resumo do Hattie em texto pequeno, que some quando a pessoa muda a lista, para não ficar desatualizado. Um card por objetivo, em duas colunas: número num círculo neutro, nome curto em 600 e a meta em `destaque`. "Adicionar objetivo" pede o que a pessoa quer alcançar e, opcionais, um nome curto e o prazo; o novo entra como rascunho. Sempre fica pelo menos um objetivo.
 
 ### Contratar um parceiro (`BotaoParceiro`)
 
@@ -274,7 +282,7 @@ O jeito da marca em palavras (calma, acolhedora, simples…), cada uma num card 
 
 ### Produtos e serviços
 
-O que a marca vende, separado do que a marca é. Um card por produto ou serviço: ícone, nome, tag "carro-chefe" quando for o caso, categoria e preço, o que é numa frase, características em tags e "O que tem de diferente" em lista. "Adicionar" abre uma janela curta (nome, produto ou serviço, o que é, características, preço); o novo entra como rascunho para o Hattie completar os diferenciais. Nas opções avançadas, a ficha de cada produto: para quem, como usar e ingredientes.
+O que a marca vende, separado do que a marca é. Um card por produto ou serviço: a primeira foto em miniatura de 56 px (ou o ícone, sem foto, com "+n" quando há mais fotos), nome, tag "carro-chefe" quando for o caso, categoria e preço, o que é numa frase, características em tags, os públicos para quem o produto é pensado (pílulas cinza com ícone de pessoas) e "O que tem de diferente" em lista. "Adicionar" e "Editar e adicionar fotos" (no menu de três pontos) abrem a mesma janela: nome, produto ou serviço, o que é, características, preço, até seis fotos e os públicos já criados em Público e personas, em pílulas que ficam pretas com texto lima `#E6F344` quando marcadas. O novo entra como rascunho para o Hattie completar os diferenciais. "Excluir" fica no menu. Nas opções avançadas, a ficha de cada produto: para quem, como usar e ingredientes.
 
 ### Atributos
 

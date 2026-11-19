@@ -2,6 +2,14 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 18/11/2026 · Estratégia mais enxuta e editável (branch `simplificacao-ux`)
+- Objetivos: dá para adicionar e apagar objetivos. Fica sempre pelo menos um.
+- Mercado e concorrentes: referências e concorrentes saem pelo menu de três pontos e entram também pelo link do site ou perfil. À vista ficam as referências e os concorrentes diretos; os indiretos vão para opções avançadas, junto do painel da semana.
+- Produtos e serviços: dá para apagar, adicionar fotos e ligar cada produto aos públicos já criados em Público e personas.
+- Diferenciais: à vista, o que mais diferencia e os principais, um por frente, com a tag da frente. Todos os diferenciais, com descrição e prova, ficam em opções avançadas.
+- Arquétipo: à vista, só a mistura, com a proporção e o lema de cada arquétipo. O que cada um é e como aparece na marca vão para opções avançadas.
+- Apagar não pede confirmação: o item some e o aviso traz "Desfazer".
+
 ## 18/11/2026 · Entrada, primeiro acesso e criação (branch `simplificacao-ux`)
 - Criar conta e entrar cabem na altura da janela. O painel lilás ganha o símbolo principal grande e um campo interativo que segue a escala das faíscas da marca (ponto, mais, brilho, asterisco): manchas que fluem, luz no mouse que deixa rastro e onda no clique.
 - Primeiro acesso: o Hattie feliz no lugar do avatar; a tela para de pular ao trocar entre criar e importar; Importar marca ganha uma área grande para soltar arquivos; os dois modos têm "Como preencher", com passo a passo e exemplo; embaixo, carrossel de vídeos de tutorial (marcadores até os vídeos chegarem).

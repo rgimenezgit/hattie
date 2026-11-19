@@ -73,6 +73,7 @@ const SECOES_BASE: Secao[] = [
       produtos: [
         {
           id: "oleo-pequi",
+          publicos: ["cuidadoras"],
           tipo: "produto",
           nome: "Óleo de pequi",
           categoria: "Óleo para pele e cabelo",
@@ -87,6 +88,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "hidratante-baru",
+          publicos: ["cuidadoras"],
           tipo: "produto",
           nome: "Hidratante de baru",
           categoria: "Hidratante corporal",
@@ -100,6 +102,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "sabonete-buriti",
+          publicos: ["cuidadoras", "presenteadoras"],
           tipo: "produto",
           nome: "Sabonete de buriti",
           categoria: "Sabonete em barra",
@@ -113,6 +116,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "kit-presente",
+          publicos: ["presenteadoras"],
           tipo: "produto",
           nome: "Kit de presente",
           categoria: "Kit",
@@ -270,6 +274,7 @@ const SECOES_BASE: Secao[] = [
           segmento: "Cosméticos",
           origem: "briefing",
           levar: "Fotos de produto com calma, muito espaço e texto que explica o uso sem exagero.",
+          link: "https://www.aesop.com",
         },
         {
           id: "patagonia",
@@ -277,6 +282,7 @@ const SECOES_BASE: Secao[] = [
           segmento: "Vestuário",
           origem: "briefing",
           levar: "Contar de onde vem cada peça, com nome do fornecedor e do lugar, como parte da marca.",
+          link: "https://www.patagonia.com",
         },
         {
           id: "cafe-especial",

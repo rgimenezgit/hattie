@@ -87,8 +87,9 @@ export function SecaoPersonalidadeMarca({ secao, marca, aoEditar }: Props) {
 /* ---------- Arquétipo ---------- */
 
 /**
- * Arquétipo: a mistura em uma frase e uma barra de proporção; depois um card por arquétipo com a essência
- * e como a marca age dentro dele. Motivação, desejo, medo, comportamentos e o cuidado com o exagero ficam nas opções avançadas.
+ * Arquétipo: à vista, só a mistura, em uma frase, com a barra de proporção e o lema de cada arquétipo.
+ * Nas opções avançadas: o card de cada um (o que é e como aparece na marca), motivação, desejo, medo,
+ * comportamentos e o cuidado com o exagero.
  */
 export function SecaoArquetipos({ secao, marca, aoEditar }: Props) {
   if (secao.conteudo.tipo !== "arquetipos") return null
@@ -112,14 +113,17 @@ export function SecaoArquetipos({ secao, marca, aoEditar }: Props) {
                 <span key={parte.id} className={cn("h-full rounded-full", indice === 0 ? "bg-texto" : "bg-cinza-medio")} style={{ width: `${parte.peso}%` }} />
               ))}
             </div>
-            <ul className="flex flex-wrap justify-between gap-x-6 gap-y-1 text-sm" aria-hidden>
+            <ul className="flex flex-wrap justify-between gap-x-6 gap-y-2 text-sm" aria-hidden>
               {partes.map((parte, indice) => (
-                <li key={parte.id} className="flex items-center gap-2">
-                  <span className={cn("size-2 rounded-full", indice === 0 ? "bg-texto" : "bg-cinza-medio")} />
-                  <span className="font-medium">{parte.nome}</span>
-                  <span className="text-texto-2 tabular-nums">
-                    {parte.peso}% · {indice === 0 ? "primário" : "secundário"}
+                <li key={parte.id} className={cn("flex flex-col gap-0.5", indice > 0 && "sm:items-end sm:text-end")}>
+                  <span className="flex items-center gap-2">
+                    <span className={cn("size-2 rounded-full", indice === 0 ? "bg-texto" : "bg-cinza-medio")} />
+                    <span className="font-medium">{parte.nome}</span>
+                    <span className="text-texto-2 tabular-nums">
+                      {parte.peso}% · {indice === 0 ? "primário" : "secundário"}
+                    </span>
                   </span>
+                  <span className="text-xs text-texto-2">{parte.lema}</span>
                 </li>
               ))}
             </ul>
@@ -127,15 +131,14 @@ export function SecaoArquetipos({ secao, marca, aoEditar }: Props) {
         </div>
       </section>
 
-      <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-2">
-        {partes.map((arquetipo, indice) => (
-          <li key={arquetipo.id} className="flex min-w-0">
-            <CartaoArquetipo arquetipo={arquetipo} papel={indice === 0 ? "primário" : "secundário"} marca={marca} />
-          </li>
-        ))}
-      </ul>
-
-      <VerMais resumo="Motivação, desejo, medo, comportamentos e o cuidado com o exagero de cada arquétipo">
+      <VerMais resumo={`O que é cada arquétipo, como aparece na ${marca.nome}, motivação, medo e comportamentos`}>
+        <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-2">
+          {partes.map((arquetipo, indice) => (
+            <li key={arquetipo.id} className="flex min-w-0">
+              <CartaoArquetipo arquetipo={arquetipo} papel={indice === 0 ? "primário" : "secundário"} marca={marca} />
+            </li>
+          ))}
+        </ul>
         {partes.map((arquetipo) => (
           <DetalheArquetipo key={arquetipo.id} arquetipo={arquetipo} />
         ))}

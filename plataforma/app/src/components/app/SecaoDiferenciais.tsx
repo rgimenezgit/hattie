@@ -3,6 +3,7 @@
 import { Coins, HandHeart, Heart, Leaf, MessageCircle, Settings2, type LucideIcon } from "lucide-react"
 import { Botao } from "@/components/hattie/Botao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
+import { Tag } from "@/components/hattie/Tag"
 import { VerMais } from "@/components/hattie/VerMais"
 import { cn } from "@/lib/utils"
 import type { ClusterDiferencial, Diferencial, Secao, TipoCluster } from "@/lib/mock"
@@ -11,17 +12,18 @@ import { MenuPonto } from "./AcoesPonto"
 
 type Props = { secao: Secao; aoEditar: () => void }
 
-const CLUSTER: Record<TipoCluster, { titulo: string; pergunta: string; icone: LucideIcon }> = {
-  funcional: { titulo: "Funcionais", pergunta: "O que o produto faz melhor", icone: Settings2 },
-  emocional: { titulo: "Emocionais", pergunta: "Como a pessoa se sente", icone: Heart },
-  social: { titulo: "Sociais", pergunta: "O que a compra faz pelas pessoas em volta", icone: HandHeart },
-  ambiental: { titulo: "Ambientais", pergunta: "O cuidado com o lugar de onde tudo vem", icone: Leaf },
-  economico: { titulo: "Econômicos", pergunta: "O que a pessoa ganha no bolso", icone: Coins },
+const CLUSTER: Record<TipoCluster, { titulo: string; tag: string; pergunta: string; icone: LucideIcon }> = {
+  funcional: { titulo: "Funcionais", tag: "funcional", pergunta: "O que o produto faz melhor", icone: Settings2 },
+  emocional: { titulo: "Emocionais", tag: "emocional", pergunta: "Como a pessoa se sente", icone: Heart },
+  social: { titulo: "Sociais", tag: "social", pergunta: "O que a compra faz pelas pessoas em volta", icone: HandHeart },
+  ambiental: { titulo: "Ambientais", tag: "ambiental", pergunta: "O cuidado com o lugar de onde tudo vem", icone: Leaf },
+  economico: { titulo: "Econômicos", tag: "econômico", pergunta: "O que a pessoa ganha no bolso", icone: Coins },
 }
 
 /**
- * Diferenciais por frente: funcionais, emocionais, sociais, ambientais e econômicos.
- * O Hattie só ativa as frentes que fazem sentido para a marca; as que ficam de fora aparecem no fim, com o motivo.
+ * Diferenciais. À vista, o essencial: o que mais diferencia e os principais, um de cada frente ativa
+ * (o mais forte), com a tag da frente. Em opções avançadas: todos os diferenciais por frente (funcionais, emocionais,
+ * sociais, ambientais, econômicos) com descrição e prova, os números e as frentes que ficaram de fora, com o motivo.
  */
 export function SecaoDiferenciais({ secao, aoEditar }: Props) {
   if (secao.conteudo.tipo !== "diferenciais") return null
@@ -30,6 +32,10 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
   const fora = clusters.filter((cluster) => cluster.diferenciais.length === 0)
   const todos = ativos.flatMap((cluster) => cluster.diferenciais)
   const fortes = todos.filter((diferencial) => diferencial.forca === "forte").length
+  const principais = ativos.map((cluster) => ({
+    cluster: cluster.id,
+    diferencial: cluster.diferenciais.find((item) => item.forca === "forte") ?? cluster.diferenciais[0],
+  }))
 
   return (
     <div className="flex flex-col gap-10">
@@ -45,20 +51,40 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
         </div>
       </section>
 
-      <section aria-labelledby="titulo-frentes" className="flex flex-col gap-3">
-        <CabecalhoBloco id="titulo-frentes" titulo="por frente" quantidade={ativos.length}>
+      <section aria-labelledby="titulo-principais" className="flex flex-col gap-3">
+        <CabecalhoBloco id="titulo-principais" titulo="principais" quantidade={principais.length}>
           <Legenda />
         </CabecalhoBloco>
-        <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-2">
-          {ativos.map((cluster) => (
-            <li key={cluster.id} className="flex min-w-0">
-              <CartaoCluster cluster={cluster} />
+        <ul className="grid grid-cols-1 gap-3 @3xl:grid-cols-2">
+          {principais.map(({ cluster, diferencial }) => (
+            <li key={diferencial.titulo} className="flex min-w-0">
+              <article aria-labelledby={`principal-${cluster}`} className="flex w-full flex-col gap-2 rounded-3xl bg-superficie p-5 md:p-6">
+                <header className="-me-2 -mt-1 flex items-center gap-2">
+                  <Tag tamanho="sm">{CLUSTER[cluster].tag}</Tag>
+                  <Forca forca={diferencial.forca} />
+                  <MenuPonto ponto={`o diferencial ${diferencial.titulo}`} className="ms-auto" />
+                </header>
+                <h3 id={`principal-${cluster}`} className="text-base font-semibold">
+                  {diferencial.titulo}
+                </h3>
+                <p className="text-sm text-texto-2">{diferencial.descricao}</p>
+              </article>
             </li>
           ))}
         </ul>
       </section>
 
-      <VerMais resumo="Números por frente e as frentes que ficaram de fora, com o motivo">
+      <VerMais resumo={`Todos os ${todos.length} diferenciais por frente, com a prova de cada um, e as frentes que ficaram de fora`}>
+        <section aria-labelledby="titulo-frentes" className="flex flex-col gap-3">
+          <CabecalhoBloco id="titulo-frentes" titulo="todos, por frente" quantidade={todos.length} />
+          <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-2">
+            {ativos.map((cluster) => (
+              <li key={cluster.id} className="flex min-w-0">
+                <CartaoCluster cluster={cluster} />
+              </li>
+            ))}
+          </ul>
+        </section>
       <section aria-labelledby="titulo-numeros-diferenciais" className="flex flex-col gap-3">
         <CabecalhoBloco id="titulo-numeros-diferenciais" titulo="em números" />
         <dl className="grid grid-cols-2 gap-y-4 rounded-3xl bg-superficie p-5 md:p-6 @3xl:grid-cols-4">

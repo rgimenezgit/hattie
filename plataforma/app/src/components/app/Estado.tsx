@@ -11,7 +11,9 @@ import {
   type Concorrente,
   type EstiloFoto,
   type Mensagem,
+  type ObjetivoMarca,
   type Persona,
+  type ProdutoMarca,
   type Publico,
   type Referencia,
   type StatusPasso,
@@ -52,6 +54,16 @@ type EstadoApp = {
   salvarEstilosFoto: (estilos: EstiloFoto[]) => void
   estilosIlustracao: EstiloFoto[] | null
   salvarEstilosIlustracao: (estilos: EstiloFoto[]) => void
+  /** Itens apagados (referências, concorrentes…), pelo id. Sai da tela e volta com "Desfazer". */
+  removidos: Record<string, true>
+  remover: (id: string) => void
+  restaurar: (id: string) => void
+  /** Lista de objetivos depois da primeira mudança; antes disso vale a do Hattie. */
+  objetivos: ObjetivoMarca[] | null
+  salvarObjetivos: (objetivos: ObjetivoMarca[]) => void
+  /** Lista de produtos e serviços depois da primeira mudança. */
+  produtos: ProdutoMarca[] | null
+  salvarProdutos: (produtos: ProdutoMarca[]) => void
 }
 
 const Contexto = createContext<EstadoApp | null>(null)
@@ -103,6 +115,9 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [tipografiaEscolhida, escolherTipografia] = useState<string | null>(null)
   const [estilosFoto, salvarEstilosFoto] = useState<EstiloFoto[] | null>(null)
   const [estilosIlustracao, salvarEstilosIlustracao] = useState<EstiloFoto[] | null>(null)
+  const [removidos, setRemovidos] = useState<Record<string, true>>({})
+  const [objetivos, salvarObjetivos] = useState<ObjetivoMarca[] | null>(null)
+  const [produtos, salvarProdutos] = useState<ProdutoMarca[] | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const esperando = useRef<Mensagem[]>([])
@@ -224,6 +239,14 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
     setNomeMarca(nome)
   }, [])
   const adicionarConcorrente = useCallback((concorrente: Concorrente) => setConcorrentesNovos((atual) => [...atual, concorrente]), [])
+  const remover = useCallback((id: string) => setRemovidos((atual) => ({ ...atual, [id]: true })), [])
+  const restaurar = useCallback((id: string) => {
+    setRemovidos((atual) => {
+      const proximo = { ...atual }
+      delete proximo[id]
+      return proximo
+    })
+  }, [])
 
   const valor = useMemo<EstadoApp>(
     () => ({
@@ -258,6 +281,13 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       salvarEstilosFoto,
       estilosIlustracao,
       salvarEstilosIlustracao,
+      removidos,
+      remover,
+      restaurar,
+      objetivos,
+      salvarObjetivos,
+      produtos,
+      salvarProdutos,
     }),
     [
       nomeMarca,
@@ -287,6 +317,11 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       tipografiaEscolhida,
       estilosFoto,
       estilosIlustracao,
+      removidos,
+      remover,
+      restaurar,
+      objetivos,
+      produtos,
     ],
   )
 
