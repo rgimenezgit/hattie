@@ -103,7 +103,7 @@ export function Inicio() {
             <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               {PROJETOS.map((projeto) => (
                 <li key={projeto.id}>
-                  <Link href={`/marca/${marca.slug}/projetos` as Route} className="group flex flex-col gap-2 rounded-2xl">
+                  <Link href={`/marca/${marca.slug}/projetos/${projeto.id}` as Route} className="group flex flex-col gap-2 rounded-2xl">
                     <span className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-superficie transition-[box-shadow] duration-150 group-hover:shadow-(--sombra-campo)">
                       <span
                         aria-hidden

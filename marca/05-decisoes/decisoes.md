@@ -2,6 +2,19 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 20/11/2026 · Área de Projetos (branch `simplificacao-ux`)
+- Projetos deixa de ser estado vazio. A lista tem busca, situação, tipo, ordem e grade ou lista; os fixados vêm primeiro.
+- Um projeto se organiza em páginas, que podem ficar dentro de pastas. Os itens (imagem, vídeo, texto, peça e forma) moram numa página.
+- Cada página tem três vistas dos mesmos itens: Canvas (quadro livre), Grade (cards para organizar) e Thread (os pedidos e o que saiu de cada um, em ordem).
+- No canvas, criar é sempre escolher na barra flutuante e clicar no lugar. Imagem, vídeo e peça abrem um pedido curto ao Hattie ali mesmo.
+- A conversa com o Hattie abre ao lado do canvas e da grade. O que ele cria nasce na página aberta; num ajuste, a nova versão fica ao lado da original.
+- Nomes das vistas: Canvas, Grade e Thread. "Thread" fica em confirmação, por ser termo em inglês.
+- Seleção no canvas: contorno fino em lima-forte `#77A00F`, no lugar do preto de 2 px.
+- Abrir um item (duplo clique no canvas, clique na grade ou na thread) mostra o visor por cima, sem trocar de vista: o item grande, o campo para pedir mudança e as abas Hattie, Ajustes e Detalhes.
+- Imagem, vídeo e peça passam a nascer pela barra de geração, com referência, proporção, resolução (ou duração) e estilo. Os estilos de fotografia e de ilustração da marca vêm primeiro.
+- Textos do projeto usam a tipografia da marca da cliente. O painel de texto traz os estilos da marca, fonte, tamanho, peso, alinhamento e cor.
+- Botão direito no canvas abre o menu do item: abrir, gerar de novo, copiar o pedido, copiar e salvar a imagem.
+
 ## 18/11/2026 · Estratégia mais enxuta e editável (branch `simplificacao-ux`)
 - Objetivos: dá para adicionar e apagar objetivos. Fica sempre pelo menos um.
 - Mercado e concorrentes: referências e concorrentes saem pelo menu de três pontos e entram também pelo link do site ou perfil. À vista ficam as referências e os concorrentes diretos; os indiretos vão para opções avançadas, junto do painel da semana.

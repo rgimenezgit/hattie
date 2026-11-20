@@ -49,7 +49,8 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
 | Início | `/marca/[marca]` | Saudação pelo horário, aviso de propostas pendentes, "o que vamos criar hoje?", projetos recentes, abas Imagem, Vídeo, Posts, Apresentação, Pesquisa, Personas, Atalhos e Site com modelos que preenchem o pedido. Vídeo e Site marcados "em breve" |
 | Hattie | `/marca/[marca]/hattie`, `/hattie/[conversa]`, `/hattie/nova` | Conversas à esquerda, conversa no centro |
 | Marca | `/marca/[marca]/cerebro` | Seção 3 |
-| Projetos, Biblioteca, Marketing, Parceiros, Automações, Conectores | `/marca/[marca]/…` | Estado vazio, próxima rodada |
+| Projetos | `/marca/[marca]/projetos`, `/projetos/[projeto]` | Lista com busca, situação, tipo, ordem e grade ou lista. O projeto aberto tem páginas e pastas na coluna, três vistas da página (Canvas, Grade, Thread) e a conversa com o Hattie, que cria os itens na página. Detalhes em `design/diretrizes-ui.md` |
+| Marketing, Automações, Conectores | `/marca/[marca]/…` | Estado vazio, próxima rodada |
 | Minhas marcas | `/marcas` | Cards das marcas e "Nova marca" |
 
 **Seletor de marca** (pílula lima no topo): as marcas da pessoa, Nova marca, Minhas marcas, Convidar pessoa, Compartilhar link da marca.

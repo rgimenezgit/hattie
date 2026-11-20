@@ -372,6 +372,45 @@ As peças (`Peca`) usam medidas em `cqmin`, então o mesmo layout vale do story 
 
 **Cores de estado em Parceiros:** verde de sucesso só para "aceitando projetos" e proposta aprovada; amarelo de atenção para agenda cheia; vermelho fica de fora, porque nenhuma ação da área apaga algo de vez. Azul diluído marca a fala do Hattie. Destaque e verificado são selos neutros.
 
+### Projetos
+
+O lugar onde a marca cria (`components/app/projetos/`). Um projeto junta tudo de uma entrega: páginas, itens e a conversa com o Hattie.
+
+**Lista** (`/projetos`). Título, quantidade e o plimm "novo projeto". Uma barra só: busca por nome, situação em pílulas (Todos, Em andamento, Concluídos, Arquivados; a ativa em preto `#101010` com texto lima `#E6F344`), tipo, ordem e grade ou lista. Fixados vêm primeiro. O card tem uma capa montada com até três itens do projeto (o primeiro maior), nome, descrição em duas linhas, tag de situação, "17 itens · 4 páginas" e quando foi editado. O menu renomeia no lugar, fixa, duplica, conclui, arquiva e exclui (com "Desfazer"). "Novo projeto" pede nome, tipo e, opcional, o primeiro pedido: com ele, o Hattie começa a criar assim que o projeto abre.
+
+**Projeto aberto** (`/projetos/[projeto]`), em três partes:
+
+1. **Coluna do projeto** (esquerda, recolhível): "← Projetos", nome, situação e última edição, menu do projeto. "Todos os arquivos" com a quantidade. "Páginas" com "+" (nova página, nova pasta): páginas soltas e pastas que abrem e fecham, cada linha com quantidade e, no hover, o menu (renomear, mover para pasta, excluir; fica pelo menos uma página). Duplo clique renomeia. No pé, o botão primário "Pedir ao Hattie". No celular, a coluna some e o título da página vira o seletor.
+2. **A página**, vista de três jeitos, trocados no topo (pílula com o ativo em lima):
+   - **Canvas**: quadro livre com pontilhado. Os itens ficam onde a pessoa colocar.
+   - **Grade**: os mesmos itens em cards, com filtro por tipo, seleção de vários e menu por item. Clicar num card abre o visor do item, sem sair da grade. Em "Todos os arquivos", agrupados por página.
+   - **Thread**: os pedidos e o que saiu de cada um, em ordem, com separador de dia. O que foi colocado à mão aparece menor, entre os pedidos. O campo de pedido fica no pé.
+3. **Conversa** (direita, 320 px; folha no celular e abaixo de 1280 px): a mesma história, compacta. Na Thread ela não abre, porque o campo já está na página.
+
+Os itens são os mesmos nas três vistas. "Todos os arquivos" não tem Canvas (o canvas é de uma página).
+
+**Canvas.**
+- Barra flutuante no pé, pílula branca com sombra: Selecionar (V), Mover a tela (H), linha, Imagem (I), Vídeo (D), Texto (T), Peça (P) e Formas (retângulo R, elipse O, seta L). A escolhida fica em lima `#E6F344`. Os rótulos aparecem quando o canvas tem 672 px ou mais.
+- Texto e forma: escolher na barra e clicar no lugar. Uma pílula preta acima da barra diz o que fazer ("Clique onde o texto começa") e traz "Esc".
+- Imagem, vídeo e peça abrem a **barra de geração** acima da barra do canvas: o pedido em cima e, embaixo, as opções em pílulas cinza. Na imagem: Referência (uma imagem para seguir), Proporção (4:5, 1:1, 3:4, 16:9, 9:16), Resolução (1K, 2K, 4K) e Estilo, com os estilos de fotografia e de ilustração da marca primeiro e, depois, tipos prontos (fotografia de produto, produto em cena, pessoas e mãos, fundo de uma cor). No vídeo, a resolução dá lugar à duração. Na peça, só Referência e Formato. À direita, enviar uma imagem do computador e o plimm. O que for gerado nasce numa linha nova, abaixo do que já existe, e a tela vai até lá; um clique no canvas marca outro lugar com um ✱ lima.
+- Enquanto o Hattie cria, o item é um espaço reservado pontilhado com o ✱ girando e "criando a imagem…".
+- Seleção: contorno fino de 1,5 px em lima-forte `#77A00F`, rente ao item (o único contorno da tela, porque é estado de seleção); no hover, preto `#101010` a 20%. Alça lima no canto para mudar o tamanho e o nome do item em cima. Shift soma; arrastar no vazio laça vários.
+- Barra da seleção, acima do item: "Pedir ajuste" em lima, abrir, duplicar, baixar, mover para outra página e excluir. Na forma, seis cores (quatro da marca da cliente, preto `#101010` e cinza `#D3D3D3`).
+- Duplo clique: abre o visor (imagem, vídeo e peça) ou edita (texto).
+- Botão direito num item: Abrir, Pedir ajuste ao Hattie, Gerar de novo, Copiar o pedido, Copiar a imagem, Salvar a imagem, Duplicar, Mover para e Excluir. No vazio: Selecionar tudo, Ver a página inteira, Nova imagem e Pedir ao Hattie.
+- **Painel de texto**: com um texto selecionado, abre à direita do canvas, flutuando (240 px), sem empurrar a tela. De cima para baixo: os estilos da tipografia da marca (Headline, H1, Texto, Legenda…, cada um na própria letra, com o tamanho ao lado), Fonte (a de títulos e a de textos da marca), Tamanho, Peso, Alinhamento e Cor. Escolher um estilo limpa os ajustes feitos à mão. Os textos do projeto usam as fontes da marca da cliente. Com menos de 672 px de canvas, o painel dá lugar a Título e Texto corrido na barra da seleção.
+- Tela: rolar move, Ctrl ou ⌘ com a roda e a pinça dão zoom, espaço segura a mão. No canto, zoom e "ver a página inteira"; com pouco espaço, sobra só este. Quando a conversa abre ou fecha, a página continua inteira à vista.
+- Teclado: setas movem a seleção (Shift, de 10 em 10), Delete apaga, ⌘D duplica, ⌘A marca tudo, Enter edita o texto, Esc solta.
+
+**Visor do item** (`VisorItem`). Abre por cima da tela, pelo duplo clique no canvas ou pelo clique na grade e na thread, sem trocar de vista. À esquerda, sobre o cinza do palco, o item grande, com setas para o anterior e o próximo (também no teclado) e, embaixo, mudanças rápidas em pílulas ("Fundo mais claro", "Mais perto do produto") e o campo "O que muda?" com o plimm. À direita, 352 px: nome, tipo e página, "Baixar" com os formatos (PNG, JPG, PDF, tamanho para Instagram), o menu (ver no canvas, copiar o pedido, duplicar, mover, excluir) e três abas:
+- **Hattie**: mudar com um clique (gerar de novo, variações, remover o fundo, trocar o fundo, ampliar, expandir) e usar a imagem num post, num story ou num banner.
+- **Ajustes** (só imagem): exposição, contraste, saturação e temperatura de −100 a 100, espelhar e voltar ao original. Valem em todas as vistas.
+- **Detalhes**: o pedido que gerou o item (com "Copiar o pedido"), quem fez, quando, página, proporção, resolução, estilo e referência.
+
+Cada mudança do Hattie nasce como versão nova ao lado da original, e o visor passa para ela. No celular, o visor ocupa a tela, com o item em cima e o painel embaixo.
+
+**Pedir ao Hattie.** O que ele cria nasce na página aberta, numa linha nova abaixo do que já existe, e o canvas leva a pessoa até lá. "Pedir ajuste" num item põe o item acima do campo ("Ajustar Story da Black Friday ×") e a nova versão nasce ao lado da original (ou embaixo, se o lado estiver ocupado), com "· v2" no nome. Apagar itens, páginas, pastas e projetos traz "Desfazer".
+
 ### Biblioteca
 
 Tudo que a marca criou com o Hattie, enviou ou recebeu de parceiros, num só lugar (`components/app/biblioteca/`). Pensada para quem não sabe o nome do arquivo: procura-se como se fala. A tela tem três níveis, do mais largo para o mais fino, cada um num lugar só:

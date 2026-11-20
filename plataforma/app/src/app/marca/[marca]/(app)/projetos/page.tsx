@@ -1,5 +1,5 @@
-import { AreaEmBreve } from "@/components/app/AreaEmBreve"
+import { ListaProjetos } from "@/components/app/projetos/ListaProjetos"
 
 export default function Pagina() {
-  return <AreaEmBreve area="projetos" />
+  return <ListaProjetos />
 }
