@@ -400,6 +400,7 @@ export function VisorItem({ item, lista, projeto, sistema, acoes, ocupado, aoMud
                   {item.geracao?.duracao && <Dado rotulo="Duração" valor={item.geracao.duracao} />}
                   {item.geracao?.estilo && <Dado rotulo="Estilo" valor={item.geracao.estilo} />}
                   {item.geracao?.referencia && <Dado rotulo="Referência" valor={item.geracao.referencia} />}
+                  {item.tipo === "imagem" && item.autor === "hattie" && <Dado rotulo="Origem" valor={item.geracao?.real ? "Gerada com a fal.ai" : "Imagem de exemplo"} />}
                   {item.arquivo && <Dado rotulo="Biblioteca" valor="Guardado" />}
                 </dl>
                 <Botao variante="secundario" tamanho="sm" className="self-start" onClick={() => aoVerNoCanvas(item)}>

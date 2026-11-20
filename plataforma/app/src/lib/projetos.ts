@@ -76,6 +76,8 @@ export type OpcoesPedido = {
   formato?: [number, number]
   /** Opções da barra de geração (resolução, estilo, referência…); ficam guardadas no item. */
   geracao?: GeracaoItem
+  /** Imagem de referência pronta para enviar ao modelo (https ou data:). Não fica guardada no item. */
+  referenciaUrl?: string
   /** Ponto do canvas onde a pessoa clicou. */
   ponto?: { x: number; y: number }
   /** Item que a pessoa quer ajustar: a nova versão nasce ao lado dele. */

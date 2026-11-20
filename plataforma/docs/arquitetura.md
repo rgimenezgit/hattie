@@ -57,7 +57,7 @@ Os getters de `src/lib/mock/index.ts` são o ponto onde os dados reais entram: t
 ## A decidir
 
 - **Cérebro de marca:** onde e como guardar as decisões, versões e o histórico de cada seção, e como o Hattie consulta isso em cada pedido.
-- **IA:** provedor de texto e de imagem, orquestração do briefing (perguntas, pesquisa, propostas por seção) e verificação de consistência das peças contra o cérebro.
+- **IA:** provedor de texto e de imagem (no protótipo, a geração de imagem em Projetos já usa a fal.ai quando há chave; ver `decisoes-tecnicas.md`), orquestração do briefing (perguntas, pesquisa, propostas por seção) e verificação de consistência das peças contra o cérebro.
 - **Espaço compartilhado** entre IA, empreendedor e designer parceiro (permissões, comentários).
 - **Autenticação, planos e créditos.**
 - **Arquivos:** upload dos materiais do briefing e entrega de vetores utilizáveis.

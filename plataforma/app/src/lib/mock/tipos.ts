@@ -317,6 +317,8 @@ export type ImagemFoto = {
   borda: "left" | "right" | "top" | "bottom"
   /** Só na ilustração: qual desenho de exemplo mostrar. */
   desenho?: DesenhoIlustracao
+  /** Imagem gerada no estilo (fal.ai). Sem ela, o card mostra o esboço nas cores do estilo. */
+  url?: string
 }
 
 /** Estilo fotográfico: o registro emocional, as seis camadas, o que evitar e as imagens de exemplo. */

@@ -26,3 +26,25 @@ Mais recente primeiro. Formato: data, decisão, motivo.
 - **Catálogo**: rota `app/api/fontes/route.ts`. Com `GOOGLE_FONTS_API_KEY` no ambiente (`.env.local`), busca a Web Fonts Developer API do Google ordenada por popularidade e guarda por um dia (`use cache` + `cacheLife("days")`). Sem a chave, devolve a lista curada de `lib/fontes.ts`.
 - **Motivo**: o espaço de teste da Tipografia funciona como um site de fontes; o protótipo roda sem chave e ganha o catálogo inteiro quando ela existir.
 - **Fonte da cliente**: Fraunces via `next/font/google` (`--font-marca`, sem preload), só para prévias de marca da cliente.
+
+
+## 20/11/2026 · Geração de imagem com a fal.ai em Projetos
+
+- **Rota**: `app/api/imagem/route.ts` (POST). Chama a fal.ai pelo endereço síncrono (`https://fal.run/…`), sem instalar biblioteca. Modelo `fal-ai/nano-banana-2`; com imagem de referência, a versão `/edit`. As opções da barra de geração vão direto: proporção em `aspect_ratio` e resolução (1K, 2K, 4K) em `resolution`.
+- **Chave**: `FAL_KEY` em `plataforma/app/.env.local`, que fica fora do Git. A chave só existe no servidor.
+- **Sem a chave**: a rota responde 503 `sem-chave` e o app segue com os desenhos de exemplo, como antes. O protótipo continua rodando sem conta na fal.ai.
+- **Publicado**: a rota fica desligada (403 `desligado`), para ninguém gastar os créditos de quem publicou. `FAL_PUBLICO=sim` liga de propósito.
+- **Pedido ao modelo**: `lib/promptImagem.ts` junta o que a pessoa escreveu com o estilo de fotografia ou de ilustração da marca que está no cérebro (cor com hex, luz, câmera, o que evitar).
+- **Onde entra**: `EstadoProjetos.pedir`. Só pedidos de imagem vão para a fal.ai; peça, vídeo e texto continuam de exemplo. Em "Pedir ajuste", a imagem original segue como referência quando já é uma imagem gerada.
+- **Limites desta versão**: as imagens geradas ficam nos endereços da fal.ai e somem do projeto ao recarregar a página, como o resto do estado. Guardar de verdade depende de decidir onde ficam os arquivos.
+- **Motivo da escolha**: é o provedor que o Raphael já usa, e o modelo aceita as mesmas proporções e resoluções da barra de geração. Não é a decisão final do provedor de imagem do produto.
+
+## 20/11/2026 · Imagens de exemplo da Raiz Natural, geradas com a fal.ai
+
+- **Roteiro**: `app/scripts/imagens-marca/gerar.mjs`. Lista as 25 imagens, com o modelo, a proporção, as referências e o prompt de cada uma. Gera só o que falta (`node scripts/imagens-marca/gerar.mjs`), refaz as que forem nomeadas e mostra o plano sem gastar com `--lista`. Salva em `app/public/marcas/raiz-natural/` e anota cada pedido em `prompts.json`.
+- **Modelos, como o Raphael definiu**: Seedream 5.5 (texto para imagem) para fotografias e ilustrações da marca; Seedream 5.5 Edit quando a foto precisa do logo; GPT Image 2 Edit para os mockups da tela "olha como ficou" (primeira etapa de aprovação), com o logo; GPT Image 2.6 Sunburst Edit para inserir o produto numa cena. Tudo em 1K; nos modelos da OpenAI, qualidade média.
+- **Prompts**: cada pedido leva os parâmetros do estilo do cérebro. Fotografia: as seis camadas do estilo Origem natural (cor com hex, luz, câmera, pessoas, ambiente, acabamento) e o que evitar. Ilustração: as seis camadas do Caderno de campo, com reforço de cor 100% chapada.
+- **Referências**: o logo (composto e só o símbolo) foi desenhado no navegador com a fonte da marca e salvo em `ref/`. O frasco de óleo de pequi foi gerado primeiro, com o logo no rótulo, e serve de produto nas inserções.
+- **Onde aparecem**: os quatro mockups em "olha como ficou"; as seis fotos e as seis ilustrações nos estilos do cérebro (prévia e cards); as oito fotos da Biblioteca, que também aparecem nos projetos; e as peças da marca, que usam a foto da cena que combina com cada layout.
+- **Sem a chave**: nada muda para quem abre o app; as imagens são arquivos do próprio app. A chave só é usada para gerar de novo.
+- **O MCP da fal.ai** não estava disponível nesta sessão; os detalhes dos modelos (parâmetros e preço) vieram do catálogo público da fal.ai.

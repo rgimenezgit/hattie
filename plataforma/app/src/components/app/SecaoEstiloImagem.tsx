@@ -76,11 +76,25 @@ const PECAS_ILUSTRACAO: PecaExemplo[] = [
 ]
 
 /** O estilo aplicado em peças da marca, para ver o resultado antes de aprovar. */
+/** Imagem gerada no estilo, ocupando o quadro do card. */
+function ImagemGerada({ url, descricao, className }: { url: string; descricao: string; className?: string }) {
+  // eslint-disable-next-line @next/next/no-img-element -- imagem do próprio app, já no tamanho de exibição
+  return <img src={url} alt={descricao} loading="lazy" className={cn("w-full object-cover", className)} />
+}
+
 function EstiloNaPeca({ config, estilo }: { config: ConfigEstilo; estilo: EstiloFoto }) {
   const sistema = useSistemaMarca()
   const paleta = paletaDe(estilo)
   return config.tipo === "fotografia" ? (
-    <NaPeca pecas={PECAS_FOTO} sistema={sistema} imagem={{ fundo: paleta[0]?.hex ?? sistema.cores.principal, cor: paleta[1]?.hex ?? sistema.cores.apoio }} />
+    <NaPeca
+      pecas={PECAS_FOTO}
+      sistema={sistema}
+      imagem={{
+        fundo: paleta[0]?.hex ?? sistema.cores.principal,
+        cor: paleta[1]?.hex ?? sistema.cores.apoio,
+        url: (estilo.imagens.find((imagem) => imagem.id === "frasco-frutos") ?? estilo.imagens.find((imagem) => imagem.url))?.url,
+      }}
+    />
   ) : (
     <NaPeca pecas={PECAS_ILUSTRACAO} sistema={sistema} coresIlustracao={coresDaPaleta(paleta)} />
   )
@@ -98,17 +112,36 @@ const FOTOGRAFIA: ConfigEstilo = {
     ["Tratamento", "cor", "Gradação"],
     ["Acabamento", "acabamento", "Pós-produção"],
   ],
-  previa: ({ paleta, valor }) => {
+  previa: ({ estilo, paleta, valor }) => {
     const [apoio, claro, escuro] = [paleta[1]?.hex ?? "#C9A27E", paleta[2]?.hex ?? "#F2EBDD", paleta[3]?.hex ?? "#5C3B28"]
+    const url = (id: string) => estilo.imagens.find((imagem) => imagem.id === id)?.url
+    const quadros = [
+      { id: "janela", legenda: `Luz ${valor("luz", "Direção")?.toLowerCase().split(",")[0] ?? "lateral"}`, fundo: claro, cor: escuro, borda: "right" as const },
+      { id: "maos-oleo", legenda: "Detalhe de mãos e produto", fundo: apoio, cor: claro, borda: "left" as const },
+      { id: "colheita", legenda: "Ambiente e colheita", fundo: paleta[0]?.hex ?? "#2F4A3A", cor: apoio, borda: "bottom" as const },
+    ]
     return (
       <>
-        <BlocoImagem className="aspect-[4/5] rounded-2xl" fundo={claro} cor={escuro} borda="right" legenda={`Luz ${valor("luz", "Direção")?.toLowerCase().split(",")[0] ?? "lateral"}`} />
-        <BlocoImagem className="aspect-[4/5] rounded-2xl" fundo={apoio} cor={claro} borda="left" legenda="Detalhe de mãos e produto" />
-        <BlocoImagem className="aspect-[4/5] rounded-2xl" fundo={paleta[0]?.hex ?? "#2F4A3A"} cor={apoio} borda="bottom" legenda="Ambiente e colheita" />
+        {quadros.map((quadro) => {
+          const imagem = url(quadro.id)
+          return imagem ? (
+            <div key={quadro.id} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+              <ImagemGerada url={imagem} descricao={quadro.legenda} className="size-full" />
+              <span className="absolute bottom-2 left-2 rounded-full bg-background px-2.5 py-1 text-xs font-medium">{quadro.legenda}</span>
+            </div>
+          ) : (
+            <BlocoImagem key={quadro.id} className="aspect-[4/5] rounded-2xl" fundo={quadro.fundo} cor={quadro.cor} borda={quadro.borda} legenda={quadro.legenda} />
+          )
+        })}
       </>
     )
   },
-  imagem: (_estilo, imagem) => <BlocoImagem className="aspect-[4/3] rounded-none outline-0" fundo={imagem.fundo} cor={imagem.luz} borda={imagem.borda} />,
+  imagem: (_estilo, imagem) =>
+    imagem.url ? (
+      <ImagemGerada url={imagem.url} descricao={imagem.cena} className="aspect-[4/3]" />
+    ) : (
+      <BlocoImagem className="aspect-[4/3] rounded-none outline-0" fundo={imagem.fundo} cor={imagem.luz} borda={imagem.borda} />
+    ),
   prompt: "Fotografia",
   textos: {
     gerando: "Aplicando as seis camadas do estilo em cada cena.",
@@ -140,21 +173,28 @@ const ILUSTRACAO: ConfigEstilo = {
     ["Figuras", "figuras", "Pessoas"],
     ["Composição", "composicao", "Respiro"],
   ],
-  previa: ({ paleta }) => (
+  previa: ({ estilo, paleta }) => (
     <>
       {(["pequi", "paisagem", "frasco"] as const).map((desenho) => (
         <div key={desenho} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-          <Ilustracao desenho={desenho} cores={coresDaPaleta(paleta)} />
+          {estilo.imagens.find((imagem) => imagem.desenho === desenho)?.url ? (
+            <ImagemGerada url={estilo.imagens.find((imagem) => imagem.desenho === desenho)!.url!} descricao={LEGENDAS_ILUSTRACAO[desenho]} className="size-full" />
+          ) : (
+            <Ilustracao desenho={desenho} cores={coresDaPaleta(paleta)} />
+          )}
           <span className="absolute bottom-2 left-2 rounded-full bg-background px-2.5 py-1 text-xs font-medium">{LEGENDAS_ILUSTRACAO[desenho]}</span>
         </div>
       ))}
     </>
   ),
-  imagem: (estilo, imagem) => (
-    <div className="aspect-[4/3]">
-      <Ilustracao desenho={imagem.desenho ?? "pequi"} cores={coresDaPaleta(paletaDe(estilo), imagem.fundo)} />
-    </div>
-  ),
+  imagem: (estilo, imagem) =>
+    imagem.url ? (
+      <ImagemGerada url={imagem.url} descricao={imagem.cena} className="aspect-[4/3]" />
+    ) : (
+      <div className="aspect-[4/3]">
+        <Ilustracao desenho={imagem.desenho ?? "pequi"} cores={coresDaPaleta(paletaDe(estilo), imagem.fundo)} />
+      </div>
+    ),
   prompt: "Ilustração",
   textos: {
     gerando: "Aplicando as seis camadas do estilo em cada desenho.",
@@ -441,7 +481,11 @@ function Imagens({ config, estilo, aoGerarDeNovo, aoGerarMais }: { config: Confi
           </li>
         ))}
       </ul>
-      <p className="text-xs text-texto-3">{config.textos.nota}</p>
+      <p className="text-xs text-texto-3">
+        {estilo.imagens.some((imagem) => imagem.url)
+          ? `${config.tipo === "fotografia" ? "Imagens geradas" : "Ilustrações geradas"} com a fal.ai a partir das seis camadas do estilo. O prompt de cada uma está em "Copiar prompt".`
+          : config.textos.nota}
+      </p>
     </section>
   )
 }

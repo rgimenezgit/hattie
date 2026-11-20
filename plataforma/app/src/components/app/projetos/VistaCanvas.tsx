@@ -291,9 +291,9 @@ export function VistaCanvas({ projeto, pagina, itens, sistema, acoes, selecionad
     return () => cancelAnimationFrame(quadro)
   }, [itens, enquadrar])
 
-  const enviarPedido = (texto: string, opcoes: { formato: [number, number]; geracao: GeracaoItem }) => {
+  const enviarPedido = (texto: string, opcoes: { formato: [number, number]; geracao: GeracaoItem; referenciaUrl?: string }) => {
     if (!gerando) return
-    const ids = aoPedir(texto, { tipo: ferramenta as TipoGeracao, formato: opcoes.formato, geracao: opcoes.geracao, ponto: ponto ?? undefined })
+    const ids = aoPedir(texto, { tipo: ferramenta as TipoGeracao, formato: opcoes.formato, geracao: opcoes.geracao, referenciaUrl: opcoes.referenciaUrl, ponto: ponto ?? undefined })
     if (!ponto) focoPendente.current = ids
     aoSelecionar(ids)
     setPonto(null)

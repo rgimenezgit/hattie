@@ -16,13 +16,14 @@ import { useSistemaMarca } from "./SistemaMarca"
 
 /**
  * Mockups da primeira apresentação: um grande e três menores. `src` vazio mostra o espaço reservado;
- * quando as imagens chegarem, basta apontar o caminho (ex.: /mockups/raiz-natural/1.jpg).
+ * as da Raiz Natural foram geradas com a fal.ai (GPT Image 2 Edit, com o logo de referência; ver scripts/imagens-marca).
+ * As outras marcas, que ainda não têm mockups, mostram o espaço reservado.
  */
 const MOCKUPS: { id: string; legenda: string; src?: string }[] = [
-  { id: "destaque", legenda: "Mockup principal" },
-  { id: "um", legenda: "Mockup 2" },
-  { id: "dois", legenda: "Mockup 3" },
-  { id: "tres", legenda: "Mockup 4" },
+  { id: "destaque", legenda: "Produtos da marca na bancada", src: "/marcas/raiz-natural/mockups/1.jpg" },
+  { id: "um", legenda: "Sacola de papel kraft", src: "/marcas/raiz-natural/mockups/2.jpg" },
+  { id: "dois", legenda: "Etiqueta de presente", src: "/marcas/raiz-natural/mockups/3.jpg" },
+  { id: "tres", legenda: "Cartão de visita", src: "/marcas/raiz-natural/mockups/4.jpg" },
 ]
 
 const APLICACOES = [
@@ -79,7 +80,7 @@ export function MarcaPronta() {
               className={cn("relative overflow-hidden rounded-3xl", indice === 0 ? "col-span-3 aspect-[4/3] sm:aspect-video" : "aspect-square rounded-2xl sm:aspect-[4/3] sm:rounded-3xl")}
               style={{ backgroundColor: cores.fundo }}
             >
-              {mockup.src ? (
+              {mockup.src && marca.slug === "raiz-natural" ? (
                 <Image src={mockup.src} alt={mockup.legenda} fill sizes={indice === 0 ? "(min-width: 1024px) 1024px, 100vw" : "(min-width: 1024px) 340px, 33vw"} className="object-cover" />
               ) : (
                 <>

@@ -15,7 +15,15 @@ export type AutorItem = "hattie" | "voce" | "parceiro"
 export type AjustesImagem = { exposicao: number; contraste: number; saturacao: number; temperatura: number; espelhada?: boolean }
 
 /** Opções escolhidas na hora de pedir uma imagem, um vídeo ou uma peça. */
-export type GeracaoItem = { proporcao?: string; resolucao?: string; estilo?: string; referencia?: string; duracao?: string }
+export type GeracaoItem = {
+  proporcao?: string
+  resolucao?: string
+  estilo?: string
+  referencia?: string
+  duracao?: string
+  /** true quando a imagem saiu do modelo de verdade; sem isso, é o desenho de exemplo do protótipo. */
+  real?: boolean
+}
 
 /**
  * Um item do projeto: imagem, vídeo, texto, peça ou forma. Mora numa página e tem lugar no canvas

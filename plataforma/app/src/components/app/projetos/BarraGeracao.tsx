@@ -59,10 +59,22 @@ const INFO: Record<TipoGeracao, { titulo: string; placeholder: string; icone: Lu
 const PILULA =
   "flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-preenchimento px-3 text-detalhe font-medium transition-[background-color] duration-150 hover:bg-preenchimento-hover data-[state=open]:bg-preenchimento-hover [&_svg]:size-3.5"
 
+/** Reduz a imagem (lado maior até 1536 px) e devolve em data:, pronta para ir ao modelo como referência. */
+async function reduzirImagem(arquivo: File): Promise<string> {
+  const original = await createImageBitmap(arquivo)
+  const escala = Math.min(1, 1536 / Math.max(original.width, original.height))
+  const tela = document.createElement("canvas")
+  tela.width = Math.round(original.width * escala)
+  tela.height = Math.round(original.height * escala)
+  tela.getContext("2d")?.drawImage(original, 0, 0, tela.width, tela.height)
+  original.close()
+  return tela.toDataURL("image/jpeg", 0.9)
+}
+
 type Props = {
   tipo: TipoGeracao
   marca: string
-  aoEnviar: (texto: string, opcoes: { formato: [number, number]; geracao: GeracaoItem }) => void
+  aoEnviar: (texto: string, opcoes: { formato: [number, number]; geracao: GeracaoItem; referenciaUrl?: string }) => void
   /** Imagem do computador, colocada direto no canvas. */
   aoEnviarArquivo: (arquivo: File) => void
   aoFechar: () => void
@@ -96,6 +108,7 @@ export function BarraGeracao({ tipo, marca, aoEnviar, aoEnviarArquivo, aoFechar 
         estilo: tipo === "peca" ? undefined : estilo,
         referencia: referencia?.nome,
       },
+      referenciaUrl: referencia?.url,
     })
   }
 
@@ -147,22 +160,19 @@ export function BarraGeracao({ tipo, marca, aoEnviar, aoEnviarArquivo, aoFechar 
           aria-hidden
           onChange={(evento) => {
             const escolhido = evento.target.files?.[0]
-            if (escolhido) setReferencia({ nome: escolhido.name, url: URL.createObjectURL(escolhido) })
+            if (escolhido) reduzirImagem(escolhido).then((url) => setReferencia({ nome: escolhido.name, url }))
             evento.target.value = ""
           }}
         />
         {referencia ? (
           <span className="flex h-8 items-center gap-1.5 rounded-full bg-acao-suave py-1 ps-1 pe-1 text-detalhe font-medium">
-            {/* eslint-disable-next-line @next/next/no-img-element -- imagem local do navegador (blob) */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- imagem local do navegador (data:) */}
             <img src={referencia.url} alt="" className="size-6 rounded-full object-cover" />
             <span className="max-w-28 truncate">{referencia.nome}</span>
             <button
               type="button"
               aria-label="Tirar a referência"
-              onClick={() => {
-                URL.revokeObjectURL(referencia.url)
-                setReferencia(null)
-              }}
+              onClick={() => setReferencia(null)}
               className="grid size-6 place-items-center rounded-full hover:bg-preto/10"
             >
               <X className="size-3" strokeWidth={2.5} />
