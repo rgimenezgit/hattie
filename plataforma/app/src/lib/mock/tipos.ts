@@ -81,7 +81,8 @@ export type Persona = {
 }
 
 /** Marca que inspira: citada pela pessoa no briefing ou sugerida pelo Hattie. */
-export type Referencia = { id: string; nome: string; segmento: string; origem: "briefing" | "hattie"; levar: string; rascunho?: boolean }
+/** Referência: marca que inspira. `link` é o site ou o perfil, para o Hattie olhar e completar o resto. */
+export type Referencia = { id: string; nome: string; segmento: string; origem: "briefing" | "hattie"; levar: string; link?: string; rascunho?: boolean }
 
 export type TipoConcorrente = "direto" | "indireto"
 
@@ -95,6 +96,8 @@ export type Concorrente = {
   onde: string
   forte: string
   brecha: string
+  /** Site ou perfil do concorrente. */
+  link?: string
   rascunho?: boolean
 }
 
@@ -187,9 +190,16 @@ export type ProdutoMarca = {
   comoUsar?: string
   ingredientes?: string[]
   principal?: boolean
+  /** Fotos do produto enviadas pela pessoa. */
+  imagens?: { id: string; nome: string; url: string }[]
+  /** Públicos (ids da seção Público e personas) para quem o produto é pensado. */
+  publicos?: string[]
   /** Acabou de entrar e o Hattie ainda vai completar. */
   rascunho?: boolean
 }
+
+/** Um objetivo da marca: nome curto e a meta com número e prazo. */
+export type ObjetivoMarca = { id: string; titulo: string; texto: string; rascunho?: boolean }
 
 /** Mensagem-chave: uma ideia que a marca repete, a frase que a resume e as palavras que carregam essa ideia. */
 export type MensagemChave = {
@@ -199,6 +209,8 @@ export type MensagemChave = {
   explicacao: string
   palavras: string[]
   exemplos: { onde: string; texto: string }[]
+  /** Acabou de entrar e o Hattie ainda vai completar a explicação e os exemplos. */
+  rascunho?: boolean
 }
 
 /** Grafismos, gradiente e ícones da marca, numa categoria só. */
@@ -305,6 +317,8 @@ export type ImagemFoto = {
   borda: "left" | "right" | "top" | "bottom"
   /** Só na ilustração: qual desenho de exemplo mostrar. */
   desenho?: DesenhoIlustracao
+  /** Imagem gerada no estilo (fal.ai). Sem ela, o card mostra o esboço nas cores do estilo. */
+  url?: string
 }
 
 /** Estilo fotográfico: o registro emocional, as seis camadas, o que evitar e as imagens de exemplo. */

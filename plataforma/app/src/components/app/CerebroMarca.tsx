@@ -45,6 +45,7 @@ import { SecaoMotion } from "./SecaoMotion"
 import { SecaoLogo } from "./SecaoLogo"
 import { SecaoNome } from "./SecaoNome"
 import { SecaoArquetipos, SecaoAtributos, SecaoPersonalidadeMarca } from "./SecaoPersonalidade"
+import { SecaoObjetivos } from "./SecaoObjetivos"
 import { SecaoProdutos } from "./SecaoProdutos"
 import { SecaoMensagens } from "./SecaoMensagens"
 import { SecaoElementos } from "./SecaoElementos"
@@ -423,6 +424,8 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
         <SecaoMotion secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : secao.conteudo.tipo === "aplicacoes" ? (
         <SecaoAplicacoes secao={secao} aoEditar={() => aoEditar(secao.id)} />
+      ) : secao.id === "objetivos" ? (
+        <SecaoObjetivos secao={secao} aoEditar={() => aoEditar(secao.id)} />
       ) : (
         <section aria-label={secao.titulo} className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 md:p-6">
           <div className="-mt-1 -me-2 flex items-center justify-between gap-3">

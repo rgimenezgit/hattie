@@ -23,7 +23,7 @@ export function NaPeca({
 }: {
   pecas: PecaExemplo[]
   sistema: SistemaMarca
-  imagem?: { fundo: string; cor: string }
+  imagem?: { fundo: string; cor: string; url?: string }
   coresIlustracao?: CoresDesenho
   titulo?: string
   className?: string

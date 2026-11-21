@@ -3,8 +3,9 @@
 import type { Route } from "next"
 import { createContext, use, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
-import { SquarePen, UsersRound } from "lucide-react"
-import { MenuAcoes } from "@/components/hattie/MenuAcoes"
+import { SquarePen, Trash2, UsersRound } from "lucide-react"
+import { MenuAcoes, type ItemMenu } from "@/components/hattie/MenuAcoes"
+import { notificar } from "@/components/hattie/Notificacao"
 import { guardarPedidoParceiro } from "@/lib/pedidoParceiro"
 import { getSecao, type EspecialidadeParceiro } from "@/lib/mock"
 import { useEstado } from "./Estado"
@@ -60,22 +61,38 @@ export function usePedirParceiro() {
 }
 
 /**
+ * Aviso de item apagado, com "Desfazer". Apagar não pede confirmação: o item some na hora e volta pelo aviso.
+ * `texto` diz o que saiu e de onde ("Tirei a Aesop das referências.").
+ */
+export function avisarRemocao(texto: string, desfazer: () => void) {
+  notificar({ titulo: "apagado", texto, som: "puff", acao: { rotulo: "Desfazer", aoClicar: desfazer } })
+}
+
+type MenuPontoProps = {
+  ponto: string
+  className?: string
+  /** Ações próprias do item, antes das padrão (ex.: "Editar produto"). */
+  acoes?: ItemMenu[]
+  /** Com esta função, o menu ganha "Excluir" no fim. */
+  aoExcluir?: () => void
+  /** Motivo para não excluir agora ("fica pelo menos um"): o item aparece desativado com a nota. */
+  excluirBloqueado?: string
+}
+
+/**
  * Menu de três pontos de um ponto da marca. `ponto` é o nome do que está no container ("Óleo de pequi", "o logo").
  * Fora do cérebro (sem contexto), não aparece.
  */
-export function MenuPonto({ ponto, className }: { ponto: string; className?: string }) {
+export function MenuPonto({ ponto, className, acoes = [], aoExcluir, excluirBloqueado }: MenuPontoProps) {
   const contexto = use(Ctx)
   const pedir = usePedirParceiro()
   if (!contexto) return null
   const { secaoId, editar } = contexto
-  return (
-    <MenuAcoes
-      rotulo={`Ações de ${ponto}`}
-      className={className}
-      itens={[
-        { rotulo: "Editar com o Hattie", icone: SquarePen, abrePainel: true, onSelect: () => editar(secaoId, ponto) },
-        { rotulo: "Contratar um parceiro", icone: UsersRound, onSelect: () => pedir(secaoId, ponto) },
-      ]}
-    />
-  )
+  const itens: ItemMenu[] = [
+    ...acoes,
+    { rotulo: "Editar com o Hattie", icone: SquarePen, abrePainel: true, onSelect: () => editar(secaoId, ponto) },
+    { rotulo: "Contratar um parceiro", icone: UsersRound, onSelect: () => pedir(secaoId, ponto) },
+  ]
+  if (aoExcluir) itens.push({ rotulo: "Excluir", icone: Trash2, separarAntes: true, onSelect: aoExcluir, desativado: Boolean(excluirBloqueado), nota: excluirBloqueado })
+  return <MenuAcoes rotulo={`Ações de ${ponto}`} className={className} itens={itens} />
 }

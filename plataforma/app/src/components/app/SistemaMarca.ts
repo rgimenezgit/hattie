@@ -16,6 +16,8 @@ export type SistemaMarca = {
   simbolo: SimboloLogo
   estiloFoto?: EstiloFoto
   estiloIlustracao?: EstiloFoto
+  /** Fotos geradas no estilo fotográfico da marca, pelo id da cena. As peças usam no lugar do esboço. */
+  fotos: Record<string, string>
   /** Situação de cada diretriz que alimenta as peças: aprovada, escolhida ou ainda a proposta do Hattie. */
   fontes: { id: string; titulo: string; detalhe: string; status: StatusSecao; definida: boolean }[]
 }
@@ -71,6 +73,7 @@ export function useSistemaMarca(): SistemaMarca {
     simbolo: ideia?.simbolo ?? "gota",
     estiloFoto,
     estiloIlustracao,
+    fotos: Object.fromEntries((estiloFoto?.imagens ?? []).filter((imagem) => imagem.url).map((imagem) => [imagem.id, imagem.url!])),
     fontes: [
       { id: "logo", titulo: "Logo", detalhe: ideia?.nome ?? "A definir", status: status("logo"), definida: Boolean(logoEscolhido) },
       { id: "cores", titulo: "Cores", detalhe: paleta.map((cor) => cor.nome).join(", "), status: status("cores"), definida: false },

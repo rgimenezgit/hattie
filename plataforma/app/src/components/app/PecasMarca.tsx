@@ -60,6 +60,22 @@ function BotaoPeca({ sistema, texto, fundo, tinta }: { sistema: SistemaMarca; te
   )
 }
 
+/** Foto de uma peça: as cores do esboço e, quando existe, a foto gerada no estilo da marca. */
+type FotoDaPeca = { fundo: string; cor: string; url?: string }
+
+/** Cena do estilo fotográfico que combina com cada layout de peça. */
+const CENA_DO_LAYOUT: Partial<Record<ExemploPeca["layout"], string>> = { "foto-cheia": "frasco-frutos", dividido: "maos-oleo", moldura: "kit", carimbo: "bancada" }
+
+/** Foto da peça: a imagem gerada quando há; senão, o esboço pontilhado nas cores da marca. */
+function FotoPeca({ url, fundo, cor, borda, className }: { url?: string; fundo: string; cor: string; borda: "top" | "bottom" | "left" | "right"; className?: string }) {
+  if (url)
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- foto do próprio app, sem otimização
+      <img src={url} alt="" className={cn("size-full object-cover", className)} />
+    )
+  return <BlocoImagem className={cn("size-full rounded-none outline-0", className)} fundo={fundo} cor={cor} borda={borda} />
+}
+
 type PropsPeca = {
   exemplo: ExemploPeca
   proporcao: [number, number]
@@ -69,7 +85,7 @@ type PropsPeca = {
   /** Área coberta pela interface da rede: o conteúdo fica fora dela. */
   zona?: FormatoPeca["zonaSegura"]
   /** Cores da foto, para mostrar a peça com outro estilo fotográfico (cards de escolha). */
-  imagem?: { fundo: string; cor: string }
+  imagem?: FotoDaPeca
   /** Cores da ilustração, para mostrar a peça com outro estilo de ilustração. */
   coresIlustracao?: CoresDesenho
   className?: string
@@ -120,11 +136,14 @@ function Layout({
   exemplo: ExemploPeca
   sistema: SistemaMarca
   horizontal: boolean
-  imagem?: { fundo: string; cor: string }
+  imagem?: FotoDaPeca
   coresIlustracao?: CoresDesenho
 }) {
   const { principal, apoio, fundo, escuro, destaque } = sistema.cores
   const desenho = coresIlustracao ?? sistema.cores
+  // Sem foto pedida, a peça usa a foto gerada da cena que combina com o layout (quando a marca tem).
+  const cena = CENA_DO_LAYOUT[exemplo.layout]
+  const url = imagem ? imagem.url : cena ? sistema.fotos[cena] : undefined
   const t = textos(sistema)
   const margem = cq(6)
   /** Margem de 6% nas laterais; em cima e embaixo, o que for maior entre a margem e a zona segura do formato. */
@@ -143,7 +162,7 @@ function Layout({
     case "foto-cheia":
       return (
         <>
-          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? principal} cor={imagem?.cor ?? apoio} borda="right" />
+          <FotoPeca url={url} className="absolute inset-0" fundo={imagem?.fundo ?? principal} cor={imagem?.cor ?? apoio} borda="right" />
           <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${principal} 34%, color-mix(in srgb, ${principal} 70%, transparent) 52%, transparent 78%)` }} />
           {coluna(
             <>
@@ -231,7 +250,7 @@ function Layout({
       )
       return (
         <div className={cn("grid size-full", horizontal ? "grid-cols-2" : "grid-rows-[54%_minmax(0,1fr)]")} style={{ backgroundColor: fundo }}>
-          <BlocoImagem className="size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda={horizontal ? "left" : "bottom"} />
+          <FotoPeca url={url} fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda={horizontal ? "left" : "bottom"} />
           {texto}
         </div>
       )
@@ -327,7 +346,7 @@ function Layout({
       return (
         <div className="relative flex size-full flex-col" style={{ backgroundColor: fundo, ...pad, gap: cq(3) }}>
           <div className="relative min-h-0 flex-1">
-            <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? principal} borda="bottom" />
+            <FotoPeca url={url} className="absolute inset-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? principal} borda="bottom" />
             <GrafismoFolhas cor={principal} traco={2} className="absolute -top-[3cqmin] -left-[4cqmin] w-[60%] -rotate-12" />
             <GrafismoFolhas cor={principal} traco={2} className="absolute -right-[4cqmin] -bottom-[3cqmin] w-[60%] rotate-[168deg]" />
           </div>
@@ -358,7 +377,7 @@ function Layout({
     case "carimbo":
       return (
         <>
-          <BlocoImagem className="absolute inset-0 size-full rounded-none outline-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda="left" />
+          <FotoPeca url={url} className="absolute inset-0" fundo={imagem?.fundo ?? apoio} cor={imagem?.cor ?? fundo} borda="left" />
           {coluna(
             <>
               <p className="max-w-[60%]" style={t.titulo(10, escuro)}>

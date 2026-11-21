@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { ArrowDownRight, ArrowUpRight, Eye, Lightbulb, MessageCircle, Plus, RefreshCw, Sparkles, TrendingUp, type LucideIcon } from "lucide-react"
+import { ArrowDownRight, ArrowUpRight, Eye, Lightbulb, Link2, MessageCircle, Plus, RefreshCw, Sparkles, TrendingUp, type LucideIcon } from "lucide-react"
 import { Botao } from "@/components/hattie/Botao"
 import { Campo, CampoArea, CampoLista } from "@/components/hattie/Campo"
 import { Janela } from "@/components/hattie/Janela"
@@ -10,27 +10,42 @@ import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { VerMais } from "@/components/hattie/VerMais"
 import { Tag } from "@/components/hattie/Tag"
+import { exibirLink, nomeDoLink, normalizarLink } from "@/lib/link"
 import { cn } from "@/lib/utils"
 import type { Concorrente, Indicador, InsightMercado, PainelMercado, Referencia, Secao, TipoConcorrente } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
+import { MenuPonto, avisarRemocao } from "./AcoesPonto"
 import { useEstado } from "./Estado"
 
 type Props = { secao: Secao; aoEditar: () => void }
 
 /**
- * Mercado e concorrentes, em três blocos:
+ * Mercado e concorrentes. À vista, o essencial:
  * 1. Referências: marcas que inspiram, citadas no briefing ou sugeridas pelo Hattie, e o que levar de cada uma.
- * 2. Concorrentes: diretos e indiretos, cada grupo com a leitura do Hattie no topo.
- * 3. Mercado esta semana: painel simples que o Hattie atualiza toda segunda, com indicadores e insights.
+ * 2. Concorrentes diretos, com a leitura do Hattie no topo.
+ * Em opções avançadas: os concorrentes indiretos e o painel "mercado esta semana", que o Hattie atualiza toda segunda.
+ * Referências e concorrentes entram pelo nome ou pelo link do site ou perfil, e saem pelo menu de três pontos (com "Desfazer").
  */
 export function SecaoMercado({ secao, aoEditar }: Props) {
-  const { referenciasNovas, concorrentesNovos } = useEstado()
+  const { referenciasNovas, concorrentesNovos, removidos, remover, restaurar } = useEstado()
   const [novaReferencia, setNovaReferencia] = useState(false)
   const [novoConcorrente, setNovoConcorrente] = useState(false)
   if (secao.conteudo.tipo !== "mercado") return null
   const { leituras, painel } = secao.conteudo
-  const referencias = [...secao.conteudo.referencias, ...referenciasNovas]
-  const concorrentes = [...secao.conteudo.concorrentes, ...concorrentesNovos]
+  const referencias = [...secao.conteudo.referencias, ...referenciasNovas].filter((item) => !removidos[item.id])
+  const concorrentes = [...secao.conteudo.concorrentes, ...concorrentesNovos].filter((item) => !removidos[item.id])
+  const diretos = concorrentes.filter((concorrente) => concorrente.tipo === "direto")
+  const indiretos = concorrentes.filter((concorrente) => concorrente.tipo === "indireto")
+
+  function excluirReferencia(referencia: Referencia) {
+    remover(referencia.id)
+    avisarRemocao(`Tirei a ${referencia.nome} das referências.`, () => restaurar(referencia.id))
+  }
+
+  function excluirConcorrente(concorrente: Concorrente) {
+    remover(concorrente.id)
+    avisarRemocao(`Tirei a ${concorrente.nome} dos concorrentes.`, () => restaurar(concorrente.id))
+  }
 
   return (
     <div className="flex flex-col gap-10">
@@ -46,7 +61,7 @@ export function SecaoMercado({ secao, aoEditar }: Props) {
         <ul className="grid grid-cols-1 gap-3 @3xl:grid-cols-3">
           {referencias.map((referencia) => (
             <li key={referencia.id} className="flex min-w-0">
-              <CartaoReferencia referencia={referencia} />
+              <CartaoReferencia referencia={referencia} aoExcluir={() => excluirReferencia(referencia)} />
             </li>
           ))}
         </ul>
@@ -58,18 +73,11 @@ export function SecaoMercado({ secao, aoEditar }: Props) {
             <Plus /> Adicionar<span className="max-sm:sr-only"> concorrente</span>
           </Botao>
         </CabecalhoBloco>
-        {(["direto", "indireto"] as const).map((tipo) => (
-          <GrupoConcorrentes
-            key={tipo}
-            tipo={tipo}
-            leitura={leituras[tipo]}
-            concorrentes={concorrentes.filter((concorrente) => concorrente.tipo === tipo)}
-            aoCompletar={aoEditar}
-          />
-        ))}
+        <GrupoConcorrentes tipo="direto" leitura={leituras.direto} concorrentes={diretos} aoCompletar={aoEditar} aoExcluir={excluirConcorrente} />
       </section>
 
-      <VerMais resumo="Painel do mercado com indicadores da semana e o que mudou">
+      <VerMais resumo={`${indiretos.length} concorrentes indiretos e o painel do mercado com os indicadores da semana`}>
+        <GrupoConcorrentes tipo="indireto" leitura={leituras.indireto} concorrentes={indiretos} aoCompletar={aoEditar} aoExcluir={excluirConcorrente} />
         <Painel painel={painel} />
       </VerMais>
 
@@ -79,7 +87,23 @@ export function SecaoMercado({ secao, aoEditar }: Props) {
   )
 }
 
-function CartaoReferencia({ referencia }: { referencia: Referencia }) {
+/** Link do site ou perfil, curto, abre em outra aba. */
+function LinkMarca({ link, className }: { link: string; className?: string }) {
+  return (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn("inline-flex min-w-0 items-center gap-1 text-xs text-texto-2 underline-offset-4 hover:text-texto hover:underline", className)}
+    >
+      <Link2 className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
+      <span className="truncate">{exibirLink(link)}</span>
+      <span className="sr-only"> (abre em outra aba)</span>
+    </a>
+  )
+}
+
+function CartaoReferencia({ referencia, aoExcluir }: { referencia: Referencia; aoExcluir: () => void }) {
   return (
     <article aria-labelledby={`referencia-${referencia.id}`} className="flex w-full min-w-0 flex-col gap-4 rounded-3xl bg-superficie p-5">
       <header className="flex items-center gap-3">
@@ -92,13 +116,15 @@ function CartaoReferencia({ referencia }: { referencia: Referencia }) {
           </h3>
           <p className="text-xs text-texto-2">{referencia.segmento}</p>
         </div>
+        <MenuPonto ponto={`a referência ${referencia.nome}`} aoExcluir={aoExcluir} className="-me-2 self-start" />
       </header>
       <div className="flex flex-1 flex-col gap-1">
         <h4 className="text-xs font-semibold text-texto-2">O que levar</h4>
         <p className="text-sm">{referencia.levar || "Eu completo o que vale levar dessa marca para a sua."}</p>
       </div>
-      <footer className="border-t border-borda-sutil pt-3 text-xs text-texto-3">
-        {referencia.origem === "briefing" ? "Você citou no briefing" : "Sugerida pelo Hattie"}
+      <footer className="flex items-center justify-between gap-3 border-t border-borda-sutil pt-3 text-xs text-texto-3">
+        <span className="shrink-0">{referencia.origem === "briefing" ? "Você citou no briefing" : "Sugerida pelo Hattie"}</span>
+        {referencia.link && <LinkMarca link={referencia.link} />}
       </footer>
     </article>
   )
@@ -114,11 +140,13 @@ function GrupoConcorrentes({
   leitura,
   concorrentes,
   aoCompletar,
+  aoExcluir,
 }: {
   tipo: TipoConcorrente
   leitura: string
   concorrentes: Concorrente[]
   aoCompletar: () => void
+  aoExcluir: (concorrente: Concorrente) => void
 }) {
   const rotulo = ROTULO_TIPO[tipo]
   return (
@@ -142,24 +170,28 @@ function GrupoConcorrentes({
       </header>
 
       <div role="table" aria-labelledby={`grupo-${tipo}`} className="flex flex-col text-sm">
-        <div role="row" className="hidden grid-cols-[minmax(0,3fr)_minmax(0,2fr)_minmax(0,2.5fr)_minmax(0,2.5fr)] gap-5 border-t border-borda-sutil py-2.5 text-xs text-texto-3 @4xl:grid">
+        <div role="row" className="hidden grid-cols-[minmax(0,3fr)_minmax(0,2fr)_minmax(0,2.5fr)_minmax(0,2.5fr)_2rem] gap-5 border-t border-borda-sutil py-2.5 text-xs text-texto-3 @4xl:grid">
           <span role="columnheader">Marca</span>
           <span role="columnheader">Preço e onde vende</span>
           <span role="columnheader">Forte em</span>
           <span role="columnheader">Brecha para você</span>
+          <span role="columnheader" className="sr-only">
+            Ações
+          </span>
         </div>
         {concorrentes.map((concorrente) => (
           <div
             key={concorrente.id}
             role="row"
-            className="grid grid-cols-1 gap-x-5 gap-y-2 border-t border-borda-sutil py-3.5 @4xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)_minmax(0,2.5fr)_minmax(0,2.5fr)]"
+            className="relative grid grid-cols-1 gap-x-5 gap-y-2 border-t border-borda-sutil py-3.5 @4xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)_minmax(0,2.5fr)_minmax(0,2.5fr)_2rem]"
           >
-            <div role="cell" className="flex flex-col gap-0.5">
+            <div role="cell" className="flex flex-col items-start gap-0.5 pe-10 @4xl:pe-0">
               <span className="flex flex-wrap items-center gap-2 font-semibold">
                 {concorrente.nome}
                 {concorrente.rascunho && <Tag tamanho="sm">rascunho</Tag>}
               </span>
               <span className="text-texto-2">{concorrente.descricao}</span>
+              {concorrente.link && <LinkMarca link={concorrente.link} className="mt-1 max-w-full" />}
             </div>
             <Celula rotulo="Preço e onde vende">
               <span className="tabular-nums">{concorrente.preco || "—"}</span>
@@ -179,6 +211,9 @@ function GrupoConcorrentes({
                 </Celula>
               </>
             )}
+            <div role="cell" className="absolute end-0 top-2.5 @4xl:static @4xl:-mt-1 @4xl:-me-2 @4xl:justify-self-end">
+              <MenuPonto ponto={`o concorrente ${concorrente.nome}`} aoExcluir={() => aoExcluir(concorrente)} />
+            </div>
           </div>
         ))}
       </div>
@@ -302,15 +337,17 @@ function FormReferencia({ aberta, aoMudar }: { aberta: boolean; aoMudar: (aberta
   function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
     const dados = new FormData(evento.currentTarget)
-    const nome = String(dados.get("nome") ?? "").trim()
+    const link = normalizarLink(String(dados.get("link") ?? ""))
+    const nome = String(dados.get("nome") ?? "").trim() || (link ? nomeDoLink(link) : "")
     if (!nome) {
-      setErro("Qual é a marca?")
+      setErro("Coloque o nome ou o link da marca.")
       focarErro(evento.currentTarget)
       return
     }
     adicionarReferencia({
       id: `referencia-${Date.now()}`,
       nome,
+      link: link ?? undefined,
       segmento: String(dados.get("segmento") ?? "").trim() || "Segmento a definir",
       origem: "briefing",
       levar: String(dados.get("levar") ?? "").trim(),
@@ -338,6 +375,14 @@ function FormReferencia({ aberta, aoMudar }: { aberta: boolean; aoMudar: (aberta
     >
       <form id="form-referencia" onSubmit={enviar} className="flex flex-col gap-4" noValidate>
         <Campo name="nome" rotulo="Marca" placeholder="Ex.: Aesop" erro={erro} autoFocus />
+        <Campo
+          name="link"
+          type="url"
+          inputMode="url"
+          rotulo="Link"
+          placeholder="Site ou perfil, ex.: aesop.com ou @aesop"
+          dica="Opcional. Com o link, eu olho a marca e completo o resto."
+        />
         <Campo name="segmento" rotulo="Área" placeholder="Ex.: Moda, café, papelaria" />
         <CampoArea name="levar" rotulo="O que você admira nela" placeholder="O jeito de fotografar, o tom das mensagens, a embalagem" dica="Opcional" />
       </form>
@@ -352,16 +397,19 @@ function FormConcorrente({ aberta, aoMudar }: { aberta: boolean; aoMudar: (abert
   function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
     const dados = new FormData(evento.currentTarget)
-    const nome = String(dados.get("nome") ?? "").trim()
+    const link = normalizarLink(String(dados.get("link") ?? ""))
+    const nome = String(dados.get("nome") ?? "").trim() || (link ? nomeDoLink(link) : "")
     if (!nome) {
-      setErro("Qual é o concorrente?")
+      setErro("Coloque o nome ou o link do concorrente.")
       focarErro(evento.currentTarget)
       return
     }
+    const tipo = String(dados.get("tipo")) === "indireto" ? "indireto" : "direto"
     adicionarConcorrente({
       id: `concorrente-${Date.now()}`,
       nome,
-      tipo: String(dados.get("tipo")) === "indireto" ? "indireto" : "direto",
+      link: link ?? undefined,
+      tipo,
       descricao: String(dados.get("descricao") ?? "").trim(),
       preco: String(dados.get("preco") ?? "").trim(),
       onde: String(dados.get("onde") ?? "").trim(),
@@ -371,7 +419,11 @@ function FormConcorrente({ aberta, aoMudar }: { aberta: boolean; aoMudar: (abert
     })
     setErro("")
     aoMudar(false)
-    notificar({ titulo: "concorrente anotado", texto: `Eu analiso a ${nome} e aponto o ponto forte e a brecha para você.`, tipo: "sucesso" })
+    notificar({
+      titulo: "concorrente anotado",
+      texto: `Eu analiso a ${nome} e aponto o ponto forte e a brecha para você.${tipo === "indireto" ? " Os indiretos ficam em opções avançadas." : ""}`,
+      tipo: "sucesso",
+    })
   }
 
   return (
@@ -399,6 +451,15 @@ function FormConcorrente({ aberta, aoMudar }: { aberta: boolean; aoMudar: (abert
             { valor: "direto", rotulo: "Direto: vende o mesmo" },
             { valor: "indireto", rotulo: "Indireto: outra solução" },
           ]}
+        />
+        <Campo
+          name="link"
+          type="url"
+          inputMode="url"
+          rotulo="Link"
+          placeholder="Site ou perfil, ex.: @ateliedaserra"
+          dica="Opcional. Com o link, eu completo o resto."
+          className="sm:col-span-2"
         />
         <Campo name="preco" rotulo="Faixa de preço" placeholder="Ex.: R$ 40 a 80" />
         <Campo name="onde" rotulo="Onde vende" placeholder="Ex.: Instagram e feiras" />

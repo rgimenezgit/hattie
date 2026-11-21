@@ -120,7 +120,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     favorito: true,
     versao: 2,
     usadoEm: ["p-post-lancamento", "p-story-pequi"],
-    previa: { tipo: "foto", fundo: CREME, tinta: ARGILA, borda: "bottom" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-pequi-bancada.jpg" },
   },
   {
     id: "f-pequi-maos",
@@ -137,7 +137,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["textura", "pele", "close", "lançamento"],
     cores: [CREME, ARGILA],
     status: "aprovado",
-    previa: { tipo: "foto", fundo: ARGILA, tinta: CREME, borda: "left" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-pequi-maos.jpg" },
   },
   {
     id: "f-pequi-verde",
@@ -154,7 +154,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["recorte", "estúdio", "fundo de uma cor"],
     cores: [VERDE, ARGILA],
     status: "rascunho",
-    previa: { tipo: "foto", fundo: VERDE, tinta: ARGILA, borda: "top" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-pequi-verde.jpg" },
   },
   {
     id: "f-cooperativa",
@@ -173,7 +173,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     cores: [VERDE, ARGILA],
     status: "aprovado",
     favorito: true,
-    previa: { tipo: "foto", fundo: VERDE, tinta: CREME, borda: "bottom" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-cooperativa.jpg" },
   },
   {
     id: "f-lote-sol",
@@ -191,7 +191,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["origem", "lote", "cooperativa", "bastidores"],
     cores: [ARGILA, CACAU],
     status: "aprovado",
-    previa: { tipo: "foto", fundo: ARGILA, tinta: CACAU, borda: "right" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-lote-sol.jpg" },
   },
   {
     id: "f-baru-recorte",
@@ -209,7 +209,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["recorte", "loja", "produto"],
     cores: [CREME, CACAU],
     status: "aprovado",
-    previa: { tipo: "foto", fundo: CREME, tinta: CACAU, borda: "top" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-baru-recorte.jpg" },
   },
   {
     id: "f-buriti-banho",
@@ -225,7 +225,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["banho", "rotina", "celular"],
     cores: [CREME, ARGILA],
     status: "aprovado",
-    previa: { tipo: "foto", fundo: CREME, tinta: VERDE, borda: "left" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-buriti-banho.jpg" },
   },
   {
     id: "f-feira",
@@ -241,7 +241,7 @@ export const ARQUIVOS: ArquivoBiblioteca[] = [
     tags: ["feira", "evento", "pessoas", "bastidores"],
     cores: [ARGILA, VERDE],
     status: "publicado",
-    previa: { tipo: "foto", fundo: ARGILA, tinta: VERDE, borda: "bottom" },
+    previa: { tipo: "enviada", url: "/marcas/raiz-natural/biblioteca/f-feira.jpg" },
   },
 
   /* ---------- Ilustrações e personagem ---------- */

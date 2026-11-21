@@ -73,6 +73,7 @@ const SECOES_BASE: Secao[] = [
       produtos: [
         {
           id: "oleo-pequi",
+          publicos: ["cuidadoras"],
           tipo: "produto",
           nome: "Óleo de pequi",
           categoria: "Óleo para pele e cabelo",
@@ -87,6 +88,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "hidratante-baru",
+          publicos: ["cuidadoras"],
           tipo: "produto",
           nome: "Hidratante de baru",
           categoria: "Hidratante corporal",
@@ -100,6 +102,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "sabonete-buriti",
+          publicos: ["cuidadoras", "presenteadoras"],
           tipo: "produto",
           nome: "Sabonete de buriti",
           categoria: "Sabonete em barra",
@@ -113,6 +116,7 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "kit-presente",
+          publicos: ["presenteadoras"],
           tipo: "produto",
           nome: "Kit de presente",
           categoria: "Kit",
@@ -270,6 +274,7 @@ const SECOES_BASE: Secao[] = [
           segmento: "Cosméticos",
           origem: "briefing",
           levar: "Fotos de produto com calma, muito espaço e texto que explica o uso sem exagero.",
+          link: "https://www.aesop.com",
         },
         {
           id: "patagonia",
@@ -277,6 +282,7 @@ const SECOES_BASE: Secao[] = [
           segmento: "Vestuário",
           origem: "briefing",
           levar: "Contar de onde vem cada peça, com nome do fornecedor e do lugar, como parte da marca.",
+          link: "https://www.patagonia.com",
         },
         {
           id: "cafe-especial",
@@ -1271,12 +1277,12 @@ const SECOES_BASE: Secao[] = [
           ],
           evitar: ["Fundo branco de estúdio", "Sorriso de propaganda olhando para a câmera", "Luz dura do meio-dia", "Objetos de plástico", "Cena centralizada e simétrica"],
           imagens: [
-            { id: "maos-oleo", cena: "Mãos aplicando o óleo de pequi no braço", enquadramento: "Detalhe", notas: [5, 5, 4, 5, 4, 5], fundo: "#F2EBDD", luz: "#C9A27E", borda: "left" },
-            { id: "frasco-frutos", cena: "Frasco âmbar ao lado de frutos de pequi sobre linho", enquadramento: "Detalhe", notas: [5, 4, 5, 5, 5, 4], fundo: "#C9A27E", luz: "#5C3B28", borda: "bottom" },
-            { id: "janela", cena: "Mulher na janela passando hidratante no rosto", enquadramento: "Meio corpo", notas: [4, 5, 4, 4, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "right" },
-            { id: "bancada", cena: "Bancada de produção com o caderno de lote aberto", enquadramento: "De cima", notas: [5, 4, 4, 5, 5, 5], fundo: "#C9A27E", luz: "#F2EBDD", borda: "top" },
-            { id: "colheita", cena: "Colheita de pequi na cooperativa, sombra de árvore", enquadramento: "Ambiente", notas: [4, 4, 4, 4, 5, 4], fundo: "#2F4A3A", luz: "#C9A27E", borda: "bottom" },
-            { id: "kit", cena: "Kit de presente em papel kraft com cartão escrito à mão", enquadramento: "Detalhe", notas: [5, 5, 5, 5, 4, 5], fundo: "#F2EBDD", luz: "#5C3B28", borda: "left" },
+            { id: "maos-oleo", url: "/marcas/raiz-natural/fotografia/maos-oleo.jpg", cena: "Mãos aplicando o óleo de pequi no braço", enquadramento: "Detalhe", notas: [5, 5, 4, 5, 4, 5], fundo: "#F2EBDD", luz: "#C9A27E", borda: "left" },
+            { id: "frasco-frutos", url: "/marcas/raiz-natural/fotografia/frasco-frutos.jpg", cena: "Frasco âmbar ao lado de frutos de pequi sobre linho", enquadramento: "Detalhe", notas: [5, 4, 5, 5, 5, 4], fundo: "#C9A27E", luz: "#5C3B28", borda: "bottom" },
+            { id: "janela", url: "/marcas/raiz-natural/fotografia/janela.jpg", cena: "Mulher na janela passando hidratante no rosto", enquadramento: "Meio corpo", notas: [4, 5, 4, 4, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "right" },
+            { id: "bancada", url: "/marcas/raiz-natural/fotografia/bancada.jpg", cena: "Bancada de produção com o caderno de lote aberto", enquadramento: "De cima", notas: [5, 4, 4, 5, 5, 5], fundo: "#C9A27E", luz: "#F2EBDD", borda: "top" },
+            { id: "colheita", url: "/marcas/raiz-natural/fotografia/colheita.jpg", cena: "Colheita de pequi na cooperativa, sombra de árvore", enquadramento: "Ambiente", notas: [4, 4, 4, 4, 5, 4], fundo: "#2F4A3A", luz: "#C9A27E", borda: "bottom" },
+            { id: "kit", url: "/marcas/raiz-natural/fotografia/kit.jpg", cena: "Kit de presente em papel kraft com cartão escrito à mão", enquadramento: "Detalhe", notas: [5, 5, 5, 5, 4, 5], fundo: "#F2EBDD", luz: "#5C3B28", borda: "left" },
           ],
         },
       ],
@@ -1387,12 +1393,12 @@ const SECOES_BASE: Secao[] = [
             "Traço de espessuras diferentes na mesma peça",
           ],
           imagens: [
-            { id: "pequi", cena: "Pequi inteiro e aberto, com o ramo", enquadramento: "Ingrediente · rótulo e site", notas: [5, 5, 4, 5, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "pequi" },
-            { id: "baru", cena: "Sementes de baru com folhas", enquadramento: "Ingrediente · post que explica", notas: [5, 4, 5, 4, 5, 5], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "baru" },
-            { id: "buriti", cena: "Buritizeiro com cachos de fruta", enquadramento: "Planta inteira · abertura de post", notas: [4, 4, 4, 5, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "buriti" },
-            { id: "paisagem", cena: "Paisagem do cerrado ao amanhecer", enquadramento: "Paisagem · capa de campanha", notas: [5, 4, 4, 4, 5, 5], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "paisagem" },
-            { id: "frasco", cena: "Frasco de hidratante entre folhas", enquadramento: "Produto · etiqueta e site", notas: [4, 5, 4, 4, 5, 3], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "frasco" },
-            { id: "padrao", cena: "Padrão de folhas e sementes", enquadramento: "Padrão · papel de presente", notas: [4, 3, 4, 4, 5, 3], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "padrao" },
+            { id: "pequi", url: "/marcas/raiz-natural/ilustracao/pequi.jpg", cena: "Pequi inteiro e aberto, com o ramo", enquadramento: "Ingrediente · rótulo e site", notas: [5, 5, 4, 5, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "pequi" },
+            { id: "baru", url: "/marcas/raiz-natural/ilustracao/baru.jpg", cena: "Sementes de baru com folhas", enquadramento: "Ingrediente · post que explica", notas: [5, 4, 5, 4, 5, 5], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "baru" },
+            { id: "buriti", url: "/marcas/raiz-natural/ilustracao/buriti.jpg", cena: "Buritizeiro com cachos de fruta", enquadramento: "Planta inteira · abertura de post", notas: [4, 4, 4, 5, 5, 4], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "buriti" },
+            { id: "paisagem", url: "/marcas/raiz-natural/ilustracao/paisagem.jpg", cena: "Paisagem do cerrado ao amanhecer", enquadramento: "Paisagem · capa de campanha", notas: [5, 4, 4, 4, 5, 5], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "paisagem" },
+            { id: "frasco", url: "/marcas/raiz-natural/ilustracao/frasco.jpg", cena: "Frasco de hidratante entre folhas", enquadramento: "Produto · etiqueta e site", notas: [4, 5, 4, 4, 5, 3], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "frasco" },
+            { id: "padrao", url: "/marcas/raiz-natural/ilustracao/padrao.jpg", cena: "Padrão de folhas e sementes", enquadramento: "Padrão · papel de presente", notas: [4, 3, 4, 4, 5, 3], fundo: "#F2EBDD", luz: "#2F4A3A", borda: "bottom", desenho: "padrao" },
           ],
         },
       ],

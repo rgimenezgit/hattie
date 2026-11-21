@@ -22,7 +22,9 @@ marca/[marca]/(app)/hattie               conversa de criação
 marca/[marca]/(app)/hattie/[conversa]    criacao, nova e conversas salvas
 marca/[marca]/(app)/cerebro              visão geral da marca
 marca/[marca]/(app)/cerebro/[secao]      uma seção
-marca/[marca]/(app)/{projetos,biblioteca,marketing,parceiros,automacoes,conectores}   estados vazios
+marca/[marca]/(app)/projetos                lista de projetos (layout com o estado dos projetos)
+marca/[marca]/(app)/projetos/[projeto]      projeto aberto: páginas, canvas, grade, thread e conversa
+marca/[marca]/(app)/{marketing,automacoes,conectores}   estados vazios
 ```
 
 ### Estado
@@ -55,7 +57,7 @@ Os getters de `src/lib/mock/index.ts` são o ponto onde os dados reais entram: t
 ## A decidir
 
 - **Cérebro de marca:** onde e como guardar as decisões, versões e o histórico de cada seção, e como o Hattie consulta isso em cada pedido.
-- **IA:** provedor de texto e de imagem, orquestração do briefing (perguntas, pesquisa, propostas por seção) e verificação de consistência das peças contra o cérebro.
+- **IA:** provedor de texto e de imagem (no protótipo, a geração de imagem em Projetos já usa a fal.ai quando há chave; ver `decisoes-tecnicas.md`), orquestração do briefing (perguntas, pesquisa, propostas por seção) e verificação de consistência das peças contra o cérebro.
 - **Espaço compartilhado** entre IA, empreendedor e designer parceiro (permissões, comentários).
 - **Autenticação, planos e créditos.**
 - **Arquivos:** upload dos materiais do briefing e entrega de vetores utilizáveis.

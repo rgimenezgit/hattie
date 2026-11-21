@@ -19,6 +19,9 @@ export type ItemMenu = {
   separarAntes?: boolean
   abrePainel?: boolean
   emBreve?: boolean
+  /** Item visível, mas sem ação agora; `nota` diz por quê ("fica pelo menos um"). */
+  desativado?: boolean
+  nota?: string
 }
 
 type Props = { rotulo: string; itens: ItemMenu[]; className?: string }
@@ -53,16 +56,16 @@ export function MenuAcoes({ rotulo, itens, className }: Props) {
           <div key={item.rotulo}>
             {item.separarAntes && <DropdownMenuSeparator />}
             <DropdownMenuItem
-              disabled={item.emBreve}
+              disabled={item.emBreve || item.desativado}
               onSelect={() => {
                 if (item.abrePainel && item.onSelect) depoisDeFechar.current = item.onSelect
                 else item.onSelect?.()
               }}
-              className="h-9 gap-2.5 rounded-xl px-2.5 text-sm"
+              className={cn("h-9 gap-2.5 rounded-xl px-2.5 text-sm", item.desativado && "text-texto-3 data-[disabled]:opacity-100")}
             >
               <item.icone className="size-4" strokeWidth={2} aria-hidden />
               {item.rotulo}
-              {item.emBreve && <span className="ms-auto ps-4 text-xs text-texto-2">em breve</span>}
+              {(item.emBreve || item.nota) && <span className="ms-auto ps-4 text-xs text-texto-2">{item.emBreve ? "em breve" : item.nota}</span>}
             </DropdownMenuItem>
           </div>
         ))}
