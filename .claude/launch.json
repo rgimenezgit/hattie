@@ -4,8 +4,20 @@
     {
       "name": "hattie-app",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "cd plataforma/app && npm run dev"],
+      "runtimeArgs": [
+        "-c",
+        "cd plataforma/app && npm run dev"
+      ],
       "port": 3000
+    },
+    {
+      "name": "hattie-app-producao",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "cd plataforma/app && npm run build && npx next start -p 3100"
+      ],
+      "port": 3100
     }
   ]
 }

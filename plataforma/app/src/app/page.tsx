@@ -44,6 +44,16 @@ export default function MapaDasTelas() {
         <p className="text-texto-2">
           Telas navegáveis com dados fictícios da Bia e da Raiz Natural. Para o fluxo completo, comece em Criar conta.
         </p>
+        <Link
+          href="/jornada"
+          className="flex items-center justify-between gap-4 rounded-2xl bg-preto px-5 py-4 text-branco transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)"
+        >
+          <span className="flex flex-col gap-0.5">
+            <span className="font-heading text-titulo-3 font-medium text-lima lowercase">jornada da bia</span>
+            <span className="text-sm text-cinza">Para apresentar: do cadastro à marca no dia a dia, com as telas e os caminhos possíveis.</span>
+          </span>
+          <span aria-hidden className="shrink-0 text-lima">→</span>
+        </Link>
       </header>
       {FLUXOS.map((fluxo) => (
         <section key={fluxo.titulo} className="flex flex-col gap-3">

@@ -57,6 +57,18 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
 
 **Conta** (avatar no fim do rail): Configurações da conta, Ajuda, Convidar pessoa, Sair.
 
+## Jornada para apresentação
+
+`/jornada` (link no mapa das telas) tem duas vistas, em abas.
+
+**Telas**: a jornada da Bia num quadro, com a captura de cada tela do protótipo, o que dá para fazer em cada uma e os caminhos possíveis, inclusive os de ida e volta (responder ou pular perguntas, pedir ajuste ao Hattie, ver a visão geral do cérebro, editar um ponto com o Hattie, pedir ajuste na proposta, procurar outro parceiro, pedir revisão, conversar com o Hattie e voltar ao início, pedir ajuste ou gerar de novo no projeto).
+
+**Fluxograma**: a mesma jornada em três partes (chegar e criar a marca; aprovar ponto por ponto e chamar um parceiro; o dia a dia), com raias de quem faz cada passo (Bia, Hattie, parceiro), losangos de decisão ("Tem conta?", "Gostou do todo?", "A proposta serve?", "A entrega está boa?", "Ficou bom?") e as setas que voltam nos laços. Um círculo lima numerado liga uma parte à seguinte.
+
+Na vista de telas: Cinco etapas: chegar (criar conta ou entrar), começar (criar do zero ou importar uma marca), criar a marca (conversa, o Hattie criando, olha como ficou), aprovar (ponto por ponto, com a visão geral do cérebro) e usar no dia a dia (início, conversa com o Hattie, projetos, criar no projeto, biblioteca). Uma faixa rosa mostra o caminho com parceiro: contratar, perfil, proposta e orçamento, quadro, e a entrega indo para a biblioteca. Linha cheia é o caminho principal; tracejada, outro caminho. Clicar numa tela abre a imagem grande e o link para a tela de verdade. No celular, as etapas viram lista.
+
+As capturas ficam em `app/public/jornada/` e saem da versão de produção (`hattie-app-producao` no `.claude/launch.json`), em 1440 × 900, pelo Chrome sem janela. Quando as telas mudarem, vale capturar de novo.
+
 ## 5. Próximas rodadas
 
 Revisão da marca importada, área de parceiros e contratação, projetos, biblioteca, marketing com calendário e conectores, automações, brandbook público por link, plano e créditos, texto final da tela de criação.
