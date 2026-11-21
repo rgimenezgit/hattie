@@ -2,6 +2,14 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 21/11/2026 · Área de Marketing (branch `marketing`)
+- Marketing deixa de ser estado vazio e ganha quatro partes: Visão geral, Calendário, Concorrentes e Leads, numa coluna como a de parceiros.
+- A visão geral abre com a leitura da semana do Hattie e o que fazer agora; os números vêm com a variação em seta e sinal, e as metas vêm dos objetivos da estratégia.
+- O calendário é a peça central: o Hattie monta as ideias do período a partir de um pedido curto (período, objetivo, canais, ritmo e datas comemorativas) e a pessoa aprova, muda ou descarta. "Atualizar com o Hattie" sugere ajustes nos posts que ainda não saíram, cada um com o porquê, e a pessoa escolhe quais aplicar.
+- Concorrentes mostram a própria marca na comparação, para dar escala, e cada novidade de um concorrente vira ideia no calendário com um clique.
+- Leads ficam por etapa; o Hattie escreve a resposta na voz da marca e a pessoa edita antes de enviar.
+- Nesta versão os números são de exemplo, e a coluna diz isso. Marcas sem redes conectadas veem o convite para conectar.
+
 ## 20/11/2026 · Área de Projetos (branch `simplificacao-ux`)
 - Projetos deixa de ser estado vazio. A lista tem busca, situação, tipo, ordem e grade ou lista; os fixados vêm primeiro.
 - Um projeto se organiza em páginas, que podem ficar dentro de pastas. Os itens (imagem, vídeo, texto, peça e forma) moram numa página.

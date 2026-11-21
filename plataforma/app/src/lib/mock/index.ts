@@ -12,3 +12,4 @@ export function getMarca(slug: string) {
 export * from "./parceiros"
 export * from "./biblioteca"
 export * from "./projetos"
+export * from "./marketing"
