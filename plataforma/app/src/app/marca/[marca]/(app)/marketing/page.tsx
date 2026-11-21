@@ -1,5 +1,5 @@
-import { AreaEmBreve } from "@/components/app/AreaEmBreve"
+import { VisaoGeral } from "@/components/app/marketing/VisaoGeral"
 
 export default function Pagina() {
-  return <AreaEmBreve area="marketing" />
+  return <VisaoGeral />
 }

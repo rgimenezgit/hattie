@@ -50,7 +50,8 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
 | Hattie | `/marca/[marca]/hattie`, `/hattie/[conversa]`, `/hattie/nova` | Conversas à esquerda, conversa no centro |
 | Marca | `/marca/[marca]/cerebro` | Seção 3 |
 | Projetos | `/marca/[marca]/projetos`, `/projetos/[projeto]` | Lista com busca, situação, tipo, ordem e grade ou lista. O projeto aberto tem páginas e pastas na coluna, três vistas da página (Canvas, Grade, Thread) e a conversa com o Hattie, que cria os itens na página. Detalhes em `design/diretrizes-ui.md` |
-| Marketing, Automações, Conectores | `/marca/[marca]/…` | Estado vazio, próxima rodada |
+| Marketing | `/marca/[marca]/marketing`, `/calendario`, `/concorrentes`, `/leads` | Visão geral (leitura da semana, números, metas, próximos posts, o que mais rendeu), calendário de posts com pedido ao Hattie e "Atualizar com o Hattie", concorrentes lado a lado com o que mudou, e leads por etapa com resposta sugerida. Detalhes em `design/diretrizes-ui.md` |
+| Automações, Conectores | `/marca/[marca]/…` | Estado vazio, próxima rodada |
 | Minhas marcas | `/marcas` | Cards das marcas e "Nova marca" |
 
 **Seletor de marca** (pílula lima no topo): as marcas da pessoa, Nova marca, Minhas marcas, Convidar pessoa, Compartilhar link da marca.
@@ -71,4 +72,4 @@ As capturas ficam em `app/public/jornada/` e saem da versão de produção (`hat
 
 ## 5. Próximas rodadas
 
-Revisão da marca importada, área de parceiros e contratação, projetos, biblioteca, marketing com calendário e conectores, automações, brandbook público por link, plano e créditos, texto final da tela de criação.
+Revisão da marca importada, área de parceiros e contratação, projetos, biblioteca, conectores (Instagram, WhatsApp e loja online alimentando o marketing), automações, brandbook público por link, plano e créditos, texto final da tela de criação.
