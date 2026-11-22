@@ -47,6 +47,9 @@ type EstadoApp = {
   adicionarConcorrente: (concorrente: Concorrente) => void
   nomeEscolhido: string | null
   escolherNome: (id: string, nome: string) => void
+  /** Paleta, tipografia e logo saem da escolha feita depois da conversa; antes dela, valem as apostas do Hattie. */
+  paletaEscolhida: string | null
+  escolherPaleta: (id: string | null) => void
   logoEscolhido: string | null
   escolherLogo: (id: string | null) => void
   tipografiaEscolhida: string | null
@@ -115,6 +118,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [referenciasNovas, setReferenciasNovas] = useState<Referencia[]>([])
   const [concorrentesNovos, setConcorrentesNovos] = useState<Concorrente[]>([])
   const [nomeEscolhido, setNomeEscolhido] = useState<string | null>(null)
+  const [paletaEscolhida, escolherPaleta] = useState<string | null>(null)
   const [logoEscolhido, escolherLogo] = useState<string | null>(null)
   const [tipografiaEscolhida, escolherTipografia] = useState<string | null>(null)
   const [estilosFoto, salvarEstilosFoto] = useState<EstiloFoto[] | null>(null)
@@ -278,6 +282,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      paletaEscolhida,
+      escolherPaleta,
       logoEscolhido,
       escolherLogo,
       tipografiaEscolhida,
@@ -320,6 +326,7 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      paletaEscolhida,
       logoEscolhido,
       tipografiaEscolhida,
       estilosFoto,

@@ -1000,7 +1000,7 @@ const SECOES_BASE: Secao[] = [
     id: "logo",
     titulo: "Logo",
     grupo: "visual",
-    resumo: "Três ideias de logo a partir da origem e do cuidado. Escolha uma para eu gerar o sistema completo.",
+    resumo: "O logo que você escolheu, com as versões composta, símbolo e tipográfica em todas as cores da paleta.",
     porque:
       "Partimos do que a marca tem de único, a origem rastreável, e do jeito calmo de falar. A serifa suave traz o artesanal; os símbolos falam de óleo, de lote ou de folha do cerrado, cada um por um caminho.",
     conteudo: {
@@ -1067,8 +1067,8 @@ const SECOES_BASE: Secao[] = [
     id: "cores",
     titulo: "Cores",
     grupo: "visual",
-    resumo: "Verde-mata, argila, creme e cacau.",
-    porque: "O verde-mata passa confiança e natureza, e a argila aquece o conjunto e lembra a terra de onde vêm os ingredientes.",
+    resumo: "A paleta que você escolheu, com o papel de cada cor.",
+    porque: "Cada cor tem um papel: a principal assina a marca, a de apoio aquece, o fundo dá espaço ao produto e a escura cuida do texto pequeno do rótulo.",
     conteudo: { tipo: "cores", cores: PALETA },
     extra: { rotulo: "Copiar cores", icone: "copiar" },
   },
@@ -1076,7 +1076,7 @@ const SECOES_BASE: Secao[] = [
     id: "tipografia",
     titulo: "Tipografia",
     grupo: "visual",
-    resumo: "Três combinações de fontes para escolher. Cada uma tem uma display, uma de texto e uma de sistema.",
+    resumo: "A combinação que você escolheu: uma display para títulos, uma de texto e uma de sistema.",
     porque:
       "A marca precisa soar artesanal nos títulos e ser legível no rótulo pequeno. Por isso cada combinação junta uma display com personalidade, uma fonte de texto calma e uma de sistema para botões, números de lote e telas.",
     conteudo: {

@@ -261,9 +261,21 @@ Cabeçalho "aonde a marca quer chegar" com a quantidade, o porquê do Hattie e "
 
 No fim de cada seção, ao lado de Aprovar e Editar com o Hattie, uma pílula rosa (`#FF8AE5` a 30%, a cor dos parceiros) com três rostos de parceiros da especialidade daquela seção, "Contratar um parceiro" em 500, a especialidade embaixo e uma seta. Leva a Parceiros com o pedido escrito.
 
+### Escolhas (`/marca/[marca]/escolhas`)
+
+Entre "criando a marca" e "olha como ficou", a pessoa escolhe as três decisões visuais que mais mudam a cara da marca, em três passos: cores, tipografia e logo. No topo, o logotipo do Hattie e os passos em pílulas (o atual em preto `#101010` com texto lima `#E6F344`; os feitos com ✓ e clicáveis para voltar; no celular, só o atual mostra o nome). Título em Clash minúsculo ("escolha as cores", "escolha as letras", "escolha o logo") e uma linha do Hattie com o chapéu.
+
+As três opções ficam lado a lado (uma por linha no celular), como rádios de verdade: setas do teclado trocam a opção. Cada card tem a prévia aplicada, o nome, "minha aposta" quando for o caso, a ideia, os hex ou as fontes e "por que funciona". A aposta já chega marcada, então o caminho mais curto é só avançar. Marcado ganha fundo lima-suave `#F1F4C9` e o ✓ preto com lima no canto do nome, sem contorno. No celular, os motivos aparecem só na opção marcada.
+
+- **Cores**: o logo da aposta na cor principal sobre o fundo da paleta e, embaixo, faixas da principal, do apoio e da escura.
+- **Tipografia**: a frase da marca na display, um trecho na de texto e um botão na de sistema, nas cores escolhidas no passo anterior.
+- **Logo**: a composta sobre o fundo e o símbolo sozinho sobre a principal e sobre o apoio, nas cores escolhidas.
+
+Rodapé fixo: "Voltar" (no primeiro passo, a nota "Dá para ajustar tudo depois, no cérebro da marca") e "Continuar" em preto; no último passo, o plimm "montar minha marca", que leva ao "olha como ficou". Sem selo nesta tela. A escolha vale para a marca inteira: o cérebro, as peças e o "olha como ficou" usam a paleta, as fontes e o logo escolhidos (`paletaEscolhida`, `tipografiaEscolhida` e `logoEscolhido` no estado; as paletas ficam em `opcoesPaleta` da marca).
+
 ### Olha como ficou (`/marca/[marca]/pronta`)
 
-Depois que o Hattie cria a marca, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`).
+Depois das escolhas, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`). As imagens prontas foram feitas com a paleta e o logo da aposta; com outra escolha, ficam os blocos pontilhados até o Hattie gerar novas.
 
 ### Assim fica numa peça (`NaPeca`)
 
@@ -291,19 +303,19 @@ Bloco "as forças da marca": atributo é frase sobre o que a marca tem e faz de 
 
 ### Logo
 
-**Primeira visita (logo pendente).** "briefing do logo": o conceito em `destaque` e quatro colunas (palavras, referências, evitar, onde vai aparecer). Depois, "escolha uma ideia": três cards com a prévia (composta positiva), nome, "minha aposta" quando for o caso, conceito, por que funciona e "Gerar com esta ideia". Gerar mostra a tela "gerando o logo" com o ✱ girando e, ao terminar, o selo tcharam. O botão "Aprovar" genérico só aparece depois que o logo existe.
+O logo chega da tela de escolhas (ou é a aposta do Hattie, para marcas que não passaram por ela). A seção mostra só o logo escolhido; trocar é pedir ao Hattie.
 
 **Logo gerado.**
-1. **O logo**: a composta grande sobre o fundo claro da marca, com a ideia e o conceito; "Ver as ideias de novo" no cabeçalho.
+1. **O logo**: a composta grande sobre o fundo claro da marca, com a ideia e o conceito.
 2. **Versões**: abas Composta, Símbolo e Tipográfica. Em cada uma, um card por variação de cor tirada da paleta da cliente: positiva, negativa, uma sobre cada cor de apoio (com a cor de maior contraste) e as monocromáticas preta e branca. Cada card mostra a prévia, o nome, as cores com hex e três ações: **Baixar** (SVG ou PNG transparente, gerados de verdade), **Ajustar com o Hattie** e **Pedir a um parceiro**.
 3. **Regras de uso**: "Faça" em lista com check verde; "Evite" em miniaturas que mostram o erro (esticar, girar, cor fora da paleta, sombra, fundo sem contraste, símbolo fora do lugar), cada uma com um X vermelho.
-4. **Área de proteção e tamanho mínimo**: diagrama com a área de proteção (x = metade da altura do símbolo) e tabela de tamanhos mínimos na tela e impresso, com a prévia no tamanho mínimo.
+4. **Opções avançadas**: o briefing do logo (conceito, palavras, referências, evitar e onde vai aparecer) e a área de proteção e o tamanho mínimo, com o diagrama com a área de proteção (x = metade da altura do símbolo) e tabela de tamanhos mínimos na tela e impresso, com a prévia no tamanho mínimo.
 
 As prévias de marca da cliente usam a fonte dela (`font-serif`, Fraunces na Raiz Natural) e nunca as fontes do Hattie.
 
 ### Tipografia
 
-**Primeira visita.** "escolha uma combinação": três cards. No topo de cada um, o nome da combinação em Clash, "minha aposta" quando for o caso, a ideia e "Gerar sistema com esta". Depois, uma linha por papel: à esquerda o papel em tag (Display, Texto, Sistema), o nome da fonte e para que ela serve; à direita a amostra na própria fonte (a frase da marca, um parágrafo, um botão com número de lote). No pé, "Por que funciona" em três colunas. Abaixo, o espaço de teste com as fontes das três combinações. Gerar mostra "montando o sistema tipográfico" e, ao terminar, o selo tcharam.
+A combinação chega da tela de escolhas (ou é a aposta do Hattie). A seção mostra só a combinação escolhida; trocar é pedir ao Hattie.
 
 **Sistema gerado.**
 1. **As fontes**: um card por papel com "Fonte display/texto/sistema" e o uso no topo, link para o Google Fonts, "Aa" e o nome da fonte escritos nela mesma num bloco cinza, o alfabeto e os pesos usados.
@@ -514,7 +526,7 @@ Com "reduzir movimento", escala, onda, giro e faíscas saem e a cor continua mud
 |---|---|
 | Carregando rota | Fundo do canvas vazio dentro do `Suspense` |
 | O Hattie pensando | Personagem e selo "hmm…" no chat |
-| Criando a marca | Tela própria com as etapas marcando uma a uma |
+| Criando a marca | Tela própria com as etapas marcando uma a uma; depois, a tela de escolhas |
 | Vazio | `EmptyState` no canvas |
 | Proposta | Esperando seu ok, aprovada, reaberta para ajustes |
 | Passo do plano | Respondido (lima com check), conversando agora (círculo `preenchimento-ativo` com ponto pulsando), falta conversar (anel `borda-tag`), o Hattie decide (anel tracejado com o chapéu) |

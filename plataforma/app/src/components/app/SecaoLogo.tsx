@@ -2,17 +2,15 @@
 
 import Link from "next/link"
 import type { Route } from "next"
-import { useEffect, useRef, useState, type CSSProperties } from "react"
-import { Check, ChevronDown, Download, MessageCircle, RotateCcw, Sparkles, UserPlus, X } from "lucide-react"
+import { type CSSProperties } from "react"
+import { Check, ChevronDown, Download, MessageCircle, UserPlus, X } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
 import { Botao } from "@/components/hattie/Botao"
-import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { VerMais } from "@/components/hattie/VerMais"
-import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
 import type { ErroLogo, IdeiaLogo, Marca, Secao, SistemaLogo } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
@@ -29,61 +27,20 @@ const TIPOS: { id: TipoLogo; rotulo: string; altura: number; explica: string }[]
 ]
 
 /**
- * Logo em dois momentos.
- * Primeira visita: o briefing do logo e três ideias; escolher uma gera o sistema.
- * Gerado: o logo principal, as versões (composta, símbolo e tipográfica) em todas as cores da paleta,
- * cada uma com baixar, ajustar com o Hattie e pedir a um parceiro; regras de uso; área de proteção e tamanho mínimo.
+ * O logo que a pessoa escolheu depois da conversa (ou a aposta do Hattie): o logo principal, as versões
+ * (composta, símbolo e tipográfica) em todas as cores da paleta, cada uma com baixar, ajustar com o Hattie
+ * e pedir a um parceiro; regras de uso; briefing, área de proteção e tamanho mínimo.
  */
 export function SecaoLogo({ secao, marca, aoEditar }: Props) {
-  const { logoEscolhido, escolherLogo, secoes, nomeMarca } = useEstado()
-  const [gerando, setGerando] = useState<IdeiaLogo | null>(null)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current)
-  }, [])
+  const { logoEscolhido, nomeMarca } = useEstado()
   if (secao.conteudo.tipo !== "logo") return null
   const sistema = secao.conteudo
-  const aprovada = secoes[secao.id] === "aprovada"
   const nome = marca.slug === "raiz-natural" ? nomeMarca : marca.nome
-  const ideia = sistema.ideias.find((item) => item.id === logoEscolhido) ?? (aprovada ? (sistema.ideias.find((item) => item.aposta) ?? sistema.ideias[0]) : undefined)
-
-  function gerar(escolha: IdeiaLogo) {
-    setGerando(escolha)
-    timer.current = setTimeout(() => {
-      escolherLogo(escolha.id)
-      setGerando(null)
-      notificar({ titulo: "logo pronto", texto: `Gerei o logo a partir da ideia ${escolha.nome}, com todas as versões e cores.`, som: "tcharam" })
-    }, 2200)
-  }
-
-  if (gerando) return <Gerando ideia={gerando} marca={marca} nome={nome} />
-
-  if (!ideia)
-    return (
-      <div className="flex flex-col gap-10">
-        <Briefing sistema={sistema} secao={secao} aoEditar={aoEditar} />
-        <section aria-labelledby="titulo-ideias" className="flex flex-col gap-3">
-          <CabecalhoBloco id="titulo-ideias" titulo="escolha uma ideia" quantidade={sistema.ideias.length}>
-            <Botao variante="secundario" tamanho="sm" onClick={aoEditar}>
-              <MessageCircle /> Pedir outras<span className="max-sm:sr-only"> ideias</span>
-            </Botao>
-          </CabecalhoBloco>
-          <p className="max-w-[70ch] text-sm text-texto-2">Escolha a ideia que mais combina com a sua marca. Eu gero o logo completo a partir dela: versões, cores e regras.</p>
-          <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
-            {sistema.ideias.map((item) => (
-              <li key={item.id} className="flex min-w-0">
-                <CartaoIdeia ideia={item} marca={marca} nome={nome} aoGerar={() => gerar(item)} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    )
-
-  return <Sistema sistema={sistema} ideia={ideia} marca={marca} nome={nome} secao={secao} aoEditar={aoEditar} aoVoltar={() => escolherLogo(null)} />
+  const ideia = sistema.ideias.find((item) => item.id === logoEscolhido) ?? sistema.ideias.find((item) => item.aposta) ?? sistema.ideias[0]
+  return <Sistema sistema={sistema} ideia={ideia} marca={marca} nome={nome} secao={secao} aoEditar={aoEditar} />
 }
 
-function Briefing({ sistema, secao, aoEditar }: { sistema: SistemaLogo; secao: Secao; aoEditar: () => void }) {
+function Briefing({ sistema }: { sistema: SistemaLogo }) {
   const { briefing } = sistema
   const colunas: { titulo: string; itens: string[] }[] = [
     { titulo: "Palavras", itens: briefing.palavras },
@@ -93,11 +50,7 @@ function Briefing({ sistema, secao, aoEditar }: { sistema: SistemaLogo; secao: S
   ]
   return (
     <section aria-labelledby="titulo-briefing-logo" className="flex flex-col gap-3">
-      <CabecalhoBloco id="titulo-briefing-logo" titulo="briefing do logo">
-        <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
-          <p>{secao.porque}</p>
-        </PorqueHattie>
-      </CabecalhoBloco>
+      <CabecalhoBloco id="titulo-briefing-logo" titulo="briefing do logo" />
       <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">
         <p className="max-w-[62ch] text-destaque font-light">{briefing.conceito}</p>
         <dl className="grid grid-cols-1 gap-y-5 border-t border-borda-sutil pt-4 sm:grid-cols-2 @4xl:grid-cols-4">
@@ -121,61 +74,6 @@ function Briefing({ sistema, secao, aoEditar }: { sistema: SistemaLogo; secao: S
   )
 }
 
-function CartaoIdeia({ ideia, marca, nome, aoGerar }: { ideia: IdeiaLogo; marca: Marca; nome: string; aoGerar: () => void }) {
-  const positiva = variacoesDeCor(marca.paleta)[0]
-  return (
-    <article aria-labelledby={`ideia-${ideia.id}`} className="flex w-full min-w-0 flex-col gap-4 rounded-3xl bg-superficie p-4">
-      <div className="grid aspect-[4/3] place-items-center rounded-2xl px-4" style={{ backgroundColor: positiva.fundo }}>
-        <Logo tipo="composta" simbolo={ideia.simbolo} nome={nome} tinta={positiva.tinta} altura={36} className="max-w-full" />
-      </div>
-      <div className="flex flex-1 flex-col gap-3 px-1">
-        <header className="flex flex-col gap-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 id={`ideia-${ideia.id}`} className="text-base font-semibold">
-              {ideia.nome}
-            </h3>
-            {ideia.aposta && (
-              <Tag tom="acao" ponto tamanho="sm">
-                minha aposta
-              </Tag>
-            )}
-          </div>
-          <p className="text-sm text-texto-2">{ideia.conceito}</p>
-        </header>
-        <ul className="flex flex-1 flex-col gap-1 border-t border-borda-sutil pt-3 text-sm">
-          {ideia.porque.map((motivo) => (
-            <li key={motivo} className="flex gap-2">
-              <Check className="mt-0.5 size-3.5 shrink-0 text-sucesso" strokeWidth={2.5} aria-hidden />
-              {motivo}
-            </li>
-          ))}
-        </ul>
-        <Botao variante={ideia.aposta ? "primario" : "secundario"} tamanho="sm" className="self-start" onClick={aoGerar}>
-          <Sparkles /> Gerar com esta ideia
-        </Botao>
-      </div>
-    </article>
-  )
-}
-
-function Gerando({ ideia, marca, nome }: { ideia: IdeiaLogo; marca: Marca; nome: string }) {
-  const positiva = variacoesDeCor(marca.paleta)[0]
-  return (
-    <section aria-live="polite" className="flex flex-col items-center gap-6 rounded-3xl bg-superficie px-6 py-14 text-center">
-      <div className="grid place-items-center rounded-2xl px-8 py-6 motion-safe:animate-pulse" style={{ backgroundColor: positiva.fundo }}>
-        <Logo tipo="composta" simbolo={ideia.simbolo} nome={nome} tinta={positiva.tinta} altura={40} />
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <IconeHattie nome="asterisco" tamanho={20} className="animate-spin text-texto [animation-duration:1.4s] motion-reduce:animate-none" />
-        <p className="font-heading text-titulo-3 font-medium lowercase">gerando o logo</p>
-        <p className="max-w-[44ch] text-sm text-texto-2">
-          Estou desenhando as versões composta, símbolo e tipográfica a partir da ideia {ideia.nome}, em todas as cores da paleta.
-        </p>
-      </div>
-    </section>
-  )
-}
-
 function Sistema({
   sistema,
   ideia,
@@ -183,7 +81,6 @@ function Sistema({
   nome,
   secao,
   aoEditar,
-  aoVoltar,
 }: {
   sistema: SistemaLogo
   ideia: IdeiaLogo
@@ -191,7 +88,6 @@ function Sistema({
   nome: string
   secao: Secao
   aoEditar: () => void
-  aoVoltar: () => void
 }) {
   const variacoes = variacoesDeCor(marca.paleta)
   const positiva = variacoes[0]
@@ -202,9 +98,6 @@ function Sistema({
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
-          <Botao variante="secundario" tamanho="sm" onClick={aoVoltar}>
-            <RotateCcw /> Ver as ideias<span className="max-sm:sr-only"> de novo</span>
-          </Botao>
           <MenuPonto ponto="o logo" />
         </CabecalhoBloco>
         <div className="flex flex-col overflow-hidden rounded-3xl bg-superficie">
@@ -241,7 +134,8 @@ function Sistema({
       </section>
 
       <Regras regras={sistema.regras} ideia={ideia} marca={marca} nome={nome} />
-      <VerMais resumo="Área de proteção e tamanho mínimo do logo">
+      <VerMais resumo="Briefing do logo, área de proteção e tamanho mínimo">
+        <Briefing sistema={sistema} />
         <Espacamento espacamento={sistema.espacamento} ideia={ideia} marca={marca} nome={nome} />
       </VerMais>
     </div>

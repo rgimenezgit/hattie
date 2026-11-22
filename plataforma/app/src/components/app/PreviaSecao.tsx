@@ -1,11 +1,13 @@
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Tag } from "@/components/hattie/Tag"
 import { Ilustracao } from "./Ilustracao"
+import { useEstado } from "./Estado"
 import { Logo } from "./Logo"
 import { cn } from "@/lib/utils"
 import type { Marca, Secao } from "@/lib/mock"
 
 export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card" | "completo"; marca: Marca }) {
+  const { tipografiaEscolhida, logoEscolhido } = useEstado()
   const { conteudo } = secao
   const card = modo === "card"
   const VERDE = marca.paleta[0].hex
@@ -43,7 +45,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
     case "cores":
       return (
         <ul className={cn("grid gap-2", card ? "grid-cols-4" : "grid-cols-2 sm:grid-cols-4")}>
-          {conteudo.cores.map((cor) => (
+          {marca.paleta.map((cor) => (
             <li key={cor.hex} className="flex flex-col gap-2">
               <span
                 className={cn("rounded-xl outline outline-1 -outline-offset-1 outline-black/10", card ? "h-14" : "aspect-[4/3]")}
@@ -67,21 +69,21 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
       )
 
     case "tipografia": {
-      const combinacao = conteudo.combinacoes.find((item) => item.aposta) ?? conteudo.combinacoes[0]
+      const combinacao = conteudo.combinacoes.find((item) => item.id === tipografiaEscolhida) ?? conteudo.combinacoes.find((item) => item.aposta) ?? conteudo.combinacoes[0]
       return (
         <div className="flex flex-col gap-2">
           <p className="font-serif text-[38px] leading-none tracking-tight" aria-hidden>
             Aa <span className="font-sans font-medium">Aa</span>
           </p>
           <p className="text-xs text-texto-3">
-            {conteudo.combinacoes.length} combinações · minha aposta: {combinacao.display.familia} e {combinacao.texto.familia}
+            {combinacao.display.familia} e {combinacao.texto.familia}
           </p>
         </div>
       )
     }
 
     case "logo": {
-      const ideia = conteudo.ideias.find((item) => item.aposta) ?? conteudo.ideias[0]
+      const ideia = conteudo.ideias.find((item) => item.id === logoEscolhido) ?? conteudo.ideias.find((item) => item.aposta) ?? conteudo.ideias[0]
       return (
         <div className="grid h-24 place-items-center rounded-2xl" style={{ backgroundColor: CREME }}>
           <Logo tipo="composta" simbolo={ideia.simbolo} nome={marca.nome} tinta={VERDE} altura={card ? 30 : 48} />

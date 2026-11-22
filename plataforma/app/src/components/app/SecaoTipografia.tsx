@@ -1,23 +1,19 @@
 "use client"
 
-import { useEffect, useId, useMemo, useRef, useState, type CSSProperties } from "react"
-import { Check, Copy, ExternalLink, RotateCcw, Sparkles } from "lucide-react"
+import { useEffect, useId, useMemo, useState, type CSSProperties } from "react"
+import { Copy, ExternalLink, RotateCcw } from "lucide-react"
 import { Abas, ConteudoAba, ListaAbas } from "@/components/hattie/Abas"
 import { Botao } from "@/components/hattie/Botao"
-import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { PorqueHattie } from "@/components/hattie/PorqueHattie"
 import { VerMais } from "@/components/hattie/VerMais"
-import { Tag } from "@/components/hattie/Tag"
 import { FONTES_CURADAS, pilhaDaFonte, urlEspecime, type FonteCatalogo } from "@/lib/fontes"
 import { carregarFonteGoogle, useFontesGoogle } from "@/lib/usarFonteGoogle"
 import { cn } from "@/lib/utils"
-import { peca, type CombinacaoTipografica, type EstiloTipografico, type FonteMarca, type GuiaTipografia, type Marca, type PapelFonte, type Secao } from "@/lib/mock"
+import { type CombinacaoTipografica, type EstiloTipografico, type FonteMarca, type GuiaTipografia, type Marca, type PapelFonte, type Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
 import { MenuPonto } from "./AcoesPonto"
 import { useEstado } from "./Estado"
-import { NaPeca, type PecaExemplo } from "./NaPeca"
-import { comCombinacao, useSistemaMarca } from "./SistemaMarca"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -31,164 +27,17 @@ const fonteDoPapel = (combinacao: CombinacaoTipografica, papel: PapelFonte) => c
 const familiaCss = (fonte: FonteMarca) => pilhaDaFonte(fonte.familia, fonte.categoria === "display" ? "sans-serif" : fonte.categoria)
 
 /**
- * Tipografia em dois momentos.
- * Primeira visita: combinações (display, texto e sistema) com a frase e um parágrafo da marca; escolher uma gera o sistema.
- * Gerado: as três fontes, a escala completa (headline a interface, tela e celular, com CSS para copiar),
- * espaçamento e guias, aplicações e um espaço de teste no estilo de um site de fontes, ligado ao Google Fonts.
+ * A combinação que a pessoa escolheu depois da conversa (ou a aposta do Hattie): as três fontes, aplicações,
+ * a escala completa (headline a interface, tela e celular, com CSS para copiar), espaçamento e guias
+ * e um espaço de teste no estilo de um site de fontes, ligado ao Google Fonts.
  */
 export function SecaoTipografia({ secao, marca, aoEditar }: Props) {
-  const { tipografiaEscolhida, escolherTipografia, secoes } = useEstado()
-  const [gerando, setGerando] = useState<CombinacaoTipografica | null>(null)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current)
-  }, [])
+  const { tipografiaEscolhida } = useEstado()
   const guia = secao.conteudo.tipo === "tipografia" ? secao.conteudo : null
-  const todasAsFontes = useMemo(
-    () => (guia ? guia.combinacoes.flatMap((combinacao) => PAPEIS.map((papel) => ({ familia: combinacao[papel.id].familia, pesos: combinacao[papel.id].pesos }))) : []),
-    [guia],
-  )
-  useFontesGoogle(todasAsFontes)
-  if (!guia) return null
-  const aprovada = secoes[secao.id] === "aprovada"
-  const escolhida =
-    guia.combinacoes.find((item) => item.id === tipografiaEscolhida) ?? (aprovada ? (guia.combinacoes.find((item) => item.aposta) ?? guia.combinacoes[0]) : undefined)
-
-  function gerar(combinacao: CombinacaoTipografica) {
-    setGerando(combinacao)
-    timer.current = setTimeout(() => {
-      escolherTipografia(combinacao.id)
-      setGerando(null)
-      notificar({ titulo: "sistema tipográfico pronto", texto: `Montei headline, títulos, texto e CTA com ${combinacao.display.familia}, ${combinacao.texto.familia} e ${combinacao.sistema.familia}.`, som: "tcharam" })
-    }, 2000)
-  }
-
-  if (gerando)
-    return (
-      <section aria-live="polite" className="flex flex-col items-center gap-5 rounded-3xl bg-superficie px-6 py-14 text-center">
-        <p className="text-titulo-1 motion-safe:animate-pulse" style={{ fontFamily: familiaCss(gerando.display), fontWeight: gerando.display.pesos[1] ?? 500 }}>
-          {guia.frase}
-        </p>
-        <IconeHattie nome="asterisco" tamanho={20} className="animate-spin text-texto [animation-duration:1.4s] motion-reduce:animate-none" />
-        <div className="flex flex-col items-center gap-1">
-          <p className="font-heading text-titulo-3 font-medium lowercase">montando o sistema tipográfico</p>
-          <p className="max-w-[44ch] text-sm text-texto-2">Calculando tamanhos, entrelinhas e espaços para tela, celular e impresso a partir da combinação {gerando.nome}.</p>
-        </div>
-      </section>
-    )
-
-  if (!escolhida)
-    return (
-      <div className="flex flex-col gap-10">
-        <section aria-labelledby="titulo-combinacoes" className="flex flex-col gap-3">
-          <CabecalhoBloco id="titulo-combinacoes" titulo="escolha uma combinação" quantidade={guia.combinacoes.length}>
-            <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
-              <p>{secao.porque}</p>
-            </PorqueHattie>
-          </CabecalhoBloco>
-          <p className="max-w-[70ch] text-sm text-texto-2">
-            Cada combinação tem uma fonte display para títulos, uma de texto para ler e uma de sistema para botões, números e telas. Escolha a que mais parece com a marca; eu monto o sistema completo a partir dela.
-          </p>
-          <ul className="flex flex-col gap-3">
-            {guia.combinacoes.map((combinacao) => (
-              <li key={combinacao.id}>
-                <CartaoCombinacao combinacao={combinacao} guia={guia} aoGerar={() => gerar(combinacao)} />
-              </li>
-            ))}
-          </ul>
-        </section>
-        <VerMais resumo="Espaço para testar as combinações com o seu próprio texto">
-          <EspacoDeTeste guia={guia} combinacoes={guia.combinacoes} />
-        </VerMais>
-      </div>
-    )
-
-  return <Sistema guia={guia} combinacao={escolhida} marca={marca} secao={secao} aoEditar={aoEditar} aoVoltar={() => escolherTipografia(null)} />
-}
-
-/**
- * Card de combinação: cabeçalho com nome, aposta, ideia e a ação; depois uma linha por papel
- * (Display, Texto, Sistema), cada uma com o rótulo do papel, a fonte e o uso à esquerda e a amostra na própria fonte à direita;
- * no pé, por que a combinação funciona.
- */
-const PECAS_TIPO: PecaExemplo[] = [
-  { exemplo: peca("tipo-post", "Post só com texto", "tipografico"), proporcao: [4, 5], legenda: "Post" },
-  { exemplo: peca("tipo-story", "Story com foto", "foto-cheia"), proporcao: [9, 16], legenda: "Story" },
-  { exemplo: peca("tipo-banner", "Banner do site", "dividido"), proporcao: [16, 9], legenda: "Banner do site" },
-]
-
-function CartaoCombinacao({ combinacao, guia, aoGerar }: { combinacao: CombinacaoTipografica; guia: GuiaTipografia; aoGerar: () => void }) {
-  const sistema = useSistemaMarca()
-  return (
-    <article aria-labelledby={`combinacao-${combinacao.id}`} className="flex flex-col rounded-3xl bg-superficie p-5 md:p-6">
-      <header className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex min-w-0 flex-col gap-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 id={`combinacao-${combinacao.id}`} className="font-heading text-titulo-3 font-medium lowercase">
-              {combinacao.nome}
-            </h3>
-            {combinacao.aposta && (
-              <Tag tom="acao" ponto tamanho="sm">
-                minha aposta
-              </Tag>
-            )}
-          </div>
-          <p className="text-sm text-texto-2">{combinacao.ideia}</p>
-        </div>
-        <div className="flex shrink-0 items-center gap-1 self-start">
-          <Botao variante={combinacao.aposta ? "primario" : "secundario"} tamanho="sm" onClick={aoGerar}>
-            <Sparkles /> Gerar sistema com esta
-          </Botao>
-          <MenuPonto ponto={`a combinação ${combinacao.nome}`} />
-        </div>
-      </header>
-
-      <NaPeca pecas={PECAS_TIPO} sistema={comCombinacao(sistema, combinacao)} className="pb-5" />
-
-      <dl className="flex flex-col">
-        {PAPEIS.map((papel) => {
-          const fonte = combinacao[papel.id]
-          return (
-            <div key={papel.id} className="grid grid-cols-1 gap-3 border-t border-borda-sutil py-4 @3xl:grid-cols-[200px_minmax(0,1fr)] @3xl:items-center @3xl:gap-6">
-              <dt className="flex flex-col gap-1">
-                <span className="flex items-center gap-2">
-                  <Tag tamanho="sm">{papel.rotulo}</Tag>
-                  <span className="text-sm font-semibold">{fonte.familia}</span>
-                </span>
-                <span className="text-xs text-texto-3">{papel.funcao}</span>
-              </dt>
-              <dd className="min-w-0" style={{ fontFamily: familiaCss(fonte) }}>
-                {papel.id === "display" && (
-                  <p className="text-titulo-1 leading-tight" style={{ fontWeight: fonte.pesos[1] ?? fonte.pesos[0] }}>
-                    {guia.frase}
-                  </p>
-                )}
-                {papel.id === "texto" && <p className="max-w-[60ch] text-base leading-relaxed text-texto-2">{guia.paragrafo}</p>}
-                {papel.id === "sistema" && (
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full bg-preto px-4 py-2 text-sm font-semibold text-branco">Ver de onde vem</span>
-                    <span className="text-sm text-texto-2 tabular-nums">Lote 012 · Validade 09/2027</span>
-                  </div>
-                )}
-              </dd>
-            </div>
-          )
-        })}
-      </dl>
-
-      <footer className="flex flex-col gap-2 border-t border-borda-sutil pt-4">
-        <h4 className="text-xs font-semibold text-texto-2">Por que funciona</h4>
-        <ul className="grid grid-cols-1 gap-x-6 gap-y-1.5 text-sm @3xl:grid-cols-3">
-          {combinacao.porque.map((motivo) => (
-            <li key={motivo} className="flex gap-2">
-              <Check className="mt-0.5 size-3.5 shrink-0 text-sucesso" strokeWidth={2.5} aria-hidden />
-              {motivo}
-            </li>
-          ))}
-        </ul>
-      </footer>
-    </article>
-  )
+  const escolhida = guia ? (guia.combinacoes.find((item) => item.id === tipografiaEscolhida) ?? guia.combinacoes.find((item) => item.aposta) ?? guia.combinacoes[0]) : null
+  useFontesGoogle(escolhida ? PAPEIS.map((papel) => ({ familia: escolhida[papel.id].familia, pesos: escolhida[papel.id].pesos })) : [])
+  if (!guia || !escolhida) return null
+  return <Sistema guia={guia} combinacao={escolhida} marca={marca} secao={secao} aoEditar={aoEditar} />
 }
 
 function Sistema({
@@ -197,14 +46,12 @@ function Sistema({
   marca,
   secao,
   aoEditar,
-  aoVoltar,
 }: {
   guia: GuiaTipografia
   combinacao: CombinacaoTipografica
   marca: Marca
   secao: Secao
   aoEditar: () => void
-  aoVoltar: () => void
 }) {
   return (
     <div className="flex flex-col gap-10">
@@ -213,9 +60,6 @@ function Sistema({
           <PorqueHattie assunto={secao.titulo} aoPerguntar={aoEditar}>
             <p>{secao.porque}</p>
           </PorqueHattie>
-          <Botao variante="secundario" tamanho="sm" onClick={aoVoltar}>
-            <RotateCcw /> Ver as combinações<span className="max-sm:sr-only"> de novo</span>
-          </Botao>
           <MenuPonto ponto="as fontes" />
         </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">

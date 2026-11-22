@@ -389,7 +389,7 @@ function VisaoGeral({ aoEditar }: { aoEditar: (id: string) => void }) {
 
 function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string) => void }) {
   const marca = useMarca()
-  const { aprovar, reabrir, secoes, logoEscolhido, tipografiaEscolhida } = useEstado()
+  const { aprovar, reabrir, secoes } = useEstado()
   const aprovada = secoes[secao.id] === "aprovada"
   const indice = SECOES.findIndex((item) => item.id === secao.id)
   const proxima = SECOES[indice + 1]
@@ -452,8 +452,7 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        {secao.conteudo.tipo === "nome" || (secao.conteudo.tipo === "logo" && !aprovada && !logoEscolhido) ||
-          (secao.conteudo.tipo === "tipografia" && !aprovada && !tipografiaEscolhida) ? null : aprovada ? (
+        {secao.conteudo.tipo === "nome" ? null : aprovada ? (
           <Botao variante="secundario" onClick={() => reabrir(secao.id)}>
             <RotateCcw /> Reabrir para ajustes
           </Botao>
