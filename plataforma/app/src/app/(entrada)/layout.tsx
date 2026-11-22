@@ -25,7 +25,7 @@ export default function LayoutDeEntrada({ children }: LayoutProps<"/">) {
         <CampoMagico cores={{ ponto: "--violeta", mais: "--violeta", brilho: "--lima", asterisco: "--lima" }} ambiente="fluxo" presenca="base" espaco={36} />
         <div className="pointer-events-none relative z-10 flex max-w-md flex-col gap-6">
           <SeloSom som="plimm" fixo className="self-start" />
-          <p className="font-heading text-titulo-1 font-medium text-preto lowercase xl:text-display [@media(max-height:760px)]:text-titulo-1">
+          <p className="font-heading text-titulo-1 font-medium text-lima lowercase xl:text-display [@media(max-height:760px)]:text-titulo-1">
             já tirei muitas marcas do chapéu. bora tirar a sua?
           </p>
         </div>

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import type { Route } from "next"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
+import { usePathname } from "next/navigation"
 import {
   ArrowLeft,
   ArrowRight,
@@ -112,8 +113,14 @@ function Sumario({ secaoAtual, aoNavegar }: { secaoAtual?: string; aoNavegar?: (
   const prefixo = useId()
   const resultados = termo ? SECOES.filter((secao) => secao.titulo.toLowerCase().includes(termo)).length : SECOES.length
 
+  // Mantém a seção atual à vista rolando só a lista (scrollIntoView também rolaria a página e faria a coluna pular).
   useEffect(() => {
-    lista.current?.querySelector('[aria-current="page"]')?.scrollIntoView({ block: "nearest" })
+    const nav = lista.current
+    const atual = nav?.querySelector<HTMLElement>('[aria-current="page"]')
+    if (!nav || !atual) return
+    const topo = atual.offsetTop - nav.offsetTop
+    if (topo < nav.scrollTop) nav.scrollTop = topo - 8
+    else if (topo + atual.offsetHeight > nav.scrollTop + nav.clientHeight) nav.scrollTop = topo + atual.offsetHeight - nav.clientHeight + 8
   }, [secaoAtual])
 
   return (
@@ -490,6 +497,20 @@ function DetalheSecao({ secao, aoEditar }: { secao: Secao; aoEditar: (id: string
   )
 }
 
+/**
+ * Coluna do sumário, no layout do cérebro: fica montada ao trocar de seção,
+ * então a lista não volta ao topo nem pula a cada clique.
+ */
+export function ColunaCerebro() {
+  const caminho = usePathname()
+  const secaoAtual = caminho.split("/cerebro/")[1]?.split("/")[0] || undefined
+  return (
+    <ColunaLateral rotulo="Sumário da marca" className="hidden lg:flex">
+      <Sumario secaoAtual={secaoAtual} />
+    </ColunaLateral>
+  )
+}
+
 export function CerebroMarca({ secaoId }: { secaoId?: string }) {
   const marca = useMarca()
   const { nomeMarca, secoes } = useEstado()
@@ -539,10 +560,6 @@ export function CerebroMarca({ secaoId }: { secaoId?: string }) {
 
   return (
     <>
-      <ColunaLateral rotulo="Sumário da marca" className="hidden lg:flex">
-        <Sumario secaoAtual={secaoId} />
-      </ColunaLateral>
-
       <Canvas rotulo={secao ? secao.titulo : "Visão geral da marca"}>
         <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto px-4 py-4 md:px-6 md:py-5">
           <div className="flex flex-col gap-5">
