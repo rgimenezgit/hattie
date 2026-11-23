@@ -22,8 +22,8 @@ export function CriandoMarca() {
   const primeiraEtapa = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
-    // Antes da validação ponto a ponto, a pessoa vê a marca inteira ("olha como ficou").
-    const destino = `/marca/${marca.slug}/pronta` as Route
+    // Depois de criar, a pessoa escolhe cores, tipografia e logo; só então vê a marca inteira ("olha como ficou").
+    const destino = `/marca/${marca.slug}/escolhas` as Route
     router.prefetch(destino)
     const intervalo = setInterval(() => setEtapa((atual) => Math.min(atual + 1, ETAPAS_CRIACAO.length)), DURACAO_ETAPA)
     const fim = setTimeout(() => router.replace(destino), DURACAO_ETAPA * (ETAPAS_CRIACAO.length + 1))
@@ -48,7 +48,7 @@ export function CriandoMarca() {
         </div>
 
         <p role="status" className="sr-only">
-          {etapa < ETAPAS_CRIACAO.length ? ETAPAS_CRIACAO[etapa] : "Marca pronta. Abrindo a primeira versão."}
+          {etapa < ETAPAS_CRIACAO.length ? ETAPAS_CRIACAO[etapa] : "Opções prontas. Abrindo as escolhas."}
         </p>
         <ol className="flex w-full flex-col gap-1 rounded-[28px] bg-branco p-3 text-left" aria-label="Etapas da criação">
           {ETAPAS_CRIACAO.map((texto, indice) => {

@@ -10,6 +10,7 @@ import { SeloSom } from "@/components/hattie/SeloSom"
 import { cn } from "@/lib/utils"
 import { PESSOA, SECOES, getSecao, peca } from "@/lib/mock"
 import { Logo } from "./Logo"
+import { useEstado } from "./Estado"
 import { useMarca } from "./MarcaContexto"
 import { Peca } from "./PecasMarca"
 import { useSistemaMarca } from "./SistemaMarca"
@@ -49,6 +50,12 @@ export function MarcaPronta() {
   const personalidade = getSecao("personalidade")?.conteudo
   const tracos = personalidade?.tipo === "personalidade" ? personalidade.tracos : []
   const primeira = SECOES[0]
+  // Os mockups prontos foram gerados com a paleta e o logo da aposta; com outra escolha, ficam os espaços reservados.
+  const { paletaEscolhida, logoEscolhido } = useEstado()
+  const logo = getSecao("logo")?.conteudo
+  const logoAposta = logo?.tipo === "logo" ? logo.ideias.find((ideia) => ideia.aposta)?.id : undefined
+  const paletaAposta = marca.opcoesPaleta?.find((opcao) => opcao.aposta)?.id
+  const mockupsValem = marca.slug === "raiz-natural" && (!paletaEscolhida || paletaEscolhida === paletaAposta) && (!logoEscolhido || logoEscolhido === logoAposta)
 
   return (
     <div className="min-h-svh bg-background px-4 py-6 md:px-10">
@@ -59,7 +66,7 @@ export function MarcaPronta() {
           <SeloSom som="tcharam" />
           <h1 className="font-heading text-titulo-1 font-medium lowercase md:text-[3rem] md:leading-none">olha como ficou, {PESSOA.nome.toLowerCase()}</h1>
           <p className="max-w-[52ch] text-texto-2">
-            Essa é a primeira versão da {sistema.nome}. Dá uma olhada no todo; depois a gente passa ponto por ponto para você aprovar ou ajustar.
+            Essa é a primeira versão da {sistema.nome}, com as cores, as letras e o logo que você escolheu. Dá uma olhada no todo; depois a gente passa ponto por ponto para você aprovar ou ajustar.
           </p>
         </header>
 
@@ -80,7 +87,7 @@ export function MarcaPronta() {
               className={cn("relative overflow-hidden rounded-3xl", indice === 0 ? "col-span-3 aspect-[4/3] sm:aspect-video" : "aspect-square rounded-2xl sm:aspect-[4/3] sm:rounded-3xl")}
               style={{ backgroundColor: cores.fundo }}
             >
-              {mockup.src && marca.slug === "raiz-natural" ? (
+              {mockup.src && mockupsValem ? (
                 <Image src={mockup.src} alt={mockup.legenda} fill sizes={indice === 0 ? "(min-width: 1024px) 1024px, 100vw" : "(min-width: 1024px) 340px, 33vw"} className="object-cover" />
               ) : (
                 <>

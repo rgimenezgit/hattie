@@ -12,9 +12,14 @@ export type Marca = {
   nome: string
   segmento: string
   cidade: string
+  /** Paleta em uso. Quando há opções, é a da aposta do Hattie até a pessoa escolher outra. */
   paleta: Cor[]
+  /** As paletas que o Hattie propõe na primeira escolha, depois da conversa. */
+  opcoesPaleta?: OpcaoPaleta[]
   fontes: { display: string; texto: string }
 }
+
+export type OpcaoPaleta = { id: string; nome: string; ideia: string; cores: Cor[]; porque: string[]; aposta?: boolean }
 
 export type StatusSecao = "pendente" | "aprovada"
 

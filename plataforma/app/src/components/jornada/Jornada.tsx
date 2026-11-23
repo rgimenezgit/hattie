@@ -48,19 +48,20 @@ const NOS: No[] = [
   { id: "importar", titulo: "Importar uma marca", texto: "Quem já tem marca manda logo, manual, site e redes. O Hattie lê tudo e organiza no cérebro.", coluna: 1, linha: "alternativa", acoes: ["Soltar arquivos na área grande", "O Hattie aponta o que falta"] },
   { id: "criacao", titulo: "Conversa de criação", texto: "O Hattie pergunta só o que falta, com o plano dos pontos ao lado. A Bia responde, manda material ou pula.", imagem: "criacao", href: `${M}/hattie/criacao`, coluna: 2, linha: "principal", acoes: ["Pular uma pergunta: o Hattie decide", "Voltar a um ponto pelo plano", "Clicar em Criar minha marca"] },
   { id: "criando", titulo: "O Hattie cria a marca", texto: "Lê tudo, pesquisa o mercado, estuda concorrentes e monta estratégia, nome, voz e visual.", imagem: "criando", href: `${M}/criando`, coluna: 3, linha: "principal", acoes: ["Leva alguns segundos", "Cada etapa aparece na lista"] },
-  { id: "pronta", titulo: "Olha como ficou", texto: "O primeiro impacto da marca inteira, antes de entrar no detalhe de cada ponto.", imagem: "pronta", href: `${M}/pronta`, coluna: 4, linha: "principal", acoes: ["Ver logo, mockups, cores e peças", "Pedir ajuste ao Hattie", "Começar a validação"] },
-  { id: "cerebro", titulo: "Visão geral do cérebro", texto: "Todas as decisões da marca num lugar, com o que já foi aprovado e o que falta.", imagem: "cerebro-visao", href: `${M}/cerebro`, coluna: 4, linha: "alternativa", acoes: ["Abrir qualquer ponto", "Ver o progresso por grupo"] },
-  { id: "validar", titulo: "Aprovar ponto por ponto", texto: "Cada ponto mostra a proposta e o porquê. A Bia decide o que fazer com ele.", imagem: "validar", href: `${M}/cerebro/nome`, coluna: 5, linha: "principal", acoes: ["Aprovar e seguir para o próximo", "Editar com o Hattie", "Contratar um parceiro para o ponto"] },
-  { id: "editar", titulo: "Editar com o Hattie", texto: "Um painel abre ao lado do ponto. A Bia conta o que quer mudar e o Hattie propõe outra versão.", coluna: 5, linha: "alternativa", acoes: ["Pedir em texto livre", "Comparar antes de aprovar"] },
-  { id: "parceiros", titulo: "Contratar um parceiro", texto: "O pedido chega escrito, com o ponto da marca, e os parceiros certos aparecem primeiro.", imagem: "parceiros", href: `${M}/parceiros`, coluna: 5, linha: "parceiro", acoes: ["Filtrar por especialidade e preço", "Escolher o que o parceiro vê da marca"] },
-  { id: "perfil", titulo: "Perfil do parceiro", texto: "Trabalhos, pacotes com preço e prazo, e o que outras marcas acharam.", imagem: "perfil", href: `${M}/parceiros/perfil/ana-prado`, coluna: 6, linha: "parceiro", acoes: ["Ver pacotes e prazos", "Mandar mensagem ou pedir orçamento"] },
-  { id: "mensagens", titulo: "Conversa, proposta e orçamento", texto: "A Bia pergunta, o parceiro tira dúvidas e manda a proposta com valor e prazo.", imagem: "mensagens", href: `${M}/parceiros/mensagens/ensaio-origem`, coluna: 7, linha: "parceiro", acoes: ["Aprovar a proposta", "Pedir ajuste no valor ou no prazo", "Procurar outro parceiro"] },
-  { id: "quadro", titulo: "Acompanhar no quadro", texto: "Cada trabalho anda por pedido, proposta, em andamento, revisão e entregue.", imagem: "quadro", href: `${M}/parceiros/quadro`, coluna: 8, linha: "parceiro", acoes: ["Pedir revisão da entrega", "Aprovar e guardar a entrega"] },
-  { id: "inicio", titulo: "Início da marca", texto: "\"O que vamos criar hoje?\", com projetos recentes e modelos que já preenchem o pedido.", imagem: "inicio", href: M, coluna: 6, linha: "principal", acoes: ["Pedir algo direto no campo", "Abrir um projeto recente", "Usar um modelo pronto"] },
-  { id: "hattie", titulo: "Conversa com o Hattie", texto: "Uma legenda, uma ideia de post ou uma opinião, sempre com o cérebro da marca.", imagem: "hattie", href: `${M}/hattie/nova`, coluna: 6, linha: "alternativa", acoes: ["Perguntar qualquer coisa da marca", "Voltar para o início"] },
-  { id: "projetos", titulo: "Projetos", texto: "Cada entrega num projeto: lançamento, campanha, catálogo. Com filtros, grade ou lista.", imagem: "projetos", href: `${M}/projetos`, coluna: 7, linha: "principal", acoes: ["Criar um projeto com o primeiro pedido", "Fixar, concluir ou arquivar"] },
-  { id: "projeto", titulo: "Criar no projeto", texto: "Canvas, grade e thread. A Bia pede e o Hattie cria imagens e peças ali mesmo.", imagem: "projeto", href: `${M}/projetos/pequi`, coluna: 8, linha: "principal", acoes: ["Pedir ajuste ou gerar de novo", "Ajustar a imagem no visor", "Organizar em páginas e pastas"] },
-  { id: "biblioteca", titulo: "Biblioteca", texto: "Tudo o que a marca criou, enviou ou recebeu de parceiros, com busca por frase.", imagem: "biblioteca", href: `${M}/biblioteca`, coluna: 9, linha: "principal", acoes: ["Procurar como se fala", "Baixar, compartilhar ou mover", "Usar num projeto"] },
+  { id: "escolhas", titulo: "Escolher cores, letras e logo", texto: "Três opções de cada, com a aposta do Hattie já marcada. Cada passo mostra as opções com o que veio antes.", imagem: "escolhas", href: `${M}/escolhas`, coluna: 4, linha: "principal", acoes: ["Ficar com a aposta e avançar", "Comparar as três opções", "Voltar a um passo anterior"] },
+  { id: "pronta", titulo: "Olha como ficou", texto: "O primeiro impacto da marca inteira, antes de entrar no detalhe de cada ponto.", imagem: "pronta", href: `${M}/pronta`, coluna: 5, linha: "principal", acoes: ["Ver logo, mockups, cores e peças", "Pedir ajuste ao Hattie", "Começar a validação"] },
+  { id: "cerebro", titulo: "Visão geral do cérebro", texto: "Todas as decisões da marca num lugar, com o que já foi aprovado e o que falta.", imagem: "cerebro-visao", href: `${M}/cerebro`, coluna: 5, linha: "alternativa", acoes: ["Abrir qualquer ponto", "Ver o progresso por grupo"] },
+  { id: "validar", titulo: "Aprovar ponto por ponto", texto: "Cada ponto mostra a proposta e o porquê. A Bia decide o que fazer com ele.", imagem: "validar", href: `${M}/cerebro/nome`, coluna: 6, linha: "principal", acoes: ["Aprovar e seguir para o próximo", "Editar com o Hattie", "Contratar um parceiro para o ponto"] },
+  { id: "editar", titulo: "Editar com o Hattie", texto: "Um painel abre ao lado do ponto. A Bia conta o que quer mudar e o Hattie propõe outra versão.", coluna: 6, linha: "alternativa", acoes: ["Pedir em texto livre", "Comparar antes de aprovar"] },
+  { id: "parceiros", titulo: "Contratar um parceiro", texto: "O pedido chega escrito, com o ponto da marca, e os parceiros certos aparecem primeiro.", imagem: "parceiros", href: `${M}/parceiros`, coluna: 6, linha: "parceiro", acoes: ["Filtrar por especialidade e preço", "Escolher o que o parceiro vê da marca"] },
+  { id: "perfil", titulo: "Perfil do parceiro", texto: "Trabalhos, pacotes com preço e prazo, e o que outras marcas acharam.", imagem: "perfil", href: `${M}/parceiros/perfil/ana-prado`, coluna: 7, linha: "parceiro", acoes: ["Ver pacotes e prazos", "Mandar mensagem ou pedir orçamento"] },
+  { id: "mensagens", titulo: "Conversa, proposta e orçamento", texto: "A Bia pergunta, o parceiro tira dúvidas e manda a proposta com valor e prazo.", imagem: "mensagens", href: `${M}/parceiros/mensagens/ensaio-origem`, coluna: 8, linha: "parceiro", acoes: ["Aprovar a proposta", "Pedir ajuste no valor ou no prazo", "Procurar outro parceiro"] },
+  { id: "quadro", titulo: "Acompanhar no quadro", texto: "Cada trabalho anda por pedido, proposta, em andamento, revisão e entregue.", imagem: "quadro", href: `${M}/parceiros/quadro`, coluna: 9, linha: "parceiro", acoes: ["Pedir revisão da entrega", "Aprovar e guardar a entrega"] },
+  { id: "inicio", titulo: "Início da marca", texto: "\"O que vamos criar hoje?\", com projetos recentes e modelos que já preenchem o pedido.", imagem: "inicio", href: M, coluna: 7, linha: "principal", acoes: ["Pedir algo direto no campo", "Abrir um projeto recente", "Usar um modelo pronto"] },
+  { id: "hattie", titulo: "Conversa com o Hattie", texto: "Uma legenda, uma ideia de post ou uma opinião, sempre com o cérebro da marca.", imagem: "hattie", href: `${M}/hattie/nova`, coluna: 7, linha: "alternativa", acoes: ["Perguntar qualquer coisa da marca", "Voltar para o início"] },
+  { id: "projetos", titulo: "Projetos", texto: "Cada entrega num projeto: lançamento, campanha, catálogo. Com filtros, grade ou lista.", imagem: "projetos", href: `${M}/projetos`, coluna: 8, linha: "principal", acoes: ["Criar um projeto com o primeiro pedido", "Fixar, concluir ou arquivar"] },
+  { id: "projeto", titulo: "Criar no projeto", texto: "Canvas, grade e thread. A Bia pede e o Hattie cria imagens e peças ali mesmo.", imagem: "projeto", href: `${M}/projetos/pequi`, coluna: 9, linha: "principal", acoes: ["Pedir ajuste ou gerar de novo", "Ajustar a imagem no visor", "Organizar em páginas e pastas"] },
+  { id: "biblioteca", titulo: "Biblioteca", texto: "Tudo o que a marca criou, enviou ou recebeu de parceiros, com busca por frase.", imagem: "biblioteca", href: `${M}/biblioteca`, coluna: 10, linha: "principal", acoes: ["Procurar como se fala", "Baixar, compartilhar ou mover", "Usar num projeto"] },
 ]
 
 const ARESTAS: Aresta[] = [
@@ -71,7 +72,9 @@ const ARESTAS: Aresta[] = [
   { de: "importar", para: "criando", saida: "direita", entrada: "topo", tipo: "alternativo", rotulo: "o Hattie lê os materiais" },
   { de: "criacao", para: "criacao", saida: "topo", entrada: "topo", tipo: "principal", rotulo: "responde ou pula", desvio: 44, trecho: 1 },
   { de: "criacao", para: "criando", saida: "direita", entrada: "esquerda", tipo: "principal", rotulo: "plimm" },
-  { de: "criando", para: "pronta", saida: "direita", entrada: "esquerda", tipo: "principal" },
+  { de: "criando", para: "escolhas", saida: "direita", entrada: "esquerda", tipo: "principal" },
+  { de: "escolhas", para: "escolhas", saida: "topo", entrada: "topo", tipo: "principal", rotulo: "compara e escolhe", desvio: 44, trecho: 1 },
+  { de: "escolhas", para: "pronta", saida: "direita", entrada: "esquerda", tipo: "principal", rotulo: "plimm" },
   { de: "pronta", para: "criando", saida: "base", entrada: "base", tipo: "alternativo", rotulo: "pede ajuste ao Hattie", desvio: 40, trecho: 1 },
   { de: "pronta", para: "validar", saida: "direita", entrada: "esquerda", tipo: "principal", rotulo: "começar a validação" },
   { de: "pronta", para: "cerebro", saida: "topo", entrada: "base", tipo: "alternativo", rotulo: "ver tudo", duplo: true },
@@ -95,9 +98,9 @@ const ARESTAS: Aresta[] = [
 const ETAPAS = [
   { numero: 1, titulo: "chegar", de: 0, ate: 0 },
   { numero: 2, titulo: "começar", de: 1, ate: 1 },
-  { numero: 3, titulo: "criar a marca", de: 2, ate: 4 },
-  { numero: 4, titulo: "aprovar", de: 5, ate: 5 },
-  { numero: 5, titulo: "usar no dia a dia", de: 6, ate: 9 },
+  { numero: 3, titulo: "criar a marca", de: 2, ate: 5 },
+  { numero: 4, titulo: "aprovar", de: 6, ate: 6 },
+  { numero: 5, titulo: "usar no dia a dia", de: 7, ate: 10 },
 ]
 
 /* ---------- Geometria do quadro ---------- */
@@ -109,7 +112,7 @@ const ALTURA_CARD = IMAGEM + 176
 const MARGEM = 48
 const TOPO = 120 // espaço das etapas e dos laços de cima
 const Y: Record<Linha, number> = { alternativa: TOPO, principal: TOPO + ALTURA_CARD + 150, parceiro: TOPO + 2 * (ALTURA_CARD + 150) + 30 }
-const LARGURA = MARGEM * 2 + COLUNA * 9 + CARD
+const LARGURA = MARGEM * 2 + COLUNA * 10 + CARD
 const ALTURA = Y.parceiro + ALTURA_CARD + 110
 
 const xDe = (no: No) => MARGEM + no.coluna * COLUNA

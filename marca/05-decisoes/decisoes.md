@@ -2,6 +2,11 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 22/11/2026 · Escolhas visuais antes do "olha como ficou" (branch `marketing`)
+- Ao terminar a conversa com o Hattie, a pessoa escolhe entre três paletas, três combinações de fontes e três logos, nessa ordem, antes de ver a marca inteira.
+- A aposta do Hattie chega marcada em cada passo, e cada passo mostra as opções com o que já foi escolhido antes.
+- O "olha como ficou" e o cérebro da marca mostram só o que foi escolhido. As seções Logo, Cores e Tipografia do cérebro deixam de ter a escolha entre opções; trocar passa a ser um pedido ao Hattie.
+
 ## 21/11/2026 · Área de Marketing (branch `marketing`)
 - Marketing deixa de ser estado vazio e ganha quatro partes: Visão geral, Calendário, Concorrentes e Leads, numa coluna como a de parceiros.
 - A visão geral abre com a leitura da semana do Hattie e o que fazer agora; os números vêm com a variação em seta e sinal, e as metas vêm dos objetivos da estratégia.
