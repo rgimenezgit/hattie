@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils"
 import type { ClusterDiferencial, Diferencial, Secao, TipoCluster } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
 import { MenuPonto } from "./AcoesPonto"
+import { useDiferenciaisEscolhidos } from "./EscolhasEstrategia"
+import { useEstado } from "./Estado"
 
 type Props = { secao: Secao; aoEditar: () => void }
 
@@ -26,16 +28,21 @@ const CLUSTER: Record<TipoCluster, { titulo: string; tag: string; pergunta: stri
  * sociais, ambientais, econômicos) com descrição e prova, os números e as frentes que ficaram de fora, com o motivo.
  */
 export function SecaoDiferenciais({ secao, aoEditar }: Props) {
+  const { diferenciaisEscolhidos } = useEstado()
+  // Depois da primeira escolha, a seção mostra só os diferenciais que a pessoa marcou (e os que ela escreveu).
+  const clusters = useDiferenciaisEscolhidos(secao.conteudo.tipo === "diferenciais" ? secao.conteudo.clusters : [])
   if (secao.conteudo.tipo !== "diferenciais") return null
-  const { principal, clusters } = secao.conteudo
+  const { principal } = secao.conteudo
   const ativos = clusters.filter((cluster) => cluster.diferenciais.length > 0)
-  const fora = clusters.filter((cluster) => cluster.diferenciais.length === 0)
+  const fora = clusters.filter((cluster) => cluster.foraPorque)
   const todos = ativos.flatMap((cluster) => cluster.diferenciais)
   const fortes = todos.filter((diferencial) => diferencial.forca === "forte").length
-  const principais = ativos.map((cluster) => ({
-    cluster: cluster.id,
-    diferencial: cluster.diferenciais.find((item) => item.forca === "forte") ?? cluster.diferenciais[0],
-  }))
+  const principais = diferenciaisEscolhidos
+    ? ativos.flatMap((cluster) => cluster.diferenciais.map((diferencial) => ({ cluster: cluster.id, diferencial })))
+    : ativos.map((cluster) => ({
+        cluster: cluster.id,
+        diferencial: cluster.diferenciais.find((item) => item.forca === "forte") ?? cluster.diferenciais[0],
+      }))
 
   return (
     <div className="flex flex-col gap-10">
@@ -56,15 +63,15 @@ export function SecaoDiferenciais({ secao, aoEditar }: Props) {
           <Legenda />
         </CabecalhoBloco>
         <ul className="grid grid-cols-1 gap-3 @3xl:grid-cols-2">
-          {principais.map(({ cluster, diferencial }) => (
+          {principais.map(({ cluster, diferencial }, indice) => (
             <li key={diferencial.titulo} className="flex min-w-0">
-              <article aria-labelledby={`principal-${cluster}`} className="flex w-full flex-col gap-2 rounded-3xl bg-superficie p-5 md:p-6">
+              <article aria-labelledby={`principal-${indice}`} className="flex w-full flex-col gap-2 rounded-3xl bg-superficie p-5 md:p-6">
                 <header className="-me-2 -mt-1 flex items-center gap-2">
                   <Tag tamanho="sm">{CLUSTER[cluster].tag}</Tag>
                   <Forca forca={diferencial.forca} />
                   <MenuPonto ponto={`o diferencial ${diferencial.titulo}`} className="ms-auto" />
                 </header>
-                <h3 id={`principal-${cluster}`} className="text-base font-semibold">
+                <h3 id={`principal-${indice}`} className="text-base font-semibold">
                   {diferencial.titulo}
                 </h3>
                 <p className="text-sm text-texto-2">{diferencial.descricao}</p>

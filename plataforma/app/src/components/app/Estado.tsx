@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, use, useCallback, useMemo, useRef, useState, type ReactNode } from "react"
+import { createContext, use, useCallback, useMemo, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from "react"
 import {
   PASSOS_PLANO,
   RECONHECIMENTOS,
@@ -9,6 +9,7 @@ import {
   STATUS_INICIAL,
   getSecao,
   type Concorrente,
+  type Diferencial,
   type EstiloFoto,
   type Mensagem,
   type MensagemChave,
@@ -19,6 +20,7 @@ import {
   type Referencia,
   type StatusPasso,
   type StatusSecao,
+  type TracoPersonalidade,
 } from "@/lib/mock"
 
 type Etapa = "rascunho" | "pronta"
@@ -47,7 +49,14 @@ type EstadoApp = {
   adicionarConcorrente: (concorrente: Concorrente) => void
   nomeEscolhido: string | null
   escolherNome: (id: string, nome: string) => void
-  /** Paleta, tipografia e logo saem da escolha feita depois da conversa; antes dela, valem as apostas do Hattie. */
+  /**
+   * Primeiras escolhas, depois da conversa: diferenciais e personalidade (com o que a pessoa escreveu),
+   * nome, paleta, tipografia e logo. Antes delas, valem as propostas e apostas do Hattie.
+   */
+  diferenciaisEscolhidos: { ids: string[]; proprios: Diferencial[] } | null
+  salvarDiferenciais: Dispatch<SetStateAction<{ ids: string[]; proprios: Diferencial[] } | null>>
+  personalidadeEscolhida: { ids: string[]; proprias: TracoPersonalidade[] } | null
+  salvarPersonalidade: Dispatch<SetStateAction<{ ids: string[]; proprias: TracoPersonalidade[] } | null>>
   paletaEscolhida: string | null
   escolherPaleta: (id: string | null) => void
   logoEscolhido: string | null
@@ -118,6 +127,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
   const [referenciasNovas, setReferenciasNovas] = useState<Referencia[]>([])
   const [concorrentesNovos, setConcorrentesNovos] = useState<Concorrente[]>([])
   const [nomeEscolhido, setNomeEscolhido] = useState<string | null>(null)
+  const [diferenciaisEscolhidos, salvarDiferenciais] = useState<{ ids: string[]; proprios: Diferencial[] } | null>(null)
+  const [personalidadeEscolhida, salvarPersonalidade] = useState<{ ids: string[]; proprias: TracoPersonalidade[] } | null>(null)
   const [paletaEscolhida, escolherPaleta] = useState<string | null>(null)
   const [logoEscolhido, escolherLogo] = useState<string | null>(null)
   const [tipografiaEscolhida, escolherTipografia] = useState<string | null>(null)
@@ -282,6 +293,10 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      diferenciaisEscolhidos,
+      salvarDiferenciais,
+      personalidadeEscolhida,
+      salvarPersonalidade,
       paletaEscolhida,
       escolherPaleta,
       logoEscolhido,
@@ -326,6 +341,8 @@ export function EstadoProvider({ children }: { children: ReactNode }) {
       adicionarConcorrente,
       nomeEscolhido,
       escolherNome,
+      diferenciaisEscolhidos,
+      personalidadeEscolhida,
       paletaEscolhida,
       logoEscolhido,
       tipografiaEscolhida,

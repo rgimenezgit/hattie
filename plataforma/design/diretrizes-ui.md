@@ -263,19 +263,36 @@ No fim de cada seção, ao lado de Aprovar e Editar com o Hattie, uma pílula ro
 
 ### Escolhas (`/marca/[marca]/escolhas`)
 
-Entre "criando a marca" e "olha como ficou", a pessoa escolhe as três decisões visuais que mais mudam a cara da marca, em três passos: cores, tipografia e logo. No topo, o logotipo do Hattie e os passos em pílulas (o atual em preto `#101010` com texto lima `#E6F344`; os feitos com ✓ e clicáveis para voltar; no celular, só o atual mostra o nome). Título em Clash minúsculo ("escolha as cores", "escolha as letras", "escolha o logo") e uma linha do Hattie com o chapéu.
+Entre "criando a marca" e "olha como ficou", a pessoa escolhe a base da marca em seis passos: diferenciais, personalidade, nome, cores, tipografia e logo. Estratégia vem antes do visual, para as cores, as letras e o logo saírem do que ela decidiu.
 
-As três opções ficam lado a lado (uma por linha no celular), como rádios de verdade: setas do teclado trocam a opção. Cada card tem a prévia aplicada, o nome, "minha aposta" quando for o caso, a ideia, os hex ou as fontes e "por que funciona". A aposta já chega marcada, então o caminho mais curto é só avançar. Marcado ganha fundo lima-suave `#F1F4C9` e o ✓ preto com lima no canto do nome, sem contorno. No celular, os motivos aparecem só na opção marcada.
+**Topo.** O logotipo do Hattie e os passos em pílulas: o atual em preto `#101010` com texto lima `#E6F344`; os feitos com ✓ e clicáveis para voltar. Abaixo de 1024 px, só o atual mostra o nome. No celular, as pílulas viram "2 de 6 · Personalidade" e uma barra fina de progresso. Título em Clash minúsculo ("o que te diferencia", "o jeito da marca", "escolha o nome", "escolha as cores", "escolha as letras", "escolha o logo") e uma linha do Hattie com o chapéu.
 
-- **Cores**: o logo da aposta na cor principal sobre o fundo da paleta e, embaixo, faixas da principal, do apoio e da escura.
-- **Tipografia**: a frase da marca na display, um trecho na de texto e um botão na de sistema, nas cores escolhidas no passo anterior.
-- **Logo**: a composta sobre o fundo e o símbolo sozinho sobre a principal e sobre o apoio, nas cores escolhidas.
+**Diferenciais e personalidade (escolha de várias).**
+- Cards que marcam e desmarcam, com caixas de seleção de verdade.
+- Diferenciais: de 3 a 4, em três colunas, com título, frente (funcional, emocional, social, ambiental) e descrição.
+- Personalidade: de 3 a 5 entre dez palavras. São cinco colunas no computador e duas no celular. A palavra vem em Clash minúsculo, com a explicação embaixo.
+- O que o Hattie escolheria leva a tag "sugestão", misturado às outras opções. Nada vem marcado.
+- Embaixo, um campo livre ("Faltou alguma palavra? Escreva a sua"). O que a pessoa escreve entra como card marcado, com a tag "escrito por você", e conta no limite.
+- Com o limite cheio, os cards não marcados ficam apagados.
+- O rodapé diz quanto falta ("Escolha mais 2 para continuar") e "Continuar" só libera no mínimo.
 
-Rodapé fixo: "Voltar" (no primeiro passo, a nota "Dá para ajustar tudo depois, no cérebro da marca") e "Continuar" em preto; no último passo, o plimm "montar minha marca", que leva ao "olha como ficou". Sem selo nesta tela. A escolha vale para a marca inteira: o cérebro, as peças e o "olha como ficou" usam a paleta, as fontes e o logo escolhidos (`paletaEscolhida`, `tipografiaEscolhida` e `logoEscolhido` no estado; as paletas ficam em `opcoesPaleta` da marca).
+**Nome, cores, tipografia e logo (escolha de uma).**
+- São rádios de verdade, e as setas do teclado trocam a opção.
+- Cada card tem a prévia, o nome, "minha aposta" quando for o caso, a ideia e "por que funciona". A aposta já chega marcada.
+- **Nome**: dois por linha. O nome grande na serifa, com as checagens de domínio, Instagram e INPI (ponto verde, amarelo ou vermelho) e o alerta quando houver.
+- **Cores**: só a paleta, em faixas na proporção de uso (principal, apoio, fundo e escura), com nome e hex embaixo de cada cor. Sem logo.
+- **Tipografia**: a frase da marca na display, um trecho na de texto e um botão na de sistema, nas cores escolhidas.
+- **Logo**: a composta sobre o fundo e o símbolo sobre a principal e sobre o apoio, já com o nome e as cores escolhidos. O monograma usa as iniciais do nome.
+
+**Cards.** Não marcado em `preenchimento`; marcado em lima-suave `#F1F4C9` com o ✓ preto e lima, sem contorno. No celular, os motivos das opções de escolha única aparecem só na marcada.
+
+**Rodapé fixo.** "Voltar", a contagem (nos dois primeiros passos) e "Continuar" em preto. No último passo, o plimm "montar minha marca" leva ao "olha como ficou". Sem selo nesta tela.
+
+**Para onde vão as escolhas.** O cérebro, as peças e o "olha como ficou" usam o que foi escolhido. No estado: `diferenciaisEscolhidos`, `personalidadeEscolhida`, `nomeEscolhido`, `paletaEscolhida`, `tipografiaEscolhida` e `logoEscolhido`. As opções vêm de `lib/mock/escolhas.ts` e de `opcoesPaleta` da marca. No cérebro, Diferenciais, Personalidade e Nome mostram só o escolhido; o que a pessoa escreveu entra para o Hattie completar (a prova do diferencial, o significado da palavra).
 
 ### Olha como ficou (`/marca/[marca]/pronta`)
 
-Depois das escolhas, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`). As imagens prontas foram feitas com a paleta e o logo da aposta; com outra escolha, ficam os blocos pontilhados até o Hattie gerar novas.
+Depois das escolhas, antes da validação ponto a ponto, uma tela de primeiro impacto: selo tcharam, "olha como ficou, bia", o logo com a tagline num bloco na cor de fundo da marca, quatro mockups da marca (um grande em 16:9 e três menores em 4:3 embaixo; no celular, o grande em 4:3 e os três quadrados lado a lado, só com o ícone na legenda), propósito, personalidade, tipografia (Aa e as famílias) e cores com hex, e "a marca no dia a dia" com cinco peças. No fim, um card preto com "agora, ponto por ponto", o número de decisões, "Ver tudo" e o botão lima "Começar a validação", que abre a primeira seção. Enquanto a imagem não chega, cada mockup mostra um bloco pontilhado nas cores de fundo e apoio da marca com a legenda numa pílula; com a imagem, ela ocupa o espaço inteiro (`MOCKUPS` em `MarcaPronta.tsx`). As imagens prontas foram feitas com o nome, a paleta e o logo da aposta; com outra escolha, ficam os blocos pontilhados até o Hattie gerar novas.
 
 ### Assim fica numa peça (`NaPeca`)
 

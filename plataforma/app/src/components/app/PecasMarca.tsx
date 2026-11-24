@@ -5,7 +5,7 @@ import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { cn } from "@/lib/utils"
 import type { ExemploPeca, FormatoPeca, SuporteMockup } from "@/lib/mock"
 import { Carimbo, GrafismoFolhas, Ilustracao, type CoresDesenho } from "./Ilustracao"
-import { Simbolo } from "./Logo"
+import { iniciaisDe, Simbolo } from "./Logo"
 import type { SistemaMarca } from "./SistemaMarca"
 
 /*
@@ -36,7 +36,7 @@ function textos(sistema: SistemaMarca) {
 function Assinatura({ sistema, cor, tamanho = 5.5, so = false }: { sistema: SistemaMarca; cor: string; tamanho?: number; so?: boolean }) {
   return (
     <span className="inline-flex shrink-0 items-center" style={{ gap: cq(tamanho * 0.3) }}>
-      <Simbolo simbolo={sistema.simbolo} tinta={cor} tamanho={24} className="shrink-0" style={{ width: cq(tamanho), height: cq(tamanho) }} />
+      <Simbolo simbolo={sistema.simbolo} tinta={cor} tamanho={24} iniciais={iniciaisDe(sistema.nome)} className="shrink-0" style={{ width: cq(tamanho), height: cq(tamanho) }} />
       {!so && (
         <span className="font-serif font-medium whitespace-nowrap" style={{ fontSize: cq(tamanho * 0.62), color: cor, lineHeight: 1 }}>
           {sistema.nome}

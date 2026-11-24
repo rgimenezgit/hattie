@@ -49,8 +49,28 @@ const GOTA = "M24 3C24 3 9 19.5 9 30a15 15 0 0 0 30 0C39 19.5 24 3 24 3Z"
 const RAIZES = "M24 18v22M24 28l-6 5.5M24 32l6 5M24 23l-4.5 3.5"
 const FOLHA = "M24 13.5c-6.5 5-7.5 12.5 0 21 7.5-8.5 6.5-16 0-21Z"
 
-/** Símbolo em SVG, de uma cor só (tinta). Os vazados usam máscara, então funcionam sobre qualquer fundo. */
-export function Simbolo({ simbolo, tinta, tamanho, className, style }: { simbolo: SimboloLogo; tinta: string; tamanho: number; className?: string; style?: CSSProperties }) {
+/** Iniciais para o monograma: a primeira letra de até duas palavras do nome, sem "e", "de" e "&". */
+export function iniciaisDe(nome: string) {
+  const palavras = nome.split(/\s+/).filter((palavra) => palavra && !["e", "de", "da", "do", "&"].includes(palavra.toLowerCase()))
+  return (palavras.slice(0, 2).map((palavra) => palavra.charAt(0).toUpperCase()).join("") || "RN")
+}
+
+/** Símbolo em SVG, de uma cor só (tinta). Os vazados usam máscara, então funcionam sobre qualquer fundo. O monograma usa as iniciais. */
+export function Simbolo({
+  simbolo,
+  tinta,
+  tamanho,
+  iniciais = "RN",
+  className,
+  style,
+}: {
+  simbolo: SimboloLogo
+  tinta: string
+  tamanho: number
+  iniciais?: string
+  className?: string
+  style?: CSSProperties
+}) {
   const id = useId().replace(/:/g, "")
   return (
     <svg viewBox="0 0 48 48" width={tamanho} height={tamanho} className={cn("shrink-0", className)} style={style} aria-hidden>
@@ -86,7 +106,7 @@ export function Simbolo({ simbolo, tinta, tamanho, className, style }: { simbolo
             fill={tinta}
             style={{ fontFamily: "var(--font-marca), Georgia, serif" }}
           >
-            RN
+            {iniciais}
           </text>
           <path d="M9 38c8-7 22-7 30 0" fill="none" stroke={tinta} strokeWidth={2.2} strokeLinecap="round" />
         </>
@@ -113,7 +133,7 @@ export function Logo({
   className?: string
   style?: CSSProperties
 }) {
-  if (tipo === "simbolo") return <Simbolo simbolo={simbolo} tinta={tinta} tamanho={altura} className={className} />
+  if (tipo === "simbolo") return <Simbolo simbolo={simbolo} tinta={tinta} tamanho={altura} iniciais={iniciaisDe(nome)} className={className} />
   const texto = (
     <span className="font-serif leading-none font-medium tracking-[-0.01em] whitespace-nowrap" style={{ color: tinta, fontSize: altura * (tipo === "composta" ? 0.62 : 0.78) }}>
       {nome}
@@ -127,7 +147,7 @@ export function Logo({
     )
   return (
     <span className={cn("inline-flex items-center", className)} style={{ gap: altura * 0.28, ...style }}>
-      <Simbolo simbolo={simbolo} tinta={tinta} tamanho={altura} />
+      <Simbolo simbolo={simbolo} tinta={tinta} tamanho={altura} iniciais={iniciaisDe(nome)} />
       {texto}
     </span>
   )
@@ -149,7 +169,7 @@ export function svgDoLogo({ tipo, simbolo, nome, tinta }: { tipo: TipoLogo; simb
         `<circle cx="24" cy="24" r="20.5" fill="none" stroke="${tinta}" stroke-width="3"/><circle cx="24" cy="24" r="16" fill="none" stroke="${tinta}" stroke-width="1.2" stroke-dasharray="2 2.4"/><mask id="m"><path d="${FOLHA}" fill="white"/><path d="M24 17v15" stroke="black" stroke-width="1.6" stroke-linecap="round"/></mask><rect width="48" height="48" fill="${tinta}" mask="url(#m)"/>`,
       )
     return g(
-      `<text x="24" y="31" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="25" font-weight="500" letter-spacing="-1.5" fill="${tinta}">RN</text><path d="M9 38c8-7 22-7 30 0" fill="none" stroke="${tinta}" stroke-width="2.2" stroke-linecap="round"/>`,
+      `<text x="24" y="31" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="25" font-weight="500" letter-spacing="-1.5" fill="${tinta}">${iniciaisDe(nome)}</text><path d="M9 38c8-7 22-7 30 0" fill="none" stroke="${tinta}" stroke-width="2.2" stroke-linecap="round"/>`,
     )
   }
   if (tipo === "simbolo") return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="480" height="480">${simboloSvg(0)}</svg>`
