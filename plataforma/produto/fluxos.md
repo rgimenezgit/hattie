@@ -65,6 +65,14 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
 
 **Conta** (avatar no fim do rail): Configurações da conta, Ajuda, Convidar pessoa, Sair.
 
+## Acesso da banca
+
+No mapa das telas, o cartão lima **acesso da banca** liga uma versão reduzida para os avaliadores do TCC e abre em Criar conta. Ela fica ligada no navegador até sair pelo mesmo cartão.
+
+- **Liberado:** criar conta, entrar, primeiro acesso, conversa de criação, o Hattie criando, escolhas, olha como ficou, cérebro da marca e parceiros (contratar, perfil e mensagens).
+- **Com cadeado:** Início, Projetos, Biblioteca, Marketing, Automações, Conectores, conversas novas com o Hattie, o quadro de parceiros, as outras marcas e Minhas marcas. Essas áreas ficam à vista, apagadas e com cadeado, sem clique e fora do Tab. Quem digitar o endereço de uma delas volta para o cérebro.
+- Entrar leva direto ao cérebro, e o símbolo do Hattie no topo também.
+
 ## Jornada para apresentação
 
 `/jornada` (link no mapa das telas) tem duas vistas, em abas.

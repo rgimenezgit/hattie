@@ -27,6 +27,7 @@ import { MenuAcoes } from "@/components/hattie/MenuAcoes"
 import { notificar } from "@/components/hattie/Notificacao"
 import { SeloSom } from "@/components/hattie/SeloSom"
 import { cn } from "@/lib/utils"
+import { fechar, useBanca } from "@/lib/banca"
 import { CONVERSAS, PASSOS_PLANO, type Mensagem, type StatusPasso } from "@/lib/mock"
 import { useEstado } from "./Estado"
 import { Canvas, CabecalhoCanvas, ColunaLateral } from "./Layout"
@@ -232,6 +233,7 @@ function Plano({ aoFechar }: { aoFechar?: () => void }) {
 
 function ListaConversas({ atual, aoNavegar }: { atual: string; aoNavegar?: () => void }) {
   const marca = useMarca()
+  const banca = useBanca()
   const { nomeMarca, etapa } = useEstado()
   return (
     <ul className="flex flex-col gap-1">
@@ -244,7 +246,8 @@ function ListaConversas({ atual, aoNavegar }: { atual: string; aoNavegar?: () =>
               href={`/marca/${marca.slug}/hattie/${conversa.id}` as Route}
               onClick={aoNavegar}
               aria-current={ativa ? "page" : undefined}
-              className="flex h-9 min-w-0 flex-1 flex-col justify-center ps-3 text-sm"
+              {...fechar(banca && conversa.id !== "criacao")}
+              className="flex h-9 min-w-0 flex-1 flex-col justify-center ps-3 text-sm aria-disabled:pointer-events-none aria-disabled:text-texto-3/50"
             >
               <span className={cn("truncate", ativa && "font-medium")}>{titulo}</span>
             </Link>
@@ -265,6 +268,7 @@ function ListaConversas({ atual, aoNavegar }: { atual: string; aoNavegar?: () =>
 
 export function ChatHattie({ conversaId }: { conversaId: string }) {
   const marca = useMarca()
+  const banca = useBanca()
   const estado = useEstado()
   const fim = useRef<HTMLDivElement>(null)
   const [planoAberto, setPlanoAberto] = useState(true)
@@ -327,7 +331,7 @@ export function ChatHattie({ conversaId }: { conversaId: string }) {
         className="hidden lg:flex"
         acao={
           <Botao variante="fantasma" tamanho="icone" aria-label="Nova conversa" asChild>
-            <Link href={`/marca/${marca.slug}/hattie/nova` as Route}>
+            <Link href={`/marca/${marca.slug}/hattie/nova` as Route} {...fechar(banca)} className="aria-disabled:pointer-events-none aria-disabled:opacity-40">
               <Plus />
             </Link>
           </Botao>

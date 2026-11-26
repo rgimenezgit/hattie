@@ -8,7 +8,7 @@ Código da aplicação Hattie. Next.js 16 (App Router) + TypeScript + Tailwind C
 npm run dev
 ```
 
-Abra a rota `/`: ela é o mapa das telas. Para o fluxo completo, comece em `/criar-conta`. A vitrine dos componentes fica em `/dev/tokens` e o gerador de grafismo em `/ferramentas/gerador/index.html`. O gerador é copiado de `marca/` quando o `npm run dev` começa: depois de mudar o arquivo em `marca/`, reinicie o dev para ver a mudança.
+Abra a rota `/`: ela é o mapa das telas. Para o fluxo completo, comece em `/criar-conta`. O cartão lima "acesso da banca" no mapa liga a versão reduzida para a banca do TCC (regras em `src/lib/banca.ts`). A vitrine dos componentes fica em `/dev/tokens` e o gerador de grafismo em `/ferramentas/gerador/index.html`. O gerador é copiado de `marca/` quando o `npm run dev` começa: depois de mudar o arquivo em `marca/`, reinicie o dev para ver a mudança.
 
 ## Onde está cada coisa
 
