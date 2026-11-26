@@ -20,7 +20,12 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
    - Cada ponto mostra o status: respondido, conversando agora, falta conversar ou o Hattie decide. Pelo menu do ponto dá para voltar a ele ou pular.
    - **Criar minha marca** fica disponível o tempo todo. Os pontos que faltam o Hattie decide com o que já sabe.
 4. **Criando a marca** (`/marca/[marca]/criando`): tela própria com as etapas (ler o que a pessoa contou, pesquisar o mercado, estudar concorrentes, montar a estratégia, propor nome, voz e visual, separar três opções de cores, letras e logo). Texto final ainda em aberto.
-5. **Escolhas** (`/marca/[marca]/escolhas`): três passos, cores, tipografia e logo, cada um com três opções do Hattie e a aposta já marcada. Cada passo mostra as opções com o que já foi escolhido antes. O plimm "montar minha marca" fecha as escolhas.
+5. **Escolhas** (`/marca/[marca]/escolhas`): seis passos, na ordem diferenciais, personalidade, nome, cores, tipografia e logo.
+   - **Diferenciais**: a pessoa marca de 3 a 4 entre os que o Hattie separou (as sugestões dele vêm com a tag "sugestão") e pode escrever os seus.
+   - **Personalidade**: de 3 a 5 entre dez palavras, com o mesmo campo livre.
+   - Nos dois, nada vem marcado: o Hattie sugere e a pessoa decide.
+   - **Nome, cores, tipografia e logo**: três ou quatro opções com a aposta do Hattie já marcada. Cada passo mostra as opções com o que já foi escolhido antes. As cores aparecem só como paleta.
+   - O plimm "montar minha marca" fecha as escolhas.
 6. **Olha como ficou** (`/marca/[marca]/pronta`): a marca inteira com as escolhas feitas.
 7. **Cérebro da marca** (`/marca/[marca]/cerebro`) com a notificação "tcharam". Todas as propostas chegam esperando o ok da pessoa, e o resto do Hattie já fica liberado.
 
@@ -68,7 +73,7 @@ Estrutura a partir das telas que o Raphael desenhou no Figma (09/11/2026), refin
 
 **Fluxograma**: a mesma jornada em três partes (chegar e criar a marca; aprovar ponto por ponto e chamar um parceiro; o dia a dia), com raias de quem faz cada passo (Bia, Hattie, parceiro), losangos de decisão ("Tem conta?", "Gostou do todo?", "A proposta serve?", "A entrega está boa?", "Ficou bom?") e as setas que voltam nos laços. Um círculo lima numerado liga uma parte à seguinte.
 
-Na vista de telas: Cinco etapas: chegar (criar conta ou entrar), começar (criar do zero ou importar uma marca), criar a marca (conversa, o Hattie criando, escolhas, olha como ficou), aprovar (ponto por ponto, com a visão geral do cérebro) e usar no dia a dia (início, conversa com o Hattie, projetos, criar no projeto, biblioteca). Uma faixa rosa mostra o caminho com parceiro: contratar, perfil, proposta e orçamento, quadro, e a entrega indo para a biblioteca. Linha cheia é o caminho principal; tracejada, outro caminho. Clicar numa tela abre a imagem grande e o link para a tela de verdade. No celular, as etapas viram lista.
+Na vista de telas: Cinco etapas: chegar (criar conta ou entrar), começar (criar do zero ou importar uma marca), criar a marca (conversa, o Hattie criando, escolhas de estratégia e visual, olha como ficou), aprovar (ponto por ponto, com a visão geral do cérebro) e usar no dia a dia (início, conversa com o Hattie, projetos, criar no projeto, biblioteca). Uma faixa rosa mostra o caminho com parceiro: contratar, perfil, proposta e orçamento, quadro, e a entrega indo para a biblioteca. Linha cheia é o caminho principal; tracejada, outro caminho. Clicar numa tela abre a imagem grande e o link para a tela de verdade. No celular, as etapas viram lista.
 
 As capturas ficam em `app/public/jornada/` e saem da versão de produção (`hattie-app-producao` no `.claude/launch.json`), em 1440 × 900, pelo Chrome sem janela. Quando as telas mudarem, vale capturar de novo.
 

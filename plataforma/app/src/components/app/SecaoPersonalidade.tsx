@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import type { Arquetipo, Atributo, Marca, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
 import { MenuPonto } from "./AcoesPonto"
+import { usePersonalidadeEscolhida } from "./EscolhasEstrategia"
 
 type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
 
@@ -34,8 +35,10 @@ const ICONE_ARQUETIPO: Record<string, LucideIcon> = {
  * Vem antes da voz e do visual. Nas opções avançadas, "se a marca fosse" uma pessoa, um lugar, um som e um material.
  */
 export function SecaoPersonalidadeMarca({ secao, marca, aoEditar }: Props) {
+  // Depois da primeira escolha, valem as palavras que a pessoa marcou (e as que ela escreveu).
+  const tracos = usePersonalidadeEscolhida(secao.conteudo.tipo === "personalidade" ? secao.conteudo.tracos : [])
   if (secao.conteudo.tipo !== "personalidade") return null
-  const { resumo, tracos, seFosse } = secao.conteudo
+  const { resumo, seFosse } = secao.conteudo
 
   return (
     <div className="flex flex-col gap-10">

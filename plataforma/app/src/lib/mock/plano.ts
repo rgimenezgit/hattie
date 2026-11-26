@@ -94,7 +94,7 @@ export const ETAPAS_CRIACAO = [
   "Estudando 6 concorrentes da região",
   "Montando a estratégia da marca",
   "Propondo nome, voz e visual",
-  "Separando três opções de cores, letras e logo",
+  "Separando as opções para você escolher",
 ]
 
 export const CONVERSAS: Conversa[] = [

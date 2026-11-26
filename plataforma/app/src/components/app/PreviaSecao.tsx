@@ -1,14 +1,17 @@
 import { BlocoImagem } from "@/components/hattie/BlocoImagem"
 import { Tag } from "@/components/hattie/Tag"
 import { Ilustracao } from "./Ilustracao"
+import { useDiferenciaisEscolhidos, usePersonalidadeEscolhida } from "./EscolhasEstrategia"
 import { useEstado } from "./Estado"
 import { Logo } from "./Logo"
 import { cn } from "@/lib/utils"
 import type { Marca, Secao } from "@/lib/mock"
 
 export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card" | "completo"; marca: Marca }) {
-  const { tipografiaEscolhida, logoEscolhido } = useEstado()
+  const { tipografiaEscolhida, logoEscolhido, nomeEscolhido } = useEstado()
   const { conteudo } = secao
+  const tracos = usePersonalidadeEscolhida(conteudo.tipo === "personalidade" ? conteudo.tracos : [])
+  const clusters = useDiferenciaisEscolhidos(conteudo.tipo === "diferenciais" ? conteudo.clusters : [])
   const card = modo === "card"
   const VERDE = marca.paleta[0].hex
   const CREME = marca.paleta[2]?.hex ?? marca.paleta[0].hex
@@ -166,12 +169,13 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
     }
 
     case "diferenciais": {
-      const ativos = conteudo.clusters.filter((cluster) => cluster.diferenciais.length > 0).length
+      const ativos = clusters.filter((cluster) => cluster.diferenciais.length > 0)
+      const total = ativos.reduce((soma, cluster) => soma + cluster.diferenciais.length, 0)
       return (
         <div className="flex flex-col gap-2">
           <p className="line-clamp-3 text-sm leading-relaxed text-texto-2">{conteudo.principal}</p>
           <p className="text-xs text-texto-3">
-            Diferenciais em {ativos} de {conteudo.clusters.length} frentes
+            {total} diferenciais em {ativos.length} de {clusters.length} frentes
           </p>
         </div>
       )
@@ -228,7 +232,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
     case "personalidade":
       return (
         <ul className="flex flex-wrap gap-x-3 gap-y-1">
-          {conteudo.tracos.map((traco) => (
+          {tracos.map((traco) => (
             <li key={traco.id} className={cn("font-heading font-medium lowercase", card ? "text-destaque" : "text-titulo-3")}>
               {traco.palavra}
             </li>
@@ -264,7 +268,17 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
         </div>
       )
 
-    case "nome":
+    case "nome": {
+      const escolhido = conteudo.opcoes.find((opcao) => opcao.id === nomeEscolhido)
+      if (escolhido)
+        return (
+          <div className="flex flex-col gap-1">
+            <p className="font-serif text-titulo-2 leading-tight" style={{ color: VERDE }}>
+              {escolhido.nome}
+            </p>
+            <p className="text-xs text-texto-3">Território {escolhido.territorio.toLowerCase()} · {escolhido.soa.toLowerCase()}</p>
+          </div>
+        )
       return (
         <div className="flex flex-col gap-2">
           <ul className="flex flex-wrap gap-1.5">
@@ -277,6 +291,7 @@ export function PreviaSecao({ secao, modo, marca }: { secao: Secao; modo: "card"
           <p className="text-xs text-texto-3">{conteudo.opcoes.length} opções para escolher</p>
         </div>
       )
+    }
 
     case "publico":
       return (

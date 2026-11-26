@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/copiar-ferramentas.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/copiar-ferramentas.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

@@ -14,7 +14,7 @@ import type { CurvaMotion, ExemploMotion, GuiaMotion, Secao } from "@/lib/mock"
 import { CabecalhoBloco } from "./Blocos"
 import { MenuPonto } from "./AcoesPonto"
 import { Carimbo, Ilustracao } from "./Ilustracao"
-import { Simbolo } from "./Logo"
+import { iniciaisDe, Simbolo } from "./Logo"
 import { useSistemaMarca, type SistemaMarca } from "./SistemaMarca"
 
 type Props = { secao: Secao; aoEditar: () => void }
@@ -431,7 +431,7 @@ function Demo({ exemplo, curva, sistema }: { exemplo: ExemploMotion; curva: stri
       return (
         <span className="inline-flex items-center gap-3" aria-label={sistema.nome}>
           <span aria-hidden style={animar("demo-escala", 640, curva, atraso)}>
-            <Simbolo simbolo={sistema.simbolo} tinta={cores.principal} tamanho={52} />
+            <Simbolo simbolo={sistema.simbolo} tinta={cores.principal} tamanho={52} iniciais={iniciaisDe(sistema.nome)} />
           </span>
           <span aria-hidden className="font-serif text-3xl font-medium whitespace-nowrap" style={{ color: cores.principal, ...animar("demo-subir", 640, curva, atraso + 480, distancia) }}>
             {sistema.nome}
@@ -501,7 +501,7 @@ function Coreografia({ guia, sistema }: { guia: GuiaMotion; sistema: SistemaMarc
             Ver de onde vem
           </span>
           <span className="absolute right-3.5 bottom-3.5" style={estilo("Logo", "demo-escala")}>
-            <Simbolo simbolo={sistema.simbolo} tinta={cores.fundo} tamanho={22} />
+            <Simbolo simbolo={sistema.simbolo} tinta={cores.fundo} tamanho={22} iniciais={iniciaisDe(sistema.nome)} />
           </span>
         </div>
 

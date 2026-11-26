@@ -1030,9 +1030,9 @@ const SECOES_BASE: Secao[] = [
         },
         {
           id: "monograma",
-          nome: "Monograma RN",
+          nome: "Monograma",
           simbolo: "monograma",
-          conceito: "As iniciais R e N com a curva de uma folha unindo as duas letras.",
+          conceito: "As iniciais da marca com a curva de uma folha unindo as letras.",
           porque: ["Elegante e próximo do universo de cosmético", "Fica bem em tampa e em bordado", "Deixa a origem para o rótulo e as fotos"],
         },
       ],

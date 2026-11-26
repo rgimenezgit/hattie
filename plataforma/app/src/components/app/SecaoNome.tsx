@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Check, ChevronDown, CircleDashed, CircleMinus, MessageCircle, Plus, RotateCcw, TriangleAlert } from "lucide-react"
+import { Check, ChevronDown, CircleDashed, CircleMinus, MessageCircle, Plus, TriangleAlert } from "lucide-react"
 import { Aviso } from "@/components/hattie/Aviso"
 import { Botao } from "@/components/hattie/Botao"
 import { Campo, CampoArea } from "@/components/hattie/Campo"
@@ -26,7 +26,7 @@ type Props = { secao: Secao; marca: Marca; aoEditar: () => void }
  * Escolher um nome troca o nome da marca no app inteiro e aprova a seção.
  */
 export function SecaoNome({ secao, marca, aoEditar }: Props) {
-  const { secoes, nomeEscolhido, nomeMarca, escolherNome, aprovar, reabrir } = useEstado()
+  const { secoes, nomeEscolhido, nomeMarca, escolherNome, aprovar } = useEstado()
   const [sugeridas, setSugeridas] = useState<OpcaoNome[]>([])
   const [confirmar, setConfirmar] = useState<OpcaoNome | null>(null)
   const [sugerir, setSugerir] = useState(false)
@@ -34,7 +34,8 @@ export function SecaoNome({ secao, marca, aoEditar }: Props) {
   const { processo } = secao.conteudo
   const opcoes = [...secao.conteudo.opcoes, ...sugeridas]
   const aprovada = secoes[secao.id] === "aprovada"
-  const escolhida = aprovada ? (opcoes.find((opcao) => opcao.id === nomeEscolhido) ?? opcoes.find((opcao) => opcao.nome === nomeMarca)) : undefined
+  // O nome sai da primeira escolha, depois da conversa; sem ela, a seção abre com as opções até a aprovação.
+  const escolhida = opcoes.find((opcao) => opcao.id === nomeEscolhido) ?? (aprovada ? opcoes.find((opcao) => opcao.nome === nomeMarca) : undefined)
 
   function confirmarEscolha(opcao: OpcaoNome) {
     escolherNome(opcao.id, opcao.nome)
@@ -51,7 +52,6 @@ export function SecaoNome({ secao, marca, aoEditar }: Props) {
           outras={opcoes.filter((opcao) => opcao.id !== escolhida.id)}
           marca={marca}
           aoEditar={aoEditar}
-          aoReabrir={() => reabrir(secao.id)}
           aoTrocarPara={setConfirmar}
         />
       ) : (
@@ -267,23 +267,18 @@ function NomeEscolhido({
   outras,
   marca,
   aoEditar,
-  aoReabrir,
   aoTrocarPara,
 }: {
   opcao: OpcaoNome
   outras: OpcaoNome[]
   marca: Marca
   aoEditar: () => void
-  aoReabrir: () => void
   aoTrocarPara: (opcao: OpcaoNome) => void
 }) {
   return (
     <>
       <section aria-labelledby="titulo-escolhido" className="flex flex-col gap-3">
         <CabecalhoBloco id="titulo-escolhido" titulo="nome da marca">
-          <Botao variante="secundario" tamanho="sm" onClick={aoReabrir}>
-            <RotateCcw /> Ver as opções de novo
-          </Botao>
           <MenuPonto ponto="o nome da marca" />
         </CabecalhoBloco>
         <div className="flex flex-col gap-5 rounded-3xl bg-superficie p-5 md:p-6">

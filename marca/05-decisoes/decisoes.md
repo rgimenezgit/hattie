@@ -2,6 +2,13 @@
 
 Apenas decisões fechadas. Mais recente primeiro. Versão consolidada em `../diretrizes-finais.md`. Para registrar uma nova, use a skill `hattie-registrar-decisao`.
 
+## 24/11/2026 · Estratégia antes do visual nas primeiras escolhas (branch `marketing`)
+- Depois da conversa, as escolhas passam a ter seis passos: diferenciais, personalidade, nome, cores, tipografia e logo.
+- Diferenciais (de 3 a 4) e personalidade (de 3 a 5 palavras, entre dez) vêm com as sugestões do Hattie marcadas como sugestão e nada pré-marcado. Os dois têm campo livre para a pessoa escrever o que faltou.
+- O nome é escolhido antes do visual, para o logo já aparecer com ele.
+- A escolha de cores mostra só a paleta, sem o logo.
+- No cérebro, Diferenciais, Personalidade e Nome mostram o que foi escolhido.
+
 ## 22/11/2026 · Escolhas visuais antes do "olha como ficou" (branch `marketing`)
 - Ao terminar a conversa com o Hattie, a pessoa escolhe entre três paletas, três combinações de fontes e três logos, nessa ordem, antes de ver a marca inteira.
 - A aposta do Hattie chega marcada em cada passo, e cada passo mostra as opções com o que já foi escolhido antes.

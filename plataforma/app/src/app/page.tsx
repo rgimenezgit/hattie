@@ -76,9 +76,32 @@ export default function MapaDasTelas() {
           </ul>
         </section>
       ))}
-      <Link href="/dev/tokens" className="self-start text-sm font-semibold underline underline-offset-4">
-        Vitrine dos componentes
-      </Link>
+      <section className="flex flex-col gap-3">
+        <div>
+          <h2 className="font-heading text-titulo-3 font-medium lowercase">ferramentas da marca</h2>
+          <p className="text-sm text-texto-2">Para uso interno do time, fora da jornada da Bia.</p>
+        </div>
+        <ul className="grid gap-2 sm:grid-cols-2">
+          <li>
+            <a
+              href="/ferramentas/gerador/index.html"
+              className="flex min-h-10 items-center justify-between gap-3 rounded-xl bg-branco px-3.5 py-2 text-sm transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)"
+            >
+              <span className="font-medium">Gerador de grafismo</span>
+              <span className="truncate text-xs text-texto-2">/ferramentas/gerador</span>
+            </a>
+          </li>
+          <li>
+            <Link
+              href="/dev/tokens"
+              className="flex min-h-10 items-center justify-between gap-3 rounded-xl bg-branco px-3.5 py-2 text-sm transition-[box-shadow] duration-150 hover:shadow-(--sombra-flutuante)"
+            >
+              <span className="font-medium">Vitrine dos componentes</span>
+              <span className="truncate text-xs text-texto-2">/dev/tokens</span>
+            </Link>
+          </li>
+        </ul>
+      </section>
     </main>
   )
 }

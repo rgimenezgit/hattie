@@ -10,6 +10,7 @@ import { SeloSom } from "@/components/hattie/SeloSom"
 import { cn } from "@/lib/utils"
 import { PESSOA, SECOES, getSecao, peca } from "@/lib/mock"
 import { Logo } from "./Logo"
+import { usePersonalidadeEscolhida } from "./EscolhasEstrategia"
 import { useEstado } from "./Estado"
 import { useMarca } from "./MarcaContexto"
 import { Peca } from "./PecasMarca"
@@ -48,14 +49,20 @@ export function MarcaPronta() {
   const proposito = getSecao("proposito")?.resumo
   const tagline = getSecao("tagline")?.resumo
   const personalidade = getSecao("personalidade")?.conteudo
-  const tracos = personalidade?.tipo === "personalidade" ? personalidade.tracos : []
+  const tracos = usePersonalidadeEscolhida(personalidade?.tipo === "personalidade" ? personalidade.tracos : [])
   const primeira = SECOES[0]
-  // Os mockups prontos foram gerados com a paleta e o logo da aposta; com outra escolha, ficam os espaços reservados.
-  const { paletaEscolhida, logoEscolhido } = useEstado()
+  // Os mockups prontos foram gerados com o nome, a paleta e o logo da aposta; com outra escolha, ficam os espaços reservados.
+  const { paletaEscolhida, logoEscolhido, nomeEscolhido } = useEstado()
+  const nomes = getSecao("nome")?.conteudo
+  const nomeAposta = nomes?.tipo === "nome" ? nomes.opcoes.find((opcao) => opcao.aposta)?.id : undefined
   const logo = getSecao("logo")?.conteudo
   const logoAposta = logo?.tipo === "logo" ? logo.ideias.find((ideia) => ideia.aposta)?.id : undefined
   const paletaAposta = marca.opcoesPaleta?.find((opcao) => opcao.aposta)?.id
-  const mockupsValem = marca.slug === "raiz-natural" && (!paletaEscolhida || paletaEscolhida === paletaAposta) && (!logoEscolhido || logoEscolhido === logoAposta)
+  const mockupsValem =
+    marca.slug === "raiz-natural" &&
+    (!nomeEscolhido || nomeEscolhido === nomeAposta) &&
+    (!paletaEscolhida || paletaEscolhida === paletaAposta) &&
+    (!logoEscolhido || logoEscolhido === logoAposta)
 
   return (
     <div className="min-h-svh bg-background px-4 py-6 md:px-10">
