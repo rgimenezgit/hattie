@@ -2,6 +2,7 @@
 
 Mais recente primeiro. Formato: data, decisão, motivo.
 
+- 2026-11-26: Gerador de grafismo no mapa das telas (`/ferramentas/gerador/index.html`). O arquivo continua em `marca/04-visual/design-system/components/Gerador/`; `scripts/copiar-ferramentas.mjs` copia o gerador e as fontes para `public/ferramentas/` antes do `dev` e do `build`, e essa cópia fica fora do git. Motivo: uma fonte da verdade só. O atalho por link simbólico fazia o Tailwind ler arquivos de fora do app e o Turbopack travava.
 - 2026-11-09: Telas refeitas a partir do Figma do Raphael. As telas da rodada de 03/11 (wireframes próprios) foram removidas. Motivo: a estrutura desenhada por ele é a referência; o código agora segue esse desenho e padroniza componentes. Rotas em `arquitetura.md`.
 - 2026-11-09: Estado do app em `EstadoProvider` no layout raiz (marca em criação, conversa, plano e status das seções). Motivo: o fluxo atravessa layouts diferentes (primeiro acesso, shell da marca, tela de criação) sem perder o que a pessoa já respondeu.
 - 2026-11-09: Shell da marca com altura de tela e rolagem só dentro do canvas e das colunas, também no celular. Contêineres de rolagem levam `relative` para que textos `sr-only` não escapem e estiquem a página. Motivo: campo de conversa sempre visível e colunas independentes.

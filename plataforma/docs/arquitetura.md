@@ -11,6 +11,7 @@ Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v4 + shadcn/ui (Radix
 ```
 /                                        mapa das telas
 /dev/tokens                              vitrine dos componentes
+/ferramentas/gerador/index.html          gerador de grafismo (cópia de marca/, feita no predev)
 (entrada)/criar-conta | entrar           layout em duas colunas
 comecar                                  primeiro acesso: criar ou importar
 marcas                                   minhas marcas

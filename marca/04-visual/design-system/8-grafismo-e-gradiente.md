@@ -153,6 +153,7 @@ Ferramentas que geram o grafismo em código, com as cores vindas das variáveis 
 - **Pontos que reagem ao cursor:** a textura Watch (textures.dev) faz uma grade de pontos que cresce perto do cursor, a base do comportamento "olho". Tinta e fundo entram por `--texture-ink` e `--texture-field`.
 - **Gradientes suaves e animados (etapa seguinte):** shaders do pacote @paper-design/shaders-react e as receitas do HazeGlow, com as cores acima.
 - **Glifos em ASCII:** a ferramenta ASCII Magic converte formas e imagens em campos de caracteres, para peças em que a faísca vira texto.
+- **Gerador de grafismo** (`components/Gerador/index.html`): monta peças em pontos ou faíscas com as composições acima como presets, controla forma (com alças no quadro, como no Figma), cor (paradas com posição, cor transparente e imagem de fundo), movimento e interação, e exporta PNG com ou sem fundo, vídeo de um ciclo e link da peça.
 - Os protótipos desta pasta (`components/Grafismo/preview.html`) mostram as peças em canvas puro, sem dependências, e servem de especificação visual.
 
 ## Prompt base (peças estáticas geradas por IA)
