@@ -11,6 +11,7 @@ import { IconeHattie } from "@/components/hattie/IconeHattie"
 import { notificar } from "@/components/hattie/Notificacao"
 import { Tag } from "@/components/hattie/Tag"
 import { cn } from "@/lib/utils"
+import { useBanca } from "@/lib/banca"
 import { ETAPAS, formatarReal, getParceiro, getSecao, type ConversaParceiro, type MensagemParceiro, type Parceiro } from "@/lib/mock"
 import { Canvas } from "../Layout"
 import { useMarca } from "../MarcaContexto"
@@ -96,6 +97,7 @@ function Conversa({ conversa, className }: { conversa: ConversaParceiro; classNa
   const [texto, setTexto] = useState("")
   const fim = useRef<HTMLDivElement>(null)
   const campo = useRef<HTMLTextAreaElement>(null)
+  const banca = useBanca()
 
   useEffect(() => {
     lerConversa(conversa.id)
@@ -135,11 +137,13 @@ function Conversa({ conversa, className }: { conversa: ConversaParceiro; classNa
             {etapa.titulo}
           </Tag>
         )}
-        <Botao variante="fantasma" tamanho="icone" asChild>
-          <Link href={`${base}/quadro` as Route} aria-label="Ver no quadro">
-            <KanbanSquare />
-          </Link>
-        </Botao>
+        {!banca && (
+          <Botao variante="fantasma" tamanho="icone" asChild>
+            <Link href={`${base}/quadro` as Route} aria-label="Ver no quadro">
+              <KanbanSquare />
+            </Link>
+          </Botao>
+        )}
       </header>
 
       <div role="log" aria-live="polite" className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 md:p-5">

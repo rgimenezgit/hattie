@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces } from "next/font/google";
 import localFont from "next/font/local";
+import { PortaoBanca } from "@/components/app/Banca";
 import { EstadoProvider } from "@/components/app/Estado";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -63,7 +64,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <TooltipProvider>
-          <EstadoProvider>{children}</EstadoProvider>
+          <EstadoProvider>
+            <PortaoBanca>{children}</PortaoBanca>
+          </EstadoProvider>
         </TooltipProvider>
         <Toaster position="bottom-center" />
       </body>

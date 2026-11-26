@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Botao } from "@/components/hattie/Botao"
 import { Campo } from "@/components/hattie/Campo"
 import { notificar } from "@/components/hattie/Notificacao"
+import { inicioDaBanca, useBanca } from "@/lib/banca"
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -23,6 +24,7 @@ function Divisor() {
 
 export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
   const router = useRouter()
+  const banca = useBanca()
   const [erros, setErros] = useState<Erros>({})
   const [enviando, setEnviando] = useState(false)
   const nome = useRef<HTMLInputElement>(null)
@@ -48,7 +50,7 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
       return
     }
     setEnviando(true)
-    router.push(criar ? "/comecar" : "/marca/raiz-natural")
+    router.push(criar ? "/comecar" : banca ? inicioDaBanca("raiz-natural") : "/marca/raiz-natural")
   }
 
   return (
@@ -62,7 +64,7 @@ export function FormEntrada({ modo }: { modo: "criar" | "entrar" }) {
         </p>
       </div>
 
-      <Botao variante="secundario" className="w-full" onClick={() => router.push(criar ? "/comecar" : "/marca/raiz-natural")}>
+      <Botao variante="secundario" className="w-full" onClick={() => router.push(criar ? "/comecar" : banca ? inicioDaBanca("raiz-natural") : "/marca/raiz-natural")}>
         Continuar com Google
       </Botao>
 

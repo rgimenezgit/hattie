@@ -5,7 +5,7 @@ import Link from "next/link"
 import type { Route } from "next"
 import { useState, type ReactNode } from "react"
 import { useRouter, useSelectedLayoutSegment } from "next/navigation"
-import { Check, ChevronDown, CircleHelp, LayoutGrid, Link2, LogOut, Menu, Plus, Settings, UserPlus } from "lucide-react"
+import { Check, ChevronDown, CircleHelp, LayoutGrid, Link2, Lock, LogOut, Menu, Plus, Settings, UserPlus } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +21,7 @@ import { MARCAS, PESSOA } from "@/lib/mock"
 import { useEstado } from "./Estado"
 import { useMarca } from "./MarcaContexto"
 import { NAVEGACAO, type ItemNavegacao } from "./Navegacao"
+import { fechadoNaBanca, inicioDaBanca, useBanca } from "@/lib/banca"
 
 const ITEM_MENU = "h-9 gap-2.5 rounded-xl px-2.5 text-sm [&_svg]:size-4"
 
@@ -30,6 +31,7 @@ function hrefDe(slug: string, item: ItemNavegacao) {
 
 function TrocaMarca({ aoAbrir }: { aoAbrir?: (aberto: boolean) => void }) {
   const marca = useMarca()
+  const banca = useBanca()
   const { nomeMarca } = useEstado()
   const nomeDe = (slug: string, nome: string) => (slug === "raiz-natural" ? nomeMarca : nome)
 
@@ -44,8 +46,8 @@ function TrocaMarca({ aoAbrir }: { aoAbrir?: (aberto: boolean) => void }) {
       <DropdownMenuContent align="start" className="w-64 rounded-2xl p-1">
         <DropdownMenuLabel className="text-xs font-medium text-texto-2">Suas marcas</DropdownMenuLabel>
         {MARCAS.map((item) => (
-          <DropdownMenuItem key={item.slug} asChild className={ITEM_MENU}>
-            <Link href={`/marca/${item.slug}` as Route}>
+          <DropdownMenuItem key={item.slug} asChild className={ITEM_MENU} disabled={banca}>
+            <Link href={`/marca/${item.slug}` as Route} aria-disabled={banca || undefined} tabIndex={banca ? -1 : undefined}>
               <span className="flex gap-0.5" aria-hidden>
                 {item.paleta.slice(0, 3).map((cor) => (
                   <span key={cor.hex} className="size-2.5 rounded-full" style={{ backgroundColor: cor.hex }} />
@@ -53,6 +55,7 @@ function TrocaMarca({ aoAbrir }: { aoAbrir?: (aberto: boolean) => void }) {
               </span>
               <span className="flex-1 truncate">{nomeDe(item.slug, item.nome)}</span>
               {item.slug === marca.slug && <Check aria-label="marca atual" />}
+              {banca && item.slug !== marca.slug && <Lock aria-label="na versão completa" />}
             </Link>
           </DropdownMenuItem>
         ))}
@@ -62,11 +65,17 @@ function TrocaMarca({ aoAbrir }: { aoAbrir?: (aberto: boolean) => void }) {
             <Plus aria-hidden /> Nova marca
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild className={ITEM_MENU}>
-          <Link href="/marcas">
-            <LayoutGrid aria-hidden /> Minhas marcas
-          </Link>
-        </DropdownMenuItem>
+        {banca ? (
+          <DropdownMenuItem className={ITEM_MENU} disabled>
+            <LayoutGrid aria-hidden /> Minhas marcas <Lock className="ms-auto" aria-label="na versão completa" />
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem asChild className={ITEM_MENU}>
+            <Link href="/marcas">
+              <LayoutGrid aria-hidden /> Minhas marcas
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem className={ITEM_MENU} disabled>
           <UserPlus aria-hidden /> Convidar pessoa <span className="ms-auto text-xs text-texto-2">em breve</span>
         </DropdownMenuItem>
@@ -141,19 +150,27 @@ function ItemRail({
   aoNavegar?: () => void
   gaveta?: boolean
 }) {
-  return (
-    <li>
-      <Link
-        href={hrefDe(slug, item)}
-        onClick={aoNavegar}
-        aria-current={ativo ? "page" : undefined}
-        className={cn(
-          "flex h-10 items-center gap-3 overflow-hidden rounded-full ps-2.5 text-sm whitespace-nowrap focus-visible:outline-offset-[-3px]",
-          gaveta ? "w-full transition-[background-color,color] duration-150" : cn("w-10 aberta:w-46", LARGURA_ITEM),
-          ativo ? "bg-lima font-semibold text-preto" : "text-texto-3 hover:bg-preenchimento hover:text-texto",
-        )}
-      >
-        <item.icone className="shrink-0" ativo={ativo} />
+  const banca = useBanca()
+  const fechado = banca && fechadoNaBanca(hrefDe(slug, item))
+  const classe = cn(
+    "flex h-10 items-center gap-3 overflow-hidden rounded-full ps-2.5 text-sm whitespace-nowrap focus-visible:outline-offset-[-3px]",
+    gaveta ? "w-full transition-[background-color,color] duration-150" : cn("w-10 aberta:w-46", LARGURA_ITEM),
+    fechado
+      ? "cursor-not-allowed text-texto-3/50"
+      : ativo
+        ? "bg-lima font-semibold text-preto"
+        : "text-texto-3 hover:bg-preenchimento hover:text-texto",
+  )
+  const conteudo = (
+    <>
+      <span className="relative shrink-0">
+          <item.icone ativo={ativo} />
+          {fechado && (
+            <span className="absolute -right-1.5 -bottom-1 grid size-3.5 place-items-center rounded-full bg-canvas">
+              <Lock className="size-2.5" strokeWidth={2.5} aria-hidden />
+            </span>
+          )}
+        </span>
         <span
           className={cn(
             !gaveta &&
@@ -161,8 +178,21 @@ function ItemRail({
           )}
         >
           {item.rotulo}
+          {fechado && <span className="sr-only"> (na versão completa)</span>}
         </span>
-      </Link>
+    </>
+  )
+  return (
+    <li>
+      {fechado ? (
+        <span role="link" aria-disabled="true" title="Na versão completa" className={classe}>
+          {conteudo}
+        </span>
+      ) : (
+        <Link href={hrefDe(slug, item)} onClick={aoNavegar} aria-current={ativo ? "page" : undefined} className={classe}>
+          {conteudo}
+        </Link>
+      )}
     </li>
   )
 }
@@ -177,6 +207,7 @@ function ItemRail({
  */
 function Espinha() {
   const marca = useMarca()
+  const banca = useBanca()
   const segmento = useSelectedLayoutSegment()
   const [fixo, setFixo] = useState(false)
   const largura =
@@ -188,7 +219,7 @@ function Espinha() {
         <span aria-hidden className="aba aba-topo" />
         <div className="relative flex h-full items-center gap-3 ps-4.5">
           <Link
-            href={`/marca/${marca.slug}` as Route}
+            href={(banca ? inicioDaBanca(marca.slug) : `/marca/${marca.slug}`) as Route}
             aria-label="Hattie, início"
             className={cn("block w-10.5 shrink-0 overflow-hidden rounded-md aberta:w-33.5", largura)}
           >
@@ -254,6 +285,7 @@ function NavegacaoCelular() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const marca = useMarca()
+  const banca = useBanca()
   return (
     <div className="relative flex h-svh flex-col overflow-hidden bg-fundo">
       <a
@@ -264,7 +296,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
       <header className="flex h-14 shrink-0 items-center gap-3 px-3 md:hidden">
         <NavegacaoCelular />
-        <Link href={`/marca/${marca.slug}` as Route} aria-label="Hattie, início" className="shrink-0">
+        <Link href={(banca ? inicioDaBanca(marca.slug) : `/marca/${marca.slug}`) as Route} aria-label="Hattie, início" className="shrink-0">
           <Image src="/logos/hattie-simbolo.svg" alt="" width={40} height={28} priority className="h-6 w-auto" />
         </Link>
         <TrocaMarca />

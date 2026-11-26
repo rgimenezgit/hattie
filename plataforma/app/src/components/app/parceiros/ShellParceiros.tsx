@@ -4,9 +4,10 @@ import Link from "next/link"
 import type { Route } from "next"
 import type { ReactNode } from "react"
 import { usePathname } from "next/navigation"
-import { KanbanSquare, MessagesSquare, UserRoundSearch, type LucideIcon } from "lucide-react"
+import { KanbanSquare, Lock, MessagesSquare, UserRoundSearch, type LucideIcon } from "lucide-react"
 import { notificar } from "@/components/hattie/Notificacao"
 import { cn } from "@/lib/utils"
+import { fechar, useBanca } from "@/lib/banca"
 import { ETAPAS, getParceiro } from "@/lib/mock"
 import { CabecalhoCanvas, ColunaLateral } from "../Layout"
 import { useMarca } from "../MarcaContexto"
@@ -53,6 +54,7 @@ function NavParceiros() {
   const marca = useMarca()
   const ativo = useItemAtivo()
   const contagens = useContagens()
+  const banca = useBanca()
   const { trabalhos } = useParceiros()
   const base = `/marca/${marca.slug}/parceiros`
   const emCurso = trabalhos.filter((trabalho) => trabalho.etapa !== "entregue")
@@ -68,11 +70,17 @@ function NavParceiros() {
               key={item.rotulo}
               href={`${base}${item.caminho}` as Route}
               aria-current={atual ? "page" : undefined}
-              className={cn("flex h-9 items-center gap-2.5 rounded-full px-3 text-sm", atual ? "bg-lima-suave font-medium" : "text-texto-2 hover:bg-preenchimento hover:text-texto")}
+              {...fechar(banca && item.segmento === "quadro")}
+              className={cn(
+                "flex h-9 items-center gap-2.5 rounded-full px-3 text-sm aria-disabled:pointer-events-none aria-disabled:text-texto-3/50",
+                atual ? "bg-lima-suave font-medium" : "text-texto-2 hover:bg-preenchimento hover:text-texto",
+              )}
             >
               <item.icone className="size-4 shrink-0" strokeWidth={atual ? 2.25 : 1.75} aria-hidden />
               <span className="flex-1">{item.rotulo}</span>
-              {contagem > 0 && (
+              {banca && item.segmento === "quadro" ? (
+                <Lock className="size-3.5 text-texto-3" strokeWidth={2} aria-label="na versão completa" />
+              ) : contagem > 0 && (
                 <span className={cn("grid h-5 min-w-5 place-items-center rounded-full px-1.5 text-micro font-semibold tabular-nums", item.segmento === "mensagens" ? "bg-preto text-lima" : "bg-preenchimento text-texto-2")}>
                   {contagem}
                   <span className="sr-only">{item.segmento === "mensagens" ? " não lidas" : " em curso"}</span>
@@ -130,6 +138,7 @@ export function TopoParceiros({ titulo, subtitulo, acoes }: { titulo: string; su
   const marca = useMarca()
   const ativo = useItemAtivo()
   const contagens = useContagens()
+  const banca = useBanca()
   return (
     <div className="flex flex-col gap-3">
       <nav aria-label="Áreas de parceiros" className="no-scrollbar -mx-4 flex overflow-x-auto px-4 lg:hidden">
@@ -142,11 +151,19 @@ export function TopoParceiros({ titulo, subtitulo, acoes }: { titulo: string; su
                 key={item.rotulo}
                 href={`/marca/${marca.slug}/parceiros${item.caminho}` as Route}
                 aria-current={atual ? "page" : undefined}
-                className={cn("inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-sm font-medium whitespace-nowrap", atual ? "bg-acao text-preto" : "text-texto-2 hover:bg-preenchimento")}
+                {...fechar(banca && item.segmento === "quadro")}
+                className={cn(
+                  "inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-sm font-medium whitespace-nowrap aria-disabled:pointer-events-none aria-disabled:text-texto-3/50",
+                  atual ? "bg-acao text-preto" : "text-texto-2 hover:bg-preenchimento",
+                )}
               >
                 <item.icone className="size-4" strokeWidth={1.75} aria-hidden />
                 {item.rotulo}
-                {contagem > 0 && <span className="text-xs text-texto-3 tabular-nums">{contagem}</span>}
+                {banca && item.segmento === "quadro" ? (
+                  <Lock className="size-3.5 text-texto-3" strokeWidth={2} aria-label="na versão completa" />
+                ) : (
+                  contagem > 0 && <span className="text-xs text-texto-3 tabular-nums">{contagem}</span>
+                )}
               </Link>
             )
           })}

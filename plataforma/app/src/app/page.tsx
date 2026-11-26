@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import type { Route } from "next"
+import { CartaoBanca } from "@/components/app/Banca"
 
 const FLUXOS: { titulo: string; descricao: string; telas: { rotulo: string; href: string }[] }[] = [
   {
@@ -54,6 +55,7 @@ export default function MapaDasTelas() {
           </span>
           <span aria-hidden className="shrink-0 text-lima">→</span>
         </Link>
+        <CartaoBanca />
       </header>
       {FLUXOS.map((fluxo) => (
         <section key={fluxo.titulo} className="flex flex-col gap-3">
